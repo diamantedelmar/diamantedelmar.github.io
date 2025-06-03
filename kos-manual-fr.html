@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue à Diamante del Mar Kos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom styles for better mobile experience */
+        h1, h2, h3 {
+            font-weight: 600; /* semibold */
+        }
+        h1 {
+            font-size: 1.875rem; /* text-3xl */
+            line-height: 2.25rem;
+            margin-bottom: 1.5rem; /* my-6 */
+            color: #1F2937; /* gray-800 */
+        }
+        h2 {
+            font-size: 1.5rem; /* text-2xl */
+            line-height: 2rem;
+            margin-top: 2rem; /* mt-8 */
+            margin-bottom: 1rem; /* mb-4 */
+            color: #2563EB; /* blue-600 */
+            border-bottom: 2px solid #DBEAFE; /* blue-100 */
+            padding-bottom: 0.5rem; /* pb-2 */
+        }
+        h3 {
+            font-size: 1.25rem; /* text-xl */
+            line-height: 1.75rem;
+            margin-top: 1.5rem; /* mt-6 */
+            margin-bottom: 0.75rem; /* mb-3 */
+            color: #1E40AF; /* blue-800 */
+        }
+        p, li {
+            font-size: 1rem; /* text-base */
+            line-height: 1.625; /* leading-relaxed */
+            color: #374151; /* gray-700 */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+        a {
+            color: #2563EB; /* blue-600 */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 1.5rem; /* p-6 */
+            margin-bottom: 1.5rem; /* mb-6 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+        }
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #E5E7EB; /* gray-200 */
+            padding: 0.75rem; /* p-3 */
+            text-align: left;
+            font-size: 0.875rem; /* text-sm */
+        }
+        th {
+            background-color: #F3F4F6; /* gray-100 */
+            font-weight: 600; /* semibold */
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border-radius: 0.375rem; /* rounded-md */
+        }
+        .badge-blue {
+            background-color: #DBEAFE; /* blue-100 */
+            color: #1E40AF; /* blue-800 */
+        }
+        .badge-green {
+            background-color: #D1FAE5; /* green-100 */
+            color: #065F46; /* green-800 */
+        }
+        .badge-red {
+            background-color: #FEE2E2; /* red-100 */
+            color: #991B1B; /* red-800 */
+        }
+        .qr-section div {
+            border: 1px solid #E5E7EB; /* gray-200 */
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.375rem; /* rounded-md */
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-3xl">
+
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-blue-700">Bienvenue à Diamante del Mar Kos</h1>
+        </header>
+
+        <!-- Navigation (optionnelle, peut être décommentée et remplie si nécessaire) -->
+        <!-- 
+        <nav class="mb-8 p-4 bg-white rounded-lg shadow">
+            <h3 class="font-semibold text-lg mb-2">Accès rapide :</h3>
+            <ul class="list-disc list-inside">
+                <li><a href="#section1" class="hover:underline">Bienvenue</a></li>
+                <li><a href="#section2" class="hover:underline">L'essentiel de l'appartement</a></li>
+                <li><a href="#section3" class="hover:underline">Vie insulaire</a></li>
+                <li><a href="#section4" class="hover:underline">Se déplacer à Kos</a></li>
+                <li><a href="#section5" class="hover:underline">Infos importantes</a></li>
+                <li><a href="#section6" class="hover:underline">Au revoir</a></li>
+                <li><a href="#applianceInfo" class="hover:underline">Infos appareils</a></li>
+            </ul>
+        </nav>
+        -->
+
+        <main>
+            <!-- Section 1 : Bienvenue au Paradis ! -->
+            <section id="section1" class="card">
+                <h2>Section 1 : Bienvenue au Paradis !</h2>
+                <h3>Un accueil chaleureux de la mer Égée</h3>
+                <p>Kalós órises ! Bienvenue à Kos, et bienvenue à Diamante del Mar Kos ! Nous sommes absolument ravis de vous accueillir sur cette île enchanteresse du Dodécanèse. Récemment rénové et conçu avec style et confort à l'esprit, nous espérons que Diamante del Mar Kos sera votre sanctuaire parfait, votre point de départ chic pour explorer le mélange captivant d'histoire ancienne, de plages ensoleillées et de vie insulaire animée qui rend Kos si spéciale.</p>
+                <p>Kos est une île qui vous invite à ralentir, à respirer l'air marin, à errer à travers des millénaires d'histoire et à savourer les plaisirs simples – un café parfaitement infusé, le goût des fruits de mer frais, la chaleur du soleil sur votre peau. C'est un lieu où les ruines antiques côtoient fièrement des cafés animés, et où des criques tranquilles rencontrent des stations balnéaires animées. Nous espérons que vous tomberez amoureux de son charme unique, tout comme nous.</p>
+                <h3>À propos de ce guide</h3>
+                <p>Considérez ce livre non pas seulement comme un manuel, mais comme votre introduction personnalisée pour vivre comme un habitant élégant pendant votre séjour. Nous avons rassemblé des informations essentielles pour vous aider à vous installer sans effort à Diamante del Mar Kos, ainsi que nos recommandations personnelles pour découvrir les points forts de l'île – des meilleurs cafés à proximité aux vues imprenables sur le coucher de soleil et aux joyaux historiques cachés. Il est conçu pour améliorer votre expérience et rendre votre aventure à Kos vraiment mémorable.</p>
+                <p>Si vous avez des questions pendant votre séjour, n'hésitez pas à nous contacter. Vous trouverez nos coordonnées dans la section 5. Maintenant, détendez-vous, relaxez-vous et laissez votre histoire à Kos commencer !</p>
+            </section>
+
+            <!-- Section 2 : Installation – L'essentiel de votre appartement -->
+            <section id="section2" class="card">
+                <h2>Section 2 : Installation – L'essentiel de votre appartement</h2>
+                <h3>Trouver votre sanctuaire</h3>
+                <p><strong>Adresse complète :</strong> Votre chez-vous loin de chez vous est situé à :<br>Diamante Del Mar Kos<br>Σοφοκλή Βενιζέλου 54 (Sophokli Venizelou 54)<br>Ville de Kos, 853 00</p>
+                <p><strong>Contexte de l'emplacement :</strong> Vous avez choisi un endroit merveilleux ! L'appartement est idéalement situé à seulement 200 mètres à pied de la célèbre plage de Lambi et à environ 1,1 kilomètre du port principal de Kos. Cela signifie que vous avez un accès facile à la mer et aux commodités de la ville, tout en profitant potentiellement d'une atmosphère légèrement plus calme qu'en plein cœur du centre animé.</p>
+                <p><strong>Carte/Itinéraire :</strong> Nous vous recommandons d'utiliser Google Maps ou votre application de navigation préférée avec l'adresse ci-dessus pour une navigation facile à votre arrivée et lors de vos explorations.</p>
+                
+                <h3>Arrivée et départ simplifiés</h3>
+                <p><strong>Heure d'arrivée :</strong> Vous pouvez arriver à tout moment à partir de <strong>16h00</strong>. Pour garantir une arrivée en douceur, veuillez nous informer à l'avance de votre heure d'arrivée estimée. Un enregistrement privé peut être organisé.</p>
+                <p><strong>Remise des clés :</strong> Vous trouverez une boîte à clés située à droite de la porte d'entrée principale. Le code est <strong>2601</strong>. Veuillez vous assurer que la boîte à clés est bien fermée après avoir récupéré la clé.</p>
+                <p><strong>Heure de départ :</strong> Le départ s'effectue avant <strong>11h00</strong>. Cela nous laisse le temps de préparer parfaitement l'appartement pour nos prochains clients. Des options de départ express sont disponibles si nécessaire.</p>
+                <p><strong>Retour des clés :</strong> Veuillez laisser les clés sur la table à manger à l'intérieur de l'appartement et vous assurer que la porte est bien verrouillée derrière vous ou remettez les clés dans la boîte à clés en utilisant le même code.</p>
+
+                <h3>Votre zone de confort</h3>
+                <p><strong>Accès Wi-Fi :</strong> Rester connecté est facile. Souligner la disponibilité d'un Wi-Fi fiable est important pour planifier des activités, rester en contact ou même rattraper du travail.</p>
+                <ul>
+                    <li><strong>Nom du réseau (SSID) :</strong> Kos</li>
+                    <li><strong>Mot de passe :</strong> kos260125</li>
+                </ul>
+                <p>Le Wi-Fi est gratuit pendant votre séjour.</p>
+                <p><strong>Climatisation :</strong> Chaque pièce est équipée de la climatisation pour votre confort. Vous trouverez des télécommandes pour chaque unité. Veuillez utiliser le bouton 'Mode' pour sélectionner le refroidissement (généralement une icône de flocon de neige) et régler la température avec les boutons fléchés. Nous recommandons de la régler autour de 23-25°C pour un environnement confortable et économe en énergie. N'oubliez pas d'éteindre les climatiseurs en quittant l'appartement.</p>
+                <p><strong>Télévision :</strong> Détendez-vous avec la Smart TV Android à écran plat. Utilisez la télécommande pour l'allumer (généralement le bouton d'alimentation rouge). Vous pouvez naviguer entre les chaînes à l'aide des boutons de changement de chaîne. Si des services de streaming comme Netflix sont disponibles et que vous souhaitez les utiliser, vous devrez peut-être vous connecter avec vos propres identifiants de compte. N'oubliez pas de vous déconnecter avant votre départ.</p>
+
+                <h3>À savoir sur la cuisine et la buanderie</h3>
+                <p>Votre appartement dispose d'une cuisine bien équipée et d'installations de buanderie pour votre commodité. Voici quelques brèves instructions :</p>
+                <ul>
+                    <li><strong>Four et plaques de cuisson :</strong> Veuillez utiliser les boutons pour contrôler la température et sélectionner les fonctions de cuisson. Assurez-vous qu'ils sont éteints après utilisation. Les ustensiles de cuisine de base sont fournis.</li>
+                    <li><strong>Micro-ondes :</strong> Idéal pour un chauffage rapide. Veuillez vous référer au panneau du micro-ondes pour les réglages de base.</li>
+                    <li><strong>Réfrigérateur :</strong> Le réfrigérateur doit être réglé à une température de refroidissement appropriée. N'hésitez pas à l'ajuster si nécessaire, mais évitez les réglages les plus froids pour éviter le gel.</li>
+                    <li><strong>Bouilloire et grille-pain :</strong> Fonctionnement standard – veuillez vous assurer que la bouilloire contient suffisamment d'eau avant de l'allumer.</li>
+                    <li><strong>Machine à laver :</strong> Située dans la cuisine. Veuillez utiliser le détergent fourni avec parcimonie. Sélectionnez un cycle de lavage approprié en fonction de votre linge. Évitez de surcharger la machine. Sur la dernière page de ce manuel, vous trouverez des codes QR pour chaque appareil.</li>
+                </ul>
+
+                <h3>Vivre en harmonie (Règlement intérieur)</h3>
+                <p>Pour garantir un séjour agréable à tous et maintenir la qualité de Diamante del Mar Kos, nous vous prions de bien vouloir respecter le règlement intérieur suivant :</p>
+                <ul>
+                    <li><strong>Fumer :</strong> Cet établissement est <span class="badge badge-red">strictement non-fumeur</span> à l'intérieur.</li>
+                    <li><strong>Animaux de compagnie :</strong> Nous aimons les animaux, mais malheureusement, les <span class="badge badge-red">animaux de compagnie ne sont pas autorisés</span> dans l'appartement.</li>
+                    <li><strong>Heures de calme :</strong> Veuillez faire preuve de considération envers nos voisins et maintenir les niveaux de bruit au minimum entre <strong>22h00 et 07h00</strong>.</li>
+                    <li><strong>Fêtes/Événements :</strong> Pour maintenir un environnement paisible, les <span class="badge badge-red">fêtes, événements et grands rassemblements ne sont pas autorisés</span>. L'établissement n'accueille pas les enterrements de vie de garçon/jeune fille ou fêtes similaires.</li>
+                    <li><strong>Invités :</strong> Seuls les clients enregistrés sont autorisés à passer la nuit. Veuillez nous informer à l'avance si vous prévoyez d'avoir des visiteurs pendant la journée.</li>
+                </ul>
+
+                <h3>Votre espace et aspects pratiques</h3>
+                <p><strong>Balcon/Terrasse :</strong> Votre appartement dispose d'un balcon ou d'une terrasse offrant de belles vues. C'est l'endroit idéal pour votre café du matin ou un verre en soirée tout en vous imprégnant de l'atmosphère égéenne. Inspiré par d'autres séjours locaux, vous pourriez trouver des sièges confortables pour vous détendre et profiter de la vue.</p>
+                <p><strong>Élimination des déchets :</strong> Veuillez jeter vos sacs poubelles dans les grandes poubelles communes situées au coin de la rue, près de la propriété. Des bacs de recyclage pour le papier, le plastique et le verre se trouvent près du parc, à proximité de la propriété. Veuillez sortir les poubelles régulièrement pour maintenir la propreté.</p>
+                <p><strong>Parking :</strong> Veuillez noter qu'il n'y a <span class="badge badge-blue">pas de parking dédié</span> disponible sur la propriété.</p>
+            </section>
+
+            <!-- Section 3 : Vie insulaire – Votre guide d'initié à Kos -->
+            <section id="section3" class="card">
+                <h2>Section 3 : Vie insulaire – Votre guide d'initié à Kos</h2>
+                <p>La ville de Kos vibre d'une énergie délicieuse, mêlant histoire ancienne et vie méditerranéenne moderne. L'un de ses plus grands plaisirs est la culture animée des cafés – le moyen idéal de commencer votre journée, de faire une pause à midi ou simplement de regarder le monde passer.</p>
+
+                <h3>Cafés et bouchées à Kos-ville (À quelques instants)</h3>
+                <p><strong>Votre rituel matinal, sublimé :</strong> Oubliez le café d'hôtel générique ; Kos vous invite à adopter le rituel local. Qu'il s'agisse d'un café grec traditionnel fort, lentement infusé, d'un Freddo Espresso ou Cappuccino glacé rafraîchissant (les incontournables grecs modernes), ou d'une infusion de spécialité méticuleusement préparée, une expérience café vous attend.</p>
+                <p><strong>Le duo de Vasileos Pavlou :</strong> Vous avez une chance incroyable ! Juste à votre porte, au <strong>33 Vasileos Pavlou</strong>, à quelques pas de votre appartement, vous trouverez non pas un, mais deux endroits distincts et très réputés, offrant des expériences différentes mais complémentaires. Cette proximité unique signifie que votre café ou brunch parfait n'est jamais loin.</p>
+                <ul>
+                    <li><strong>Alchimion :</strong> C'est votre destination idéale pour un <strong>petit-déjeuner ou un brunch</strong> détendu. Leur menu propose des options créatives comme les overnight oats (essayez le Cacao Porridge ou les Peanut Butter Oats), des plats aux œufs savoureux tels que les Kayianas traditionnels ou la Shakshuka épicée, des crêpes salées avec du bacon et des œufs, et des salades fraîches. Ils servent une gamme de cafés, y compris espresso, filtre et cold brew, avec des alternatives de lait végétal disponibles. L'atmosphère est accueillante et conviviale, propice à la flânerie avec un ordinateur portable (Wi-Fi gratuit fourni) ou à profiter des places en plein air. Ils accueillent même les chiens ! Ouvert tous les jours de 07h00 à 18h00 (dimanche de 08h00 à 16h00). Vous pouvez les trouver sur Facebook et Instagram. Fait intéressant, il est situé près de l'autel historique de Dionysos.</li>
+                    <li><strong>The Cup :</strong> Si un <strong>café exceptionnel</strong> est votre priorité, rendez-vous à côté, chez "The Cup". Ce petit café non-fumeur est réputé comme un véritable café "troisième vague", loué pour ses excellentes boissons à base d'espresso brassées sans prétention. Ils proposent une variété de laits végétaux (avoine, amande, germes mentionnés) et ont souvent des barres de collation et des biscuits végétaliens disponibles. Bien que principalement axé sur le café, ils servent également de délicieux et abordables sandwichs ciabatta. Le service est réputé amical, et le Wi-Fi gratuit est disponible. Sachez qu'en raison de sa qualité et de sa popularité, vous pourriez rencontrer une attente aux heures de pointe, surtout si vous commandez de la nourriture plutôt qu'un simple café à emporter. Les heures d'ouverture semblent étendues : du lundi au vendredi de 07h00 à 22h00, le samedi et le dimanche de 08h00 à 16h00. Adresse confirmée au 33 Vasileos Pavlou.</li>
+                </ul>
+
+                <h3>Autres joyaux de Kos-ville :</h3>
+                <ul>
+                    <li><strong>Zero Cafe Bar :</strong> Aventurez-vous à quelques pas vers le port pour trouver ce havre pour les amateurs de bière artisanale. Zero propose une collection impressionnante de bières artisanales grecques (en bouteille et à la pression), avec un propriétaire compétent et sympathique heureux d'offrir des recommandations. Détendez-vous dans le grand jardin à bière ombragé ou la cour confortable. Ils organisent également des concerts et diffusent des sports, et servent du café, des cocktails, des collations savoureuses et une limonade maison rafraîchissante. Ouvert tard.</li>
+                    <li><strong>Restaurant Platanos :</strong> Pour un repas chargé d'histoire et de romance, dînez sous le légendaire platane d'Hippocrate. Situé sur la place Platanos, cet endroit offre un cadre magnifique, une excellente cuisine de haute qualité (joue de veau, salade grecque et café flambé unique sont loués), un service attentionné et propose souvent de la musique live, créant une ambiance merveilleuse. C'est aussi un endroit charmant pour un café matinal ou un jus de fruits frais tout en admirant le site historique.</li>
+                    <li><strong>Coffee Stories :</strong> Un charmant café de quartier situé au 5 Korai. Connu pour son ambiance douce, ses offres de café grec standard (Freddo Espresso, Cappuccino, Frappe, etc.) et ses options de livraison. Ouvert tous les jours de 06h00 à 20h00 (dimanche jusqu'à 15h00).</li>
+                    <li><strong>Kentron Street Cafe :</strong> Situé au 2 Venizelou Eleftheriou, cet endroit prétend avoir le "meilleur café de la ville". Ils proposent une gamme de cafés, jus de fruits frais, sandwichs, pâtisseries (comme la bougatsa et les tyropites), club sandwichs, milkshakes, et assurent des services de livraison et de vente à emporter, y compris des options de brunch. Ouvert tous les jours, avec des horaires légèrement plus courts le week-end.</li>
+                </ul>
+                <p><strong>Autres mentions notables :</strong> Pour une bouchée rapide, <strong>Toast Special</strong> près de l'église Agia Paraskevi est réputé pour ses excellents toasts. <strong>Ariston</strong> et <strong>Tsivrini</strong> sont célèbres pour la meilleure bougatsa (tourte à la crème). Le <strong>Ciao Cafe Bistro</strong> dans la vieille ville propose des boissons traditionnelles comme la Kanelada et la Soumada ainsi que du café, des salades et des repas. Le <strong>Scoops Cafe</strong> (deux emplacements) est idéal pour le café à emporter, les granités, les gaufres et les glaces. <strong>Kaseta</strong> est un café-bar ouvert toute la journée, connu pour son café de qualité, ses cocktails et son ambiance chaleureuse. Pour une expérience de bar d'hôtel plus haut de gamme avec vue sur la mer, envisagez le <strong>H2O</strong> à l'hôtel Kos Aktis Art. Le <strong>Sitar Cocktail Bar</strong> près du port propose des cocktails créatifs jour et nuit.</p>
+
+                <h3>Un avant-goût de Kos - Recommandations de restaurants :</h3>
+                <p>La ville de Kos présente un éventail délicieux d'expériences culinaires, des tavernes décontractées en bord de mer aux restaurants élégants.</p>
+                <ul>
+                    <li><strong>Fruits de mer au bord de l'eau :</strong> Une expérience insulaire grecque par excellence ! Dirigez-vous vers le port pour <strong>Barbouni</strong> et <strong>Nick the Fisherman</strong>, pratiquement voisins. Barbouni offre un cadre magnifique en bord de mer (réservez à l'avance pour une table au bord de l'eau) et est loué pour des plats comme les croquettes de morue, les beignets de courgettes, les tagliatelles à l'encre de seiche et les sushis. Les deux servent du poisson incroyablement frais, simplement grillé ou préparé. <strong>Votsalakia</strong> est une autre option populaire en bord de mer. La <strong>Taverne de fruits de mer Kalymnos</strong>, également au bord de l'eau, est réputée pour son immense menu, ses prix raisonnables et son service amical.</li>
+                    <li><strong>Grec authentique et Meze :</strong> Pour un vrai goût de la cuisine locale, <strong>Patriko</strong> est un choix familial fantastique dans une rue latérale près de la place des Dauphins, offrant une cuisine de haute qualité, un service exceptionnel, des prix raisonnables et une merveilleuse sélection de mezes traditionnels (petites assiettes à partager) – essayez la feta cuite au four avec du miel ou la salade Patriko signature. La <strong>Taverna Evdokia Mummy's Cooking</strong> offre une expérience grecque complète avec une hospitalité authentique et des plats délicieux et frais préparés par Evdokia elle-même – la tartinade d'aubergines et les poivrons farcis à la feta sont fortement recommandés. La <strong>Taverne Elia</strong>, bien que peut-être plus calme en basse saison, possède un décor traditionnel fantastique et un excellent menu. <strong>Broadway</strong>, en activité depuis 1990, propose une cuisine grecque traditionnelle avec une touche contemporaine et des portions généreuses – le youvetsi de bœuf (bœuf braisé lentement avec des pâtes ressemblant à de l'orzo) est un point fort. Sur la place de la ville, <strong>Aegli</strong> n'est pas seulement un café mais une coopérative de femmes soutenant les femmes locales ; arrêtez-vous pour leur limonade maison rafraîchissante et leurs collations.</li>
+                    <li><strong>Saveurs internationales :</strong> Si vous avez envie de changement, <strong>Twin Dragon</strong> sur la plage principale propose une cuisine chinoise et asiatique avec vue sur la mer. Pour la cuisine mexicaine et les steaks dans un cadre thématique près du port, essayez <strong>El Paso</strong>.</li>
+                    <li><strong>Élégant et raffiné :</strong> Pour une occasion spéciale, <strong>Cuvée</strong> à l'hôtel Aqua Blu à Lambi propose une cuisine de destination sophistiquée et moderne avec des menus dégustation. Dans la ville de Kos, <strong>Petrino</strong> offre une atmosphère élégante parfaite pour un repas romantique, tandis que le <strong>Restaurant Platanos</strong>, situé dans son emplacement historique sous le platane, offre une qualité gastronomique avec une belle présentation.</li>
+                    <li><strong>Décontracté et fiable :</strong> <strong>Ali Restaurant</strong> et <strong>Lambros Steakhouse</strong> sont des endroits locaux recommandés, tout comme <strong>Thrasyvoulos</strong>.</li>
+                </ul>
+
+                <h3>Recommandation de l'hôte</h3>
+                <h4>Une coupe au-dessus : Pourquoi Xasapaki est un incontournable à Kos</h4>
+                <p>Pour une expérience culinaire inoubliable qui marie la tradition d'une boucherie classique au flair d'un steakhouse de premier ordre, ne cherchez pas plus loin que Xasapaki (également connu sous le nom de Chasapaki ou The Hasapaki) à Kos. Cet établissement n'est pas seulement un endroit pour manger ; c'est une célébration de la viande de qualité, préparée de manière experte et servie avec une hospitalité grecque authentique.</p>
+                <p>Ancré dans une riche histoire qui a commencé comme une boucherie locale, Xasapaki est devenu une destination culinaire prisée, réputée pour son concept unique : les convives choisissent leurs morceaux de viande préférés directement sur l'étal du boucher. Que vous ayez envie d'un succulent steak Black Angus, d'une tendre côtelette d'agneau locale ou peut-être même d'une luxueuse sélection de Wagyu, le choix vous appartient. L'équipe expérimentée grille ensuite votre sélection à la perfection, garantissant un repas adapté précisément à vos goûts.</p>
+                <p>Mais l'attrait de Xasapaki s'étend au-delà de ses steaks exceptionnels. Leurs hamburgers sont fréquemment salués comme les meilleurs de l'île, préparés à partir de bœuf frais de haute qualité et souvent accompagnés de touches maison comme du bacon fumé et des frites rustiques. Des entrées telles que le riche carpaccio de bœuf, le savoureux tartare de steak et les délicieuses boulettes de fromage suscitent également des critiques élogieuses.</p>
+                <p>Les clients louent constamment la qualité exceptionnelle de la viande, les portions généreuses et les prix étonnamment raisonnables. Le personnel amical et attentionné améliore encore l'expérience culinaire, créant une atmosphère accueillante qui incite les habitants et les touristes à revenir. Compte tenu de sa popularité, il est fortement recommandé de réserver pour éviter toute déception.</p>
+                <p>Si vous recherchez plus qu'un simple repas – si vous recherchez un goût authentique de viandes manipulées et cuites de manière experte dans un cadre dynamique et unique – la boucherie et le restaurant Xasapaki à Kos sont un incontournable absolu. C'est une expérience qui promet d'être une coupe au-dessus.</p>
+                <p>Visitez leur site web pour le menu et les réservations : <a href="https://xasapaki.gr/" target="_blank" rel="noopener noreferrer">https://xasapaki.gr/</a></p>
+
+                <h3>Retour dans le temps (Histoire de Kos-ville) :</h3>
+                <p>Kos-ville est souvent décrite comme un "musée à ciel ouvert", et pour cause. Des strates d'histoire sont visibles partout, des ruines grecques et romaines antiques aux châteaux médiévaux construits par les Chevaliers de Saint-Jean, en passant par les mosquées ottomanes et les élégants bâtiments de l'époque italienne. De nombreux sites clés sont facilement explorables à pied depuis votre appartement.</p>
+                <h4>Tableau : Points forts historiques de Kos-ville</h4>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nom du site</th>
+                                <th>Brève description</th>
+                                <th>Horaires d'été</th>
+                                <th>Billet d'été</th>
+                                <th>Remarques</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Agora antique</td>
+                                <td>Centre commercial et social de l'ancienne Kos, près du port. Ruines en plein air.</td>
+                                <td>Probablement accessible à tout moment</td>
+                                <td>Gratuit</td>
+                                <td>Comprend l'autel de Dionysos à proximité.</td>
+                            </tr>
+                            <tr>
+                                <td>Château de Neratzia (Château des Chevaliers)</td>
+                                <td>Impressionnant château des Chevaliers du XVe siècle à l'entrée du port.</td>
+                                <td>Contradictoire : Quotidien 08h30-15h00 OU Mer-Lun 08h30-15h30 (Mar fermé)</td>
+                                <td>3 €</td>
+                                <td>Vérifier l'état actuel de la restauration/accessibilité.</td>
+                            </tr>
+                            <tr>
+                                <td>Platane d'Hippocrate</td>
+                                <td>Arbre ancien près du château ; lieu d'enseignement légendaire d'Hippocrate.</td>
+                                <td>Accessible à tout moment</td>
+                                <td>Gratuit</td>
+                                <td>Lieu photo emblématique.</td>
+                            </tr>
+                            <tr>
+                                <td>Odéon romain</td>
+                                <td>Théâtre bien conservé du IIe siècle av. J.-C.</td>
+                                <td>Vérifier localement (peut être en accès libre)</td>
+                                <td>Gratuit (généralement)</td>
+                                <td>Accueille parfois des événements. Le billet combiné mentionné ailleurs implique un accès potentiellement contrôlé.</td>
+                            </tr>
+                            <tr>
+                                <td>Casa Romana</td>
+                                <td>Villa romaine restaurée (style Pompéi) avec mosaïques/fresques.</td>
+                                <td>08h00 - 19h30/20h00 (Fermé le mardi)</td>
+                                <td>10 €</td>
+                                <td>Billet combiné avec Asclépiéion/Musée disponible (15 €/3 jours).</td>
+                            </tr>
+                            <tr>
+                                <td>Musée archéologique</td>
+                                <td>Abrite des découvertes de l'Asclépiéion, de l'Agora, etc.</td>
+                                <td>08h30 - 19h30 (Fermé le mardi)</td>
+                                <td>10 €</td>
+                                <td>Billet combiné disponible (15 €/3 jours).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><em>*Remarque :* Les heures d'ouverture et les prix des billets, en particulier pour le château, peuvent varier ou être sujets à changement en raison de restaurations ou d'autres facteurs. Il est toujours sage de vérifier localement ou via les sites web officiels si vous prévoyez une visite nécessitant des frais d'entrée ou un horaire spécifique.</em></p>
+
+                <h3>Au-delà de la ville – Aventures insulaires :</h3>
+                <p>Bien que Kos-ville offre beaucoup, les paysages variés et les charmants villages de l'île invitent à l'exploration.</p>
+                <h4>Soleil, sable et mer - Une plage pour chaque humeur :</h4>
+                <p>Avec un littoral s'étendant sur 112 kilomètres, Kos est le rêve des amoureux de la plage, offrant tout, des longues étendues de sable aux criques de galets et aux falaises spectaculaires. Douze plages arborent fièrement le Pavillon Bleu pour leur qualité.</p>
+                <h5>À proximité (Facilement accessible) :</h5>
+                <ul>
+                    <li><strong>Plage de Lambi :</strong> Votre voisine la plus proche ! À seulement 3 km au nord du centre-ville, facilement accessible à pied, à vélo ou en bus. C'est une longue étendue de sable populaire avec des eaux peu profondes, ce qui la rend familiale. Bien organisée avec des chaises longues, des parasols, des sports nautiques et de nombreux bars de plage et restaurants. La zone de Lambi Mylos est particulièrement animée.</li>
+                    <li><strong>Plage de Psalidi :</strong> Située à 4 km au sud-est de la ville. Cette plage de galets comporte des sections organisées avec des parasols et des bars de plage et est un centre de planche à voile, de kitesurf et de plongée.</li>
+                    <li><strong>Plage d'Agios Fokas :</strong> En continuant vers le sud depuis Psalidi (environ 8 km de la ville). Une grande étendue de galets plus foncés et de sable offrant un mélange de zones organisées et d'endroits plus calmes pour la détente. Elle est idéalement située près de la plage de Therma.</li>
+                </ul>
+                <h5>Côte nord (Sablonneuse et souvent venteuse) :</h5>
+                <p>Idéale pour les bains de soleil et les sports de vent.</p>
+                <ul>
+                    <li><strong>Plage de Tigaki :</strong> (11 km à l'ouest) Une vaste étendue de sable fin avec des eaux cristallines et peu profondes (certifiée Pavillon Bleu), parfaite pour les enfants. Elle dégage une ambiance détendue mais est populaire, offrant de nombreuses chaises longues, parasols, tavernes et bars de plage. Un endroit de prédilection pour la planche à voile et le kitesurf, mais suffisamment grand pour trouver des zones plus calmes. Offre de superbes vues sur le coucher de soleil.</li>
+                    <li><strong>Plage de Marmari :</strong> (14-20 km au sud-ouest) Une étendue de 3 km de magnifique sable blanc et d'eaux peu profondes. Bien organisée (bien que certaines sources disent partiellement organisée), elle répond à des goûts variés avec des activités comme l'équitation, le kitesurf et la planche à voile. Connue pour son atmosphère animée et ses couchers de soleil époustouflants.</li>
+                    <li><strong>Plage de Mastichari :</strong> (27 km au sud-ouest) Une plage exotique avec du sable blanc et doux et une eau turquoise. C'est une côte animée et bien organisée, familiale et un lieu de prédilection pour la planche à voile avec plusieurs centres. Le port du village dessert également des ferries pour Kalymnos.</li>
+                </ul>
+                 <h5>Côte sud (Baie de Kefalos et au-delà) :</h5>
+                <p>Célèbre pour ses paysages pittoresques et sa variété.</p>
+                <ul>
+                    <li><strong>Plage de Kardamena :</strong> (27-30 km au sud-ouest) La plage attenante à la station touristique la plus animée de Kos. Attendez-vous à une ambiance cosmopolite, une organisation complète avec toutes les commodités, sports nautiques, bars de plage et restaurants. Convient à tous – familles, couples et groupes d'amis à la recherche d'énergie.</li>
+                    <li><strong>Plage d'Agios Stefanos :</strong> (35-40 km au sud-ouest) Sans doute l'une des plages les plus emblématiques et photogéniques de Kos. Un mélange de sable fin et de minuscules galets, bien organisée avec une ambiance cosmopolite. Propose des sports nautiques, y compris la plongée sous-marine. Le magnifique décor comprend l'îlot de Kastri avec son église au dôme bleu (vous pouvez y nager ou y aller en bateau) et les ruines de basiliques paléochrétiennes du Ve siècle juste au bord du rivage.</li>
+                    <li><strong>Paradise Beach :</strong> (30-33 km au sud-ouest) Porte bien son nom avec une étendue de rêve de sable doré et d'eaux peu profondes bleu-vert. Extrêmement populaire, surtout auprès des familles en raison de la mer calme et peu profonde. Bien organisée avec des chaises longues, des parasols, des bars de plage, de nombreux sports nautiques (kayak, parachute ascensionnel, jet-ski, etc.) et des tavernes à proximité. Peut être très fréquentée en haute saison.</li>
+                    <li><strong>Camel Beach :</strong> (Près de Paradise, 30 km au sud-ouest) Une crique pittoresque avec du sable blanc fin et de minuscules galets. L'eau y est exceptionnellement claire, ce qui la rend idéale pour la plongée avec tuba, bien qu'elle devienne rapidement profonde. L'accès implique une courte marche depuis le parking. Offre une certaine organisation avec des chaises longues et des parasols, et des tavernes sont à proximité.</li>
+                    <li><strong>Plage de Lagada :</strong> (Près de Paradise, 35 km au sud-ouest) Fait partie du front de mer continu de la baie de Kefalos, offrant du sable doré fin et de belles eaux de baignade. Vous pouvez trouver des sections organisées avec des commodités ou rechercher des parcelles plus calmes et isolées. Un favori des couples.</li>
+                </ul>
+                <h5>Plage de Kefalos (Kamari) :</h5>
+                <p>(40-45 km au sud-ouest) La principale et longue plage de sable de la région de Kefalos. Bien organisée, familiale et proposant de la planche à voile et d'autres sports nautiques. Elle est également réputée pour être accessible aux fauteuils roulants. Une bonne base pour explorer la péninsule.</p>
+                <h5>Plage d'Agios Theologos :</h5>
+                <p>(Pointe sud-ouest) Une option plus sauvage et isolée pour ceux qui recherchent la tranquillité. Présente des falaises de calcaire spectaculaires, des rivages de galets/rochers et de superbes vues sur le coucher de soleil. Il y a une taverne sur place.</p>
+                <h5>Cavo Paradiso :</h5>
+                <p>(Point le plus méridional) Un joyau quelque peu caché, connu pour sa beauté sauvage et accidentée, sa longue étendue de sable et ses eaux turquoise. L'accès nécessite une marche ou un véhicule robuste, ce qui le rend moins fréquenté.</p>
+                <h5>Expérience unique :</h5>
+                <ul>
+                    <li><strong>Plage de Therma :</strong> (12 km au sud-est) Une visite incontournable pour une expérience spa naturelle unique. Du sable de galets noirs volcaniques et des rochers spectaculaires encadrent une crique où des sources chaudes naturelles se jettent dans la mer, se mélangeant dans un bassin rocheux artificiel. On dit que l'eau a des vertus thérapeutiques. Nécessite une courte marche depuis la fin de la route. Quelques chaises longues et un snack-bar sont disponibles.</li>
+                </ul>
+
+                <h4>Tableau : Guide des plages de Kos</h4>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nom de la plage</th>
+                                <th>Lieu/Dist. de Kos-ville</th>
+                                <th>Sable/Galets</th>
+                                <th>Organisation</th>
+                                <th>Idéal pour</th>
+                                <th>Remarques</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Lambi</td>
+                                <td>3km N</td>
+                                <td>Sable</td>
+                                <td>Bien organisée</td>
+                                <td>Proximité de la ville, familles, sports nautiques</td>
+                                <td>Accès facile à vélo/à pied.</td>
+                            </tr>
+                            <tr>
+                                <td>Tigaki</td>
+                                <td>11km O</td>
+                                <td>Sable</td>
+                                <td>Bien organisée</td>
+                                <td>Familles (eau peu profonde), planche à voile/kitesurf, couchers de soleil</td>
+                                <td>Pavillon Bleu. Peut être fréquentée.</td>
+                            </tr>
+                            <tr>
+                                <td>Marmari</td>
+                                <td>14-20km SO</td>
+                                <td>Sable blanc</td>
+                                <td>Bien/Partiellement organisée</td>
+                                <td>Tous les goûts, planche à voile/kitesurf, couchers de soleil, équitation</td>
+                                <td>Longue plage animée.</td>
+                            </tr>
+                            <tr>
+                                <td>Mastichari</td>
+                                <td>27km SO</td>
+                                <td>Sable blanc</td>
+                                <td>Bien organisée</td>
+                                <td>Planche à voile, familles, ambiance exotique</td>
+                                <td>Fréquentée, port pour Kalymnos.</td>
+                            </tr>
+                            <tr>
+                                <td>Kardamena</td>
+                                <td>27-30km SO</td>
+                                <td>Sable</td>
+                                <td>Bien organisée</td>
+                                <td>Ambiance de station balnéaire animée, toutes commodités, vie nocturne</td>
+                                <td>Centre touristique populaire.</td>
+                            </tr>
+                            <tr>
+                                <td>Agios Stefanos</td>
+                                <td>35-40km SO</td>
+                                <td>Sable et galets</td>
+                                <td>Bien organisée</td>
+                                <td>Paysage (îlot Kastri/ruines), familles, sports nautiques</td>
+                                <td>Très pittoresque.</td>
+                            </tr>
+                            <tr>
+                                <td>Paradise</td>
+                                <td>30-33km SO</td>
+                                <td>Sable doré</td>
+                                <td>Bien organisée</td>
+                                <td>Familles (eau peu profonde), sports nautiques</td>
+                                <td>Très populaire, peut être bondée.</td>
+                            </tr>
+                            <tr>
+                                <td>Camel</td>
+                                <td>30km SO</td>
+                                <td>Sable blanc et galets</td>
+                                <td>Quelque organisation</td>
+                                <td>Snorkeling, crique pittoresque</td>
+                                <td>Devient vite profonde, courte marche nécessaire.</td>
+                            </tr>
+                            <tr>
+                                <td>Therma</td>
+                                <td>12km SE</td>
+                                <td>Galets noirs</td>
+                                <td>Quelque organisation</td>
+                                <td>Expérience unique de source chaude</td>
+                                <td>Courte marche nécessaire.</td>
+                            </tr>
+                             <tr>
+                                <td>Agios Theologos</td>
+                                <td>Pointe SO</td>
+                                <td>Galets/Rochers</td>
+                                <td>Minimale/Aucune</td>
+                                <td>Isolement, beauté sauvage, couchers de soleil</td>
+                                <td>Accès isolé.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Charme des villages - Au-delà de la capitale</h3>
+                <p>S'échapper de Kos-ville révèle des villages traditionnels nichés dans les montagnes ou surplombant la mer, offrant un rythme et une perspective différents.</p>
+                <ul>
+                    <li><strong>Zia :</strong> Une visite absolument incontournable, surtout pour le coucher du soleil. Ce magnifique village de montagne, à environ 16 km au sud de Kos-ville, offre des vues panoramiques à couper le souffle sur Kalymnos, Pserimos et la côte turque, qui deviennent vraiment spectaculaires lorsque le soleil se couche. Bien que populaire auprès des touristes, il conserve son charme avec ses bâtiments blanchis à la chaux, ses boutiques d'artisanat et ses excellentes options de restauration. Le restaurant <strong>Oromedon</strong> est fortement recommandé pour sa combinaison de vues imprenables et de délicieuse cuisine locale. Vous pouvez également visiter le <strong>Parc Naturel de Kos</strong> à proximité ou faire une randonnée jusqu'au sommet du <strong>Mont Dikeos</strong> (le plus haut sommet de Kos) depuis Zia. Compte tenu de sa popularité pour le coucher du soleil, envisagez de réserver des restaurants ou des transports à l'avance.</li>
+                    <li><strong>Kefalos :</strong> Situé à 40 km au sud-ouest de Kos-ville, Kefalos offre une base plus calme et plus traditionnelle. Le village est pittoresquement perché sur une colline surplombant la baie de Kamari, qui abrite de nombreuses belles plages (comme Agios Stefanos) et l'emblématique <strong>îlot de Kastri</strong>. Explorez les ruelles étroites et les maisons blanches traditionnelles du village supérieur, ou profitez des commodités balnéaires de Kamari en contrebas. Les vestiges historiques comprennent les ruines du <strong>Château de Kefalos</strong> et la <strong>Basilique de Saint-Étienne</strong> à proximité. De nombreux cafés et tavernes accueillent les visiteurs.</li>
+                    <li><strong>Pyli :</strong> Un village traditionnel à environ 15 km au sud-ouest de Kos-ville. Son principal attrait est le <strong>Paléo Pyli (Vieux Pyli)</strong> voisin, les ruines atmosphériques d'une forteresse byzantine. Le nouveau village de Pyli possède une place centrale avec des cafés et des tavernes traditionnels.</li>
+                    <li><strong>Antimachia :</strong> Situé à 23 km au sud-ouest de Kos-ville, près de l'aéroport. Ce village est dominé par l'imposant <strong>Château Vénitien d'Antimachia</strong>. Le village abrite également la <strong>Maison Traditionnelle d'Antimachia</strong> et est connu pour son festival du miel.</li>
+                    <li><strong>Asfendiou et Hameaux de montagne (Lagoudi, Asomatos) :</strong> Pour un aperçu du Kos authentique et rural, explorez ces villages sur les pentes du Mont Dikeos. Asfendiou possède une architecture traditionnelle. Le village voisin de <strong>Lagoudi</strong> a été en grande partie abandonné puis réhabilité. <strong>Asomatos</strong> est particulièrement préservé du tourisme.</li>
+                    <li><strong>Platani :</strong> À seulement 3 km de Kos-ville, Platani est unique en tant que foyer de la minorité musulmane turcophone de Kos. Il offre une saveur culturelle différente et est connu pour le restaurant d'influence turque <strong>Sherif</strong>.</li>
+                </ul>
+
+                <h3>Merveilles antiques - L'Asclépiéion :</h3>
+                <p>Aucune visite à Kos n'est complète sans explorer l'<strong>Asclépiéion</strong>, le site archéologique le plus important de l'île.</p>
+                <ul>
+                    <li><strong>Importance :</strong> Sanctuaire de guérison renommé dédié à Asclépios, dieu de la médecine. Lié à Hippocrate, "Père de la médecine moderne".</li>
+                    <li><strong>Disposition :</strong> Trois terrasses reliées par des escaliers. Premier niveau : salles de traitement, bains. Deuxième niveau : temples. Troisième niveau : plus grand temple, portiques.</li>
+                    <li><strong>Visite :</strong> À 4 km de Kos-ville. Accessible en voiture, taxi, bus (ligne 3 ou 6) ou à pied. Prévoyez 1 à 2 heures. Envisagez un guide. Visitez tôt/tard en été. Printemps/automne idéal. Rapports suggérant l'absence d'accès pour personnes handicapées.</li>
+                    <li><strong>Horaires et Billets :</strong>
+                        <ul>
+                            <li>Été (1er avr. - 31 oct.) : Tous les jours 08h00 - 20h00 (Dernière entrée 19h30).</li>
+                            <li>Hiver (1er nov. - 31 mars) : 08h30 - 15h30 (Fermé le mardi).</li>
+                            <li>Billet (Été) : 8 €. (Hiver) : 4 €.</li>
+                            <li>Réductions : Citoyens UE 6-25 ans gratuit ; non-UE 6-25 ans 50% de réduction. Citoyens UE de plus de 65 ans 50% de réduction. Pièce d'identité requise.</li>
+                            <li>Billet combiné : 15 € (Asclépiéion, Musée Archéologique, Casa Romana - valable 3 jours).</li>
+                            <li>Boutique de souvenirs sur place.</li>
+                            <li><em>Vérification conseillée :</em> Consultez le site officiel du Patrimoine Hellénique (hhticket.gr) pour les détails actuels.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Section 4 : Se déplacer à Kos -->
+            <section id="section4" class="card">
+                <h2>Section 4 : Se déplacer à Kos</h2>
+                <p>Explorer Kos fait partie de l'aventure ! Voici un aperçu des meilleures façons de se déplacer sur l'île.</p>
+                <h3>Se déplacer sur l'île :</h3>
+                <ul>
+                    <li><strong>Location de voiture / scooter / VTT :</strong> Recommandé pour la flexibilité. Nombreuses agences à Kos-ville, à l'aéroport, dans les stations balnéaires. Voiture : ~35-60 €/jour. Scooter : ~25 €/jour. Permis de conduire valide requis (PCI pour non-UE). Réservez à l'avance en été.</li>
+                    <li><strong>Bus interurbains KTEL :</strong> Économique. Gare principale : 7 rue Kleopatras, Kos-ville. Modernes, climatisés. Billets dans le bus. Tarifs : ~2,30-5,20 €. Vérifiez les horaires : <a href="http://www.ktel-kos.gr" target="_blank" rel="noopener noreferrer">www.ktel-kos.gr</a> ou à la gare. Contact : +30 22420 22292.</li>
+                </ul>
+                <h4>Principales lignes KTEL depuis Kos-ville (Estimations estivales) :</h4>
+                <ul>
+                    <li>Vers Kefalos : Quotidien, 07h30-21h00. Tarif : 5,20 €. Trajet : ~1h15.</li>
+                    <li>Vers Zia : Quotidien, 09h30-15h45. Tarif : 2,30 €. Trajet : ~30min. (Vérifiez attentivement les horaires de retour, surtout pour le coucher du soleil).</li>
+                    <li>Vers Tigaki : Fréquent, 08h10-23h30. Tarif : 2,30 €.</li>
+                    <li>Vers Marmari : Fréquent, 08h00-23h30. Tarif : 2,30 €.</li>
+                    <li>Vers l'aéroport (KGS) : Régulier. Trajet : ~30-40min. Consultez le site web de KTEL.</li>
+                </ul>
+                <ul>
+                    <li><strong>Bus urbains (DEAS) :</strong> Pour Kos-ville et ses environs (Lambi, Psalidi, Asclépiéion, Therma). Arrêts en ville. Infos : <a href="http://mobility.kos.gr" target="_blank" rel="noopener noreferrer">mobility.kos.gr</a> ou +30 22420 26276. Ligne 5 vers la plage de Therma (toutes les heures de 09h15 à 16h35).</li>
+                    <li><strong>Taxis :</strong> Disponibles à Kos-ville (station : Akti Kountouriotou), à l'aéroport, dans les stations balnéaires. Hélés, en station ou sur réservation : +30 22420 23333 / 22777 ou en ligne (KosTaxi.eu, KosRadioTaxi.gr). Compteur, confirmez le tarif pour les longs trajets. Kos-ville-Kefalos ~50-60 € ; Kos-ville-Zia ~19-23 €.</li>
+                    <li><strong>Vélo :</strong> Agréable pour les courtes distances (côtes nord/est plates). Pistes cyclables de Kos-ville à Tigaki et Lambi/Psalidi. Locations : ~5-10 €/jour.</li>
+                </ul>
+                <h3>Temps de trajet (Conduite approximative) :</h3>
+                <ul>
+                    <li>Kos-ville ↔ Kefalos : 40-45 minutes (40 km)</li>
+                    <li>Kos-ville ↔ Zia : 17-20 minutes (13,5 km)</li>
+                    <li>Kos-ville ↔ Tigaki : 15-20 minutes (11 km)</li>
+                    <li>Kos-ville ↔ Marmari : 20-25 minutes (14 km)</li>
+                    <li>Kos-ville ↔ Aéroport (KGS) : 30-40 minutes (24 km)</li>
+                    <li>Kos-ville ↔ Plage de Therma : 15-20 minutes (12 km)</li>
+                </ul>
+            </section>
+
+            <!-- Section 5 : Informations importantes -->
+            <section id="section5" class="card">
+                <h2>Section 5 : Informations importantes</h2>
+                <h3>En cas d'urgence</h3>
+                <p>La Grèce utilise le système d'urgence européen standard.</p>
+                <ul>
+                    <li><strong>Numéro d'urgence européen : <a href="tel:112" class="font-semibold">112</a></strong> (Ambulance, Pompiers, Police, Garde côtière. Les opérateurs parlent grec, anglais et français).</li>
+                </ul>
+                <p><strong>Lignes d'urgence directes grecques :</strong></p>
+                <ul>
+                    <li>Ambulance (EKAB) : <a href="tel:166" class="font-semibold">166</a></li>
+                    <li>Police : <a href="tel:100" class="font-semibold">100</a></li>
+                    <li>Pompiers : <a href="tel:199" class="font-semibold">199</a></li>
+                    <li>Garde côtière : <a href="tel:108" class="font-semibold">108</a></li>
+                    <li>Police touristique (assistance/information) : <a href="tel:171" class="font-semibold">171</a></li>
+                </ul>
+                <h3>Contact de l'hôte</h3>
+                <p>Pour toute question non urgente ou assistance pendant votre séjour :</p>
+                <ul>
+                    <li><strong>Nom :</strong> Varthakouris Ioannis</li>
+                    <li><strong>Téléphone / WhatsApp :</strong> <a href="https://wa.me/306944589632" target="_blank" rel="noopener noreferrer" class="font-semibold">+30 6944 589632</a> (Cliquez pour discuter) ou Appelez <a href="tel:+306944589632" class="font-semibold">+30 6944 589632</a></li>
+                    <li><strong>Méthode de contact/Horaires préférés :</strong> Message WhatsApp ou Viber privilégié pour les demandes non urgentes entre 9h et 20h. Pour les problèmes urgents en dehors de ces heures ou si vous ne parvenez pas à me joindre via WhatsApp, veuillez appeler.</li>
+                </ul>
+                <h3>Essentiels à proximité</h3>
+                <p><strong>Pharmacies (Farmakeio / Φαρμακείο) :</strong> Facilement disponibles à Kos-ville. Elles fonctionnent selon un système de rotation pour les services en dehors des heures d'ouverture et le week-end (recherchez les panneaux indiquant "Εφημερεύον Φαρμακείο" - Pharmacie de garde). Vérifiez sur Google Maps les emplacements et horaires les plus proches.</p>
+                <p><strong>Supermarchés / Épiceries :</strong> Des supérettes et de plus grands supermarchés sont accessibles à pied. AB Vassilopoulos pour un plus grand choix se trouve à environ 1 minute à pied.</p>
+                <p><strong>Distributeurs automatiques / Banques :</strong> Disponibles dans diverses banques du centre de Kos-ville. Un distributeur automatique se trouve à l'entrée du supermarché AB Vassilopoulos, à environ 1 minute à pied.</p>
+            </section>
+
+            <!-- Section 6 : À la prochaine... -->
+            <section id="section6" class="card">
+                <h2>Section 6 : À la prochaine...</h2>
+                <h3>Un adieu chaleureux</h3>
+                <p>Alors que votre séjour à Diamante del Mar Kos et sur la magnifique île de Kos touche à sa fin, nous tenons à vous remercier sincèrement d'avoir choisi de séjourner chez nous. Nous espérons sincèrement que vous avez passé des vacances merveilleuses, relaxantes et mémorables, remplies de soleil, de découvertes et de la magie unique de la mer Égée.</p>
+                <h3>Rappel de départ</h3>
+                <ul>
+                    <li><strong>Heure de départ :</strong> Veuillez libérer l'appartement avant <strong>11h00</strong>.</li>
+                    <li><strong>Retour des clés :</strong> Déposez vos clés dans la boîte à clés.</li>
+                    <li><strong>Dernières vérifications :</strong> Avant de partir, veuillez prendre un moment pour vous assurer que vous avez tous vos effets personnels. Nous vous prions de bien vouloir éteindre toutes les lumières et les climatiseurs, et de laisser l'appartement dans un état raisonnablement propre.</li>
+                </ul>
+                <h3>Partagez votre expérience</h3>
+                <p>Si vous avez apprécié votre séjour à Diamante del Mar Kos, nous vous serions incroyablement reconnaissants de prendre quelques instants pour partager votre expérience en laissant un avis sur la plateforme que vous avez utilisée pour la réservation (Booking.com ou Airbnb). Vos commentaires sont précieux pour nous.</p>
+                <h3>Restez connecté</h3>
+                <p>Pour de futurs séjours ou demandes de renseignements, n'hésitez pas à nous contacter directement à <a href="mailto:diamantedelmarkos@gmail.com">diamantedelmarkos@gmail.com</a>.</p>
+                <p>Si vous avez des questions de dernière minute avant votre départ, n'hésitez pas à utiliser les coordonnées fournies dans la section 5.</p>
+                <p>Merci encore une fois d'avoir séjourné chez nous. Nous vous souhaitons un voyage sûr et agréable !</p>
+            </section>
+            
+            <!-- Informations sur les appareils -->
+            <section id="applianceInfo" class="card">
+                <h2>Informations utiles sur les appareils électroménagers</h2>
+                
+                <div class="mb-4 p-3 border rounded-md">
+                    <h3 class="font-semibold">Sélecteur de programme Lave-linge</h3>
+                    <p>Traductions pour le sélecteur de programme :</p>
+                    <p>EN, FR, DE, NL, TR, GR</p>
+                    <p>(Voir l'appareil ou les codes QR spécifiques pour un guide visuel)</p>
+                </div>
+
+                <h3 class="text-lg font-semibold mb-3">Manuels des appareils (Scannez le code QR avec votre téléphone)</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 qr-section">
+                    <div>
+                        <h4 class="font-semibold">FOUR À MICRO-ONDES</h4>
+                        <p>Scannez le QR code pour le manuel.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">FOUR</h4>
+                        <p>Scannez le QR code pour le manuel.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">MACHINE À CAFÉ NESPRESSO INISIA</h4>
+                        <p>Scannez le QR code pour le manuel.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">LAVE-LINGE</h4>
+                        <p>Scannez le QR code pour le manuel.</p>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-semibold mt-6 mb-3">Versions traduites en ligne (Scannez avec votre téléphone)</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 qr-section">
+                    <div>
+                        <h4 class="font-semibold">Anglais</h4>
+                        <p>Scannez le QR code pour le manuel.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Grec - Ελληνικά</h4>
+                        <p>Scannez le QR code pour le manuel.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Allemand – Deutsch</h4>
+                        <p>Scannez le QR code pour le manuel.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Italien – Italiano</h4>
+                        <p>Scannez le QR code pour le manuel.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Français - Française</h4>
+                        <p>Scannez le QR code pour le manuel.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Espagnol - Español</h4>
+                        <p>Scannez le QR code pour le manuel.</p>
+                    </div>
+                     <div>
+                        <h4 class="font-semibold">Néerlandais - Nederlands</h4>
+                        <p>Scannez le QR code pour le manuel.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Turc - Türkçe</h4>
+                        <p>Scannez le QR code pour le manuel.</p>
+                    </div>
+                </div>
+                <p class="mt-4 text-sm text-gray-600"><em>Remarque : Comme les codes QR réels ne sont pas disponibles dans le texte source, il s'agit de substituants. Veuillez vous référer aux codes QR physiques fournis dans la propriété.</em></p>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 py-6 border-t border-gray-300">
+            <p class="text-sm text-gray-600">&copy; Diamante del Mar Kos - Nous vous souhaitons un merveilleux séjour !</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
