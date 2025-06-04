@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diamante del Mar Girit'e Hoş Geldiniz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .content-section {
+            padding-top: 60px; /* Navigasyon yüksekliğine göre ayarla */
+            margin-top: -60px; /* Navigasyon yüksekliğine göre ayarla */
+        }
+        .table-responsive {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #e2e8f0; /* Tailwind gray-300 */
+            padding: 0.75rem; /* p-3 */
+            text-align: left;
+        }
+        th {
+            background-color: #f1f5f9; /* Tailwind slate-100 */
+        }
+        /* Akordeon/açılır menü için özel stiller */
+        .nav-menu summary::-webkit-details-marker {
+            display: none;
+        }
+        .nav-menu summary {
+            list-style: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Navigasyon -->
+    <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-3">
+                <h1 class="text-xl font-bold text-sky-600">Diamante del Mar</h1>
+                <details class="nav-menu md:hidden">
+                    <summary class="px-3 py-2 rounded-md text-slate-600 hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </summary>
+                    <div class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl z-20">
+                        <a href="#section1" class="block px-4 py-2 text-slate-700 hover:bg-sky-100 hover:text-sky-600">Hoş Geldiniz</a>
+                        <a href="#section2" class="block px-4 py-2 text-slate-700 hover:bg-sky-100 hover:text-sky-600">Daire Temel Bilgileri</a>
+                        <a href="#section3" class="block px-4 py-2 text-slate-700 hover:bg-sky-100 hover:text-sky-600">Ada Yaşamı Rehberi</a>
+                        <a href="#section4" class="block px-4 py-2 text-slate-700 hover:bg-sky-100 hover:text-sky-600">Kos'ta Ulaşım</a>
+                        <a href="#section5" class="block px-4 py-2 text-slate-700 hover:bg-sky-100 hover:text-sky-600">Önemli Bilgiler</a>
+                        <a href="#section6" class="block px-4 py-2 text-slate-700 hover:bg-sky-100 hover:text-sky-600">Veda</a>
+                        <a href="#section_appliances" class="block px-4 py-2 text-slate-700 hover:bg-sky-100 hover:text-sky-600">Cihazlar</a>
+                    </div>
+                </details>
+                <div class="hidden md:flex space-x-4">
+                     <a href="#section1" class="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-sky-100 hover:text-sky-600">Hoş Geldiniz</a>
+                    <a href="#section2" class="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-sky-100 hover:text-sky-600">Temel Bilgiler</a>
+                    <a href="#section3" class="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-sky-100 hover:text-sky-600">Ada Rehberi</a>
+                    <a href="#section4" class="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-sky-100 hover:text-sky-600">Ulaşım</a>
+                    <a href="#section5" class="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-sky-100 hover:text-sky-600">Önemli</a>
+                    <a href="#section6" class="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-sky-100 hover:text-sky-600">Veda</a>
+                    <a href="#section_appliances" class="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-sky-100 hover:text-sky-600">Cihazlar</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ana İçerik -->
+    <main class="container mx-auto px-4 py-8 pt-20"> <!-- Navigasyon ofseti için pt-20 eklendi -->
+
+        <!-- Bölüm 1: Cennete Hoş Geldiniz! -->
+        <section id="section1" class="content-section mb-12 p-6 bg-white rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-sky-700 mb-6 border-b-2 border-sky-200 pb-2">Bölüm 1: Cennete Hoş Geldiniz!</h2>
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Sıcak Bir Ege Karşılaması</h3>
+            <p class="mb-4">Kalós órises! Kos'a hoş geldiniz ve Diamante del Mar Girit'e hoş geldiniz! Sizi bu büyüleyici Oniki Ada adasında ağırlamaktan kesinlikle mutluluk duyuyoruz. Yakın zamanda yenilenmiş ve stil ve konfor göz önünde bulundurularak tasarlanmış olan Diamante del Mar Girit'in, Kos'u bu kadar özel kılan antik tarih, güneşli plajlar ve canlı ada yaşamının büyüleyici karışımını keşfetmek için mükemmel sığınağınız, şık ana üssünüz olacağını umuyoruz.</p>
+            <p class="mb-4">Kos, yavaşlamaya, deniz havasını solumaya, binlerce yıllık tarihte dolaşmaya ve basit zevklerin tadını çıkarmaya davet eden bir adadır – mükemmel demlenmiş bir kahve, taze deniz ürünlerinin tadı, güneşin teninizdeki sıcaklığı. Antik kalıntıların hareketli kafelerin yanında gururla durduğu ve sakin koyların canlı plaj tatil köyleriyle buluştuğu bir yerdir. Tıpkı bizim gibi eşsiz cazibesine aşık olmanızı umuyoruz.</p>
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Bu Rehber Hakkında</h3>
+            <p class="mb-4">Bu kitabı sadece bir el kitabı olarak değil, konaklamanız sırasında şık bir yerli gibi yaşamanız için özel olarak hazırlanmış bir giriş olarak düşünün. Diamante del Mar Girit'e zahmetsizce yerleşmenize yardımcı olacak temel bilgileri, adanın öne çıkan özelliklerini keşfetmeniz için kişisel önerilerimizle birlikte topladık – en iyi yakındaki kahve dükkanlarından nefes kesen gün batımı manzaralarına ve gizli tarihi mücevherlere kadar. Deneyiminizi geliştirmek ve Kos maceranızı gerçekten unutulmaz kılmak için tasarlanmıştır.</p>
+            <p>Konaklamanız sırasında herhangi bir sorunuz olursa lütfen bizimle iletişime geçmekten çekinmeyin. İletişim bilgilerimizi Bölüm 5'te bulabilirsiniz. Şimdi rahatlayın, gevşeyin ve Kos hikayeniz başlasın!</p>
+        </section>
+
+        <!-- Bölüm 2: Yerleşme – Dairenizin Temel İhtiyaçları -->
+        <section id="section2" class="content-section mb-12 p-6 bg-white rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-sky-700 mb-6 border-b-2 border-sky-200 pb-2">Bölüm 2: Yerleşme – Dairenizin Temel İhtiyaçları</h2>
+            
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Sığınağınızı Bulma</h3>
+            <p class="mb-2"><strong>Tam Adres:</strong> Evden uzaktaki eviniz şu adreste bulunmaktadır:<br>Diamante Del Mar Girit<br>Σοφοκλή Βενιζέλου 54 (Sophokli Venizelou 54)<br>Kos Şehri, 853 00</p>
+            <p class="mb-2"><strong>Konum Bağlamı:</strong> Harika bir yer seçtiniz! Daire, popüler Lambi Plajı'na sadece 200 metrelik kısa bir yürüyüş mesafesinde ve ana Kos Limanı'na yaklaşık 1,1 kilometre uzaklıkta elverişli bir konuma sahiptir. Bu, denize ve şehrin olanaklarına kolay erişiminiz olduğu anlamına gelirken, potansiyel olarak hareketli merkezin tam kalbinde olmaktan biraz daha sakin bir atmosferin tadını çıkarabilirsiniz.</p>
+            <p class="mb-4"><strong>Harita/Yol Tarifi:</strong> Varışta ve keşifleriniz sırasında kolay navigasyon için yukarıdaki adresi Google Haritalar veya tercih ettiğiniz navigasyon uygulamasıyla kullanmanızı öneririz.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Basitleştirilmiş Giriş ve Çıkış</h3>
+            <p class="mb-2"><strong>Giriş Saati:</strong> Saat 16:00'dan itibaren istediğiniz zaman giriş yapabilirsiniz. Sorunsuz bir varış sağlamak için lütfen tahmini varış saatinizi önceden bize bildirin. Özel check-in ayarlanabilir.</p>
+            <p class="mb-2"><strong>Anahtar Teslimi:</strong> Ana giriş kapısının sağında bir anahtar kutusu bulacaksınız. Kod <strong>3909</strong>'dur. Lütfen anahtarı aldıktan sonra anahtar kutusunun güvenli bir şekilde kapatıldığından emin olun.</p>
+            <p class="mb-2"><strong>Çıkış Saati:</strong> Çıkış saati 11:00'dir. Bu, bir sonraki misafirlerimiz için daireyi mükemmel bir şekilde hazırlamamız için bize zaman tanır. Gerekirse ekspres check-out seçenekleri mevcuttur.</p>
+            <p class="mb-4"><strong>Anahtar İadesi:</strong> Lütfen anahtarları dairenin içindeki yemek masasının üzerine bırakın ve kapının arkanızdan güvenli bir şekilde kilitlendiğinden emin olun veya anahtarları aynı kodu kullanarak anahtar kutusuna iade edin.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Konfor Alanınız</h3>
+            <p class="mb-2"><strong>Wi-Fi Erişimi:</strong> Bağlantıda kalmak kolaydır. Güvenilir Wi-Fi'nin kullanılabilirliğini vurgulamak, etkinlikleri planlamak, iletişimde kalmak ve hatta işleri halletmek için önemlidir.</p>
+            <ul class="list-disc list-inside mb-2 pl-4">
+                <li><strong>Ağ Adı (SSID):</strong> Crete</li>
+                <li><strong>Şifre:</strong> Crete2025</li>
+            </ul>
+            <p class="mb-2">Wi-Fi konaklamanız süresince ücretsizdir.</p>
+            <p class="mb-2"><strong>Klima:</strong> Her oda konforunuz için klima ile donatılmıştır. Her ünite için uzaktan kumanda bulacaksınız. Soğutmayı seçmek için 'Mod' düğmesini kullanın (genellikle bir kar tanesi simgesi) ve sıcaklığı ok düğmeleriyle ayarlayın. Konforlu ve enerji tasarruflu bir ortam için yaklaşık 23-25°C'ye ayarlamanızı öneririz. Lütfen daireden ayrılırken klimaları kapatmayı unutmayın.</p>
+            <p class="mb-4"><strong>Televizyon:</strong> Düz ekran Akıllı Android TV ile rahatlayın. Açmak için uzaktan kumandayı kullanın (genellikle kırmızı güç düğmesi). Kanal yukarı/aşağı düğmelerini kullanarak kanallar arasında gezinebilirsiniz. Netflix gibi yayın hizmetleri mevcutsa ve bunları kullanmak isterseniz, kendi hesap bilgilerinizle giriş yapmanız gerekebilir. Lütfen ayrılmadan önce çıkış yapmayı unutmayın.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Mutfak ve Çamaşır Bilgileri</h3>
+            <p class="mb-2">Daireniz, rahatınız için iyi donanımlı bir mutfak ve çamaşır yıkama olanaklarına sahiptir. İşte bazı kısa talimatlar:</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>Fırın ve Ocak:</strong> Sıcaklığı kontrol etmek ve pişirme fonksiyonlarını seçmek için düğmeleri kullanın. Kullanımdan sonra kapalı olduklarından emin olun. Temel mutfak eşyaları sağlanmaktadır.</li>
+                <li><strong>Mikrodalga:</strong> Hızlı ısıtma için idealdir. Temel ayarlar için lütfen mikrodalga panelini inceleyin.</li>
+                <li><strong>Buzdolabı:</strong> Buzdolabı uygun bir soğutma sıcaklığına ayarlanmalıdır. Gerekirse ayarlamaktan çekinmeyin, ancak donmayı önlemek için en soğuk ayarlardan kaçının.</li>
+                <li><strong>Su Isıtıcısı ve Tost Makinesi:</strong> Standart çalıştırma – lütfen çalıştırmadan önce su ısıtıcısında yeterli su olduğundan emin olun.</li>
+                <li><strong>Çamaşır Makinesi:</strong> Mutfak alanında bulunur. Lütfen sağlanan deterjanı idareli kullanın. Çamaşırlarınıza göre uygun bir yıkama programı seçin. Makineyi aşırı yüklemekten kaçının. Bu kılavuzun son sayfasında her cihaz için QR kodları bulunmaktadır.</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Uyum İçinde Yaşamak (Ev Kuralları)</h3>
+            <p class="mb-2">Herkes için keyifli bir konaklama sağlamak ve Diamante del Mar Girit'in kalitesini korumak için aşağıdaki ev kurallarına uymanızı rica ederiz:</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>Sigara:</strong> Bu, iç mekanlarda kesinlikle sigara içilmeyen bir tesistir.</li>
+                <li><strong>Evcil Hayvanlar:</strong> Hayvanları seviyoruz ama maalesef dairede evcil hayvanlara izin verilmemektedir.</li>
+                <li><strong>Sessiz Saatler:</strong> Lütfen komşularımıza saygılı olun ve gürültü seviyesini 22:00 ile 07:00 arasında minimumda tutun.</li>
+                <li><strong>Partiler/Etkinlikler:</strong> Huzurlu bir ortam sağlamak için partilere, etkinliklere ve büyük toplantılara izin verilmemektedir. Tesis, bekarlığa veda partileri veya benzeri partilere ev sahipliği yapmamaktadır.</li>
+                <li><strong>Misafirler:</strong> Sadece kayıtlı misafirlerin gece konaklamasına izin verilmektedir. Gündüz ziyaretçi ağırlamayı planlıyorsanız lütfen bizi önceden bilgilendirin.</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Alanınız ve Pratik Bilgiler</h3>
+            <p class="mb-2"><strong>Balkon/Teras:</strong> Dairenizde güzel manzaralar sunan bir balkon veya teras bulunmaktadır. Ege atmosferini içinize çekerken sabah kahveniz veya akşam içkiniz için mükemmel bir yerdir. Diğer yerel konaklamalardan esinlenerek, dinlenmek ve manzaranın tadını çıkarmak için konforlu oturma yerleri bulabilirsiniz.</p>
+            <p class="mb-2"><strong>Çöp Bertarafı:</strong> Lütfen poşetlenmiş çöplerinizi tesisin yakınındaki sokak köşesinde bulunan büyük ortak çöp kutularına atın. Kağıt, plastik ve cam için geri dönüşüm kutuları tesisin yakınındaki parkın yanında bulunmaktadır. Lütfen temizliği korumak için çöpleri düzenli olarak çıkarın.</p>
+            <p><strong>Park Yeri:</strong> Lütfen tesiste özel park yeri bulunmadığını unutmayın.</p>
+        </section>
+
+        <!-- Bölüm 3: Ada Yaşamı – Kos İçin İçeriden Bilgiler Rehberiniz -->
+        <section id="section3" class="content-section mb-12 p-6 bg-white rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-sky-700 mb-6 border-b-2 border-sky-200 pb-2">Bölüm 3: Ada Yaşamı – Kos İçin İçeriden Bilgiler Rehberiniz</h2>
+            <p class="mb-4">Kos Şehri, antik tarihi modern Akdeniz yaşamıyla harmanlayan keyifli bir enerjiyle titreşir. En büyük zevklerinden biri canlı kafe kültürüdür – güne başlamanın, öğle molası vermenin veya sadece dünyayı seyretmenin mükemmel bir yoludur.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Kos Şehri Kahve ve Atıştırmalıkları (Sadece Birkaç Dakika Uzakta)</h3>
+            <p class="mb-2"><strong>Sabah Ritüeliniz, Yükseltilmiş:</strong> Genel otel kahvesini unutun; Kos sizi yerel ritüeli benimsemeye davet ediyor. İster yavaşça demlenmiş güçlü bir geleneksel Yunan kahvesi, ister serinletici bir buzlu Freddo Espresso veya Cappuccino (modern Yunan klasikleri) veya titizlikle hazırlanmış özel bir demleme olsun, bir kahve deneyimi sizi bekliyor.</p>
+            <p class="mb-2"><strong>Vasileos Pavlou İkilisi:</strong> İnanılmaz şanslısınız! Hemen kapınızın önünde, Vasileos Pavlou 33'te, dairenizden sadece birkaç adım ötede, farklı ama tamamlayıcı deneyimler sunan bir değil, iki ayrı ve son derece saygın mekan bulacaksınız. Bu eşsiz yakınlık, mükemmel kahvenizin veya brunch'ınızın asla uzakta olmadığı anlamına gelir.</p>
+            <div class="mb-4 p-4 border border-slate-200 rounded-lg">
+                <h4 class="text-xl font-medium text-sky-600 mb-1">Alchimion</h4>
+                <p class="text-sm text-slate-600 mb-2">Vasileos Pavlou 33</p>
+                <p>Burası rahat bir kahvaltı veya brunch için ideal bir yer. Menülerinde bir gece önceden hazırlanmış yulaf (Kakaolu Yulaf Ezmesi veya Fıstık Ezmeli Yulaf deneyin), geleneksel Kayianas veya baharatlı Şakşuka gibi lezzetli yumurta yemekleri, pastırmalı ve yumurtalı tuzlu krepler ve taze salatalar gibi yaratıcı seçenekler bulunur. Espresso, filtre kahve ve soğuk demleme dahil olmak üzere çeşitli kahveler sunarlar ve bitki bazlı süt alternatifleri mevcuttur. Atmosfer davetkar ve samimidir, bir dizüstü bilgisayarla oyalanmak (ücretsiz Wi-Fi sağlanır) veya açık havada oturmanın keyfini çıkarmak için uygundur. Hatta köpeklere bile izin veriyorlar! Her gün 07:00 - 18:00 (Pazar günleri 08:00 - 16:00) arası açıktır. Onları Facebook ve Instagram'da bulabilirsiniz. İlginç bir nokta olarak, tarihi Dionysos Sunağı'nın yakınında yer almaktadır.</p>
+            </div>
+            <div class="mb-4 p-4 border border-slate-200 rounded-lg">
+                <h4 class="text-xl font-medium text-sky-600 mb-1">The Cup</h4>
+                <p class="text-sm text-slate-600 mb-2">Vasileos Pavlou 33</p>
+                <p>Eğer olağanüstü kahve önceliğinizse, yan taraftaki "The Cup"a gidin. Bu küçük, sigara içilmeyen kafe, gösterişsiz demlenmiş olağanüstü espresso içecekleriyle övülen gerçek bir "üçüncü dalga" kahve dükkanı olarak bilinir. Çeşitli bitki sütleri (yulaf, badem, filiz belirtilmiştir) sunarlar ve genellikle vegan atıştırmalık barlar ve kurabiyeler bulundururlar. Esas olarak kahveye odaklansalar da, lezzetli ve uygun fiyatlı ciabatta sandviçleri de servis ederler. Hizmetin samimi olduğu belirtiliyor ve ücretsiz Wi-Fi mevcut. Kalitesi ve popülaritesi nedeniyle, özellikle sadece paket kahve yerine yiyecek sipariş ediyorsanız, yoğun saatlerde beklemeniz gerekebileceğini unutmayın. Çalışma saatleri kapsamlı görünüyor: Pazartesi-Cuma 07:00-22:00, Cumartesi-Pazar 08:00-16:00.</p>
+            </div>
+
+            <h4 class="text-xl font-semibold text-sky-600 mt-6 mb-3">Kos Şehrindeki Diğer Mücevherler:</h4>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-2">
+                <li><strong>Zero Cafe Bar:</strong> Zanaat birası meraklıları için bu cenneti bulmak için limana doğru kısa bir yürüyüş yapın. Zero, bilgili ve samimi bir sahibinin tavsiyelerde bulunmaktan mutluluk duyduğu etkileyici bir Yunan zanaat birası koleksiyonuna (şişe ve fıçı) sahiptir. Geniş, gölgeli bira bahçesinde veya şirin avluda dinlenin. Ayrıca canlı müzik düzenlerler ve spor gösterirler ve kahve, kokteyller, lezzetli atıştırmalıklar ve ferahlatıcı ev yapımı limonata servis ederler. Uzun çalışma saatleri.</li>
+                <li><strong>Platanos Restaurant:</strong> Tarih ve romantizmle dolu bir yemek için efsanevi Hipokrat Çınarı'nın altında yemek yiyin. Platanos Meydanı'nda bulunan bu mekan, güzel bir ortam, mükemmel, yüksek kaliteli yiyecekler (dana yanağı, Yunan salatası ve eşsiz flambé kahve övgü alıyor), özenli hizmet sunar ve genellikle canlı müzik eşliğinde harika bir atmosfer yaratır. Ayrıca tarihi alanı hayranlıkla izlerken sabah kahvesi veya taze meyve suyu için de hoş bir yerdir.</li>
+                <li><strong>Coffee Stories:</strong> Korai 5'te bulunan şirin bir mahalle kafesi. Tatlı atmosferi, standart Yunan kahvesi çeşitleri (Freddo Espresso, Cappuccino, Frappe vb.) ve teslimat seçenekleriyle tanınır. Her gün 06:00-20:00 (Pazar günleri 15:00'e kadar) açıktır.</li>
+                <li><strong>Kentron Street Cafe:</strong> Venizelou Eleftheriou 2'de bulunan bu mekan "şehrin en iyi kahvesine" sahip olduğunu iddia ediyor. Çeşitli kahveler, taze meyve suları, sandviçler, hamur işleri (bougatsa ve tyropites gibi), kulüp sandviçleri, milkshake'ler sunarlar ve brunch seçenekleri de dahil olmak üzere teslimat ve paket servis hizmetleri sunarlar. Hafta sonları biraz daha kısa saatlerle her gün açıktır.</li>
+            </ul>
+            <p class="mb-4"><strong>Diğer Önemli Bahisler:</strong> Hızlı bir atıştırmalık için Agia Paraskevi kilisesinin yakınındaki <strong>Toast Special</strong> harika tostlarıyla dikkat çekiyor. <strong>Ariston</strong> ve <strong>Tsivrini</strong> en iyi bougatsa (muhallebili börek) ile ünlüdür. Eski Şehir'deki <strong>Ciao Cafe Bistro</strong>, kahve, salata ve yemeklerin yanı sıra Kanelada ve Soumada gibi geleneksel içecekler sunmaktadır. <strong>Scoops Cafe</strong> (iki şube) paket kahve, granita, waffle ve dondurma için harikadır. <strong>Kaseta</strong>, kaliteli kahvesi, kokteylleri ve rahat ortamıyla bilinen gün boyu açık bir kafe-bardır. Deniz manzaralı daha lüks bir otel barı deneyimi için Kos Aktis Art Hotel'deki <strong>H2O</strong>'yu düşünebilirsiniz. Limanın yakınındaki <strong>Sitar Cocktail Bar</strong>, gece gündüz yaratıcı kokteyller sunmaktadır.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mt-8 mb-3">Kos Lezzetleri - Yemek Önerileri</h3>
+            <p class="mb-4">Kos Şehri, rahat sahil tavernalarından şık restoranlara kadar keyifli bir dizi yemek deneyimi sunar.</p>
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Deniz Kenarında Deniz Ürünleri:</h4>
+            <p class="mb-3">Tipik bir Yunan adası deneyimi! Limana doğru <strong>Barbouni</strong> ve neredeyse komşu olan <strong>Nick the Fisherman</strong>'a gidin. Barbouni harika bir sahil ortamı sunar (deniz kenarında bir masa için önceden rezervasyon yapın) ve morina kroketleri, kabak mücveri, mürekkepbalıklı tagliatelle ve suşi gibi yemekleriyle övülür. Her ikisi de inanılmaz derecede taze, basitçe ızgara edilmiş veya hazırlanmış balık servis eder. <strong>Votsalakia</strong> bir başka popüler sahil seçeneğidir. Yine su kenarında bulunan <strong>Kalymnos Seafood Tavern</strong>, devasa menüsü, makul fiyatları ve güler yüzlü hizmetiyle dikkat çekiyor.</p>
+            
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Otantik Yunan ve Meze:</h4>
+            <p class="mb-3">Yerel mutfağın gerçek tadı için, Yunus Meydanı yakınlarındaki bir ara sokakta bulunan aile işletmesi <strong>Patriko</strong>, yüksek kaliteli yemekler, olağanüstü hizmet, makul fiyatlar ve harika bir geleneksel meze (küçük paylaşımlık tabaklar) seçkisi sunan harika bir seçimdir – ballı fırında feta veya özel Patriko Salatası'nı deneyin. <strong>Taverna Evdokia Mummy's Cooking</strong>, Evdokia'nın kendisi tarafından hazırlanan gerçek misafirperverlik ve lezzetli, taze yemeklerle eksiksiz bir Yunan deneyimi sunar – patlıcan ezmesi ve feta dolgulu biberler şiddetle tavsiye edilir. <strong>Elia Tavern</strong>, belki sezon dışında daha sessiz olsa da, harika bir geleneksel dekora ve harika bir menüye sahiptir. 1990'dan beri faaliyet gösteren <strong>Broadway</strong>, çağdaş bir dokunuşla geleneksel Yunan mutfağı ve cömert porsiyonlar sunar – dana etli güveç (arpa şehriye benzeri makarnayla yavaş pişirilmiş dana eti) bir başyapıttır. Şehir Meydanı'ndaki <strong>Aegli</strong> sadece bir kafe değil, aynı zamanda yerel kadınları destekleyen tamamen kadınlardan oluşan bir kooperatiftir; ferahlatıcı ev yapımı limonataları ve atıştırmalıkları için uğrayın.</p>
+
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Uluslararası Lezzetler:</h4>
+            <p class="mb-3">Değişiklik isterseniz, ana plajdaki <strong>Twin Dragon</strong> deniz manzaralı Çin ve Asya mutfağı sunmaktadır. Limanın yakınında temalı bir ortamda Meksika yemekleri ve biftekler için <strong>El Paso</strong>'yu deneyin.</p>
+
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Şık ve Gurme:</h4>
+            <p class="mb-3">Özel bir durum için, Lambi'deki Aqua Blu Hotel'deki <strong>Cuvée</strong>, tadım menüleriyle sofistike, modern bir destinasyon yemeği sunmaktadır. Kos Şehri'nde, <strong>Petrino</strong> romantik bir yemek için mükemmel, şık bir atmosfer sunarken, çınar ağacının altındaki tarihi konumunda yer alan <strong>Platanos Restaurant</strong>, güzel sunumlarla kaliteli yemekler sunmaktadır.</p>
+
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Rahat ve Güvenilir:</h4>
+            <p class="mb-6"><strong>Ali Restaurant</strong> ve <strong>Lambros Steakhouse</strong> tavsiye edilen yerel mekanlardır, <strong>Thrasyvoulos</strong> da öyle.</p>
+
+            <div class="bg-sky-50 p-6 rounded-lg shadow-inner mb-6">
+                <h4 class="text-xl font-semibold text-sky-700 mb-2">Ev Sahibinden Tavsiye: Xasapaki</h4>
+                <p class="mb-2"><strong>Diğerlerinden Bir Adım Önde: Kos'ta Xasapaki Neden Mutlaka Ziyaret Edilmeli?</strong></p>
+                <p class="mb-2">Klasik bir kasabın geleneğini birinci sınıf bir steakhouse'un zarafetiyle birleştiren unutulmaz bir yemek deneyimi için Kos'taki Xasapaki'den (Chasapaki veya The Hasapaki olarak da bilinir) başkasına bakmayın. Bu kuruluş sadece yemek yenecek bir yer değil; ustaca hazırlanmış ve gerçek Yunan misafirperverliğiyle sunulan kaliteli etin bir kutlamasıdır.</p>
+                <p class="mb-2">Yerel bir kasap olarak başlayan zengin bir tarihe sahip olan Xasapaki, benzersiz konseptiyle tanınan sevilen bir mutfak destinasyonuna dönüşmüştür: Müşteriler tercih ettikleri et kesimlerini doğrudan kasabın tezgahından seçerler. İster sulu bir Black Angus bifteği, ister yumuşak bir yerel kuzu pirzolası, ister lüks bir Wagyu seçimi isteyin, seçim sizin. Deneyimli ekip daha sonra seçiminizi mükemmel bir şekilde ızgara yaparak, tam olarak beğeninize göre hazırlanmış bir yemek sunar.</p>
+                <p class="mb-2">Ancak Xasapaki'nin cazibesi olağanüstü bifteklerinin ötesine uzanır. Burgerleri sık sık adanın en iyisi olarak övülür, taze, yüksek kaliteli sığır etinden yapılır ve genellikle füme pastırma ve rustik köy patatesleri gibi ev yapımı dokunuşlarla birlikte sunulur. Zengin dana carpaccio, lezzetli steak tartar ve enfes peynir topları gibi mezeler de büyük beğeni toplar.</p>
+                <p class="mb-2">Müşteriler sürekli olarak etin olağanüstü kalitesini, cömert porsiyonlarını ve şaşırtıcı derecede makul fiyatlarını övüyor. Güler yüzlü ve özenli personel, hem yerli halkı hem de turistleri tekrar tekrar geri getiren davetkar bir atmosfer yaratarak yemek deneyimini daha da geliştirir. Popülaritesi göz önüne alındığında, hayal kırıklığını önlemek için rezervasyon yaptırmanız şiddetle tavsiye edilir.</p>
+                <p class="mb-2">Sadece bir yemekten daha fazlasını arıyorsanız – canlı ve benzersiz bir ortamda ustaca işlenmiş ve pişirilmiş etlerin otantik bir tadını arıyorsanız – Kos'taki Xasapaki kasap evi ve restoranı kesinlikle denenmesi gereken bir yerdir. Diğerlerinden bir adım önde olmayı vaat eden bir deneyimdir.</p>
+                <p><a href="https://xasapaki.gr/" target="_blank" rel="noopener noreferrer" class="text-sky-600 hover:text-sky-800 underline">Menü ve rezervasyonlar için çevrimiçi olarak ziyaret edin.</a></p>
+            </div>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mt-8 mb-3">Zamanda Geriye Yolculuk (Kos Şehri Tarihi)</h3>
+            <p class="mb-4">Kos Şehri genellikle "açık hava müzesi" olarak tanımlanır ve bunun iyi bir nedeni vardır. Antik Yunan ve Roma kalıntılarından Aziz John Şövalyeleri tarafından inşa edilen ortaçağ kalelerine, Osmanlı camilerine ve İtalyan dönemi zarif binalarına kadar tarihin katmanları her yerde görülebilir. Birçok önemli yer dairenizden yürüyerek kolayca keşfedilebilir.</p>
+            
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Kos Şehri Tarihi Önemli Noktalar</h4>
+            <div class="table-responsive mb-4">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Yer Adı</th>
+                            <th>Kısa Açıklama</th>
+                            <th>Yaz Saatleri</th>
+                            <th>Yaz Bileti</th>
+                            <th>Notlar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Antik Agora</td>
+                            <td>Antik Kos'un ticari ve sosyal merkezi, liman yakınında. Açık hava kalıntıları.</td>
+                            <td>Muhtemelen her zaman erişilebilir</td>
+                            <td>Ücretsiz</td>
+                            <td>Yakınlarda Dionysos Sunağı'nı içerir.</td>
+                        </tr>
+                        <tr>
+                            <td>Neratzia Kalesi (Şövalyeler Kalesi)</td>
+                            <td>Liman girişinde etkileyici 15. yüzyıl Şövalyeler Kalesi.</td>
+                            <td>Çelişkili: Günlük 08:30-15:00 VEYA Çar-Pzt 08:30-15:30 (Salı Kapalı)</td>
+                            <td>3 €</td>
+                            <td>Mevcut restorasyon durumunu/erişilebilirliğini kontrol edin.</td>
+                        </tr>
+                        <tr>
+                            <td>Hipokrat Çınarı</td>
+                            <td>Kale yakınında antik ağaç; Hipokrat'ın efsanevi öğretim yeri.</td>
+                            <td>Her zaman erişilebilir</td>
+                            <td>Ücretsiz</td>
+                            <td>İkonik fotoğraf noktası.</td>
+                        </tr>
+                        <tr>
+                            <td>Roma Odeonu</td>
+                            <td>İyi korunmuş M.Ö. 2. yüzyıl tiyatrosu.</td>
+                            <td>Yerel olarak kontrol edin (açık erişim olabilir)</td>
+                            <td>Ücretsiz (genellikle)</td>
+                            <td>Bazen etkinliklere ev sahipliği yapar. Başka bir yerde bahsedilen kombine bilet, potansiyel kontrollü erişim anlamına gelebilir.</td>
+                        </tr>
+                        <tr>
+                            <td>Casa Romana</td>
+                            <td>Mozaikler/fresklerle restore edilmiş Roma villası (Pompei tarzı).</td>
+                            <td>08:00 - 19:30/20:00 (Salı günleri kapalı)</td>
+                            <td>10 €</td>
+                            <td>Asklepion/Müze ile kombine bilet mevcut (15 €/3 gün).</td>
+                        </tr>
+                        <tr>
+                            <td>Arkeoloji Müzesi</td>
+                            <td>Asklepion, Agora vb. yerlerden buluntular barındırır.</td>
+                            <td>08:30 - 19:30 (Salı günleri kapalı)</td>
+                            <td>10 €</td>
+                            <td>Kombine bilet mevcut (15 €/3 gün).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm text-slate-600 italic">Not: Özellikle Kale için açılış saatleri ve bilet fiyatları, restorasyon veya diğer faktörler nedeniyle değişebilir veya değişikliğe tabi olabilir. Giriş ücreti veya belirli zamanlama gerektiren bir ziyaret planlıyorsanız, yerel olarak veya resmi web siteleri aracılığıyla her zaman iki kez kontrol etmeniz akıllıca olacaktır.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mt-8 mb-3">Şehrin Ötesinde – Ada Maceraları</h3>
+            <p class="mb-4">Kos Şehri çok şey sunsa da, adanın çeşitli manzaraları ve büyüleyici köyleri keşfe davet ediyor.</p>
+
+            <h4 class="text-xl font-semibold text-sky-600 mb-3">Güneş, Kum ve Deniz - Her Ruh Haline Uygun Bir Plaj</h4>
+            <p class="mb-4">112 kilometrelik bir sahil şeridine sahip olan Kos, uzun kumlu plajlardan çakıllı koylara ve dramatik kayalıklara kadar her şeyi sunan bir plaj severlerin rüyasıdır. On iki plaj, kaliteleri nedeniyle gururla Mavi Bayrak dalgalandırmaktadır.</p>
+            
+            <h5 class="text-lg font-medium text-slate-700 mb-2">Yakınlarda (Kolay Ulaşım):</h5>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>Lambi Plajı:</strong> En yakın komşunuz! Şehir merkezinin sadece 3 km kuzeyinde, yürüyerek, bisikletle veya otobüsle kolayca ulaşılabilir. Sığ suları olan uzun, popüler bir kum şerididir ve bu da onu aile dostu yapar. Şezlonglar, şemsiyeler, su sporları ve çok sayıda plaj barı ve restoranı ile iyi organize edilmiştir. Lambi Mylos bölgesi özellikle hareketlidir.</li>
+                <li><strong>Psalidi Plajı:</strong> Şehrin 4 km güneydoğusunda yer almaktadır. Bu çakıllı plajda şemsiyeler ve plaj barları bulunan organize bölümler vardır ve rüzgar sörfü, uçurtma sörfü ve dalış için bir merkezdir.</li>
+                <li><strong>Agios Fokas Plajı:</strong> Psalidi'den güneye doğru devam ederek (şehirden yaklaşık 8 km). Daha koyu çakıl ve kumdan oluşan geniş bir alan, organize alanların ve dinlenmek için daha sakin noktaların bir karışımını sunar. Therma plajına elverişli bir konumdadır.</li>
+            </ul>
+
+            <h5 class="text-lg font-medium text-slate-700 mb-2">Kuzey Kıyısı (Kumlu ve Genellikle Rüzgarlı):</h5>
+             <p class="mb-3 italic">Güneşlenmek ve rüzgar sporları için idealdir.</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>Tigaki Plajı:</strong> (11 km Batı) Kristal berraklığında, sığ suları (Mavi Bayrak sertifikalı) olan geniş bir ince kum alanı, çocuklar için mükemmeldir. Rahat bir havası vardır ancak popülerdir, bol miktarda şezlong, şemsiye, taverna ve plaj barı sunar. Rüzgar ve uçurtma sörfü için favori bir yerdir, ancak daha sakin alanlar bulmak için yeterince büyüktür. Harika gün batımı manzaraları sunar.</li>
+                <li><strong>Marmari Plajı:</strong> (14-20 km GB) 3 km uzunluğunda güzel beyaz kum ve sığ sulardan oluşan bir şerit. İyi organize edilmiş (bazı kaynaklar kısmen organize edilmiş dese de), ata binme, uçurtma sörfü ve rüzgar sörfü gibi aktivitelerle çeşitli zevklere hitap eder. Canlı atmosferi ve çarpıcı gün batımlarıyla tanınır.</li>
+                <li><strong>Mastichari Plajı:</strong> (27 km GB) Yumuşak beyaz kumlu ve turkuaz sulu egzotik bir plaj. Kalabalık, iyi organize edilmiş bir sahil, aile dostu ve çeşitli merkezleriyle rüzgar sörfü için birinci sınıf bir konumdur. Buradaki köy limanı ayrıca Kalimnos'a feribot seferleri de düzenlemektedir.</li>
+            </ul>
+
+            <h5 class="text-lg font-medium text-slate-700 mb-2">Güney Kıyısı (Kefalos Körfezi ve Ötesi):</h5>
+            <p class="mb-3 italic">Manzaralı manzaraları ve çeşitliliği ile ünlüdür.</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>Kardamena Plajı:</strong> (27-30 km GB) Kos'un en hareketli turistik beldesine bitişik plaj. Kozmopolit bir hava, tüm olanaklarla tam organizasyon, su sporları, plaj barları ve restoranlar bekleyin. Herkes için uygundur – aileler, çiftler ve enerji arayan arkadaş grupları.</li>
+                <li><strong>Agios Stefanos Plajı:</strong> (35-40 km GB) Muhtemelen Kos'un en ikonik ve fotojenik plajlarından biri. İnce kum ve küçük çakılların bir karışımı, kozmopolit bir hisle iyi organize edilmiş. Tüplü dalış dahil su sporları sunmaktadır. Çarpıcı fon, mavi kubbeli kilisesiyle Kastri adacığını (oraya yüzebilir veya tekneyle gidebilirsiniz) ve kıyıdaki 5. yüzyıldan kalma paleo-Hıristiyan bazilikalarının kalıntılarını içerir.</li>
+                <li><strong>Paradise Plajı:</strong> (30-33 km GB) Altın kumlu ve sığ, yeşil-mavi suları olan rüya gibi bir şeritle adının hakkını veriyor. Sakin, sığ denizi nedeniyle özellikle aileler arasında son derece popülerdir. Şezlonglar, şemsiyeler, plaj barları, çok sayıda su sporu (kayak, parasailing, jet ski vb.) ve yakındaki tavernalarla iyi organize edilmiştir. Yüksek sezonda çok kalabalık olabilir.</li>
+                <li><strong>Deve Plajı:</strong> (Paradise yakınında, 30 km GB) İnce beyaz kumlu ve küçük çakıllı pitoresk bir koy. Buradaki su olağanüstü berraktır, bu da onu şnorkelle yüzmek için harika kılar, ancak hızla derinleşir. Erişim, park alanından kısa bir yürüyüş gerektirir. Şezlonglar ve şemsiyelerle bir miktar organizasyon sunar ve tavernalar yakındadır.</li>
+                <li><strong>Lagada Plajı:</strong> (Paradise yakınında, 35 km GB) Kefalos Körfezi sahil şeridinin kesintisiz bir parçası olup, ince altın kumlu ve güzel yüzme suları sunmaktadır. Olanaklarla organize edilmiş bölümler bulabilir veya daha sakin, daha tenha yerler arayabilirsiniz. Çiftler arasında bir favori.</li>
+                <li><strong>Kefalos Plajı (Kamari):</strong> (40-45 km GB) Kefalos bölgesinin ana, uzun kumlu plajı. İyi organize edilmiş, aile dostu ve rüzgar sörfü ve diğer su sporları sunmaktadır. Ayrıca tekerlekli sandalye erişimine uygun olduğu da belirtilmektedir. Yarımadayı keşfetmek için iyi bir başlangıç noktasıdır.</li>
+                <li><strong>Agios Theologos Plajı:</strong> (Güneybatı ucu) Huzur arayanlar için daha vahşi, daha tenha bir seçenek. Dramatik kireçtaşı kayalıkları, çakıllı/kayalık kıyıları ve harika gün batımı manzaraları sunar. Tesiste bir taverna bulunmaktadır.</li>
+                <li><strong>Cavo Paradiso:</strong> (En güney noktası) Vahşi, engebeli güzelliği, uzun kumlu alanı ve turkuaz sularıyla bilinen, biraz gizli bir mücevher. Erişim, yürüyüş veya sağlam bir araç gerektirir, bu da onu daha az kalabalık yapar.</li>
+            </ul>
+            
+            <h5 class="text-lg font-medium text-slate-700 mt-4 mb-2">Eşsiz Deneyim:</h5>
+            <ul class="list-disc list-inside mb-4 pl-4">
+                <li><strong>Therma Plajı:</strong> (12 km GD) Eşsiz bir doğal spa deneyimi için mutlaka ziyaret edilmesi gereken bir yer. Volkanik siyah çakıllı kum ve dramatik kayalar, doğal kaplıcaların denize aktığı ve insan yapımı bir kaya havuzunda karıştığı bir koyu çerçeveler. Suyun tedavi edici faydaları olduğu söylenir. Yolun sonundan kısa bir yürüyüş gerektirir. Bazı şezlonglar ve bir snack bar mevcuttur.</li>
+            </ul>
+
+            <h4 class="text-xl font-semibold text-sky-600 mt-6 mb-3">Kos Plaj Rehberi Tablosu</h4>
+            <div class="table-responsive mb-6">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Plaj Adı</th>
+                            <th>Konum/Kos Şehrine Uzaklık</th>
+                            <th>Kum/Çakıl</th>
+                            <th>Organizasyon</th>
+                            <th>En İyisi</th>
+                            <th>Notlar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Lambi</td><td>3km K</td><td>Kum</td><td>İyi Organize</td><td>Şehre yakınlık, aileler, su sporları</td><td>Bisikletle/yürüyerek kolay erişim.</td></tr>
+                        <tr><td>Tigaki</td><td>11km B</td><td>Kum</td><td>İyi Organize</td><td>Aileler (sığ su), rüzgar/uçurtma sörfü, gün batımları</td><td>Mavi Bayrak. Kalabalık olabilir.</td></tr>
+                        <tr><td>Marmari</td><td>14-20km GB</td><td>Beyaz Kum</td><td>İyi/Kısmen Organize</td><td>Her zevke uygun, rüzgar/uçurtma sörfü, gün batımları, ata binme</td><td>Canlı, uzun plaj.</td></tr>
+                        <tr><td>Mastichari</td><td>27km GB</td><td>Beyaz Kum</td><td>İyi Organize</td><td>Rüzgar sörfü, aileler, egzotik hava</td><td>Kalabalık, Kalimnos'a liman.</td></tr>
+                        <tr><td>Kardamena</td><td>27-30km GB</td><td>Kum</td><td>İyi Organize</td><td>Canlı tatil köyü havası, tüm olanaklar, gece hayatı</td><td>Popüler turizm merkezi.</td></tr>
+                        <tr><td>Agios Stefanos</td><td>35-40km GB</td><td>Kum ve Çakıl</td><td>İyi Organize</td><td>Manzara (Kastri Adası/kalıntılar), aileler, su sporları</td><td>Son derece pitoresk.</td></tr>
+                        <tr><td>Paradise</td><td>30-33km GB</td><td>Altın Kum</td><td>İyi Organize</td><td>Aileler (sığ su), su sporları</td><td>Çok popüler, kalabalık olabilir.</td></tr>
+                        <tr><td>Deve</td><td>30km GB</td><td>Beyaz Kum ve Çakıl</td><td>Biraz Organizasyon</td><td>Şnorkelle yüzme, pitoresk koy</td><td>Hızla derinleşir, kısa bir yürüyüş gerekir.</td></tr>
+                        <tr><td>Therma</td><td>12km GD</td><td>Siyah Çakıl</td><td>Biraz Organizasyon</td><td>Eşsiz kaplıca deneyimi</td><td>Kısa bir yürüyüş gerektirir.</td></tr>
+                        <tr><td>Agios Theologos</td><td>GB Ucu</td><td>Çakıl/Kaya</td><td>Minimum/Yok</td><td>Tenhalık, vahşi güzellik, gün batımları</td><td>Uzak erişim.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mt-8 mb-3">Köy Cazibesi - Başkentin Ötesinde</h3>
+            <p class="mb-4">Kos Şehri'nden kaçmak, dağlara kurulmuş veya denize bakan, farklı bir tempo ve bakış açısı sunan geleneksel köyleri ortaya çıkarır.</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-3">
+                <li><strong>Zia:</strong> Özellikle gün batımı için mutlaka ziyaret edilmesi gereken bir yer. Kos Şehri'nin yaklaşık 16 km güneyinde bulunan bu güzel dağ köyü, Kalimnos, Pserimos ve Türk kıyılarına doğru nefes kesen panoramik manzaralar sunar ve güneş batarken gerçekten muhteşem hale gelir. Turistler arasında popüler olmasına rağmen, beyaz badanalı binaları, el sanatları dükkanları ve mükemmel yemek seçenekleriyle cazibesini korumaktadır. <strong>Oromedon</strong> restoranı, muhteşem manzaraları ve lezzetli yerel mutfağının (limonlu ve rezeneli dağ domuzunu veya geleneksel musakkayı deneyin) birleşimi nedeniyle şiddetle tavsiye edilir. Ayrıca yakındaki Kos Tabiat Parkı'nı ziyaret edebilir veya Zia'dan Kos'un en yüksek zirvesi olan Dikeos Dağı'na yürüyüş yapabilirsiniz. Gün batımı için popülaritesi göz önüne alındığında, restoranları veya ulaşımı önceden ayırtmayı düşünün; özel gün batımı otobüs turları mevcuttur.</li>
+                <li><strong>Kefalos:</strong> Kos Şehri'nin 40 km güneybatısında yer alan Kefalos, başkente kıyasla daha sakin, daha geleneksel bir üs sunmaktadır. Köy, birçok güzel plaja (Agios Stefanos gibi) ve ikonik Kastri adacığına ev sahipliği yapan Kamari Koyu'na bakan bir tepenin üzerinde pitoresk bir konuma sahiptir. Üst köyün dar sokaklarını ve geleneksel beyaz evlerini keşfedin veya aşağıdaki Kamari'nin sahil olanaklarının keyfini çıkarın. Kefalos, adanın antik başkenti Astypalea idi ve tarihi kalıntılar arasında Kefalos Kalesi'nin kalıntıları ve yakındaki Aziz Stephen Bazilikası bulunmaktadır. Güney yarımadasının plajlarını ve Aspri Petra mağarasını keşfetmek için mükemmel bir merkezdir. <strong>Mylotopi</strong> (restore edilmiş bir yel değirmeninde harika manzaralı bir kafe), <strong>Taverna Niotis</strong> (menüsüz, çok çeşitli Yunan deneyimiyle tanınır), <strong>Taverna Cavos</strong> (yerel halk tarafından taze balık için tavsiye edilir) ve modern, iyi yorumlanmış <strong>Ficus</strong> restoranı da dahil olmak üzere çok sayıda kafe ve taverna ziyaretçilere hizmet vermektedir.</li>
+                <li><strong>Pyli:</strong> Kos Şehri'nin yaklaşık 15 km güneybatısında geleneksel bir yerleşim yeri. Ana cazibe merkezi, geniş manzaralar sunan bir tepenin üzerine kurulmuş Bizans kalesinin atmosferik kalıntıları olan yakındaki Paleo Pyli'dir (Eski Pyli). Yeni Pyli köyünde geleneksel kafeler ve tavernaların bulunduğu merkezi bir meydan vardır. Kalenin yakınındaki basit bir ouzeri içecekler, mezeler ve manzaralar sunmaktadır. Pyli köy meydanındaki <strong>Fox cafe</strong>, özellikle Banoffee turtası olmak üzere güzel pastalarıyla dikkat çekiyor.</li>
+                <li><strong>Antimachia:</strong> Havaalanı yakınında, Kos Şehri'nin 23 km güneybatısında yer almaktadır. Bu oldukça büyük geleneksel köy, heybetli Antimachia Venedik Kalesi tarafından domine edilmektedir. Bu büyük kale bütün bir yerleşimi çevreliyordu ve etkileyici duvarları, burçları ve iki küçük kilisesi (Agios Nikolaos ve Agia Paraskevi, genellikle görünür fresklerle açıktır) keşfedilmeye değerdir. Kaleye giriş ücretsizdir, ancak erişim kısıtlamalarını kontrol edin. Köy ayrıca 20. yüzyılın başlarındaki ada yaşamını yeniden yaratan bir müze olan Antimachia Geleneksel Evi'ne ev sahipliği yapmaktadır ve bal festivaliyle tanınır.</li>
+                <li><strong>Asfendiou ve Dağ Köyleri (Lagoudi, Asomatos):</strong> Ana turistik rotalardan uzakta, otantik, kırsal Kos'a bir göz atmak için Kos Şehri'nin yaklaşık 14-15 km güneyindeki Dikeos Dağı'nın yamaçlarındaki köyleri keşfedin. Asfendiou'nun kendisi geleneksel mimariye sahip büyük bir köydür. Yakındaki Lagoudi, büyük ölçüde terk edilmiş ve daha sonra yeniden keşfedilip yenilenmiş bir köy olarak ilginçtir. Asomatos turizmden özellikle etkilenmemiştir. Asomatos'taki geleneksel bir kafeneion (kafe), mezeler, içecekler ve ara sıra canlı müzik sunan hareketli bir yer olarak belirtilmektedir. Lagoudi'deki <strong>Grandma's House</strong> tavernası da dikkat çekicidir.</li>
+                <li><strong>Platani:</strong> Kos Şehri'ne sadece 3 km uzaklıkta bulunan Platani, Kos'un Türkçe konuşan Müslüman azınlığının evi olmasıyla benzersizdir. Farklı bir kültürel lezzet sunar ve yerel bir favori olan Türk etkisindeki <strong>Sherif</strong> restoranıyla tanınır.</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mt-8 mb-3">Antik Harikalar - Asklepion</h3>
+            <p class="mb-2">Kos ziyareti, adanın en önemli arkeolojik alanı ve derin tarihi öneme sahip bir yer olan <strong>Asklepion</strong>'u keşfetmeden tamamlanmış sayılmaz.</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-2">
+                <li><strong>Önemi:</strong> Antik çağda ünlü olan burası, tıp ve sağlık tanrısı Asklepios'a adanmış en önemli şifa kutsal alanlarından biriydi. Sadece bir ibadet ve şifa yeri olarak değil, aynı zamanda burada ders verdiği ve pratik yaptığına inanılan Kos doğumlu "Modern Tıbbın Babası" Hipokrat ile özdeşleşmiş saygın bir tıp okulu olarak da hizmet vermiştir. Denize ve Türk kıyılarına bakan yeşil bir yamaçtaki sakin ortam, tedavi sürecinin ayrılmaz bir parçası olarak kabul ediliyordu.</li>
+                <li><strong>Düzen:</strong> Kutsal alan, anıtsal merdivenlerle birbirine bağlanan üç güzel peyzajlı teras boyunca uzanır. <strong>Birinci seviye</strong> tedavi odalarını, ritüel arınma için çeşmeleri, Roma dönemi hamamlarını ve muhtemelen tıp okulunun kendisini barındırıyordu. <strong>İkinci seviye</strong> ibadete odaklanmıştı ve en eski tapınak kalıntılarını (M.Ö. 4. yüzyıl Asklepios Tapınağı) ve kısmen restore edilmiş Apollon Tapınağı'nı (Asklepios'un babası) içeriyordu. Büyük bir merdiven, hastaları ve ziyaretçileri ağırlamak için muhtemelen kullanılan revaklarla (stoalar) çevrili, Asklepios'a adanmış en büyük tapınağın bulunduğu <strong>üçüncü seviyeye</strong> çıkar. Burada erken dönem bir Hıristiyan kilisesinin kalıntıları da bulunmaktadır. Bu seviyenin üzerinde, muhteşem manzaralar sunan Apollon'a adanmış bir orman bulunmaktadır.</li>
+                <li><strong>Ziyaret:</strong> Asklepion, Kos Şehri'ne sadece 4 km uzaklıkta elverişli bir konumdadır. Kiralık araba, taksi, yerel DEAS otobüsü (Kos Şehri'nden Şehir Hattı 3 veya 6, tarifeleri kontrol edin) veya daha enerjik olanlar için yürüyerek (yaklaşık 50 dakika) kolayca ulaşabilirsiniz. Arkeolojik alanı iyice keşfetmek için en az 1-2 saat ayırın; bitişikteki Hipokrat Vakfı Müzesi ve Botanik Bahçeleri'ni (ayrı giriş) ziyaret etmeyi planlıyorsanız ekstra zaman ekleyin. Alanın tarihini ve önemini tam olarak kavramak için lisanslı bir rehber tutmanız şiddetle tavsiye edilir. Sıcaklık ve olası kalabalık nedeniyle, yoğun yaz aylarında (Temmuz-Ağustos) sabah erken veya öğleden sonra geç saatlerde ziyaret etmeniz önerilir. İlkbahar ve sonbahar özellikle atmosferik koşullar sunar. <em>Önemli Not: Raporlar, alanın şu anda engelli erişimine sahip olmadığını göstermektedir.</em></li>
+                <li><strong>Saatler ve Biletler:</strong>
+                    <ul class="list-circle list-inside ml-4 mt-1 space-y-1">
+                        <li><strong>Yaz (yaklaşık 1 Nisan - 31 Ekim):</strong> Her gün 08:00 - 20:00 arası açıktır. Son giriş genellikle kapanıştan 30 dakika öncedir (19:30).</li>
+                        <li><strong>Kış (yaklaşık 1 Kasım - 31 Mart):</strong> 08:30 - 15:30 arası açıktır. Salı günleri kapalıdır.</li>
+                        <li><strong>Bilet Fiyatı (Yaz):</strong> 8 €.</li>
+                        <li><strong>Bilet Fiyatı (Kış):</strong> 4 € (İndirimli fiyat kışın tüm ziyaretçiler için geçerlidir).</li>
+                        <li><strong>İndirimler:</strong> 6-25 yaş arası AB vatandaşları ücretsiz giriş yapar; 6-25 yaş arası AB dışı vatandaşlar %50 indirim alır. 65 yaş üstü AB vatandaşları %50 indirim alır. Geçerli kimlik/yaş kanıtı/durum kanıtı gereklidir.</li>
+                        <li><strong>Kombine Bilet:</strong> Asklepion, Kos Arkeoloji Müzesi ve Casa Romana'ya 3 gün geçerli giriş sağlayan 15 € değerinde özel bir paket bilet mevcuttur. Üç ana alanı da ziyaret etmeyi planlıyorsanız bu iyi bir değer sunar.</li>
+                        <li>Tesiste bir Helen Mirası hediyelik eşya dükkanı bulunmaktadır.</li>
+                        <li><em>Doğrulama Önerilir:</em> Bu ayrıntılar güncel bilgilere dayansa da, özellikle yoğun sezon dışında ziyaretinizden önce resmi Helen Mirası web sitesinden (hhticket.gr) veya alanı arayarak güncel saatleri ve fiyatları hızlıca doğrulamanız her zaman en iyi uygulamadır.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Bölüm 4: Kos'ta Ulaşım -->
+        <section id="section4" class="content-section mb-12 p-6 bg-white rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-sky-700 mb-6 border-b-2 border-sky-200 pb-2">Bölüm 4: Kos'ta Ulaşım</h2>
+            <p class="mb-4">Kos'u keşfetmek maceranın bir parçasıdır! İşte adada dolaşmanın ve hazinelerini keşfetmenin en iyi yollarına bir bakış.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Adada Dolaşmak:</h3>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-3">
+                <li><strong>Kiralık Araba / Scooter / ATV:</strong> Özellikle Kos Şehri'nin ötesini keşfetmeyi ve daha uzak plajları veya köyleri ziyaret etmeyi planlıyorsanız, maksimum özgürlük ve esneklik için bir araç kiralamanız şiddetle tavsiye edilir. Kos Şehri'nde, havaalanında ve Tigaki, Marmari ve Kardamena gibi önemli tatil köylerinde çok sayıda kiralama acentesi bulunmaktadır. Küçük bir araba için günde yaklaşık 35-60 €, bir scooter için ise günde 25 € ödemeyi bekleyin, ancak fiyatlar sezona ve kiralama süresine göre değişir. Geçerli bir ehliyete (AB dışı ehliyetler için uluslararası bir ehliyet gerekebilir) ve muhtemelen depozito için bir kredi kartına ihtiyacınız olacaktır. Yoğun yaz aylarında (Haziran-Eylül) önceden rezervasyon yapmanız önerilir.</li>
+                <li><strong>KTEL Şehirlerarası Otobüsleri:</strong> Toplu taşıma otobüs hizmeti (KTEL), Kos Şehri, havaalanı ve ana köyler ile tatil köyleri arasında seyahat etmenin ekonomik bir yolunu sunar. Ana otobüs terminali, Kos Şehri'nin merkezinde, Kleopatras Caddesi 7 numarada yer almaktadır. Otobüsler genellikle modern ve klimalıdır. Biletler doğrudan otobüsten satın alınır ve ücretler varış noktasına bağlı olarak yaklaşık 2,30 € ile 5,20 € arasında değişir. Tarifeler yaz sezonunda daha sıktır ancak özellikle Pazar günleri veya daha az yaygın güzergahlar için sınırlı olabilir. Her zaman en son tarifeyi çevrimiçi olarak (www.ktel-kos.gr) veya istasyondan kontrol edin. İletişim: +30 22420 22292.</li>
+                <li><strong>Şehir İçi Otobüsler (DEAS):</strong> Kos Şehri içinde ve Lambi, Psalidi, Agios Fokas, Platani, Asklepion ve Therma Plajı gibi yakındaki bölgelere seyahat etmek için belediye otobüs hizmetini kullanın. Otobüs durakları liman yakınında da dahil olmak üzere şehrin her yerinde bulunmaktadır. Güzergahları ve tarifeleri Kos Mobility web sitesinden/uygulamasından (mobility.kos.gr) kontrol edin veya +30 22420 26276 numaralı telefonu arayın. Şehir Hattı 5, 09:15 ile 16:35 arasında Therma Plajı'na saatlik hizmet vermektedir.</li>
+                <li><strong>Taksiler:</strong> Özellikle Kos Şehri'nde (Akti Kountouriotou'daki taksi durağı), havaalanında ve önemli tatil köylerinde adanın her yerinde kolayca bulunabilir. Taksiler çağrılabilir, duraklarda bulunabilir veya telefonla (Kos Şehri: +30 22420 23333 / 22777) ya da çevrimiçi olarak (örneğin KosTaxi.eu, KosRadioTaxi.gr) rezerve edilebilir. Taksiler taksimetrelidir ancak havaalanına veya uzak köylere gibi daha uzun yolculuklar için yaklaşık ücreti teyit etmek veya bir fiyatta anlaşmak akıllıca olacaktır. Ücretler şöyle olabilir: Kos Şehri-Kefalos ~50-60 €; Kos Şehri-Zia ~19-23 €.</li>
+                <li><strong>Bisiklete Binme:</strong> Kos'un özellikle kuzey ve doğu kıyıları boyunca nispeten düz arazisi, daha kısa mesafeler için bisiklete binmeyi keyifli bir seçenek haline getirir. Özel bisiklet yolları Kos Şehri'ni batıda Tigaki'ye ve doğuda Lambi/Psalidi'ye bağlar. Lambi Plajı da dahil olmak üzere Kos Şehri'ne yakın bölgeleri keşfetmenin harika bir yoludur. Bisiklet kiralama yerleri günde yaklaşık 5-10 € karşılığında yaygın olarak bulunmaktadır. Güneş kremi ve suyu unutmayın!</li>
+            </ul>
+            
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Kos Şehrinden Önemli KTEL Güzergahları (Yaz Tahminleri):</h4>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>Kefalos'a:</strong> Günlük servis, 07:30 ile 21:00 arasında birden fazla sefer. Ücret: 5,20 €. Yolculuk Süresi: Yaklaşık 1 saat 15 dakika.</li>
+                <li><strong>Zia'ya:</strong> Genellikle 09:30 ile 15:45 arasında günde birkaç sefer. Ücret: 2,30 €. Yolculuk Süresi: Yaklaşık 30 dakika. <em>Önemli: Özellikle gün batımından sonra Zia'dan dönüş otobüsleri sınırlıdır. Otobüsle gün batımı ziyareti planlıyorsanız, dönüş saatlerini dikkatlice kontrol edin veya özel bir gün batımı turu/transferi düşünün. Bazı kaynaklar servisin sadece Pzt-Cum olduğunu belirtmektedir.</em></li>
+                <li><strong>Tigaki'ye:</strong> Sık günlük servis, 08:10 - 23:30. Ücret: 2,30 €.</li>
+                <li><strong>Marmari'ye:</strong> Sık günlük servis, 08:00 - 23:30. Ücret: 2,30 €.</li>
+                <li><strong>Havaalanına (KGS):</strong> Genellikle Mastichari veya Kardamena üzerinden düzenli bağlantılar. Yolculuk Süresi: Yaklaşık 30-40 dakika. KTEL web sitesinden belirli havaalanı güzergahlarını kontrol edin.</li>
+            </ul>
+
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Seyahat Süreleri (Yaklaşık Sürüş):</h4>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li>Kos Şehri ↔ Kefalos: 40-45 dakika (40 km)</li>
+                <li>Kos Şehri ↔ Zia: 17-20 dakika (13,5 km)</li>
+                <li>Kos Şehri ↔ Tigaki: 15-20 dakika (11 km)</li>
+                <li>Kos Şehri ↔ Marmari: 20-25 dakika (14 km)</li>
+                <li>Kos Şehri ↔ Havaalanı (KGS): 30-40 dakika (24 km)</li>
+                <li>Kos Şehri ↔ Therma Plajı: 15-20 dakika (12 km)</li>
+            </ul>
+        </section>
+
+        <!-- Bölüm 5: Önemli Bilgiler -->
+        <section id="section5" class="content-section mb-12 p-6 bg-white rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-sky-700 mb-6 border-b-2 border-sky-200 pb-2">Bölüm 5: Önemli Bilgiler</h2>
+            
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Acil Durumda</h3>
+            <p class="mb-2">Yunanistan, Avrupa standart acil durum sistemini kullanmaktadır. Bu numaraları bilmek seyahatleriniz sırasında içinizin rahat olmasını sağlayabilir.</p>
+            <p class="mb-2"><strong>Avrupa Acil Durum Numarası: 112</strong><br>Bu, herhangi bir telefondan (sabit hat veya mobil, sinyal veya kredi olmasa bile) herhangi bir acil durum için – Ambulans, İtfaiye, Polis veya Sahil Güvenlik – aranacak tek, ücretsiz numaradır. Operatörler genellikle Yunanca, İngilizce ve Fransızca konuşur. Sizi uygun yerel servise bağlayacaklardır.</p>
+            
+            <h4 class="text-xl font-medium text-slate-700 mt-4 mb-2">Doğrudan Yunan Acil Durum Hatları:</h4>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li>Ambulans (EKAB): <strong>166</strong></li>
+                <li>Polis: <strong>100</strong></li>
+                <li>İtfaiye: <strong>199</strong></li>
+                <li>Sahil Güvenlik: <strong>108</strong></li>
+                <li>Turist Polisi (yardım/bilgi için): <strong>171</strong></li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mt-6 mb-3">Ev Sahibi İletişim Bilgileri</h3>
+            <p class="mb-2">Konaklamanız sırasında acil olmayan sorularınız veya yardımlarınız için lütfen bizimle iletişime geçmekten çekinmeyin:</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>İsim:</strong> Iryna Kovalchuk</li>
+                <li><strong>Telefon / WhatsApp:</strong> +30 6944 589632</li>
+                <li><strong>Tercih Edilen İletişim Yöntemi/Saatleri:</strong> Acil olmayan sorular için 09:00 ile 20:00 saatleri arasında WhatsApp veya Viber mesajı tercih edilir. Bu saatler dışındaki acil durumlar veya WhatsApp üzerinden bana ulaşamazsanız lütfen arayın.</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mt-6 mb-3">Yakındaki Temel İhtiyaçlar</h3>
+            <p class="mb-2"><strong>Eczaneler (Farmakeio / Φαρμακείο):</strong> Eczaneler Kos Şehri'nde kolayca bulunabilir. Mesai saatleri dışında ve hafta sonları için bir rotasyon sistemiyle çalışırlar ("Εφημερεύον Φαρμακείο" / Efimerevon Farmakeio - Nöbetçi Eczane yazan tabelalara bakın). <em>[Ev sahibi en yakınını ve tipik saatlerini Google Haritalar üzerinden doğrulamalıdır]</em></p>
+            <p class="mb-2"><strong>Süpermarketler / Bakkallar:</strong> Temel ihtiyaçlarınızı karşılamak için yürüme mesafesinde mini marketler ve daha büyük süpermarketler bulacaksınız. Bir süpermarket (AB Vassilopoulos) sadece 1 dakikalık yürüme mesafesindedir. Daha geniş bir seçenek için, yaklaşık 1 dakikalık yürüme mesafesinde bir başkası bulunmaktadır.</p>
+            <p><strong>ATM'ler / Bankalar:</strong> ATM'ler Kos Şehir merkezindeki çeşitli bankalarda, daireden yaklaşık 1 dakikalık yürüme mesafesinde, AB Vassilopoulos Süpermarket'in girişinde bir tane de dahil olmak üzere mevcuttur.</p>
+        </section>
+
+        <!-- Bölüm 6: Bir Sonraki Sefere Kadar... -->
+        <section id="section6" class="content-section mb-12 p-6 bg-white rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-sky-700 mb-6 border-b-2 border-sky-200 pb-2">Bölüm 6: Bir Sonraki Sefere Kadar...</h2>
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Sıcak Bir Veda</h3>
+            <p class="mb-4">Diamante del Mar Girit'teki ve güzel Kos adasındaki zamanınız sona ererken, bizimle kalmayı seçtiğiniz için en içten teşekkürlerimizi sunmak istiyoruz. Güneş ışığı, keşifler ve Ege'nin eşsiz büyüsüyle dolu harika, dinlendirici ve unutulmaz bir tatil geçirdiğinizi içtenlikle umuyoruz.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Çıkış Hatırlatması</h3>
+            <p class="mb-2">Sadece çıkış prosedürünün nazik bir hatırlatması:</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>Çıkış Saati:</strong> Lütfen daireyi saat 11:00'e kadar boşaltın.</li>
+                <li><strong>Anahtar İadesi:</strong> Anahtarlarınızı anahtar kutusuna bırakın.</li>
+                <li><strong>Son Kontroller:</strong> Ayrılmadan önce lütfen tüm kişisel eşyalarınızı aldığınızdan emin olmak için bir dakikanızı ayırın. Tüm ışıkları ve klimaları kapatmanızı ve daireyi makul ölçüde düzenli bir durumda bırakmanızı rica ederiz. İşbirliğiniz bir sonraki misafirlerimiz için hazırlanmamıza yardımcı olur.</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Deneyiminizi Paylaşın</h3>
+            <p class="mb-4">Diamante del Mar Kos'taki konaklamanızdan keyif aldıysanız, rezervasyon yaptığınız platformda (Booking.com veya Airbnb) bir yorum bırakarak deneyiminizi paylaşmak için birkaç dakikanızı ayırırsanız inanılmaz derecede minnettar oluruz. Geri bildiriminiz bizim için paha biçilmezdir ve gelecekteki gezginlerin küçük cennet parçamızı keşfetmesine yardımcı olur.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Bağlantıda Kalın</h3>
+            <p class="mb-2">Gelecekteki konaklamalarınız veya sorularınız için lütfen bizimle doğrudan <a href="mailto:diamantedelmarcrete@gmail.com" class="text-sky-600 hover:underline">diamantedelmarcrete@gmail.com</a> adresinden iletişime geçmekten çekinmeyin.</p>
+            <p>Ayrılmadan önce son dakika sorularınız olursa lütfen Bölüm 5'te verilen iletişim bilgilerini kullanmaktan çekinmeyin.</p>
+            <p class="mt-4">Bizimle kaldığınız için bir kez daha teşekkür ederiz. Güvenli ve keyifli bir yolculuk dileriz!</p>
+        </section>
+
+        <!-- Bölüm: Ev Aletleri Hakkında Faydalı Bilgiler -->
+        <section id="section_appliances" class="content-section mb-12 p-6 bg-white rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-sky-700 mb-6 border-b-2 border-sky-200 pb-2">Ev Aletleri Hakkında Faydalı Bilgiler</h2>
+            
+            <p class="mb-4">Belgede cihaz kılavuzları için QR kodlarından bahsedilmektedir. Bunlar buraya doğrudan yerleştirilemediğinden, bu QR kodları için lütfen orijinal belgeye veya fiziksel kopyalara bakın. Aşağıda sağlanan metinsel bilgiler bulunmaktadır:</p>
+
+            <h3 class="text-xl font-semibold text-sky-600 mb-2">Çamaşır Makinesi Program Düğmesi Çevirileri</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
+                <div class="p-3 bg-slate-100 rounded-md">EN, FR</div>
+                <div class="p-3 bg-slate-100 rounded-md">DE</div>
+                <div class="p-3 bg-slate-100 rounded-md">NL</div>
+                <div class="p-3 bg-slate-100 rounded-md">TR, GR</div>
+            </div>
+            
+            <h3 class="text-xl font-semibold text-sky-600 mb-2">Cihaz Kılavuzları QR Kodları (Yer Tutucu)</h3>
+            <p class="mb-4 text-sm italic">Lütfen fiziksel karşılama kitabınızdaki veya sağlanan dijital belgedeki QR kodlarını tarayın.</p>
+            <div class="table-responsive mb-6">
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Cihaz</th>
+                            <th>Kılavuz QR (Telefonunuzla Tarayın)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MİKRODALGA FIRIN</td>
+                            <td>[QR Kodu Yer Tutucusu / Kılavuza Bağlantı]</td>
+                        </tr>
+                         <tr>
+                            <td>FIRIN</td>
+                            <td>[QR Kodu Yer Tutucusu / Kılavuza Bağlantı]</td>
+                        </tr>
+                        <tr>
+                            <td>NESPRESSO INISIA KAHVE MAKİNESİ</td>
+                            <td>[QR Kodu Yer Tutucusu / Kılavuza Bağlantı]</td>
+                        </tr>
+                        <tr>
+                            <td>ÇAMAŞIR MAKİNESİ</td>
+                            <td>[QR Kodu Yer Tutucusu / Kılavuza Bağlantı]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="text-xl font-semibold text-sky-600 mb-2">Çevrimiçi Çevrilmiş Versiyonlar (Telefonunuzla Tarayın)</h3>
+             <p class="mb-4 text-sm italic">Çevrilmiş versiyonlar için lütfen fiziksel karşılama kitabınızdaki veya sağlanan dijital belgedeki QR kodlarını tarayın.</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div class="p-3 bg-slate-100 rounded-md">İngilizce [QR Yer Tutucusu]</div>
+                <div class="p-3 bg-slate-100 rounded-md">Yunanca - Ελληνικά [QR Yer Tutucusu]</div>
+                <div class="p-3 bg-slate-100 rounded-md">Almanca – Deutsch [QR Yer Tutucusu]</div>
+                <div class="p-3 bg-slate-100 rounded-md">İtalyanca – Italiano [QR Yer Tutucusu]</div>
+                <div class="p-3 bg-slate-100 rounded-md">Fransızca - Française [QR Yer Tutucusu]</div>
+                <div class="p-3 bg-slate-100 rounded-md">İspanyolca - Español [QR Yer Tutucusu]</div>
+                <div class="p-3 bg-slate-100 rounded-md">Hollandaca - Nederlands [QR Yer Tutucusu]</div>
+                <div class="p-3 bg-slate-100 rounded-md">Türkçe - Türkçe [QR Yer Tutucusu]</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300 text-center p-6 mt-12">
+        <p>&copy; Diamante del Mar Girit. Konaklamanızın tadını çıkarın!</p>
+    </footer>
+
+    <script>
+        // Bir bağlantıya tıklandığında mobil menüyü kapat
+        document.querySelectorAll('.nav-menu a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const detailsElement = this.closest('details');
+                if (detailsElement) {
+                    detailsElement.removeAttribute('open');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

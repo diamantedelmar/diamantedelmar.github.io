@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenidos a Diamante del Mar Creta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .content-section {
+            padding-top: 60px; /* Regular según la altura de la navegación */
+            margin-top: -60px; /* Regular según la altura de la navegación */
+        }
+        .table-responsive {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #e2e8f0; /* Tailwind gray-300 */
+            padding: 0.75rem; /* p-3 */
+            text-align: left;
+        }
+        th {
+            background-color: #f1f5f9; /* Tailwind slate-100 */
+        }
+        /* Estilos personalizados para el menú acordeón/desplegable */
+        .nav-menu summary::-webkit-details-marker {
+            display: none;
+        }
+        .nav-menu summary {
+            list-style: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Navegación -->
+    <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-3">
+                <h1 class="text-xl font-bold text-sky-600">Diamante del Mar</h1>
+                <details class="nav-menu md:hidden">
+                    <summary class="px-3 py-2 rounded-md text-slate-600 hover:bg-slate-100 focus:outline-none cursor-pointer">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </summary>
+                    <div class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl z-20">
+                        <a href="#section1" class="block px-4 py-2 text-slate-700 hover:bg-sky-100 hover:text-sky-600">Bienvenidos</a>
+                        <a href="#section2" class="block px-4 py-2 text-slate-700 hover:bg-sky-100 hover:text-sky-600">Esenciales del apartamento</a>
+                        <a href="#section3" class="block px-4 py-2 text-slate-700 hover:bg-sky-100 hover:text-sky-600">Guía de la vida en la isla</a>
+                        <a href="#section4" class="block px-4 py-2 text-slate-700 hover:bg-sky-100 hover:text-sky-600">Moverse por Kos</a>
+                        <a href="#section5" class="block px-4 py-2 text-slate-700 hover:bg-sky-100 hover:text-sky-600">Información importante</a>
+                        <a href="#section6" class="block px-4 py-2 text-slate-700 hover:bg-sky-100 hover:text-sky-600">Despedida</a>
+                        <a href="#section_appliances" class="block px-4 py-2 text-slate-700 hover:bg-sky-100 hover:text-sky-600">Electrodomésticos</a>
+                    </div>
+                </details>
+                <div class="hidden md:flex space-x-4">
+                     <a href="#section1" class="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-sky-100 hover:text-sky-600">Bienvenidos</a>
+                    <a href="#section2" class="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-sky-100 hover:text-sky-600">Esenciales</a>
+                    <a href="#section3" class="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-sky-100 hover:text-sky-600">Guía de la isla</a>
+                    <a href="#section4" class="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-sky-100 hover:text-sky-600">Navegación</a>
+                    <a href="#section5" class="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-sky-100 hover:text-sky-600">Importante</a>
+                    <a href="#section6" class="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-sky-100 hover:text-sky-600">Despedida</a>
+                    <a href="#section_appliances" class="px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-sky-100 hover:text-sky-600">Electrodomésticos</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="container mx-auto px-4 py-8 pt-20"> <!-- pt-20 añadido para el desplazamiento de la navegación -->
+
+        <!-- Sección 1: ¡Bienvenidos al Paraíso! -->
+        <section id="section1" class="content-section mb-12 p-6 bg-white rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-sky-700 mb-6 border-b-2 border-sky-200 pb-2">Sección 1: ¡Bienvenidos al Paraíso!</h2>
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Un cálido saludo desde el Egeo</h3>
+            <p class="mb-4">¡Kalós órises! ¡Bienvenidos a Kos y bienvenidos a Diamante del Mar Creta! Estamos absolutamente encantados de recibirlos en esta encantadora isla del Dodecaneso. Recientemente renovado y diseñado pensando en el estilo y la comodidad, esperamos que Diamante del Mar Creta les sirva de santuario perfecto, su base elegante desde la cual explorar la fascinante mezcla de historia antigua, playas bañadas por el sol y la vibrante vida isleña que hace a Kos tan especial.</p>
+            <p class="mb-4">Kos es una isla que invita a reducir la velocidad, a respirar el aire marino, a pasear por milenios de historia y a saborear los placeres simples: un café perfectamente preparado, el sabor del marisco fresco, el calor del sol en la piel. Es un lugar donde las ruinas antiguas se alzan orgullosas junto a cafés bulliciosos, y donde las calas tranquilas se encuentran con animados complejos turísticos de playa. Esperamos que se enamoren de su encanto único, tal como lo hemos hecho nosotros.</p>
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Sobre esta guía</h3>
+            <p class="mb-4">Consideren este libro no solo como un manual, sino como su introducción curada para vivir como un elegante local durante su estancia. Hemos recopilado información esencial para ayudarles a instalarse sin esfuerzo en Diamante del Mar Creta, junto con nuestras recomendaciones personales para descubrir los puntos destacados de la isla: desde los mejores cafés cercanos hasta impresionantes vistas del atardecer y gemas históricas ocultas. Está diseñado para mejorar su experiencia y hacer que su aventura en Kos sea verdaderamente memorable.</p>
+            <p>Si tienen alguna pregunta durante su estancia, no duden en contactarnos. Encontrarán nuestros datos de contacto en la Sección 5. Ahora, ¡relájense, descansen y dejen que comience su historia en Kos!</p>
+        </section>
+
+        <!-- Sección 2: Instalándose – Lo esencial de su apartamento -->
+        <section id="section2" class="content-section mb-12 p-6 bg-white rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-sky-700 mb-6 border-b-2 border-sky-200 pb-2">Sección 2: Instalándose – Lo esencial de su apartamento</h2>
+            
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Encontrando su santuario</h3>
+            <p class="mb-2"><strong>Dirección completa:</strong> Su hogar lejos del hogar se encuentra en:<br>Diamante Del Mar Creta<br>Σοφοκλή Βενιζέλου 54 (Sophokli Venizelou 54)<br>Ciudad de Kos, 853 00</p>
+            <p class="mb-2"><strong>Contexto de la ubicación:</strong> ¡Han elegido un lugar maravilloso! El apartamento está convenientemente situado a solo 200 metros a pie de la popular playa de Lambi y aproximadamente a 1,1 kilómetros del puerto principal de Kos. Esto significa que tienen fácil acceso al mar y a las comodidades de la ciudad, mientras disfrutan potencialmente de una atmósfera un poco más tranquila que en el corazón del bullicioso centro.</p>
+            <p class="mb-4"><strong>Mapa/Direcciones:</strong> Recomendamos usar Google Maps o su aplicación de navegación preferida con la dirección anterior para una fácil navegación a su llegada y durante sus exploraciones.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Llegada y salida simplificadas</h3>
+            <p class="mb-2"><strong>Hora de llegada:</strong> Pueden llegar en cualquier momento a partir de las 16:00. Para garantizar una llegada sin problemas, infórmennos con anticipación de su hora estimada de llegada. Se puede organizar un check-in privado.</p>
+            <p class="mb-2"><strong>Recogida de llaves:</strong> Encontrarán una caja de seguridad ubicada a la derecha de la puerta de entrada principal. El código es <strong>3909</strong>. Asegúrense de que la caja de seguridad esté bien cerrada después de recuperar la llave.</p>
+            <p class="mb-2"><strong>Hora de salida:</strong> La salida es antes de las 11:00. Esto nos da tiempo para preparar perfectamente el apartamento para nuestros próximos huéspedes. Hay opciones de check-out exprés disponibles si es necesario.</p>
+            <p class="mb-4"><strong>Devolución de llaves:</strong> Dejen las llaves en la mesa del comedor dentro del apartamento y asegúrense de que la puerta esté bien cerrada detrás de ustedes o devuelvan las llaves a la caja de seguridad usando el mismo código.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Su zona de confort</h3>
+            <p class="mb-2"><strong>Acceso Wi-Fi:</strong> Mantenerse conectado es fácil. Destacar la disponibilidad de Wi-Fi confiable es importante para planificar actividades, mantenerse en contacto o incluso ponerse al día con el trabajo.</p>
+            <ul class="list-disc list-inside mb-2 pl-4">
+                <li><strong>Nombre de la red (SSID):</strong> Crete</li>
+                <li><strong>Contraseña:</strong> Crete2025</li>
+            </ul>
+            <p class="mb-2">El Wi-Fi es gratuito durante su estancia.</p>
+            <p class="mb-2"><strong>Aire acondicionado:</strong> Cada habitación está equipada con aire acondicionado para su comodidad. Encontrarán mandos a distancia para cada unidad. Utilicen el botón 'Mode' para seleccionar refrigeración (generalmente un icono de copo de nieve) y ajusten la temperatura con los botones de flecha. Recomendamos configurarlo alrededor de 23-25°C para un ambiente cómodo y energéticamente eficiente. Recuerden apagar los aires acondicionados al salir del apartamento.</p>
+            <p class="mb-4"><strong>Televisión:</strong> Relájense con el Smart TV Android de pantalla plana. Usen el mando a distancia para encenderlo (generalmente el botón rojo de encendido). Pueden navegar por los canales usando los botones de subir/bajar canal. Si hay servicios de streaming como Netflix disponibles y desean usarlos, es posible que necesiten iniciar sesión con los datos de su propia cuenta. Recuerden cerrar sesión antes de su partida.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Conocimientos de cocina y lavandería</h3>
+            <p class="mb-2">Su apartamento cuenta con una cocina bien equipada e instalaciones de lavandería para su comodidad. Aquí hay algunas breves instrucciones:</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>Horno y vitrocerámica:</strong> Utilicen los mandos para controlar la temperatura y seleccionar las funciones de cocción. Asegúrense de que estén apagados después de su uso. Se proporcionan utensilios de cocina básicos.</li>
+                <li><strong>Microondas:</strong> Ideal para calentar rápidamente. Consulten el panel del microondas para los ajustes básicos.</li>
+                <li><strong>Refrigerador:</strong> El refrigerador debe estar ajustado a una temperatura de enfriamiento adecuada. Siéntanse libres de ajustarlo si es necesario, pero eviten los ajustes más fríos para evitar la congelación.</li>
+                <li><strong>Hervidor y tostadora:</strong> Funcionamiento estándar: asegúrense de que el hervidor tenga suficiente agua antes de encenderlo.</li>
+                <li><strong>Lavadora:</strong> Ubicada en el área de la cocina. Usen el detergente provisto con moderación. Seleccionen un ciclo de lavado apropiado según su ropa. Eviten sobrecargar la máquina. En la última página de este manual encontrarán códigos QR para cada electrodoméstico.</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Vivir en armonía (Normas de la casa)</h3>
+            <p class="mb-2">Para garantizar una estancia agradable para todos y mantener la calidad de Diamante del Mar Creta, les rogamos amablemente que observen las siguientes normas de la casa:</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>Fumar:</strong> Está estrictamente prohibido fumar en el interior de la propiedad.</li>
+                <li><strong>Mascotas:</strong> Amamos a los animales, pero desafortunadamente, no se permiten mascotas en el apartamento.</li>
+                <li><strong>Horas de silencio:</strong> Sean considerados con nuestros vecinos y mantengan los niveles de ruido al mínimo entre las 22:00 y las 07:00.</li>
+                <li><strong>Fiestas/Eventos:</strong> Para mantener un ambiente tranquilo, no se permiten fiestas, eventos ni grandes reuniones. La propiedad no admite despedidas de soltero/a o fiestas similares.</li>
+                <li><strong>Invitados:</strong> Solo los huéspedes registrados pueden pernoctar. Infórmennos con anticipación si planean tener visitas durante el día.</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Su espacio y aspectos prácticos</h3>
+            <p class="mb-2"><strong>Balcón/Terraza:</strong> Su apartamento cuenta con un balcón o terraza con hermosas vistas. Es el lugar perfecto para su café matutino o una copa por la noche mientras se sumergen en la atmósfera egea. Inspirado en otras estancias locales, es posible que encuentren asientos cómodos para relajarse y disfrutar de la vista.</p>
+            <p class="mb-2"><strong>Eliminación de basura:</strong> Depositen sus bolsas de basura en los grandes contenedores comunes ubicados en la esquina de la calle cerca de la propiedad. Los contenedores de reciclaje para papel, plástico y vidrio se encuentran cerca del parque, cerca de la propiedad. Saquen la basura regularmente para mantener la limpieza.</p>
+            <p><strong>Estacionamiento:</strong> Tengan en cuenta que no hay estacionamiento dedicado disponible en la propiedad.</p>
+        </section>
+
+        <!-- Sección 3: Vida isleña – Su guía privilegiada de Kos -->
+        <section id="section3" class="content-section mb-12 p-6 bg-white rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-sky-700 mb-6 border-b-2 border-sky-200 pb-2">Sección 3: Vida isleña – Su guía privilegiada de Kos</h2>
+            <p class="mb-4">La ciudad de Kos late con una energía deliciosa, mezclando historia antigua con la vida mediterránea moderna. Uno de sus mayores placeres es la vibrante cultura de los cafés, la manera perfecta de comenzar el día, tomar un descanso al mediodía o simplemente observar el mundo pasar.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Cafés y bocadillos en la ciudad de Kos (A solo unos momentos)</h3>
+            <p class="mb-2"><strong>Su ritual matutino, elevado:</strong> Olvídense del café genérico de hotel; Kos los invita a abrazar el ritual local. Ya sea un fuerte café griego tradicional preparado lentamente, un refrescante Freddo Espresso o Cappuccino helado (los básicos griegos modernos), o una infusión especial meticulosamente elaborada, una experiencia de café los espera.</p>
+            <p class="mb-2"><strong>El dúo de Vasileos Pavlou:</strong> ¡Son increíblemente afortunados! Justo en su puerta, en Vasileos Pavlou 33, a pocos pasos de su apartamento, encontrarán no uno, sino dos lugares distintos y muy apreciados, que ofrecen experiencias diferentes pero complementarias. Esta proximidad única significa que su café o brunch perfecto nunca está lejos.</p>
+            <div class="mb-4 p-4 border border-slate-200 rounded-lg">
+                <h4 class="text-xl font-medium text-sky-600 mb-1">Alchimion</h4>
+                <p class="text-sm text-slate-600 mb-2">Vasileos Pavlou 33</p>
+                <p>Este es su destino ideal para un desayuno o brunch relajado. Su menú cuenta con opciones creativas como avena nocturna (prueben el porridge de cacao o la avena con mantequilla de maní), sabrosos platos de huevo como los tradicionales Kayianas o la picante Shakshuka, panqueques salados con tocino y huevo, y ensaladas frescas. Sirven una variedad de cafés, incluyendo espresso, filtro y cold brew, con alternativas de leche vegetal disponibles. El ambiente es acogedor y amigable, adecuado para quedarse con una computadora portátil (se proporciona Wi-Fi gratuito) o disfrutar de los asientos al aire libre. ¡Incluso admiten perros! Abierto todos los días de 07:00 a 18:00 (domingos de 08:00 a 16:00). Pueden encontrarlos en Facebook e Instagram. Como dato de interés, se encuentra cerca del histórico Altar de Dionisio.</p>
+            </div>
+            <div class="mb-4 p-4 border border-slate-200 rounded-lg">
+                <h4 class="text-xl font-medium text-sky-600 mb-1">The Cup</h4>
+                <p class="text-sm text-slate-600 mb-2">Vasileos Pavlou 33</p>
+                <p>Si un café excepcional es su prioridad, diríjanse al lado a "The Cup". Este pequeño café para no fumadores es conocido como una cafetería "tercera ola" propiamente dicha, elogiada por sus excelentes bebidas espresso preparadas sin pretensiones. Ofrecen una variedad de leches vegetales (avena, almendra, brotes mencionados) y a menudo tienen disponibles barritas energéticas y galletas veganas. Aunque se centran principalmente en el café, también sirven deliciosos y asequibles sándwiches de ciabatta. El servicio se destaca por ser amigable y hay Wi-Fi gratuito disponible. Tengan en cuenta que, debido a su calidad y popularidad, es posible que encuentren esperas durante las horas pico, especialmente si piden comida en lugar de solo café para llevar. Los horarios de apertura parecen amplios: de lunes a viernes de 07:00 a 22:00, sábados y domingos de 08:00 a 16:00.</p>
+            </div>
+
+            <h4 class="text-xl font-semibold text-sky-600 mt-6 mb-3">Más joyas de la ciudad de Kos:</h4>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-2">
+                <li><strong>Zero Cafe Bar:</strong> Aventúrense a dar un corto paseo hacia el puerto para encontrar este paraíso para los entusiastas de la cerveza artesanal. Zero cuenta con una impresionante colección de cervezas artesanales griegas (embotelladas y de barril), con un propietario conocedor y amigable dispuesto a ofrecer recomendaciones. Relájense en el gran jardín de cerveza a la sombra o en el acogedor patio. También organizan música en vivo y muestran deportes, y sirven café, cócteles, sabrosos aperitivos y refrescante limonada casera. Abierto hasta tarde.</li>
+                <li><strong>Restaurante Platanos:</strong> Para una comida cargada de historia y romance, cenen bajo el legendario Árbol de Hipócrates. Ubicado en la Plaza Platanos, este lugar ofrece un hermoso entorno, comida excelente y de alta calidad (la carrillera de ternera, la ensalada griega y un singular café flambeado reciben elogios), un servicio atento y, a menudo, cuenta con música en vivo, creando un ambiente maravilloso. También es un lugar encantador para tomar un café por la mañana o un zumo fresco mientras se admira el sitio histórico.</li>
+                <li><strong>Coffee Stories:</strong> Un encantador café de barrio ubicado en Korai 5. Conocido por su dulce ambiente, sus ofertas estándar de café griego (Freddo Espresso, Cappuccino, Frappe, etc.) y sus opciones de entrega. Abierto todos los días de 06:00 a 20:00 (domingos hasta las 15:00).</li>
+                <li><strong>Kentron Street Cafe:</strong> Situado en Venizelou Eleftheriou 2, este lugar afirma tener el "mejor café de la ciudad". Ofrecen una variedad de cafés, zumos frescos, sándwiches, pasteles (como bougatsa y tyropites), club sándwiches, batidos y ofrecen servicios de entrega y para llevar, incluidas opciones de brunch. Abierto todos los días, con horarios ligeramente más cortos los fines de semana.</li>
+            </ul>
+            <p class="mb-4"><strong>Otras menciones notables:</strong> Para un bocado rápido, <strong>Toast Special</strong> cerca de la iglesia de Agia Paraskevi es conocido por sus excelentes tostadas. <strong>Ariston</strong> y <strong>Tsivrini</strong> son famosos por la mejor bougatsa (pastel de crema). <strong>Ciao Cafe Bistro</strong> en el casco antiguo ofrece bebidas tradicionales como Kanelada y Soumada junto con café, ensaladas y comidas. <strong>Scoops Cafe</strong> (dos ubicaciones) es ideal para café para llevar, granizados, gofres y helados. <strong>Kaseta</strong> es un café-bar abierto todo el día conocido por su café de calidad, cócteles y un ambiente acogedor. Para una experiencia de bar de hotel más exclusiva con vistas al mar, consideren <strong>H2O</strong> en el Kos Aktis Art Hotel. El <strong>Sitar Cocktail Bar</strong> cerca del puerto ofrece cócteles creativos día y noche.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mt-8 mb-3">Un sabor de Kos - Recomendaciones gastronómicas</h3>
+            <p class="mb-4">La ciudad de Kos presenta una deliciosa variedad de experiencias gastronómicas, desde tabernas informales junto al mar hasta elegantes restaurantes.</p>
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Mariscos junto al agua:</h4>
+            <p class="mb-3">¡Una experiencia isleña griega por excelencia! Diríjanse hacia el puerto para encontrar <strong>Barbouni</strong> y <strong>Nick the Fisherman</strong>, prácticamente vecinos. Barbouni ofrece un maravilloso entorno junto a la orilla (reserven con anticipación para una mesa junto al agua) y es elogiado por platos como croquetas de bacalao, buñuelos de calabacín, tagliatelle con tinta de calamar y sushi. Ambos sirven pescado increíblemente fresco, simplemente a la parrilla o preparado. <strong>Votsalakia</strong> es otra opción popular frente al mar. La <strong>Taberna de Mariscos Kalymnos</strong>, también al borde del agua, se destaca por su enorme menú, precios razonables y servicio amable.</p>
+            
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Griego auténtico y Meze:</h4>
+            <p class="mb-3">Para saborear la auténtica cocina local, <strong>Patriko</strong> es una fantástica opción familiar en una calle lateral cerca de la Plaza de los Delfines, que ofrece comida de alta calidad, un servicio excepcional, precios razonables y una maravillosa selección de mezes tradicionales (pequeños platos para compartir): prueben el feta al horno con miel o la ensalada Patriko de la casa. La <strong>Taberna Evdokia Mummy's Cooking</strong> ofrece una experiencia griega completa con hospitalidad genuina y deliciosos platos frescos preparados por la propia Evdokia: la crema de berenjenas y los pimientos rellenos de feta son muy recomendables. La <strong>Taberna Elia</strong>, aunque quizás más tranquila en temporada baja, cuenta con una fantástica decoración tradicional y un excelente menú. <strong>Broadway</strong>, en funcionamiento desde 1990, ofrece cocina tradicional griega con un toque contemporáneo y porciones generosas: el youvetsi de ternera (ternera estofada lentamente con pasta similar al orzo) es un plato estrella. En la Plaza de la Ciudad, <strong>Aegli</strong> no es solo un café, sino una cooperativa exclusivamente femenina que apoya a las mujeres locales; pasen por su refrescante limonada casera y sus aperitivos.</p>
+
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Sabores internacionales:</h4>
+            <p class="mb-3">Si les apetece un cambio, <strong>Twin Dragon</strong> en la playa principal ofrece cocina china y asiática con vistas al mar. Para comida mexicana y filetes en un ambiente temático cerca del puerto, prueben <strong>El Paso</strong>.</p>
+
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Elegante y alta cocina:</h4>
+            <p class="mb-3">Para una ocasión especial, <strong>Cuvée</strong> en el Hotel Aqua Blu en Lambi ofrece una sofisticada y moderna cena de destino con menús degustación. En la ciudad de Kos, <strong>Petrino</strong> ofrece un ambiente elegante perfecto para una cena romántica, mientras que el <strong>Restaurante Platanos</strong>, ubicado en su histórica ubicación bajo el plátano, ofrece calidad de alta cocina con una hermosa presentación.</p>
+
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Informal y confiable:</h4>
+            <p class="mb-6">El <strong>Restaurante Ali</strong> y el <strong>Lambros Steakhouse</strong> son lugares locales recomendados, al igual que <strong>Thrasyvoulos</strong>.</p>
+
+            <div class="bg-sky-50 p-6 rounded-lg shadow-inner mb-6">
+                <h4 class="text-xl font-semibold text-sky-700 mb-2">Recomendación del anfitrión: Xasapaki</h4>
+                <p class="mb-2"><strong>Un corte por encima del resto: Por qué Xasapaki es una visita obligada en Kos</strong></p>
+                <p class="mb-2">Para una experiencia gastronómica inolvidable que combina la tradición de una carnicería clásica con el estilo de un asador de primera categoría, no busquen más allá de Xasapaki (también conocido como Chasapaki o The Hasapaki) en Kos. Este establecimiento no es solo un lugar para comer; es una celebración de la carne de calidad, preparada por expertos y servida con auténtica hospitalidad griega.</p>
+                <p class="mb-2">Con una rica historia que comenzó como una carnicería local, Xasapaki se ha convertido en un apreciado destino culinario conocido por su concepto único: los comensales eligen sus cortes de carne preferidos directamente del mostrador del carnicero. Ya sea que deseen un suculento filete Black Angus, una tierna chuleta de cordero local o quizás incluso una lujosa selección de Wagyu, la elección es suya. Luego, el experimentado equipo asa su selección a la perfección, asegurando una comida adaptada precisamente a su gusto.</p>
+                <p class="mb-2">Pero el atractivo de Xasapaki se extiende más allá de sus excepcionales filetes. Sus hamburguesas son frecuentemente elogiadas como las mejores de la isla, elaboradas con carne de res fresca y de alta calidad y, a menudo, acompañadas de toques caseros como tocino ahumado y papas fritas rústicas. Aperitivos como el rico carpaccio de ternera, el sabroso tartar de bistec y las deliciosas bolas de queso también reciben críticas entusiastas.</p>
+                <p class="mb-2">Los clientes elogian constantemente la excelente calidad de la carne, las generosas porciones y los precios sorprendentemente razonables. El personal amable y atento mejora aún más la experiencia gastronómica, creando un ambiente acogedor que hace que tanto los lugareños como los turistas regresen. Dada su popularidad, se recomienda encarecidamente hacer una reserva para evitar decepciones.</p>
+                <p class="mb-2">Si buscan algo más que una simple comida, si buscan un auténtico sabor de carnes expertamente manipuladas y cocinadas en un entorno vibrante y único, la carnicería y restaurante Xasapaki en Kos es una visita obligada. Es una experiencia que promete ser un corte por encima del resto.</p>
+                <p><a href="https://xasapaki.gr/" target="_blank" rel="noopener noreferrer" class="text-sky-600 hover:text-sky-800 underline">Visítenlos en línea para ver el menú y hacer reservaciones.</a></p>
+            </div>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mt-8 mb-3">Retrocediendo en el tiempo (Historia de la ciudad de Kos)</h3>
+            <p class="mb-4">La ciudad de Kos a menudo se describe como un "museo al aire libre", y con razón. Capas de historia son visibles en todas partes, desde antiguas ruinas griegas y romanas hasta castillos medievales construidos por los Caballeros de San Juan, mezquitas otomanas y elegantes edificios de la era italiana. Muchos sitios clave se pueden explorar fácilmente a pie desde su apartamento.</p>
+            
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Lugares históricos destacados de la ciudad de Kos</h4>
+            <div class="table-responsive mb-4">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del sitio</th>
+                            <th>Breve descripción</th>
+                            <th>Horario de verano</th>
+                            <th>Entrada de verano</th>
+                            <th>Notas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ágora Antigua</td>
+                            <td>Centro comercial y social de la antigua Kos, cerca del puerto. Ruinas al aire libre.</td>
+                            <td>Probablemente accesible en cualquier momento</td>
+                            <td>Gratis</td>
+                            <td>Incluye el Altar de Dionisio cerca.</td>
+                        </tr>
+                        <tr>
+                            <td>Castillo de Neratzia (Castillo de los Caballeros)</td>
+                            <td>Impresionante castillo de los Caballeros del siglo XV en la entrada del puerto.</td>
+                            <td>Conflictivo: Diario 08:30-15:00 O Mié-Lun 08:30-15:30 (Mar cerrado)</td>
+                            <td>3 €</td>
+                            <td>Consultar estado actual de restauración/accesibilidad.</td>
+                        </tr>
+                        <tr>
+                            <td>Plátano de Hipócrates</td>
+                            <td>Árbol antiguo cerca del castillo; legendario lugar de enseñanza de Hipócrates.</td>
+                            <td>Accesible en cualquier momento</td>
+                            <td>Gratis</td>
+                            <td>Lugar icónico para fotos.</td>
+                        </tr>
+                        <tr>
+                            <td>Odeón Romano</td>
+                            <td>Teatro bien conservado del siglo II a.C.</td>
+                            <td>Consultar localmente (puede ser de acceso libre)</td>
+                            <td>Gratis (generalmente)</td>
+                            <td>A veces alberga eventos. Un boleto combinado mencionado en otra parte implica un posible acceso controlado.</td>
+                        </tr>
+                        <tr>
+                            <td>Casa Romana</td>
+                            <td>Villa romana restaurada (estilo Pompeya) con mosaicos/frescos.</td>
+                            <td>08:00 - 19:30/20:00 (Cerrado los martes)</td>
+                            <td>10 €</td>
+                            <td>Boleto combinado con Asclepeion/Museo disponible (15 €/3 días).</td>
+                        </tr>
+                        <tr>
+                            <td>Museo Arqueológico</td>
+                            <td>Alberga hallazgos del Asclepeion, Ágora, etc.</td>
+                            <td>08:30 - 19:30 (Cerrado los martes)</td>
+                            <td>10 €</td>
+                            <td>Boleto combinado disponible (15 €/3 días).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm text-slate-600 italic">Nota: Los horarios de apertura y los precios de las entradas, especialmente para el Castillo, pueden variar o estar sujetos a cambios debido a restauraciones u otros factores. Siempre es aconsejable verificar localmente o a través de sitios web oficiales si planean una visita que requiera entradas o horarios específicos.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mt-8 mb-3">Más allá de la ciudad – Aventuras en la isla</h3>
+            <p class="mb-4">Si bien la ciudad de Kos ofrece mucho, los diversos paisajes de la isla y sus encantadores pueblos invitan a la exploración.</p>
+
+            <h4 class="text-xl font-semibold text-sky-600 mb-3">Sol, arena y mar - Una playa para cada estado de ánimo</h4>
+            <p class="mb-4">Con una costa que se extiende por 112 kilómetros, Kos es el sueño de los amantes de la playa, ofreciendo de todo, desde largas extensiones de arena hasta calas de guijarros y espectaculares acantilados. Doce playas ondean con orgullo la Bandera Azul por su calidad.</p>
+            
+            <h5 class="text-lg font-medium text-slate-700 mb-2">Cerca (Fácil acceso):</h5>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>Playa de Lambi:</strong> ¡Su vecina más cercana! A solo 3 km al norte del centro de la ciudad, fácilmente accesible a pie, en bicicleta o en autobús. Es una larga y popular franja de arena con aguas poco profundas, lo que la hace ideal para familias. Bien organizada con tumbonas, sombrillas, deportes acuáticos y numerosos chiringuitos y restaurantes. La zona de Lambi Mylos es particularmente animada.</li>
+                <li><strong>Playa de Psalidi:</strong> Ubicada a 4 km al sureste de la ciudad. Esta playa de guijarros tiene secciones organizadas con sombrillas y chiringuitos y es un centro para el windsurf, el kitesurf y el buceo.</li>
+                <li><strong>Playa de Agios Fokas:</strong> Continuando hacia el sur desde Psalidi (a unos 8 km de la ciudad). Una gran extensión de guijarros más oscuros y arena que ofrece una mezcla de áreas organizadas y lugares más tranquilos para relajarse. Está convenientemente ubicada cerca de la playa de Therma.</li>
+            </ul>
+
+            <h5 class="text-lg font-medium text-slate-700 mb-2">Costa Norte (Arenosa y a menudo ventosa):</h5>
+             <p class="mb-3 italic">Ideal para tomar el sol y practicar deportes de viento.</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>Playa de Tigaki:</strong> (11 km al Oeste) Una vasta extensión de arena fina con aguas cristalinas y poco profundas (certificada con Bandera Azul), perfecta para niños. Tiene un ambiente relajado pero es popular, ofreciendo muchas tumbonas, sombrillas, tabernas y chiringuitos. Un lugar favorito para el windsurf y el kitesurf, pero lo suficientemente grande como para encontrar áreas más tranquilas. Ofrece excelentes vistas del atardecer.</li>
+                <li><strong>Playa de Marmari:</strong> (14-20 km al SO) Un tramo de 3 km de hermosa arena blanca y aguas poco profundas. Bien organizada (aunque algunas fuentes dicen parcialmente organizada), satisface diversos gustos con actividades como equitación, kitesurf y windsurf. Conocida por su ambiente animado y sus impresionantes atardeceres.</li>
+                <li><strong>Playa de Mastichari:</strong> (27 km al SO) Una playa exótica con arena blanca y suave y agua turquesa. Es una costa concurrida y bien organizada, ideal para familias, y un lugar privilegiado para el windsurf con varios centros. El puerto del pueblo aquí también sirve ferries a Kalymnos.</li>
+            </ul>
+
+            <h5 class="text-lg font-medium text-slate-700 mb-2">Costa Sur (Bahía de Kefalos y más allá):</h5>
+            <p class="mb-3 italic">Famosa por sus paisajes pintorescos y su variedad.</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>Playa de Kardamena:</strong> (27-30 km al SO) La playa contigua al complejo turístico más animado de Kos. Esperen un ambiente cosmopolita, organización completa con todas las comodidades, deportes acuáticos, chiringuitos y restaurantes. Adecuada para todos: familias, parejas y grupos de amigos que buscan energía.</li>
+                <li><strong>Playa de Agios Stefanos:</strong> (35-40 km al SO) Podría decirse que es una de las playas más icónicas y fotogénicas de Kos. Una mezcla de arena fina y pequeños guijarros, bien organizada con un ambiente cosmopolita. Ofrece deportes acuáticos, incluido el buceo. El impresionante telón de fondo incluye el islote de Kastri con su iglesia de cúpula azul (se puede nadar o llegar en barco) y las ruinas de basílicas paleocristianas del siglo V justo en la orilla.</li>
+                <li><strong>Paradise Beach:</strong> (30-33 km al SO) Hace honor a su nombre con una franja de ensueño de arena dorada y aguas poco profundas de color verde azulado. Extremadamente popular, especialmente entre las familias debido al mar tranquilo y poco profundo. Bien organizada con tumbonas, sombrillas, chiringuitos, numerosos deportes acuáticos (kayak, paravelismo, moto acuática, etc.) y tabernas cercanas. Puede estar muy concurrida en temporada alta.</li>
+                <li><strong>Camel Beach:</strong> (Cerca de Paradise, 30 km al SO) Una cala pintoresca con arena blanca fina y pequeños guijarros. El agua aquí es excepcionalmente clara, lo que la hace ideal para practicar snorkel, aunque se vuelve profunda rápidamente. El acceso implica una corta caminata desde el área de estacionamiento. Ofrece cierta organización con tumbonas y sombrillas, y hay tabernas cerca.</li>
+                <li><strong>Playa de Lagada:</strong> (Cerca de Paradise, 35 km al SO) Parte del continuo frente de playa de la Bahía de Kefalos, que ofrece fina arena dorada y hermosas aguas para nadar. Pueden encontrar secciones organizadas con comodidades o buscar parches más tranquilos y apartados. Una de las favoritas de las parejas.</li>
+                <li><strong>Playa de Kefalos (Kamari):</strong> (40-45 km al SO) La principal y larga playa de arena de la zona de Kefalos. Bien organizada, ideal para familias, y ofrece windsurf y otros deportes acuáticos. También se destaca por ser accesible para sillas de ruedas. Una buena base para explorar la península.</li>
+                <li><strong>Playa de Agios Theologos:</strong> (Extremo suroeste) Una opción más salvaje y apartada para aquellos que buscan tranquilidad. Presenta espectaculares acantilados de piedra caliza, costas de guijarros/rocas y excelentes vistas del atardecer. Hay una taberna en el lugar.</li>
+                <li><strong>Cavo Paradiso:</strong> (Punto más meridional) Una joya algo escondida, conocida por su belleza salvaje y agreste, su larga extensión de arena y sus aguas turquesas. El acceso requiere una caminata o un vehículo resistente, lo que la hace menos concurrida.</li>
+            </ul>
+            
+            <h5 class="text-lg font-medium text-slate-700 mt-4 mb-2">Experiencia única:</h5>
+            <ul class="list-disc list-inside mb-4 pl-4">
+                <li><strong>Playa de Therma:</strong> (12 km al SE) Una visita obligada para una experiencia única de spa natural. Arena de guijarros negros volcánicos y rocas espectaculares enmarcan una cala donde las aguas termales naturales desembocan en el mar, mezclándose en una piscina de rocas artificial. Se dice que el agua tiene beneficios terapéuticos. Requiere una corta caminata desde el final de la carretera. Hay algunas tumbonas y un snack bar disponibles.</li>
+            </ul>
+
+            <h4 class="text-xl font-semibold text-sky-600 mt-6 mb-3">Tabla guía de playas de Kos</h4>
+            <div class="table-responsive mb-6">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre de la playa</th>
+                            <th>Ubicación/Dist. de la ciudad de Kos</th>
+                            <th>Arena/Guijarros</th>
+                            <th>Organización</th>
+                            <th>Ideal para</th>
+                            <th>Notas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Lambi</td><td>3km N</td><td>Arena</td><td>Bien organizada</td><td>Proximidad a la ciudad, familias, deportes acuáticos</td><td>Fácil acceso en bicicleta/a pie.</td></tr>
+                        <tr><td>Tigaki</td><td>11km O</td><td>Arena</td><td>Bien organizada</td><td>Familias (aguas poco profundas), windsurf/kitesurf, atardeceres</td><td>Bandera Azul. Puede estar concurrida.</td></tr>
+                        <tr><td>Marmari</td><td>14-20km SO</td><td>Arena blanca</td><td>Bien/Parcialmente organizada</td><td>Todos los gustos, windsurf/kitesurf, atardeceres, equitación</td><td>Playa larga y animada.</td></tr>
+                        <tr><td>Mastichari</td><td>27km SO</td><td>Arena blanca</td><td>Bien organizada</td><td>Windsurf, familias, ambiente exótico</td><td>Concurrida, puerto para Kalymnos.</td></tr>
+                        <tr><td>Kardamena</td><td>27-30km SO</td><td>Arena</td><td>Bien organizada</td><td>Ambiente animado de resort, todas las comodidades, vida nocturna</td><td>Popular centro turístico.</td></tr>
+                        <tr><td>Agios Stefanos</td><td>35-40km SO</td><td>Arena y guijarros</td><td>Bien organizada</td><td>Paisaje (islote de Kastri/ruinas), familias, deportes acuáticos</td><td>Muy pintoresca.</td></tr>
+                        <tr><td>Paradise</td><td>30-33km SO</td><td>Arena dorada</td><td>Bien organizada</td><td>Familias (aguas poco profundas), deportes acuáticos</td><td>Muy popular, puede estar abarrotada.</td></tr>
+                        <tr><td>Camel</td><td>30km SO</td><td>Arena blanca y guijarros</td><td>Alguna organización</td><td>Snorkel, cala pintoresca</td><td>Se vuelve profunda rápidamente, se necesita una corta caminata.</td></tr>
+                        <tr><td>Therma</td><td>12km SE</td><td>Guijarros negros</td><td>Alguna organización</td><td>Experiencia única de aguas termales</td><td>Requiere una corta caminata.</td></tr>
+                        <tr><td>Agios Theologos</td><td>Extremo SO</td><td>Guijarros/Rocas</td><td>Mínima/Ninguna</td><td>Aislamiento, belleza salvaje, atardeceres</td><td>Acceso remoto.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mt-8 mb-3">Encanto de los pueblos - Más allá de la capital</h3>
+            <p class="mb-4">Escapar de la ciudad de Kos revela pueblos tradicionales enclavados en las montañas o con vistas al mar, que ofrecen un ritmo y una perspectiva diferentes.</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-3">
+                <li><strong>Zia:</strong> Una visita absolutamente imprescindible, especialmente para el atardecer. Este hermoso pueblo de montaña, a unos 16 km al sur de la ciudad de Kos, ofrece impresionantes vistas panorámicas hacia Kalymnos, Pserimos y la costa turca, que se vuelven verdaderamente espectaculares cuando se pone el sol. Aunque es popular entre los turistas, conserva su encanto con edificios encalados, tiendas de artesanía y excelentes opciones gastronómicas. El restaurante <strong>Oromedon</strong> es muy recomendable por su combinación de impresionantes vistas y deliciosa cocina local (prueben el cerdo de montaña con limón e hinojo, o la tradicional moussaka). También pueden visitar el cercano Parque Natural de Kos o caminar hasta la cima del Monte Dikeos (el pico más alto de Kos) desde Zia. Dada su popularidad para el atardecer, consideren reservar restaurantes o transporte con anticipación; hay disponibles recorridos específicos en autobús para el atardecer.</li>
+                <li><strong>Kefalos:</strong> Ubicado a 40 km al suroeste de la ciudad de Kos, Kefalos ofrece una base más tranquila y tradicional en comparación con la capital. El pueblo se asienta pintorescamente en una colina con vistas a la bahía de Kamari, hogar de muchas hermosas playas (como Agios Stefanos) y el icónico islote de Kastri. Exploren las estrechas callejuelas y las tradicionales casas blancas del pueblo superior, o disfruten de las comodidades junto al mar de Kamari abajo. Kefalos fue la antigua capital de la isla, Astypalea, y los restos históricos incluyen las ruinas del Castillo de Kefalos y la cercana Basílica de San Esteban. Es un excelente centro para explorar las playas de la península sur y la cueva de Aspri Petra. Numerosos cafés y tabernas atienden a los visitantes, incluyendo <strong>Mylotopi</strong> (un café en un molino de viento restaurado con excelentes vistas), <strong>Taberna Niotis</strong> (conocida por su singular experiencia griega de varios platos sin menú), <strong>Taberna Cavos</strong> (recomendada por los lugareños por su pescado fresco) y el moderno y bien valorado restaurante <strong>Ficus</strong>.</li>
+                <li><strong>Pyli:</strong> Un asentamiento tradicional a unos 15 km al suroeste de la ciudad de Kos. Su principal atractivo es la cercana Paleo Pyli (Vieja Pyli), las atmosféricas ruinas de una fortaleza bizantina encaramada en una colina que ofrece amplias vistas. El nuevo pueblo de Pyli tiene una plaza central con cafés y tabernas tradicionales. Una sencilla ouzeria cerca de la fortaleza ofrece bebidas, meze y vistas. El <strong>Fox cafe</strong> en la plaza del pueblo de Pyli es conocido por sus buenos pasteles, especialmente el pastel Banoffee.</li>
+                <li><strong>Antimachia:</strong> Situada a 23 km al suroeste de la ciudad de Kos, cerca del aeropuerto. Este considerable pueblo tradicional está dominado por el imponente Castillo Veneciano de Antimachia. Esta gran fortaleza encerraba un asentamiento completo, y sus impresionantes murallas, bastiones y dos pequeñas iglesias (Agios Nikolaos y Agia Paraskevi, a menudo abiertas con frescos visibles) merecen una visita. La entrada al castillo es gratuita, aunque verifiquen cualquier restricción de acceso. El pueblo también alberga la Casa Tradicional de Antimachia, un museo que recrea la vida isleña de principios del siglo XX, y es conocido por su festival de la miel.</li>
+                <li><strong>Asfendiou y aldeas de montaña (Lagoudi, Asomatos):</strong> Para echar un vistazo a la auténtica Kos rural, lejos de las principales rutas turísticas, exploren los pueblos en las laderas del Monte Dikeos, a unos 14-15 km al sur de la ciudad de Kos. Asfendiou en sí es un pueblo grande con arquitectura tradicional. La cercana Lagoudi es interesante como un pueblo que fue en gran parte abandonado y luego redescubierto y reformado. Asomatos está particularmente intacta por el turismo. Se menciona un kafeneion (café) tradicional en Asomatos como un lugar animado que ofrece meze, bebidas y música en vivo ocasional. También se destaca la taberna <strong>Grandma's House</strong> en Lagoudi.</li>
+                <li><strong>Platani:</strong> A solo 3 km de la ciudad de Kos, Platani es única por ser el hogar de la minoría musulmana de habla turca de Kos. Ofrece un sabor cultural diferente y es conocida por el restaurante de influencia turca <strong>Sherif</strong>, uno de los favoritos locales.</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mt-8 mb-3">Maravillas antiguas - El Asclepeion</h3>
+            <p class="mb-2">Ninguna visita a Kos está completa sin explorar el <strong>Asclepeion</strong>, el sitio arqueológico más importante de la isla y un lugar de profunda importancia histórica.</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-2">
+                <li><strong>Importancia:</strong> Reconocido en toda la antigüedad, este fue uno de los santuarios de curación más importantes dedicados a Asclepio, el dios de la medicina y la salud. Sirvió no solo como lugar de culto y curación, sino también como una respetada escuela de medicina, intrínsecamente vinculada a Hipócrates, el "Padre de la Medicina Moderna" nacido en Kos, quien se cree que enseñó y practicó aquí. El entorno sereno en una ladera verde con vistas al mar y la costa turca se consideraba parte integral del proceso terapéutico.</li>
+                <li><strong>Disposición:</strong> El santuario se despliega a través de tres terrazas bellamente ajardinadas conectadas por escaleras monumentales. El <strong>primer nivel</strong> albergaba salas de tratamiento, fuentes para la purificación ritual, baños de la época romana y posiblemente la propia escuela de medicina. El <strong>segundo nivel</strong> se centraba en el culto, presentando las ruinas del templo más antiguo (Templo de Asclepio del siglo IV a.C.) y el Templo de Apolo parcialmente restaurado (padre de Asclepio). Una gran escalera conduce al <strong>tercer nivel</strong>, sitio del templo más grande dedicado a Asclepio, flanqueado por pórticos (stoas) probablemente utilizados para alojar a pacientes y visitantes. Aquí también existen restos de una iglesia paleocristiana. Sobre este nivel se encuentra un bosque dedicado a Apolo, que ofrece magníficas vistas.</li>
+                <li><strong>Visita:</strong> El Asclepeion está convenientemente ubicado a solo 4 km de la ciudad de Kos. Pueden llegar fácilmente en coche de alquiler, taxi, el autobús local DEAS (Línea urbana 3 o 6 desde la ciudad de Kos, consulten horarios) o incluso a pie para los más enérgicos (aprox. 50 min). Dediquen al menos 1-2 horas para explorar a fondo el sitio arqueológico; añadan tiempo extra si planean visitar el adyacente Museo de la Fundación Hipócrates y los Jardines Botánicos (entrada independiente). Para comprender completamente la historia y la importancia del sitio, se recomienda encarecidamente contratar a un guía autorizado. Debido al calor y la posible multitud, es aconsejable visitar temprano en la mañana o más tarde en la tarde durante los meses pico de verano (julio-agosto). La primavera y el otoño ofrecen condiciones particularmente atmosféricas. <em>Nota importante: Los informes sugieren que el sitio actualmente carece de acceso para discapacitados.</em></li>
+                <li><strong>Horarios y entradas:</strong>
+                    <ul class="list-circle list-inside ml-4 mt-1 space-y-1">
+                        <li><strong>Verano (aprox. 1 de abril - 31 de octubre):</strong> Abierto todos los días de 08:00 a 20:00. Última entrada generalmente 30 minutos antes del cierre (19:30).</li>
+                        <li><strong>Invierno (aprox. 1 de noviembre - 31 de marzo):</strong> Abierto de 08:30 a 15:30. Cerrado los martes.</li>
+                        <li><strong>Precio de la entrada (verano):</strong> 8 €.</li>
+                        <li><strong>Precio de la entrada (invierno):</strong> 4 € (Se aplica tarifa reducida a todos los visitantes en invierno).</li>
+                        <li><strong>Reducciones:</strong> Los ciudadanos de la UE de 6 a 25 años entran gratis; los ciudadanos no pertenecientes a la UE de 6 a 25 años obtienen un 50% de descuento. Los ciudadanos de la UE mayores de 65 años obtienen un 50% de descuento. Se requiere identificación/prueba de edad/estado válida.</li>
+                        <li><strong>Entrada combinada:</strong> Hay disponible una entrada especial de paquete que cuesta 15 €, válida por 3 días, que otorga acceso al Asclepeion, al Museo Arqueológico de Kos y a la Casa Romana. Esto ofrece una buena relación calidad-precio si planean visitar los tres sitios principales.</li>
+                        <li>Hay una tienda de regalos del Patrimonio Helénico en el lugar.</li>
+                        <li><em>Se recomienda verificar:</em> Si bien estos detalles se basan en información reciente, siempre es una buena práctica verificar rápidamente los horarios y precios actuales en el sitio web oficial del Patrimonio Helénico (hhticket.gr) o llamando al sitio antes de su visita, especialmente fuera de temporada alta.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Sección 4: Moverse por Kos -->
+        <section id="section4" class="content-section mb-12 p-6 bg-white rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-sky-700 mb-6 border-b-2 border-sky-200 pb-2">Sección 4: Moverse por Kos</h2>
+            <p class="mb-4">¡Explorar Kos es parte de la aventura! Aquí tienen un resumen de las mejores maneras de moverse por la isla y descubrir sus tesoros.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Moverse por la isla:</h3>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-3">
+                <li><strong>Coche de alquiler / Scooter / ATV:</strong> Para obtener la máxima libertad y flexibilidad, especialmente si planean explorar más allá de la ciudad de Kos y visitar playas o pueblos más remotos, se recomienda encarecidamente alquilar un vehículo. Numerosas agencias de alquiler se encuentran en la ciudad de Kos, en el aeropuerto y en los principales centros turísticos como Tigaki, Marmari y Kardamena. Esperen pagar alrededor de 35-60 € por día por un coche pequeño y 25 € por día por un scooter, aunque los precios varían según la temporada y la duración del alquiler. Necesitarán un permiso de conducir válido (es posible que se requiera un permiso de conducir internacional para los permisos no pertenecientes a la UE) y posiblemente una tarjeta de crédito para un depósito. Es aconsejable reservar con anticipación durante los concurridos meses de verano (junio-septiembre).</li>
+                <li><strong>Autobuses interurbanos KTEL:</strong> El servicio público de autobuses (KTEL) ofrece una forma económica de viajar entre la ciudad de Kos, el aeropuerto y los principales pueblos y centros turísticos. La estación principal de autobuses está ubicada en el centro de la ciudad de Kos, en la calle Kleopatras 7. Los autobuses suelen ser modernos y con aire acondicionado. Los billetes se compran directamente en el autobús, con tarifas que oscilan entre aproximadamente 2,30 € y 5,20 € según el destino. Los horarios son más frecuentes durante la temporada de verano, pero pueden ser limitados, especialmente los domingos o para rutas menos comunes. Consulten siempre el último horario en línea (www.ktel-kos.gr) o en la estación. Contacto: +30 22420 22292.</li>
+                <li><strong>Autobuses urbanos (DEAS):</strong> Para viajar dentro de la ciudad de Kos y a áreas cercanas como Lambi, Psalidi, Agios Fokas, Platani, el Asclepeion y la playa de Therma, utilicen el servicio de autobuses municipales. Las paradas de autobús se encuentran por toda la ciudad, incluso cerca del puerto. Consulten rutas y horarios en el sitio web/aplicación Kos Mobility (mobility.kos.gr) o llamen al +30 22420 26276. La línea urbana 5 ofrece servicio cada hora a la playa de Therma entre las 09:15 y las 16:35.</li>
+                <li><strong>Taxis:</strong> Fácilmente disponibles en toda la isla, especialmente en la ciudad de Kos (parada de taxis en Akti Kountouriotou), el aeropuerto y los principales centros turísticos. Los taxis se pueden parar en la calle, encontrar en las paradas o reservar por teléfono (Ciudad de Kos: +30 22420 23333 / 22777) o en línea (por ejemplo, KosTaxi.eu, KosRadioTaxi.gr). Los taxis tienen taxímetro, pero es aconsejable confirmar la tarifa aproximada o acordar un precio para viajes más largos, como al aeropuerto o pueblos distantes. Esperen tarifas como: Ciudad de Kos-Kefalos ~50-60 €; Ciudad de Kos-Zia ~19-23 €.</li>
+                <li><strong>Ciclismo:</strong> El terreno relativamente llano de Kos, particularmente a lo largo de las costas norte y este, hace que el ciclismo sea una opción agradable para distancias más cortas. Carriles bici dedicados conectan la ciudad de Kos con Tigaki al oeste y Lambi/Psalidi al este. Es una excelente manera de explorar las áreas cercanas a la ciudad de Kos, incluida la playa de Lambi. Los alquileres de bicicletas están ampliamente disponibles por alrededor de 5-10 € por día. ¡Recuerden la protección solar y el agua!</li>
+            </ul>
+            
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Rutas clave de KTEL desde la ciudad de Kos (Estimaciones de verano):</h4>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>A Kefalos:</strong> Servicio diario, múltiples salidas entre las 07:30 y las 21:00. Tarifa: 5,20 €. Tiempo de viaje: Aprox. 1 hora y 15 minutos.</li>
+                <li><strong>A Zia:</strong> Varias salidas diarias, generalmente entre las 09:30 y las 15:45. Tarifa: 2,30 €. Tiempo de viaje: Aprox. 30 minutos. <em>Importante: Los autobuses de regreso desde Zia, especialmente después del atardecer, son limitados. Si planean una visita al atardecer en autobús, verifiquen cuidadosamente los horarios de regreso o consideren un tour/traslado dedicado al atardecer. Algunas fuentes mencionan que el servicio es solo de lunes a viernes.</em></li>
+                <li><strong>A Tigaki:</strong> Servicio diario frecuente, 08:10 - 23:30. Tarifa: 2,30 €.</li>
+                <li><strong>A Marmari:</strong> Servicio diario frecuente, 08:00 - 23:30. Tarifa: 2,30 €.</li>
+                <li><strong>Al aeropuerto (KGS):</strong> Conexiones regulares, a menudo a través de Mastichari o Kardamena. Tiempo de viaje: Aprox. 30-40 minutos. Consulten las rutas específicas del aeropuerto en el sitio web de KTEL.</li>
+            </ul>
+
+            <h4 class="text-xl font-medium text-slate-700 mb-2">Tiempos de viaje (Conducción aproximada):</h4>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li>Ciudad de Kos ↔ Kefalos: 40-45 minutos (40 km)</li>
+                <li>Ciudad de Kos ↔ Zia: 17-20 minutos (13,5 km)</li>
+                <li>Ciudad de Kos ↔ Tigaki: 15-20 minutos (11 km)</li>
+                <li>Ciudad de Kos ↔ Marmari: 20-25 minutos (14 km)</li>
+                <li>Ciudad de Kos ↔ Aeropuerto (KGS): 30-40 minutos (24 km)</li>
+                <li>Ciudad de Kos ↔ Playa de Therma: 15-20 minutos (12 km)</li>
+            </ul>
+        </section>
+
+        <!-- Sección 5: Información importante -->
+        <section id="section5" class="content-section mb-12 p-6 bg-white rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-sky-700 mb-6 border-b-2 border-sky-200 pb-2">Sección 5: Información importante</h2>
+            
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">En caso de emergencia</h3>
+            <p class="mb-2">Grecia opera con el sistema de emergencia estándar europeo. Conocer estos números puede brindarles tranquilidad durante sus viajes.</p>
+            <p class="mb-2"><strong>Número de emergencia europeo: 112</strong><br>Este es el número único y gratuito al que llamar desde cualquier teléfono (fijo o móvil, incluso sin señal o crédito) para cualquier emergencia: ambulancia, bomberos, policía o guardacostas. Los operadores suelen hablar griego, inglés y francés. Los conectarán con el servicio local apropiado.</p>
+            
+            <h4 class="text-xl font-medium text-slate-700 mt-4 mb-2">Líneas directas de emergencia griegas:</h4>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li>Ambulancia (EKAB): <strong>166</strong></li>
+                <li>Policía: <strong>100</strong></li>
+                <li>Bomberos: <strong>199</strong></li>
+                <li>Guardacostas: <strong>108</strong></li>
+                <li>Policía Turística (para asistencia/información): <strong>171</strong></li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mt-6 mb-3">Contacto del anfitrión</h3>
+            <p class="mb-2">Para cualquier pregunta no urgente o asistencia durante su estancia, no duden en contactarnos:</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>Nombre:</strong> Iryna Kovalchuk</li>
+                <li><strong>Teléfono / WhatsApp:</strong> +30 6944 589632</li>
+                <li><strong>Método de contacto/Horario preferido:</strong> Se prefiere mensaje de WhatsApp o Viber para consultas no urgentes entre las 9 a.m. y las 8 p.m. Para problemas urgentes fuera de este horario o si no pueden comunicarse conmigo por WhatsApp, por favor llamen.</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mt-6 mb-3">Esenciales cercanos</h3>
+            <p class="mb-2"><strong>Farmacias (Farmakeio / Φαρμακείο):</strong> Las farmacias están fácilmente disponibles en la ciudad de Kos. Operan con un sistema de rotación para servicios fuera de horario y fines de semana (busquen letreros que indiquen la "Εφημερεύον Φαρμακείο" / Efimerevon Farmakeio - Farmacia de guardia). <em>[El anfitrión debe verificar la más cercana y los horarios típicos a través de Google Maps]</em></p>
+            <p class="mb-2"><strong>Supermercados / Tiendas de comestibles:</strong> Encontrarán minimercados y supermercados más grandes a poca distancia para abastecerse de lo esencial. Un supermercado (AB Vassilopoulos) está a solo 1 minuto a pie. Para una selección más amplia, hay otro ubicado a aproximadamente 1 minuto a pie.</p>
+            <p><strong>Cajeros automáticos / Bancos:</strong> Hay cajeros automáticos disponibles en varios bancos en el centro de la ciudad de Kos, aproximadamente a 1 minuto a pie del apartamento, incluido uno en la entrada del supermercado AB Vassilopoulos.</p>
+        </section>
+
+        <!-- Sección 6: Hasta la próxima... -->
+        <section id="section6" class="content-section mb-12 p-6 bg-white rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-sky-700 mb-6 border-b-2 border-sky-200 pb-2">Sección 6: Hasta la próxima...</h2>
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Una cálida despedida</h3>
+            <p class="mb-4">A medida que su tiempo en Diamante del Mar Creta y en la hermosa isla de Kos llega a su fin, queremos extender nuestro más sincero agradecimiento por elegir quedarse con nosotros. Realmente esperamos que hayan tenido unas vacaciones maravillosas, relajantes y memorables, llenas de sol, descubrimientos y la magia única del Egeo.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Recordatorio de salida</h3>
+            <p class="mb-2">Solo un amable recordatorio del procedimiento de salida:</p>
+            <ul class="list-disc list-inside mb-4 pl-4 space-y-1">
+                <li><strong>Hora de salida:</strong> Por favor, desalojen el apartamento antes de las 11:00.</li>
+                <li><strong>Devolución de llaves:</strong> Coloquen sus llaves en la caja de seguridad.</li>
+                <li><strong>Verificaciones finales:</strong> Antes de irse, tómense un momento para asegurarse de que tienen todas sus pertenencias personales. Les pedimos amablemente que apaguen todas las luces y unidades de aire acondicionado, y dejen el apartamento en condiciones razonablemente ordenadas. Su cooperación nos ayuda a prepararnos para nuestros próximos huéspedes.</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Compartan su experiencia</h3>
+            <p class="mb-4">Si disfrutaron de su estancia en Diamante del Mar Kos, estaríamos increíblemente agradecidos si pudieran tomarse unos momentos para compartir su experiencia dejando una reseña en la plataforma que utilizaron para reservar (Booking.com o Airbnb). Sus comentarios son invaluables para nosotros y ayudan a futuros viajeros a descubrir nuestro pequeño rincón del paraíso.</p>
+
+            <h3 class="text-2xl font-semibold text-sky-600 mb-3">Manténganse en contacto</h3>
+            <p class="mb-2">Para futuras estancias o consultas, no duden en contactarnos directamente en <a href="mailto:diamantedelmarcrete@gmail.com" class="text-sky-600 hover:underline">diamantedelmarcrete@gmail.com</a></p>
+            <p>Si tienen alguna pregunta de última hora antes de su partida, no duden en utilizar los datos de contacto proporcionados en la Sección 5.</p>
+            <p class="mt-4">Gracias una vez más por quedarse con nosotros. ¡Les deseamos un viaje seguro y agradable!</p>
+        </section>
+
+        <!-- Sección: Información útil sobre electrodomésticos -->
+        <section id="section_appliances" class="content-section mb-12 p-6 bg-white rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-sky-700 mb-6 border-b-2 border-sky-200 pb-2">Información útil sobre electrodomésticos</h2>
+            
+            <p class="mb-4">El documento menciona códigos QR para los manuales de los electrodomésticos. Como estos no se pueden incrustar directamente aquí, consulten el documento original o las copias físicas para estos códigos QR. A continuación se muestra la información textual proporcionada:</p>
+
+            <h3 class="text-xl font-semibold text-sky-600 mb-2">Traducciones del selector de programas de la lavadora</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
+                <div class="p-3 bg-slate-100 rounded-md">EN, FR</div>
+                <div class="p-3 bg-slate-100 rounded-md">DE</div>
+                <div class="p-3 bg-slate-100 rounded-md">NL</div>
+                <div class="p-3 bg-slate-100 rounded-md">TR, GR</div>
+            </div>
+            
+            <h3 class="text-xl font-semibold text-sky-600 mb-2">Códigos QR de los manuales de electrodomésticos (Marcador de posición)</h3>
+            <p class="mb-4 text-sm italic">Escaneen los códigos QR en su libro de bienvenida físico o en el documento digital proporcionado.</p>
+            <div class="table-responsive mb-6">
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Electrodoméstico</th>
+                            <th>QR Manual (Escanear con su teléfono)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>HORNO MICROONDAS</td>
+                            <td>[Marcador de posición QR-Code / Enlace al manual]</td>
+                        </tr>
+                         <tr>
+                            <td>HORNO</td>
+                            <td>[Marcador de posición QR-Code / Enlace al manual]</td>
+                        </tr>
+                        <tr>
+                            <td>CAFETERA NESPRESSO INISIA</td>
+                            <td>[Marcador de posición QR-Code / Enlace al manual]</td>
+                        </tr>
+                        <tr>
+                            <td>LAVADORA</td>
+                            <td>[Marcador de posición QR-Code / Enlace al manual]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="text-xl font-semibold text-sky-600 mb-2">Versiones traducidas en línea (Escanear con su teléfono)</h3>
+             <p class="mb-4 text-sm italic">Escaneen los códigos QR en su libro de bienvenida físico o en el documento digital proporcionado para las versiones traducidas.</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div class="p-3 bg-slate-100 rounded-md">Inglés [Marcador de posición QR]</div>
+                <div class="p-3 bg-slate-100 rounded-md">Griego - Ελληνικά [Marcador de posición QR]</div>
+                <div class="p-3 bg-slate-100 rounded-md">Alemán – Deutsch [Marcador de posición QR]</div>
+                <div class="p-3 bg-slate-100 rounded-md">Italiano – Italiano [Marcador de posición QR]</div>
+                <div class="p-3 bg-slate-100 rounded-md">Francés - Française [Marcador de posición QR]</div>
+                <div class="p-3 bg-slate-100 rounded-md">Español - Español [Marcador de posición QR]</div>
+                <div class="p-3 bg-slate-100 rounded-md">Holandés - Nederlands [Marcador de posición QR]</div>
+                <div class="p-3 bg-slate-100 rounded-md">Turco - Türkçe [Marcador de posición QR]</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300 text-center p-6 mt-12">
+        <p>&copy; Diamante del Mar Creta. ¡Disfruten de su estancia!</p>
+    </footer>
+
+    <script>
+        // Cerrar el menú móvil cuando se hace clic en un enlace
+        document.querySelectorAll('.nav-menu a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const detailsElement = this.closest('details');
+                if (detailsElement) {
+                    detailsElement.removeAttribute('open');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
