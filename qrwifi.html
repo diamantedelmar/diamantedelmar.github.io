@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Wi-Fi Sign</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- QR Code JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .sign-container {
+            /* Approximate dimensions for 20x15cm, adjust as needed for print */
+            /* Using a fixed aspect ratio with max-width for responsiveness */
+            width: 100%;
+            max-width: 750px; /* Adjust this based on desired print resolution */
+            padding-bottom: 75%; /* 15/20 = 0.75 or 75% for 4:3 aspect ratio */
+            position: relative;
+            background: linear-gradient(135deg, #a7e0ed, #6a7eff); /* Gradient background */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            border-radius: 1.5rem; /* Large rounded corners */
+            overflow: hidden; /* Ensure content stays within rounded corners */
+        }
+        .sign-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2.5rem; /* Responsive padding */
+            color: #ffffff; /* White text color */
+            text-align: center;
+        }
+        .qr-code-container {
+            background-color: #ffffff; /* White background for QR code */
+            padding: 1rem;
+            border-radius: 0.75rem; /* Rounded corners for QR code container */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Shadow for QR code */
+        }
+        /* Ensure QR code image scales within its container */
+        .qr-code-container img {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Remove extra space below image */
+        }
+        /* Small screen adjustments */
+        @media (max-width: 640px) {
+            .sign-content {
+                padding: 1.5rem;
+            }
+            .sign-content h1 {
+                font-size: 2.5rem; /* Smaller font on small screens */
+            }
+            .sign-content p {
+                font-size: 1rem;
+            }
+            .qr-code-container {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter">
+    <div class="sign-container">
+        <div class="sign-content">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">Welcome!</h1>
+            <p class="text-lg md:text-xl font-medium mb-2 opacity-90">Enjoy free Wi-Fi!</p>
+            <p class="text-2xl md:text-3xl font-bold mb-4 opacity-95">Network: <span id="wifi-ssid">Phaedra</span></p>
+
+            <div id="qrcode" class="qr-code-container">
+                <!-- QR code will be generated here -->
+            </div>
+
+            <p class="text-lg md:text-xl font-medium mt-4 opacity-90">Password: <span class="font-bold">Phaedra!22420@</span></p>
+            <p class="text-sm md:text-base mt-2 opacity-80">Scan the QR code to connect automatically.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // IMPORTANT: Replace "Your_WiFi_SSID_Here" with your actual Wi-Fi network name (SSID)
+            const wifiSSID = "Phaedra";
+            const wifiPassword = "Phaedra!22420@";
+            const encryptionType = "WPA2"; // Common for most networks (WPA/WPA2/WPA3)
+
+            // Construct the Wi-Fi configuration string for the QR code
+            // Format: WIFI:S:<SSID>;T:<ENCRYPTION_TYPE>;P:<PASSWORD>;;
+            const qrCodeData = `WIFI:S:${wifiSSID};T:${encryptionType};P:${wifiPassword};;`;
+
+            // Display the SSID on the sign
+            document.getElementById('wifi-ssid').textContent = wifiSSID;
+
+            // Generate the QR code
+            // Check if QRCode is defined before using it
+            if (typeof QRCode !== 'undefined') {
+                new QRCode(document.getElementById("qrcode"), {
+                    text: qrCodeData,
+                    width: 200, // Adjust size as needed, will scale with container
+                    height: 200,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H // High error correction level
+                });
+            } else {
+                console.error("QRCode.js library not loaded.");
+                // Optionally display a fallback message or alternative QR link
+                document.getElementById("qrcode").innerHTML = "<p class='text-red-500'>QR Code library failed to load. Please manually connect using the details above.</p>";
+            }
+        });
+    </script>
+</body>
+</html>
