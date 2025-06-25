@@ -1,0 +1,379 @@
+import React from 'react';
+
+// --- Helper Functions ---
+const parseICS = (icsData) => {
+    const events = [];
+    const lines = icsData.split(/\r\n|\n|\r/);
+    let currentEvent = null;
+    let inEvent = false;
+
+    // Use a regex to safely split lines, handling folded lines (starting with a space)
+    const unfoldedLines = [];
+    let currentLine = '';
+    lines.forEach(line => {
+        if (line.startsWith(' ')) {
+            currentLine += line.substring(1);
+        } else {
+            if (currentLine) {
+                unfoldedLines.push(currentLine);
+            }
+            currentLine = line;
+        }
+    });
+    if (currentLine) {
+        unfoldedLines.push(currentLine);
+    }
+
+
+    unfoldedLines.forEach(line => {
+        if (line.startsWith('BEGIN:VEVENT')) {
+            inEvent = true;
+            currentEvent = {};
+        } else if (line.startsWith('END:VEVENT')) {
+            inEvent = false;
+            if (currentEvent && currentEvent.summary && currentEvent.dtstart) {
+                events.push(currentEvent);
+            }
+            currentEvent = null;
+        } else if (inEvent && currentEvent) {
+            const [key, ...valueParts] = line.split(':');
+            const value = valueParts.join(':');
+            if (key && value) {
+                const keyLower = key.toLowerCase().split(';')[0]; // Get key name before any params
+                if (keyLower === 'summary') currentEvent.summary = value;
+                if (keyLower === 'dtstart') currentEvent.dtstart = parseDate(value, key);
+                if (keyLower === 'dtend') currentEvent.dtend = parseDate(value, key);
+                if (keyLower === 'description') currentEvent.description = value;
+                if (keyLower === 'location') currentEvent.location = value;
+                if (keyLower === 'rrule') currentEvent.rrule = value;
+            }
+        }
+    });
+    return expandRecurringEvents(events);
+};
+
+
+const parseDate = (dateString, key) => {
+    try {
+        if (key.includes('VALUE=DATE') || dateString.length === 8) {
+            // Handle 'YYYYMMDD' format
+            const year = parseInt(dateString.substring(0, 4), 10);
+            const month = parseInt(dateString.substring(4, 6), 10) - 1;
+            const day = parseInt(dateString.substring(6, 8), 10);
+            // Treat as UTC to avoid timezone issues during parsing
+            return new Date(Date.UTC(year, month, day));
+        } else {
+            // Handle 'YYYYMMDDTHHMMSSZ' format
+            const year = parseInt(dateString.substring(0, 4), 10);
+            const month = parseInt(dateString.substring(4, 6), 10) - 1;
+            const day = parseInt(dateString.substring(6, 8), 10);
+            const hour = parseInt(dateString.substring(9, 11), 10);
+            const minute = parseInt(dateString.substring(11, 13), 10);
+            const second = parseInt(dateString.substring(13, 15), 10);
+            // The 'Z' indicates UTC
+            return new Date(Date.UTC(year, month, day, hour, minute, second));
+        }
+    } catch (e) {
+        console.error("Error parsing date:", dateString, e);
+        return null;
+    }
+};
+
+
+const expandRecurringEvents = (events) => {
+    const allEvents = [];
+    const expansionEndDate = new Date();
+    expansionEndDate.setFullYear(expansionEndDate.getFullYear() + 1); // Expand for the next year
+
+    events.forEach(event => {
+        // Ensure RRule is loaded before trying to use it
+        if (event.rrule && window.RRule) {
+            try {
+                // RRule requires a DTSTART in its string options
+                const rule = window.RRule.fromString(`DTSTART:${formatRRuleDate(event.dtstart)}\n${event.rrule}`);
+                const dates = rule.between(new Date(), expansionEndDate);
+                
+                dates.forEach(date => {
+                    // Adjust for UTC offset when creating instances from local time
+                    const utcDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getSeconds());
+                    
+                    const duration = event.dtend && event.dtstart ? event.dtend.getTime() - event.dtstart.getTime() : 0;
+                    const newEndDate = duration > 0 ? new Date(utcDate.getTime() + duration) : null;
+
+                    allEvents.push({
+                        ...event,
+                        dtstart: utcDate,
+                        dtend: newEndDate,
+                        isRecurring: true,
+                    });
+                });
+            } catch (e) {
+                 console.error("Error parsing RRule:", event.rrule, e);
+                 allEvents.push(event); // Add the original event if rrule fails
+            }
+        } else {
+            allEvents.push(event);
+        }
+    });
+    return allEvents;
+};
+
+// Formats a date object into the YYYYMMDDTHHMMSSZ format required by RRule
+const formatRRuleDate = (date) => {
+    if(!date) return '';
+    return date.getUTCFullYear() +
+        ('0' + (date.getUTCMonth() + 1)).slice(-2) +
+        ('0' + date.getUTCDate()).slice(-2) + 'T' +
+        ('0' + date.getUTCHours()).slice(-2) +
+        ('0' + date.getUTCMinutes()).slice(-2) +
+        ('0' + date.getUTCSeconds()).slice(-2) + 'Z';
+}
+
+const EventCard = ({ event }) => {
+    const isAllDay = !event.dtstart || event.dtstart.getUTCHours() === 0 && event.dtstart.getUTCMinutes() === 0;
+
+    return (
+        <div className="bg-white rounded-lg shadow-md p-4 mb-4 border-l-4 border-indigo-500">
+            <h3 className="font-bold text-lg text-indigo-800">{event.summary || 'No Title'}</h3>
+            <p className="text-sm text-gray-600">
+                {isAllDay 
+                    ? `All Day on ${event.dtstart.toLocaleDateString()}`
+                    : `${event.dtstart.toLocaleString()} - ${event.dtend ? event.dtend.toLocaleString() : ''}`
+                }
+            </p>
+            {event.location && <p className="text-sm text-gray-500 mt-1">📍 {event.location.replace(/\\/g, '')}</p>}
+            {event.description && <p className="text-sm text-gray-700 mt-2">{event.description.replace(/\\n/g, '\n').replace(/\\/g, '')}</p>}
+        </div>
+    );
+}
+
+const DayView = ({ events, date }) => {
+    const dayStart = new Date(date);
+    dayStart.setHours(0, 0, 0, 0);
+    const dayEnd = new Date(date);
+    dayEnd.setHours(23, 59, 59, 999);
+
+    const dayEvents = events.filter(event => {
+        if (!event.dtstart) return false;
+        const eventStart = new Date(event.dtstart);
+        return eventStart >= dayStart && eventStart <= dayEnd;
+    }).sort((a, b) => new Date(a.dtstart) - new Date(b.dtstart));
+
+    return (
+        <div>
+            {dayEvents.length > 0 ? (
+                dayEvents.map((event, index) => <EventCard key={`${event.summary}-${index}`} event={event} />)
+            ) : (
+                <p className="text-center text-gray-500 mt-8">No events for this day.</p>
+            )}
+        </div>
+    );
+};
+
+const MonthView = ({ events, date, onDayClick }) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const daysInMonth = lastDay.getDate();
+    const startDayOfWeek = firstDay.getDay(); 
+
+    const calendarDays = [];
+
+    // Add blank days for the start of the month
+    for (let i = 0; i < startDayOfWeek; i++) {
+        calendarDays.push(<div key={`blank-start-${i}`} className="border rounded-md p-2 h-28 sm:h-24"></div>);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+        const currentDate = new Date(year, month, day);
+        const dayStart = new Date(year, month, day, 0, 0, 0);
+        const dayEnd = new Date(year, month, day, 23, 59, 59);
+
+        const dayEvents = events.filter(event => {
+             if (!event.dtstart) return false;
+             const eventStart = new Date(event.dtstart);
+             return eventStart >= dayStart && eventStart <= dayEnd;
+        });
+
+        calendarDays.push(
+            <div 
+                key={day} 
+                className={`border rounded-md p-2 h-28 sm:h-24 flex flex-col cursor-pointer transition hover:bg-indigo-50 ${dayEvents.length > 0 ? 'bg-indigo-100' : 'bg-white'}`}
+                onClick={() => onDayClick(currentDate)}
+            >
+                <span className="font-bold">{day}</span>
+                <div className="flex-grow overflow-y-auto text-xs mt-1">
+                    {dayEvents.slice(0, 2).map((event, i) => (
+                        <div key={i} className="bg-indigo-400 text-white rounded px-1 mb-1 truncate">{event.summary}</div>
+                    ))}
+                    {dayEvents.length > 2 && <div className="text-indigo-600 font-semibold">...more</div>}
+                </div>
+            </div>
+        );
+    }
+    
+    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    return (
+        <>
+           <div className="grid grid-cols-7 gap-1 text-center font-semibold text-gray-600 mb-2">
+                {daysOfWeek.map(day => <div key={day}>{day.substring(0,3)}</div>)}
+           </div>
+           <div className="grid grid-cols-7 gap-1">
+               {calendarDays}
+           </div>
+        </>
+    );
+};
+
+export default function App() {
+    const [icsUrl, setIcsUrl] = React.useState('https://calendar.google.com/calendar/ical/en.usa%23holiday%40group.v.calendar.google.com/public/basic.ics');
+    const [events, setEvents] = React.useState([]);
+    const [error, setError] = React.useState('');
+    const [loading, setLoading] = React.useState(true); // Start loading initially
+    const [view, setView] = React.useState('month'); // 'day' or 'month'
+    const [currentDate, setCurrentDate] = React.useState(new Date());
+    const [isRruleLoaded, setIsRruleLoaded] = React.useState(false);
+
+    const fetchCalendar = React.useCallback(async () => {
+        if (!icsUrl) {
+            setError('Please enter an ICS URL.');
+            return;
+        }
+        setLoading(true);
+        setError('');
+        setEvents([]);
+
+        // Using a CORS proxy to fetch the calendar data
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+        try {
+            const response = await fetch(proxyUrl + icsUrl);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.text();
+            const parsedEvents = parseICS(data);
+            setEvents(parsedEvents);
+        } catch (e) {
+            console.error(e);
+            setError('Failed to fetch or parse ICS file. Check the URL and CORS permissions.');
+        } finally {
+            setLoading(false);
+        }
+    }, [icsUrl]);
+    
+    // Effect to load the RRule script
+    React.useEffect(() => {
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/rrule@2.6.4/dist/es5/rrule.min.js';
+        script.async = true;
+        script.onload = () => {
+            setIsRruleLoaded(true);
+        };
+        script.onerror = () => {
+             setError("Failed to load dependency for recurring events.");
+             setLoading(false);
+        }
+        document.body.appendChild(script);
+        
+        return () => {
+            // Clean up script tag if component unmounts
+            try {
+                document.body.removeChild(script);
+            } catch (e) {
+                // Ignore errors if script is already removed
+            }
+        }
+    }, []);
+
+    // Effect to fetch calendar data once RRule is loaded
+    React.useEffect(() => {
+        if (isRruleLoaded) {
+            fetchCalendar();
+        }
+    }, [isRruleLoaded, fetchCalendar]);
+
+    const handleUrlChange = (e) => {
+        setIcsUrl(e.target.value);
+    };
+    
+    const handleDateChange = (increment) => {
+        setCurrentDate(prevDate => {
+            const newDate = new Date(prevDate);
+            if (view === 'day') {
+                newDate.setDate(newDate.getDate() + increment);
+            } else {
+                newDate.setMonth(newDate.getMonth() + increment);
+            }
+            return newDate;
+        });
+    };
+    
+    const handleDayClickFromMonth = (date) => {
+        setCurrentDate(date);
+        setView('day');
+    }
+
+    return (
+        <div className="bg-gray-100 min-h-screen font-sans">
+            <header className="bg-indigo-600 text-white p-4 shadow-md">
+                <h1 className="text-2xl font-bold text-center">ICS Calendar Viewer</h1>
+            </header>
+
+            <main className="p-2 sm:p-4 max-w-4xl mx-auto">
+                <div className="bg-white p-4 rounded-lg shadow-md mb-6">
+                    <div className="flex flex-col sm:flex-row gap-2">
+                         <input
+                            type="text"
+                            value={icsUrl}
+                            onChange={handleUrlChange}
+                            placeholder="Enter public Google Calendar ICS URL"
+                            className="flex-grow p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                        />
+                        <button
+                            onClick={fetchCalendar}
+                            disabled={loading || !isRruleLoaded}
+                            className="bg-indigo-500 text-white px-6 py-2 rounded-md hover:bg-indigo-700 disabled:bg-indigo-300 transition-colors duration-300"
+                        >
+                            {loading ? 'Loading...' : 'Load Calendar'}
+                        </button>
+                    </div>
+                     {error && <p className="text-red-500 mt-2 text-sm">{error}</p>}
+                </div>
+
+                <div className="bg-white p-2 sm:p-4 rounded-lg shadow-md">
+                     <div className="flex justify-between items-center mb-4">
+                        <button onClick={() => handleDateChange(-1)} className="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300">‹</button>
+                        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 text-center">
+                           {view === 'day' 
+                               ? currentDate.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+                               : currentDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long' })
+                           }
+                        </h2>
+                        <button onClick={() => handleDateChange(1)} className="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300">›</button>
+                    </div>
+                     <div className="flex justify-center border-b mb-4">
+                        <button 
+                            onClick={() => setView('month')}
+                            className={`px-4 py-2 rounded-t-md ${view === 'month' ? 'bg-indigo-500 text-white' : 'bg-gray-100'}`}
+                        >Month</button>
+                         <button 
+                            onClick={() => setView('day')}
+                            className={`px-4 py-2 rounded-t-md ${view === 'day' ? 'bg-indigo-500 text-white' : 'bg-gray-100'}`}
+                        >Day</button>
+                    </div>
+
+                    {(loading || !isRruleLoaded) && <div className="text-center p-8">Loading events...</div>}
+                    
+                    {!loading && isRruleLoaded && view === 'day' && <DayView events={events} date={currentDate} />}
+                    {!loading && isRruleLoaded && view === 'month' && <MonthView events={events} date={currentDate} onDayClick={handleDayClickFromMonth}/>}
+
+                </div>
+            </main>
+            <footer className="text-center text-gray-500 text-sm p-4">
+                 <p>Provide a public .ics link. Private calendars may not work.</p>
+            </footer>
+        </div>
+    );
+}
