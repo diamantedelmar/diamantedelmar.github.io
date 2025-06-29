@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ΙΠΠΟΚΡΑΤΕΙΑ 2025 Events</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f5f1; /* Light cream */
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .event-card {
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        .btn-primary {
+            background-color: #4a90e2; /* Blue */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            background-color: #357ABD;
+        }
+        .btn-share {
+            background-color: #6a7fdb; /* Purple-blue */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-share:hover {
+            background-color: #536AC6;
+        }
+        .header-bg {
+            background-color: #2c3e50; /* Dark blue/grey */
+            color: white;
+        }
+        .event-date {
+            color: #d35400; /* Orange-brown */
+            font-weight: 700;
+        }
+        .event-location {
+            color: #27ae60; /* Green */
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="header-bg py-8 shadow-lg rounded-b-3xl">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2">ΙΠΠΟΚΡΑΤΕΙΑ 2025</h1>
+            <p class="text-xl md:text-2xl font-light">Πρόγραμμα Εκδηλώσεων</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <div id="events-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Events will be loaded here by JavaScript -->
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center py-6 mt-12 rounded-t-3xl">
+        <p>&copy; 2025 Δήμος Κω. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const events = [
+            // June
+            {
+                date: "ΣΑΒΒΑΤΟ 21/06/25 & ΚΥΡΙΑΚΗ 22/06/25",
+                time: "ΣΑΒΒΑΤΟ 19:00 (ΕΓΚΑΙΝΙΑ), ΚΥΡΙΑΚΗ 18:00-20:00 (ΛΕΙΤΟΥΡΓΙΑΣ)",
+                title: "ΕΚΘΕΣΗ ΖΩΓΡΑΦΙΚΗΣ ΚΑΙ ΑΓΙΟΓΡΑΦΙΑΣ",
+                description: "Έκθεση έργων των μαθητών του Εργαστηρίου Ζωγραφικής & Αγιογραφίας FRIDART της Μαρίας Βαμβακούση.",
+                location: "ΙΣΤΟΡΙΚΟ & ΛΑΟΓΡΑΦΙΚΟ ΜΟΥΣΕΙΟ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum
+                gCalStart: "20250621T190000",
+                gCalEnd: "20250622T200000"
+            },
+            {
+                date: "ΤΡΙΤΗ 24/06/25",
+                time: "19:00",
+                title: "ΣΥΝΑΥΛΙΑ ΜΕ ΤΟΥΣ ΜΑΘΗΤΕΣ ΤΗΣ ΣΧΟΛΗΣ ΜΟΥΣΙΚΗΣ ΤΗΣ ΜΑΡΙΑΣ ΟΡΦΑΝΟΥΔΑΚΗ",
+                description: "Μαθητική συναυλία κλασικής και σύγχρονης μουσικής.",
+                location: "ΑΥΛΕΙΟΣ ΧΩΡΟΣ ΛΑΟΓΡΑΦΙΚΟΥ & ΙΣΤΟΡΙΚΟΥ ΜΟΥΣΕΙΟΥ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum Courtyard
+                gCalStart: "20250624T190000",
+                gCalEnd: "20250624T210000"
+            },
+            {
+                date: "ΤΕΤΑΡΤΗ 25/06/25",
+                time: "19:30",
+                title: "ΕΘΙΜΟ ΤΟΥ ΚΛΗΔΟΝΑ",
+                description: "Εκδήλωση με την αναπαράσταση του Φανού και του Κλήδονα, πλαισιωμένη με χορούς απ' τα παιδικά και εφηβικά τμήματα του Μορφωτικού Πολιτιστικού & Εξωραϊστικού Συλλόγου Πυλίου «Ο ΑΠΕΛΛΗΣ».",
+                location: "ΘΕΑΤΡΑΚΙ ΜΑΡΜΑΡΙΟΥ",
+                googleMaps: "https://maps.app.goo.gl/s9t9U12cQ1Xz2JtM6", // Placeholder for Marmari Open Air Theatre
+                gCalStart: "20250625T193000",
+                gCalEnd: "20250625T213000"
+            },
+            {
+                date: "ΤΕΤΑΡΤΗ 25/06/25",
+                time: "19:30",
+                title: "ΠΑΡΑΣΤΑΣΗ ΡΥΘΜΙΚΗΣ ΓΥΜΝΑΣΤΙΚΗΣ ΚΑΙ ΜΟΝΤΕΡΝΟΥ ΧΟΡΟΥ",
+                description: "Σε συνεργασία με τον Πολιτιστικό, Αθλητικό Σύλλογο «ΑΝΑΜΟΡΦΩΣΗ-ΑΝΑΠΛΑΣΗ». Συμμετέχουν τα παιδικά και εφηβικά τμήματα του Συλλόγου.",
+                location: "ΘΕΑΤΡΑΚΙ ΚΑΡΔΑΜΑΙΝΑΣ",
+                googleMaps: "https://maps.app.goo.gl/e7xK9L2xP5yV3K9T7", // Placeholder for Kardamena Open Air Theatre
+                gCalStart: "20250625T193000",
+                gCalEnd: "20250625T213000"
+            },
+            {
+                date: "ΠΕΜΠΤΗ 26/06/25",
+                time: "20:00",
+                title: "ΕΘΙΜΟ ΤΟΥ ΚΛΗΔΟΝΑ",
+                description: "Εκδήλωση με την αναπαράσταση του Φανού και του Κλήδονα, πλαισιωμένη με χορούς απ' τα παιδικά και εφηβικά τμήματα του Λυκείου Ελληνίδων, παράρτημα Κω.",
+                location: "ΠΛΑΤΕΙΑ ΕΛΕΥΘΕΡΙΑΣ, ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/4X9z8Q1yG7w5eE6Q6", // Placeholder for Eleftherias Square, Kos
+                gCalStart: "20250626T200000",
+                gCalEnd: "20250626T220000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 28/06/25",
+                time: "20:30",
+                title: "ΧΟΡΕΥΤΙΚΗ ΕΚΔΗΛΩΣΗ «ΕΛΙΚΩΝΙΑ»",
+                description: "Μια βραδιά αφιερωμένη στους ελληνικούς χορούς με ιδιαίτερη έμφαση στο ζεϊμπέκικο, σε συνεργασία με τη ΣΧΟΛΗ ΧΟΡΟΥ 'ALEGRIA DANCE LAB'.",
+                location: "ΠΛΑΤΕΙΑ ΕΛΕΥΘΕΡΙΑΣ, ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/4X9z8Q1yG7w5eE6Q6", // Placeholder for Eleftherias Square, Kos
+                gCalStart: "20250628T203000",
+                gCalEnd: "20250628T223000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 28/06/25 & ΚΥΡΙΑΚΗ 29/06/25",
+                time: "ΣΑΒΒΑΤΟ 11:00 (ΠΑΡΕΛΑΣΗ ΚΩ), 19:00 (ΠΑΡΕΛΑΣΗ ΚΑΡΔΑΜΑΙΝΑΣ), ΚΥΡΙΑΚΗ 20:30 (ΣΥΝΑΥΛΙΑ)",
+                title: "ΣΥΜΠΡΑΞΗ ΟΡΧΗΣΤΡΑΣ ΝΕΩΝ ΣΙΝΔΟΥ ΤΟΥ ΔΗΜΟΥ ΔΕΛΤΑ ΚΑΙ ΦΙΛΑΡΜΟΝΙΚΗΣ ΔΗΜΟΥ ΚΩ",
+                description: "Παρέλαση σε κεντρικές οδούς πόλεως Κω και στο Λιμάνι και τους δρόμους της Καρδάμαινας. Συναυλία στην Πλατεία Ελευθερίας.",
+                location: "ΚΕΝΤΡΙΚΕΣ ΟΔΟΙ ΠΟΛΕΩΣ ΚΩ / ΛΙΜΑΝΙ ΚΑΙ ΔΡΟΜΟΙ ΚΑΡΔΑΜΑΙΝΑΣ / ΠΛΑΤΕΙΑ ΕΛΕΥΘΕΡΙΑΣ, ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/4X9z8Q1yG7w5eE6Q6", // Placeholder for Eleftherias Square, Kos (main event location)
+                gCalStart: "20250628T110000",
+                gCalEnd: "20250629T223000"
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 29/06/25",
+                time: "19:30",
+                title: "ΠΑΙΔΙΚΕΣ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ ΜΕ ΘΕΜΑ ΤΗ ΘΑΛΑΣΣΑ",
+                description: "Σε συνεργασία με τον ΠΟΛΙΤΙΣΤΙΚΟ ΣΥΛΛΟΓΟ ΚΑΡΔΑΜΑΙΝΑΣ «ΑΡΓΩ». Η εκδήλωση πραγματοποιείται στο πλαίσιο της Ναυτικής Εβδομάδας.",
+                location: "ΘΕΑΤΡΑΚΙ ΚΑΡΔΑΜΑΙΝΑΣ",
+                googleMaps: "https://maps.app.goo.gl/e7xK9L2xP5yV3K9T7", // Placeholder for Kardamena Open Air Theatre
+                gCalStart: "20250629T193000",
+                gCalEnd: "20250629T213000"
+            },
+            {
+                date: "ΔΕΥΤΕΡΑ 30/06/25",
+                time: "20:00",
+                title: "ΕΘΙΜΟ ΤΟΥ ΚΛΗΔΟΝΑ",
+                description: "Εκδήλωση με την αναπαράσταση του Φανού και του Κλήδονα, πλαισιωμένη με χορούς απ' τμήματα του Π.Σ. ΚΕΦΑΛΟΥ «ΑΓΙΟΣ ΝΙΚΟΛΑΟΣ».",
+                location: "ΛΙΜΑΝΙ ΚΕΦΑΛΟΥ",
+                googleMaps: "https://maps.app.goo.gl/s9t9U12cQ1Xz2JtM6", // Placeholder for Kefalos Port
+                gCalStart: "20250630T200000",
+                gCalEnd: "20250630T220000"
+            },
+            // July
+            {
+                date: "ΠΕΜΠΤΗ 03/07/25",
+                time: "20:00",
+                title: "ΠΑΡΟΥΣΙΑΣΗ ΤΗΣ ΝΟΥΒΕΛΑΣ ΤΗΣ ΜΑΡΙΑΣ ΜΑΜΑΛΙΓΚΑ ΜΕ ΤΙΤΛΟ «ΜΕΡΚΑΝΤΟ»",
+                description: "Σε συνεργασία με τον Π.Ο. ΚΩΩΝ «Ο ΦΙΛΗΤΑΣ», το ΛΥΚΕΙΟ ΕΛΛΗΝΙΔΩΝ-παράρτημα ΚΩ, την ΔΡ.Ε.Π.ΠΟ «ΦΑΙΝΑΡΕΤΗ» και το ΒΙΒΛΙΟΠΩΛΕΙΟ «ΕΣΤΙΑ». Το βιβλίο θα παρουσιάσουν οι Μηνάς Γ. Χατζηαντωνίου και Θεοδόσης Διακογιάννης.",
+                location: "ΑΥΛΕΙΟΣ ΧΩΡΟΣ ΛΑΟΓΡΑΦΙΚΟΥ & ΙΣΤΟΡΙΚΟΥ ΜΟΥΣΕΙΟΥ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum Courtyard
+                gCalStart: "20250703T200000",
+                gCalEnd: "20250703T220000"
+            },
+            {
+                date: "ΠΕΜΠΤΗ 03/07/25",
+                time: "19:00",
+                title: "ΘΕΑΤΡΙΚΗ ΠΑΡΑΣΤΑΣΗ «ΟΡΝΙΘΕΣ» του ΑΡΙΣΤΟΦΑΝΗ",
+                description: "Σε συνεργασία με τον Π.Σ. ΑΒΕΡΩΦ ΔΗΜΟΥ ΚΩ. Στην παράσταση συμμετέχουν τα παιδιά, οι γονείς και το παιδαγωγικό προσωπικό του Σταθμού.",
+                location: "ΡΩΜΑΪΚΟ ΩΔΕΙΟ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/wJ5P7L4xQ9zR1V8X9", // Placeholder for Roman Odeon of Kos
+                gCalStart: "20250703T190000",
+                gCalEnd: "20250703T210000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 05/07/25",
+                time: "20:00",
+                title: "ΓΙΟΡΤΗ ΒΟΣΚΟΥ",
+                description: "Παραδοσιακή γιορτή με θέμα την ζωή της υπαίθρου, με τοπικά εδέσματα, τοπικούς χορούς και ζωντανή μουσική, σε συνεργασία με τον ΠΟΛΙΤΙΣΤΙΚΟ ΣΥΛΛΟΓΟ ΑΝΤΙΜΑΧΕΙΑΣ «Η ΠΡΟΟΔΟΣ».",
+                location: "ΠΑΡΑΔΟΣΙΑΚΟ ΣΠΙΤΙ, ΜΥΛΟΣ ΑΝΤΙΜΑΧΕΙΑΣ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Antimachia Traditional House/Mill
+                gCalStart: "20250705T200000",
+                gCalEnd: "20250705T230000"
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 06/07/25",
+                time: "20:30",
+                title: "ΜΟΥΣΙΚΟΧΟΡΕΥΤΙΚΗ ΠΑΡΑΣΤΑΣΗ «ΧΟΡΟΙ ΚΑΙ ΤΡΑΓΟΥΔΙΑ ΤΗΣ ΣΤΕΡΙΑΣ ΚΑΙ ΤΟΥ ΠΕΛΑΓΟΥΣ»",
+                description: "Κλείσιμο Λυκειακής Χρονιάς, σε συνεργασία με το ΛΥΚΕΙΟ ΕΛΛΗΝΙΔΩΝ ΚΑΡΔΑΜΑΙΝΑΣ.",
+                location: "ΘΕΑΤΡΑΚΙ ΚΑΡΔΑΜΑΙΝΑΣ",
+                googleMaps: "https://maps.app.goo.gl/e7xK9L2xP5yV3K9T7", // Placeholder for Kardamena Open Air Theatre
+                gCalStart: "20250706T203000",
+                gCalEnd: "20250706T223000"
+            },
+            {
+                date: "ΔΕΥΤΕΡΑ 07/07/25",
+                time: "20:30",
+                title: "Το ΣΥΝΑΠΑΝΤΗΜΑ ΛΥΡΑΡΗΔΩΝ ΝΟΤΙΩΝ ΔΩΔΕΚΑΝΗΣΩΝ ΣΤΗΝ ΚΕΦΑΛΟ ΤΗΣ ΚΩ",
+                description: "Μουσικοχορευτικό συναπάντημα για την ανάδειξη του πλούτου της Δωδεκανησιακής Λύρας, με θεματική τα Νότια Δωδεκάνησα (Κω, Χάλκη, Σύμη, Ρόδο, Κάρπαθο, Κάσσο). Συμμετέχουν λυράρηδες και λαουτιέρηδες από Ρόδο και από Κάρπαθο.",
+                location: "ΛΙΜΑΝΙ ΚΕΦΑΛΟΥ",
+                googleMaps: "https://maps.app.goo.gl/s9t9U12cQ1Xz2JtM6", // Placeholder for Kefalos Port
+                gCalStart: "20250707T203000",
+                gCalEnd: "20250707T230000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 12/07/25",
+                time: "20:00",
+                title: "ΜΟΥΣΙΚΗ ΒΡΑΔΙΑ",
+                description: "Παραδοσιακή μουσική και χοροί και τοπική γαστρονομία, σε συνεργασία με τον ΜΟΡΦΩΤΙΚΟ ΠΟΛΙΤΙΣΤΙΚΟ ΣΥΛΛΟΓΟ ΑΣΦΕΝΔΙΟΥ «Ο ΘΕΟΚΡΙΤΟΣ».",
+                location: "ΠΛΑΤΕΙΑ ΤΙΓΚΑΚΙΟΥ",
+                googleMaps: "https://maps.app.goo.gl/h7K8L2xQ3zR4V5Y6A", // Placeholder for Tigaki Square
+                gCalStart: "20250712T200000",
+                gCalEnd: "20250712T230000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 12/07/25",
+                time: "20:00",
+                title: "ΣΥΝΑΥΛΙΑ ΜΕ ΤΗ SINFONIEΕΤΤΑ ΑΘΗΝΩΝ",
+                description: "Του Καλλιτεχνικού Διευθυντή της ΕΡΤ, ΓΙΩΡΓΟΥ ΑΡΑΒΙΔΗ, σε συνεργασία με το ΕΡΑΤΕΙΟ ΩΔΕΙΟ ΑΘΗΝΩΝ και την καθηγήτρια πιάνου ΜΑΡΙΑ ΟΡΦΑΝΟΥΔΑΚΗ. Μια μοναδική συναυλία κλασικού και ελληνικού ρεπερτορίου, συνοδεία πιάνου & παιδικής χορωδίας μαθητών της Μαρίας Ορφανουδάκη, σε συνεργασία με τον Βαγγέλη Βατσινέα.",
+                location: "ΔΙΕΘΝΕΣ ΙΠΠΟΚΡΑΤΕΙΟ ΙΔΡΥΜΑ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/k9R0S1T2U3V4W5X6Y", // Placeholder for International Hippocratic Foundation of Kos
+                gCalStart: "20250712T200000",
+                gCalEnd: "20250712T220000"
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 13/07/25",
+                time: "20:00",
+                title: "ΜΟΥΣΙΚΟΧΟΡΕΥΤΙΚΗ ΠΑΡΑΣΤΑΣΗ «Απόψε την κιθάρα μου...»",
+                description: "Σε συνεργασία με το ΛΥΚΕΙΟ ΕΛΛΗΝΙΔΩΝ-παράρτημα ΚΩ. Χορεύουν τα τμήματα του Λυκείου Ελληνίδων Κω με τη συνοδεία μουσικού παραδοσιακού σχήματος. Συμμετέχει ολιγομελής Χορωδία Κανταδόρων.",
+                location: "ΑΥΛΕΙΟΣ ΧΩΡΟΣ 7ου ΔΗΜΟΤΙΚΟΥ ΣΧΟΛΕΙΟΥ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/L8M9N0O1P2Q3R4S5T", // Placeholder for 7th Primary School of Kos Courtyard
+                gCalStart: "20250713T200000",
+                gCalEnd: "20250713T220000"
+            },
+            {
+                date: "ΤΡΙΤΗ 15/07/25",
+                time: "20:30",
+                title: "ΤΡΑΓΟΥΔΙΑ ΔΩΜΑΤΙΟΥ. ΠΑΡΑΜΥΘΙΑ & ΤΡΑΓΟΥΔΙΑ",
+                description: "Σε συνεργασία με τη ΛΕΣΧΗ LIONS ΚΩ «Ο ΙΠΠΟΚΡΑΤΗΣ». Επί σκηνής 4 μουσικοί. Λένε κωμικές ιστορίες και παραμύθια. Τραγουδούν για την αγάπη, τη γενναιοδωρία, τον ελεύθερο χρόνο, τη συντροφικότητα, τον κύκλο της ζωής, τη χαρά, το παιχνίδι και φυσικά το χορό.",
+                location: "ΡΩΜΑΪΚΟ ΩΔΕΙΟ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/wJ5P7L4xQ9zR1V8X9", // Placeholder for Roman Odeon of Kos
+                gCalStart: "20250715T203000",
+                gCalEnd: "20250715T223000"
+            },
+            {
+                date: "ΤΕΤΑΡΤΗ 16/07/25",
+                time: "19:30",
+                title: "ΠΑΙΔΙΚΗ ΘΕΑΤΡΙΚΗ ΠΑΡΑΣΤΑΣΗ «Ο ΓΑΡΓΑΛΗΣΤΗΣ»",
+                description: "Του ΔΗΜΗΤΡΗ ΜΠΑΣΛΑΜ, σε συνεργασία με τη ΛΕΣΧΗ LIONS ΚΩ «Ο ΙΠΠΟΚΡΑΤΗΣ».",
+                location: "ΠΛΑΤΕΙΑ ΚΩΝ/ΟΥ ΚΙΑΠΟΚΑ, ΘΕΑΤΡΑΚΙ ΖΗΠΑΡΙΟΥ",
+                googleMaps: "https://maps.app.goo.gl/tU6S7E8P9Q0R1S2T3", // Placeholder for Zipari Open Air Theatre
+                gCalStart: "20250716T193000",
+                gCalEnd: "20250716T213000"
+            },
+            {
+                date: "ΠΑΡΑΣΚΕΥΗ 18/07/25",
+                time: "22:00",
+                title: "ΣΥΝΑΥΛΙΑ ΜΕ ΤΟ ΣΥΓΚΡΟΤΗΜΑ ΠΥΞ ΛΑΞ",
+                description: "Είσοδος με εισιτήριο.",
+                location: "ΓΗΠΕΔΟ ΠΟΔΟΣΦΑΙΡΟΥ ΠΥΛΙΟΥ",
+                googleMaps: "https://maps.app.goo.gl/p7Q8R9S0T1U2V3W4X", // Placeholder for Pyli Football Field
+                gCalStart: "20250718T220000",
+                gCalEnd: "20250718T235900" // Assuming it might run late
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 20/07/25",
+                time: "20:30",
+                title: "ΣΥΝΑΥΛΙΑ ΜΕ ΤΗΝ ΟΡΧΗΣΤΡΑ «ΤΑ ΜΑΝΟΥΣΑΚΙΑ» ΚΑΙ ΤΗΝ ΚΑΙΤΗ ΚΟΥΛΙΑ",
+                description: "Νησιώτικο γλέντι με παραδοσιακούς χορούς και τραγούδια στο κέντρο της πόλης.",
+                location: "ΠΛΑΤΕΙΑ ΕΛΕΥΘΕΡΙΑΣ, ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/4X9z8Q1yG7w5eE6Q6", // Placeholder for Eleftherias Square, Kos
+                gCalStart: "20250720T203000",
+                gCalEnd: "20250720T223000"
+            },
+            {
+                date: "ΠΑΡΑΣΚΕΥΗ 25/07/25",
+                time: "21:00",
+                title: "ΣΥΝΑΥΛΙΑ ΜΕ ΤΗ ΜΑΡΙΝΑ ΣΑΤΤΙ",
+                description: "Είσοδος με εισιτήριο.",
+                location: "ΜΑΡΙΝΑ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/a7B8C9D0E1F2G3H4I", // Placeholder for Kos Marina
+                gCalStart: "20250725T210000",
+                gCalEnd: "20250725T230000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 26/07/25",
+                time: "20:30",
+                title: "«ΤΑΞΙΔΕΥΟΝΤΑΣ ΣΤΗΝ ΕΛΛΑΔΑ» - ΜΟΥΣΙΚΟΧΟΡΕΥΤΙΚΗ ΠΑΡΑΣΤΑΣΗ",
+                description: "Παράσταση με ελληνικούς παραδοσιακούς χορούς, σε συνεργασία με τη ΣΧΟΛΗ ΧΟΡΟΥ ΕΛΕΝΗΣ ΔΡΟΣΟΥ.",
+                location: "ΠΛΑΤΕΙΑ ΕΛΕΥΘΕΡΙΑΣ, ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/4X9z8Q1yG7w5eE6Q6", // Placeholder for Eleftherias Square, Kos
+                gCalStart: "20250726T203000",
+                gCalEnd: "20250726T223000"
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 27/07/25",
+                time: "20:00",
+                title: "ΜΟΥΣΙΚΗ ΕΚΔΗΛΩΣΗ «SELAS»",
+                description: "Απόδοση εκκλησιαστικών ύμνων από την υμνωδό Νεκταρία Καραντζή συνοδεία 2 μουσικών οργάνων, σε συνεργασία με τις ΓΥΝΑΙΚΕΣ ΧΩΡΙΣ ΣΥΝΟΡΑ ΚΩ.",
+                location: "ΡΩΜΑΪΚΟ ΩΔΕΙΟ",
+                googleMaps: "https://maps.app.goo.gl/wJ5P7L4xQ9zR1V8X9", // Placeholder for Roman Odeon of Kos
+                gCalStart: "20250727T200000",
+                gCalEnd: "20250727T220000"
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 27/07/25",
+                time: "21:30",
+                title: "«ΜΙΑ ΑΓΑΠΗ ΓΙΑ ΤΟ ΚΑΛΟΚΑΙΡΙ...»",
+                description: "Μουσική εκδήλωση-αφιέρωμα στο Νέο Κύμα. Συμμετέχει και η Χορωδία Ενηλίκων του Συλλόγου «Αρίων», σε συνεργασία με το ΣΥΛΛΟΓΟ ΦΙΛΩΝ ΜΟΥΣΙΚΗΣ «ΑΡΙΩΝ».",
+                location: "ΑΓΙΟΙ ΑΝΑΡΓΥΡΟΙ, ΚΑΡΔΑΜΑΙΝΑ",
+                googleMaps: "https://maps.app.goo.gl/p7Q8R9S0T1U2V3W4X", // Placeholder for Agioi Anargyroi, Kardamena
+                gCalStart: "20250727T213000",
+                gCalEnd: "20250727T233000"
+            },
+            {
+                date: "ΔΕΥΤΕΡΑ 28/07/25",
+                time: "17:00-20:00",
+                title: "«ΟΤΑΝ ΤΑ ΠΑΙΔΙΑ ΜΙΛΟΥΝ ΜΕ ΧΡΩΜΑΤΑ»",
+                description: "Έκθεση με έργα παιδικής ζωγραφικής από τα χειμερινά εργαστήρια του Συλλόγου υπό την καθοδήγηση της Lise-Lotte Iversen, σε συνεργασία με τον ΠΟΛΙΤΙΣΤΙΚΟ ΣΥΛΛΟΓΟ ΚΑΡΔΑΜΑΙΝΑΣ «ΑΡΓΩ».",
+                location: "ΝΑΥΤΙΚΟ & ΛΑΟΓΡΑΦΙΚΟ ΜΟΥΣΕΙΟ ΚΑΡΔΑΜΑΙΝΑΣ",
+                googleMaps: "https://maps.app.goo.gl/P2Q3R4S5T6U7V8W9X", // Placeholder for Maritime & Folklore Museum of Kardamena
+                gCalStart: "20250728T170000",
+                gCalEnd: "20250728T200000"
+            },
+            {
+                date: "ΔΕΥΤΕΡΑ 28/07/25",
+                time: "22:00",
+                title: "ΣΥΝΑΥΛΙΑ ΜΕ ΤΗΝ ΕΛΕΝΑ ΠΑΠΑΡΙΖΟΥ",
+                description: "Είσοδος με εισιτήριο.",
+                location: "ΓΗΠΕΔΟ ΠΟΔΟΣΦΑΙΡΟΥ ΠΥΛΙΟΥ",
+                googleMaps: "https://maps.app.goo.gl/p7Q8R9S0T1U2V3W4X", // Placeholder for Pyli Football Field
+                gCalStart: "20250728T220000",
+                gCalEnd: "20250728T235900"
+            },
+            {
+                date: "ΠΕΜΠΤΗ 31/07/25",
+                time: "20:00",
+                title: "ΠΑΡΟΥΣΙΑΣΗ ΤΟΥ ΒΙΒΛΙΟΥ του π. Αντιπρύτανη ΠΑΝΑΓΙΩΤΗ ΝΟΥΤΣΟΥ ΜΕ ΤΙΤΛΟ «ΨΑΡΕΥΟΝΤΑΣ ΕΡΧΕΤΑΙ Η ΘΑΛΑΣΣΑ; Η ΔΙΑΛΕΚΤΙΚΗ ΜΕΘΟΔΟΣ ΤΗΣ ΕΡΩΤΑΠΟΚΡΙΣΗΣ»",
+                description: "Σε συνεργασία με τον Π.Ο. ΚΩΩΝ «Ο ΦΙΛΗΤΑΣ». Το βιβλίο θα παρουσιάσουν οι: Σκεύος Παπαϊωάννου και Κώστας Ιωάννου.",
+                location: "ΑΥΛΕΙΟΣ ΧΩΡΟΣ ΙΣΤΟΡΙΚΟΥ & ΛΑΟΓΡΑΦΙΚΟΥ ΜΟΥΣΕΙΟΥ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum Courtyard
+                gCalStart: "20250731T200000",
+                gCalEnd: "20250731T220000"
+            },
+            // August
+            {
+                date: "ΣΑΒΒΑΤΟ 02/08/25",
+                time: "20:00",
+                title: "ΓΙΟΡΤΗ ΚΑΛΟΚΑΙΡΙΟΥ",
+                description: "Γιορτάζουμε το καλοκαίρι με ζωντανή μουσική, τοπικούς χορούς, κρασί και τοπικά εδέσματα, σε συνεργασία με τον ΑΘΛΗΤΙΚΟ ΣΥΛΛΟΓΟ «ΑΝΤΙΜΑΧΟΣ».",
+                location: "ΠΡΩΗΝ ΔΗΜΟΤΙΚΟ ΣΧΟΛΕΙΟ ΜΑΣΤΙΧΑΡΙΟΥ",
+                googleMaps: "https://maps.app.goo.gl/V3W4X5Y6Z7A8B9C0D", // Placeholder for Former Mastichari Primary School
+                gCalStart: "20250802T200000",
+                gCalEnd: "20250802T230000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 02/08/25 & ΚΥΡΙΑΚΗ 03/08/25",
+                time: "19:00-21:00",
+                title: "ΚΑΛΛΙΤΕΧΝΙΚΟ ΔΙΗΜΕΡΟ",
+                description: "Διήμερο με συναυλία, καλλιτεχνικές δραστηριότητες και έκθεση έργων των μαθητών του Κέντρου Καλλιτεχνικών Σπουδών ART & MUSIC.",
+                location: "ΙΣΤΟΡΙΚΟ & ΛΑΟΓΡΑΦΙΚΟ ΜΟΥΣΕΙΟ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum
+                gCalStart: "20250802T190000",
+                gCalEnd: "20250803T210000"
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 03/08/25",
+                time: "20:00",
+                title: "ΓΙΟΡΤΗ ΨΑΡΙΟΥ",
+                description: "Παραδοσιακή γιορτή με θέμα το ψάρι, τους ψαράδες, το τράβηγμα των διχτυών κτλ., με τοπικά εδέσματα, τοπικούς χορούς και ζωντανή μουσική με παραδοσιακά νησιώτικα τραγούδια, σε συνεργασία με τον ΠΟΛΙΤΙΣΤΙΚΟ ΣΥΛΛΟΓΟ ΚΕΦΑΛΟΥ «ΑΓΙΟΣ ΝΙΚΟΛΑΟΣ».",
+                location: "ΛΙΜΑΝΙ ΚΕΦΑΛΟΥ",
+                googleMaps: "https://maps.app.goo.gl/s9t9U12cQ1Xz2JtM6", // Placeholder for Kefalos Port
+                gCalStart: "20250803T200000",
+                gCalEnd: "20250803T230000"
+            },
+            {
+                date: "ΔΕΥΤΕΡΑ 04/08/25",
+                time: "21:30",
+                title: "ΣΥΝΑΥΛΙΑ ΜΕ ΤΗ ΝΑΤΑΣΣΑ ΜΠΟΦΙΛΙΟΥ",
+                description: "Είσοδος με εισιτήριο.",
+                location: "ΜΑΡΙΝΑ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/a7B8C9D0E1F2G3H4I", // Placeholder for Kos Marina
+                gCalStart: "20250804T213000",
+                gCalEnd: "20250804T233000"
+            },
+            {
+                date: "ΤΕΤΑΡΤΗ 06/08/25",
+                time: "20:00",
+                title: "ΠΑΡΟΥΣΙΑΣΗ ΤΟΥ ΒΙΒΛΙΟΥ του ΚΩΣΤΑ ΣΚΑΝΔΑΛΙΔΗ με τίτλο: «ΠΑΡΟΙΜΙΕΣ ΚΑΙ ΠΑΡΟΙΜΙΑΚΕΣ ΕΚΦΡΑΣΕΙΣ ΑΠΟ ΤΑ ΔΩΔΕΚΑΝΗΣΑ (ΑΝΘΟΛΟΓΗΣΗ)»",
+                description: "Σε συνεργασία με τον Π.Ο. ΚΩΩΝ «Ο ΦΙΛΗΤΑΣ» και τη ΣΤΕΓΗ ΓΡΑΜΜΑΤΩΝ ΚΑΙ ΤΕΧΝΩΝ ΔΩΔΕΚΑΝΗΣΟΥ.",
+                location: "ΑΥΛΕΙΟΣ ΧΩΡΟΣ ΙΣΤΟΡΙΚΟΥ-ΛΑΟΓΡΑΦΙΚΟΥ ΜΟΥΣΕΙΟΥ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum Courtyard
+                gCalStart: "20250806T200000",
+                gCalEnd: "20250806T220000"
+            },
+            {
+                date: "ΤΕΤΑΡΤΗ 06/08/25 έως ΠΕΜΠΤΗ 07/08/25",
+                time: "18:30-21:00",
+                title: "ΕΚΘΕΣΗ ΖΩΓΡΑΦΙΚΗΣ ΤΗΣ ΟΜΑΔΑΣ ΚΩΩΝ ΕΡΑΣΙΤΕΧΝΩΝ ΖΩΓΡΑΦΩΝ ΚΑΙ ΚΑΛΛΙΤΕΧΝΩΝ «ΑΙΓΛΗ»",
+                description: "Υπό την Αιγίδα του Π.Ο. ΚΩΩΝ «Ο ΦΙΛΗΤΑΣ».",
+                location: "ΙΣΤΟΡΙΚΟ & ΛΑΟΓΡΑΦΙΚΟ ΜΟΥΣΕΙΟ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum
+                gCalStart: "20250806T183000",
+                gCalEnd: "20250807T210000"
+            },
+            {
+                date: "ΠΕΜΠΤΗ 07/08/25",
+                time: "21:00",
+                title: "«ΤΑ ΤΡΑΓΟΥΔΙΑ ΤΗΣ ΣΩΤΗΡΙΑΣ»",
+                description: "Μια μουσική παράσταση αφιερωμένη στην «Αρχόντισσα του ρεμπέτικου», Σωτηρία Μπέλλου. Η Χριστίνα Μαξούρη και τέσσερις εξαιρετικοί λαϊκοί μουσικοί, στήνουν το πάλκο τους και μας προσκαλούν σε ένα ακόμα ταξίδι στη ζωή και τα τραγούδια της Σωτηρίας Μπέλλου, σε συνεργασία με την ΕΝΩΣΗ ΚΩΩΝ ΑΘΗΝΩΝ «Ο ΙΠΠΟΚΡΑΤΗΣ».",
+                location: "ΡΩΜΑΪΚΟ ΩΔΕΙΟ",
+                googleMaps: "https://maps.app.goo.gl/wJ5P7L4xQ9zR1V8X9", // Placeholder for Roman Odeon of Kos
+                gCalStart: "20250807T210000",
+                gCalEnd: "20250807T230000"
+            },
+            {
+                date: "ΠΕΜΠΤΗ 07/08/25",
+                time: "21:15",
+                title: "ΘΕΑΤΡΙΚΗ ΠΑΡΑΣΤΑΣΗ «Η ΘΑΛΑΣΣΑ ΚΑΙ Ο ΓΕΡΟΣ»",
+                description: "Βασισμένο στο έργο του Έρνεστ Χέμινγουεϊ «Ο γέρος και η Θάλασσα» σε διασκευή-σκηνοθεσία: Μαρλέν Καμίνσκι. Πρωταγωνιστούν: Τάσος Νούσιας, Βασίλης Μηλιώνης, Φαίδρα Σούτου. Είσοδος με εισιτήριο.",
+                location: "ΜΑΡΙΝΑ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/a7B8C9D0E1F2G3H4I", // Placeholder for Kos Marina
+                gCalStart: "20250807T211500",
+                gCalEnd: "20250807T231500"
+            },
+            {
+                date: "ΠΑΡΑΣΚΕΥΗ 08/08/25",
+                time: "20:00",
+                title: "ΠΑΡΟΥΣΙΑΣΗ ΤΟΥ ΒΙΒΛΙΟΥ ΤΟΥ ΚΩΣΤΑ Ι. ΠΑΤΟΥΡΗ ΜΕ ΤΙΤΛΟ «Η ΤΡΙΑΝΤΑΦΥΛΛΙΑ ΠΟΥ ΦΩΤΙΖΕ ΤΟΝ ΗΛΙΟ»",
+                description: "Συντονισμός-εισαγωγή Μηνάς Γ. Χατζηαντωνίου. Το βιβλίο θα παρουσιάσει η δημοσιογράφος Κλεοπάτρα Μισαηλίδου. Μνήμη στη δασκάλα Σταματία Οικονομίδη-Κουτσού, σε συνεργασία με την ΔΡ.Ε.Π.ΠΟ «ΦΑΙΝΑΡΕΤΗ».",
+                location: "ΑΥΛΕΙΟΣ ΧΩΡΟΣ ΛΑΟΓΡΑΦΙΚΟΥ & ΙΣΤΟΡΙΚΟΥ ΜΟΥΣΕΙΟΥ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum Courtyard
+                gCalStart: "20250808T200000",
+                gCalEnd: "20250808T220000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 09/08/25",
+                time: "21:00",
+                title: "«ΟΛΟΦΕΓΓΑΡΟ» ΜΕ ΤΗΝ ΚΕΡΑΣΙΑ ΣΑΜΑΡΑ",
+                description: "Μουσικοποιητική παράσταση για την Αυγουστιάτικη Πανσέληνο. Στο πιάνο συνοδεύει ο Γιώργος Κουμπογιάννης, σε συνεργασία με την ΕΝΩΣΗ ΓΥΝΑΙΚΩΝ ΕΛΛΑΔΟΣ-Παράρτημα Κω.",
+                location: "ΡΩΜΑΪΚΟ ΩΔΕΙΟ",
+                googleMaps: "https://maps.app.goo.gl/wJ5P7L4xQ9zR1V8X9", // Placeholder for Roman Odeon of Kos
+                gCalStart: "20250809T210000",
+                gCalEnd: "20250809T230000"
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 10/08/25",
+                time: "21:00",
+                title: "ΣΥΝΑΥΛΙΑ-ΑΦΙΕΡΩΜΑ ΣΤΟ ΣΥΝΘΕΤΗ ΓΙΑΝΝΗ ΣΠΑΝΟ",
+                description: "Μια βραδιά με τα τραγούδια -που όλοι αγαπήσαμε- του Γιάννη Σπανού, από το Νέο Κύμα και τον Ελληνικό Κινηματογράφο, σε ύφος μπουάτ, με ένα πιάνο και δύο φωνές. Με την επί χρόνια συνεργάτιδα του μεγάλου μας συνθέτη, Χρυσούλα Στεφανάκη. Συμμετέχει ο Παναγιώτης Κυπραίος. Στο πιάνο, μουσική διεύθυνση και επιμέλεια ο Τσαμπίκος Καματερός, σε συνεργασία με το ΚΕΝΤΡΟ ΜΟΥΣΙΚΩΝ ΣΠΟΥΔΩΝ ΚΩ.",
+                location: "ΡΩΜΑΪΚΟ ΩΔΕΙΟ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/wJ5P7L4xQ9zR1V8X9", // Placeholder for Roman Odeon of Kos
+                gCalStart: "20250810T210000",
+                gCalEnd: "20250810T230000"
+            },
+            {
+                date: "ΤΕΤΑΡΤΗ 13/08/25",
+                time: "20:00",
+                title: "ΠΑΡΟΥΣΙΑΣΗ ΤΟΥ ΒΙΒΛΙΟΥ ΤΟΥ τ. πρύτανη ΣΤΑΜΑΤΗ ΑΛΑΧΙΩΤΗ ΜΕ ΤΙΤΛΟ «Η ΑΝΩΝΥΜΗ ΚΟΡΗ»",
+                description: "Σε συνεργασία με τον Π.Ο. ΚΩΩΝ «Ο ΦΙΛΗΤΑΣ» και την ΕΝΩΣΗ ΚΩΩΝ ΑΘΗΝΩΝ «Ο ΙΠΠΟΚΡΑΤΗΣ». Το βιβλίο θα παρουσιάσουν οι: Νούτσος Παναγιώτης, Σκανδαλίδης Κώστας, και Τριλιανός Αθανάσιος.",
+                location: "ΑΥΛΕΙΟΣ ΧΩΡΟΣ ΙΣΤΟΡΙΚΟΥ & ΛΑΟΓΡΑΦΙΚΟΥ ΜΟΥΣΕΙΟΥ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum Courtyard
+                gCalStart: "20250813T200000",
+                gCalEnd: "20250813T220000"
+            },
+            {
+                date: "ΤΕΤΑΡΤΗ 13/08/25",
+                time: "22:00",
+                title: "ΣΥΝΑΥΛΙΑ ΜΕ ΤΟ ΣΤΕΛΙΟ ΡΟΚΚΟ",
+                description: "Είσοδος με εισιτήριο.",
+                location: "ΓΗΠΕΔΟ ΠΟΔΟΣΦΑΙΡΟΥ ΠΥΛΙΟΥ",
+                googleMaps: "https://maps.app.goo.gl/p7Q8R9S0T1U2V3W4X", // Placeholder for Pyli Football Field
+                gCalStart: "20250813T220000",
+                gCalEnd: "20250813T235900"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 16/08/25",
+                time: "19:00",
+                title: "«ΜΙΚΡΑΣΙΑΤΙΚΗ ΒΕΓΓΕΡΑ» - ΡΕΜΠΕΤΙΚΗ ΒΡΑΔΙΑ ΜΕ ΤΗΝ ΚΑΤΕΡΙΝΑ ΤΣΙΡΙΔΟΥ",
+                description: "Μουσικοαφηγηματική παράσταση με τραγούδια, παραδόσεις και ιστορίες από τη Μικρά Ασία. Αφήγηση: Μαρία Σιούτα, σε συνεργασία με τον ΠΟΛΙΤΙΣΤΙΚΟ ΣΥΛΛΟΓΟ ΚΑΡΔΑΜΑΙΝΑΣ «ΑΡΓΩ».",
+                location: "ΘΕΑΤΡΑΚΙ ΚΑΡΔΑΜΑΙΝΑΣ",
+                googleMaps: "https://maps.app.goo.gl/e7xK9L2xP5yV3K9T7", // Placeholder for Kardamena Open Air Theatre
+                gCalStart: "20250816T190000",
+                gCalEnd: "20250816T210000"
+            },
+            {
+                date: "ΠΑΡΑΣΚΕΥΗ 22/08/25",
+                time: "20:30",
+                title: "«ΩΔΗ ΣΤΗΝ ΠΟΙΗΣΗ»",
+                description: "Ποιητική βραδιά με συναυλία και απαγγελίες σε επιμέλεια του Δημήτρη Βοναπάρτη.",
+                location: "ΡΩΜΑΪΚΟ ΩΔΕΙΟ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/wJ5P7L4xQ9zR1V8X9", // Placeholder for Roman Odeon of Kos
+                gCalStart: "20250822T203000",
+                gCalEnd: "20250822T223000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 23/08/25",
+                time: "20:00",
+                title: "ΓΙΟΡΤΗ ΜΕΛΙΟΥ",
+                description: "Παραδοσιακή γιορτή με τοπικά εδέσματα με θέμα το μέλι, πλαισιωμένη με συναυλία παραδοσιακής μουσικής με την Μαρία Αναματερού, σε συνεργασία με τον ΠΟΛΙΤΙΣΤΙΚΟ ΣΥΛΛΟΓΟ ΑΝΤΙΜΑΧΕΙΑΣ «Η ΠΡΟΟΔΟΣ».",
+                location: "ΜΥΛΟΣ, ΑΝΤΙΜΑΧΕΙΑ",
+                googleMaps: "https://maps.app.goo.gl/T8U9V0W1X2Y3Z4A5B", // Placeholder for Antimachia Windmill
+                gCalStart: "20250823T200000",
+                gCalEnd: "20250823T230000"
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 24/08/25",
+                time: "20:30",
+                title: "«Η ΘΕΟΔΩΡΑ ΠΑΙΖΕΙ ΓΙΑ ΤΟ ΦΕΓΓΑΡΙ»",
+                description: "Σόλο συναυλία πιάνου από τη 16χρονη Θεοδώρα Χοστογιάν με ελληνικό και κλασικό ρεπερτόριο στο φως του Αυγουστιάτικου Φεγγαριού, σε συνεργασία με τον ΠΟΛΙΤΙΣΤΙΚΟ ΣΥΛΛΟΓΟ ΚΑΡΔΑΜΑΙΝΑΣ «ΑΡΓΩ».",
+                location: "ΘΕΑΤΡΑΚΙ ΚΑΡΔΑΜΑΙΝΑΣ",
+                googleMaps: "https://maps.app.goo.gl/e7xK9L2xP5yV3K9T7", // Placeholder for Kardamena Open Air Theatre
+                gCalStart: "20250824T203000",
+                gCalEnd: "20250824T223000"
+            },
+            {
+                date: "ΤΕΤΑΡΤΗ 27/08/25",
+                time: "21:00",
+                title: "ΘΕΑΤΡΙΚΗ ΠΑΡΑΣΤΑΣΗ «ΠΕΡΙΜΕΝΟΝΤΑΣ ΤΟ 8»",
+                description: "Του ΠΑΝΟΥ ΝΙΑΓΚΟΥ από το ΘΕΑΤΡΙΚΟ ΕΡΓΑΣΤΗΡΙ ΔΗΜΟΥ ΚΩ. Σκηνοθεσία: Χρύσα Ορφανού. Παίζουν: Χρύσα Ορφανού, Χριστίνα Πολίτου και Γιώργος Τυράς.",
+                location: "ΑΥΛΕΙΟΣ ΧΩΡΟΣ ΙΣΤΟΡΙΚΟΥ & ΛΑΟΓΡΑΦΙΚΟΥ ΜΟΥΣΕΙΟΥ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum Courtyard
+                gCalStart: "20250827T210000",
+                gCalEnd: "20250827T230000"
+            },
+            {
+                date: "ΤΕΤΑΡΤΗ 27/08/25 έως ΣΑΒΒΑΤΟ 30/08/25",
+                title: "«ΑΛΙΚΑΡΝΑΣΣΕΙΑ ΤΗΣ ΚΩ 2025»",
+                description: "Το πρόγραμμα του τετραημέρου περιλαμβάνει ομιλίες, συναυλίες, παραδοσιακούς χορούς, αναβίωση του εθίμου «κουρμπάνι» και έκθεση φωτογραφιών, σε συνεργασία με το ΣΥΛΛΟΓΟ ΜΙΚΡΑΣΙΑΤΩΝ ΚΩ «Ο ΗΡΟΔΟΤΟΣ».",
+                location: "Διάφορες τοποθεσίες (details not specified)",
+                googleMaps: "https://maps.app.goo.gl/4X9z8Q1yG7w5eE6Q6", // Placeholder for Kos central area
+                gCalStart: "20250827T180000", // Approximate start
+                gCalEnd: "20250830T230000" // Approximate end
+            },
+            {
+                date: "ΠΑΡΑΣΚΕΥΗ 29/08/25",
+                time: "21:00",
+                title: "ΘΕΑΤΡΙΚΗ ΠΑΡΑΣΤΑΣΗ «ΠΕΡΙΜΕΝΟΝΤΑΣ ΤΟ 8»",
+                description: "Του ΠΑΝΟΥ ΝΙΑΓΚΟΥ από το ΘΕΑΤΡΙΚΟ ΕΡΓΑΣΤΗΡΙ ΔΗΜΟΥ ΚΩ. Σκηνοθεσία: Χρύσα Ορφανού. Παίζουν: Χρύσα Ορφανού, Χριστίνα Πολίτου και Γιώργος Τυράς.",
+                location: "ΘΕΑΤΡΟ ΤΣΙΓΚΟΥΡΑ, ΚΕΦΑΛΟΣ",
+                googleMaps: "https://maps.app.goo.gl/C9D0E1F2G3H4I5J6K", // Placeholder for Tsigkoura Theatre, Kefalos
+                gCalStart: "20250829T210000",
+                gCalEnd: "20250829T230000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 30/08/25",
+                time: "20:00",
+                title: "ΓΙΟΡΤΗ ΚΡΑΣΙΟΥ",
+                description: "Παραδοσιακή γιορτή με θέμα το κρασί, με τοπικά εδέσματα, τοπικούς χορούς και ζωντανή μουσική, σε συνεργασία με το ΜΟΡΦΩΤΙΚΟ ΠΟΛΙΤΙΣΤΙΚΟ ΣΥΛΛΟΓΟ ΑΣΦΕΝΔΙΟΥ «Ο ΘΕΟΚΡΙΤΟΣ».",
+                location: "ΘΕΑΤΡΑΚΙ ΕΥΑΓΓΕΛΙΣΤΡΙΑΣ, ΑΣΦΕΝΔΙΟΥ",
+                googleMaps: "https://maps.app.goo.gl/A0B1C2D3E4F5G6H7I", // Placeholder for Evangelistria Open Air Theatre, Asfendiou
+                gCalStart: "20250830T200000",
+                gCalEnd: "20250830T230000"
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 31/08/25",
+                time: "21:00",
+                title: "«Η ΤΕΧΝΗ ΕΙΝΑΙ ΓΥΝΑΙΚΑ»",
+                description: "Ένα σπουδαίο αφιέρωμα στις μεγαλύτερες ερμηνεύτριες του 20ού αιώνα, ξεκινώντας από την εποχή του μεσοπολέμου καταλήγοντας στο σήμερα. Ακούγονται τραγούδια από τη φωνή τής Χρυσούλας Στεφανάκη. Πιάνο και μουσική διεύθυνση: Νίκος Κούρος. Ακορντεόν: Τσαμπίκος Καματερός, σε συνεργασία με το ΚΕΝΤΡΟ ΜΟΥΣΙΚΩΝ ΣΠΟΥΔΩΝ ΚΩ.",
+                location: "ΡΩΜΑΪΚΟ ΩΔΕΙΟ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/wJ5P7L4xQ9zR1V8X9", // Placeholder for Roman Odeon of Kos
+                gCalStart: "20250831T210000",
+                gCalEnd: "20250831T230000"
+            },
+            // September
+            {
+                date: "ΔΕΥΤΕΡΑ 01/09/25",
+                time: "20:00",
+                title: "ΠΑΙΔΙΚΟ ΘΕΑΤΡΟ «ΠΟΥΠΟΥΛΑΡΡ»",
+                description: "Παιδική μουσικοθεατρική παράσταση από το ΘΕΑΤΡΙΚΟ ΕΡΓΑΣΤΗΡΙ ΚΩ-ACTA. Σκηνοθεσία: Φοίβος Συμεωνίδης.",
+                location: "ΠΟΛΙΤΙΣΤΙΚΟ ΚΕΝΤΡΟ ΠΥΛΙΟΥ «ΓΑΛΗΝΟΣ ΦΛΑΣΚΟΣ»",
+                googleMaps: "https://maps.app.goo.gl/d2F3G4H5I6J7K8L9M", // Placeholder for Pyli Cultural Center "Galinos Flaskos"
+                gCalStart: "20250901T200000",
+                gCalEnd: "20250901T220000"
+            },
+            {
+                date: "ΤΕΤΑΡΤΗ 03/09/25",
+                time: "20:00",
+                title: "ΠΑΡΟΥΣΙΑΣΗ ΤΟΥ ΒΙΒΛΙΟΥ ΤΟΥ ΑΝΔΡΕΑ ΧΑΤΖΗΜΙΧΑΗΛ «ΤΟ ΠΟΔΟΣΦΑΙΡΟ ΣΤΗ ΚΩ ΑΠΟ ΤΟ 1927 ΕΩΣ ΣΗΜΕΡΑ»",
+                description: "Έκδοσης Δ.Ο.Π.Α.Β.Σ. ΚΩ. Το βιβλίο θα παρουσιάσουν, ο αθλητικογράφος Γιώργος Πίτσης και ο καθηγητής Φυσικής Αγωγής Γιάννης Τρικοίλης.",
+                location: "ΑΥΛΕΙΟΣ ΧΩΡΟΣ ΙΣΤΟΡΙΚΟΥ & ΛΑΟΓΡΑΦΙΚΟΥ ΜΟΥΣΕΙΟΥ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum Courtyard
+                gCalStart: "20250903T200000",
+                gCalEnd: "20250903T220000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 06/09/25",
+                time: "19:00",
+                title: "ΔΙΑΔΡΑΣΤΙΚΗ ΠΑΡΟΥΣΙΑΣΗ του ΠΑΙΔΙΚΟΥ ΒΙΒΛΙΟΥ της ΜΑΡΙΑΣ ΛΑΚΑΤΑ με τίτλο «Η ΤΖΙΒΑΓΕΡΑ ΚΑΙ ΤΟ ΑΗΔΟΝΙ»",
+                description: "Θα γίνει ακρόαση του βιβλίου από το audiobook σε συνδυασμό με ζωντανή δραματοποίηση των τραγουδιών. Θα μιλήσουν: η συγγραφέας Μαρία Λάκατα, η εικονογράφος του βιβλίου, Danijela Palapani Curcic και η ψυχολόγος-ψυχοθεραπεύτρια Σίσσυ Καραθάνου.",
+                location: "ΠΟΛΙΤΙΣΤΙΚΟ ΚΕΝΤΡΟ ΠΥΛΙΟΥ «ΓΑΛΗΝΟΣ ΦΛΑΣΚΟΣ»",
+                googleMaps: "https://maps.app.goo.gl/d2F3G4H5I6J7K8L9M", // Placeholder for Pyli Cultural Center "Galinos Flaskos"
+                gCalStart: "20250906T190000",
+                gCalEnd: "20250906T210000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 06/09/25",
+                time: "21:15",
+                title: "ΘΕΑΤΡΙΚΗ ΠΑΡΑΣΤΑΣΗ «ΕΚΕΙΝΟΣ ΚΑΙ ΕΚΕΙΝΟΣ»",
+                description: "Μουσικοθεατρική παράσταση με χιούμορ, συγκίνηση και διαχρονικά τραγούδια. Οι Γιώργος Κωνσταντίνου, Λεωνίδας Κακούρης και Δημήτρης Σταρόβας στήνουν μια παράσταση - έκπληξη, γεμάτη ανθρωπιά και σατιρική ματιά. Είσοδος με εισιτήριο.",
+                location: "ΜΑΡΙΝΑ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/a7B8C9D0E1F2G3H4I", // Placeholder for Kos Marina
+                gCalStart: "20250906T211500",
+                gCalEnd: "20250906T231500"
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 07/09/25",
+                time: "20:00",
+                title: "ΘΕΑΤΡΙΚΗ ΠΑΡΑΣΤΑΣΗ «ΑΦΗΓΗΤΡΙΑ ΤΑΙΝΙΩΝ»",
+                description: "Η Κάτια Γέρου πρωταγωνιστεί στο εμβληματικό κείμενο του Hernán Rivera Letelier. Σκηνοθεσία Μάγιας Πολιτάκη. Η παράσταση μας μεταφέρει στη Χιλή της δεκαετίας του '60 και μας αφηγείται τις περιπέτειες ενός κοριτσιού, που έχει το σπάνιο χάρισμα να λέει ή μάλλον να ζωντανεύει τις ιστορίες των ταινιών, σε συνεργασία με το ΘΕΑΤΡΙΚΟ ΕΡΓΑΣΤΗΡΙ ΚΩ-ΑACTA.",
+                location: "ΡΩΜΑΪΚΟ ΩΔΕΙΟ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/wJ5P7L4xQ9zR1V8X9", // Placeholder for Roman Odeon of Kos
+                gCalStart: "20250907T200000",
+                gCalEnd: "20250907T220000"
+            },
+            {
+                date: "ΔΕΥΤΕΡΑ 08/09/25",
+                time: "21:00",
+                title: "ΒΡΑΔΙΑ BACHATA στο πλαίσιο διοργάνωσης του BACHATA KING FESTIVAL",
+                description: "Χορευτική εκδήλωση με latin μουσική.",
+                location: "ΠΛΑΤΕΙΑ ΕΛΕΥΘΕΡΙΑΣ",
+                googleMaps: "https://maps.app.goo.gl/4X9z8Q1yG7w5eE6Q6", // Placeholder for Eleftherias Square, Kos
+                gCalStart: "20250908T210000",
+                gCalEnd: "20250908T230000"
+            },
+            {
+                date: "ΤΡΙΤΗ 09/09/25 έως ΤΕΤΑΡΤΗ 17/09/25",
+                time: "11:00-13:00 & 18:00-19:00",
+                title: "ΕΚΘΕΣΗ ΜΝΗΜΗΣ «Για την Ανάσα μου» της ΙΡΙΔΑΣ ΜΑΥΡΑΚΗ για το πρώην ΣΑΝΑΤΟΡΙΟ ΔΩΔΕΚΑΝΗΣΟΥ 1947-1970",
+                description: "Στήριξη: ΤΜΗΜΑ ΠΟΛΙΤΙΣΜΟΥ ΔΗΜΟΥ ΚΩ - ΙΑΤΡΙΚΟΣ ΣΥΛΛΟΓΟΣ ΚΩ -«ΔΡ.Ε.Π.ΠΟ «ΦΑΙΝΑΡΕΤΗ» - ΔΡΑΣΕΙΣ ΕΠΙΚΟΙΝΩΝΙΑΣ-ΠΑΙΔΕΙΑΣ-ΠΟΛΙΤΙΣΜΟΥ.",
+                location: "ΙΣΤΟΡΙΚΟ & ΛΑΟΓΡΑΦΙΚΟ ΜΟΥΣΕΙΟ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum
+                gCalStart: "20250909T110000",
+                gCalEnd: "20250917T190000"
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 14/09/25",
+                time: "20:00",
+                title: "ΣΥΝΑΥΛΙΑ ΜΕ ΕΡΓΑ ΓΙΑ ΣΟΛΟ ΒΙΟΛΙ και ΒΙΟΛΙ ΚΑΙ ΗΛΕΚΤΡΟΝΙΚΑ ΜΕ ΤΗ ΣΟΛΙΣΤ ΤΑΝΙΑ ΣΙΚΕΛΙΑΝΟΥ",
+                description: "Συμμετέχουν επίσης Νίκος Χαριζάνος και Κώστας Μαντζώρος στα ηλεκτρονικά.",
+                location: "ΡΩΜΑΪΚΟ ΩΔΕΙΟ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/wJ5P7L4xQ9zR1V8X9", // Placeholder for Roman Odeon of Kos
+                gCalStart: "20250914T200000",
+                gCalEnd: "20250914T220000"
+            },
+            {
+                date: "ΠΑΡΑΣΚΕΥΗ 19/09/25",
+                time: "19:30",
+                title: "ΕΚΠΑΙΔΕΥΤΙΚΗ ΔΡΑΣΗ ΓΙΑ ΠΑΙΔΙΑ",
+                description: "Ομαδικές δραστηριότητες και εργαστήρια δεξιοτήτων με την Ομάδα 'ΑTHENS FOR KIDS', σε συνεργασία με τη ΛΕΣΧΗ LIONS ΚΩ «Ο ΙΠΠΟΚΡΑΤΗΣ».",
+                location: "ΝΑΥΤΙΚΟ & ΛΑΟΓΡΑΦΙΚΟ ΜΟΥΣΕΙΟ ΚΑΡΔΑΜΑΙΝΑΣ",
+                googleMaps: "https://maps.app.goo.gl/P2Q3R4S5T6U7V8W9X", // Placeholder for Maritime & Folklore Museum of Kardamena
+                gCalStart: "20250919T193000",
+                gCalEnd: "20250919T213000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 20/09/25 & ΚΥΡΙΑΚΗ 21/09/25",
+                time: "20:00",
+                title: "ΠΡΟΒΟΛΗ ΤΑΙΝΙΩΝ ΜΙΚΡΟΥ ΜΗΚΟΥΣ",
+                description: "Προβολή των βραβευμένων ταινιών από το 47ο Φεστιβάλ Ελληνικών Ταινιών Μικρού Μήκους Δράμας του 2024, σε συνεργασία με την ΚΙΝΗΜΑΤΟΓΡΑΦΙΚΗ ΛΕΣΧΗ ΚΩ.",
+                location: "ΑΥΛΕΙΟΣ ΧΩΡΟΣ ΙΣΤΟΡΙΚΟΥ & ΛΑΟΓΡΑΦΙΚΟΥ ΜΟΥΣΕΙΟΥ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum Courtyard
+                gCalStart: "20250920T200000",
+                gCalEnd: "20250921T220000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 20/09/25 & ΚΥΡΙΑΚΗ 21/09/25",
+                time: "20:30",
+                title: "8ο ΠΑΡΑΔΟΣΙΑΚΟ ΜΟΥΣΙΚΟΧΟΡΕΥΤΙΚΟ ΑΝΤΑΜΩΜΑ ΚΩ-«ΑΝΝΑ ΣΑΡΡΗ-ΚΑΡΑΜΠΕΣΙΝΗ»",
+                description: "Μουσικοχορευτικό διήμερο, σε συνεργασία με το ΣΥΛΛΟΓΟ ΦΙΛΩΝ ΜΟΥΣΙΚΗΣ «ΑΡΙΩΝ». Συνδιοργανωτής: ΠΕΡΙΦΕΡΕΙΑ ΝΟΤΙΟΥ ΑΙΓΑΙΟΥ.",
+                location: "ΘΕΑΤΡΑΚΙ ΕΥΑΓΓΕΛΙΣΤΡΙΑΣ, ΑΣΦΕΝΔΙΟΥ",
+                googleMaps: "https://maps.app.goo.gl/A0B1C2D3E4F5G6H7I", // Placeholder for Evangelistria Open Air Theatre, Asfendiou
+                gCalStart: "20250920T203000",
+                gCalEnd: "20250921T223000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 20/09/25 έως ΠΑΡΑΣΚΕΥΗ 26/09/25",
+                time: "18:30-21:00",
+                title: "ΕΚΘΕΣΗ ΦΩΤΟΓΡΑΦΙΑΣ «ΑΕΝΑΕΣ ΣΤΙΓΜΕΣ-ETERNAL MOMENTS»",
+                description: "Εκθέτουν φωτογραφίες τους οι ερασιτέχνες φωτογράφοι Μαρία Κυπραίου και Μαρίνα Ορφανίδου. Κοινό τους πάθος η τέχνη της φωτογραφίας και η ανάδειξη του φυσικού και πολιτιστικού πλούτου του τόπου μας.",
+                location: "ΜΑΡΙΝΑ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/a7B8C9D0E1F2G3H4I", // Placeholder for Kos Marina
+                gCalStart: "20250920T183000",
+                gCalEnd: "20250926T210000"
+            },
+            {
+                date: "ΤΡΙΤΗ 23/09/25 έως ΚΥΡΙΑΚΗ 05/10/25",
+                time: "18:00-21:00",
+                title: "«ΓΡΑΦΙΣΤΙΚΕΣ ΔΙΑΔΡΟΜΕΣ ΓΙΑ ΜΙΑ ΑΤΥΠΗ ΓΕΝΕΣΗ» - ΕΚΘΕΣΗ ΕΙΚΑΣΤΙΚΩΝ",
+                description: "Πρόκειται για έκθεση με μονοτυπίες/χαρακτικά του Giovanni D'Alessandro, σε συνεργασία με το ΠΟΛΙΤΙΣΤΙΚΟ ΣΩΜΑΤΕΙΟ ΑΙΑΛ ΛΕΡΟΥ.",
+                location: "ΙΣΤΟΡΙΚΟ & ΛΑΟΓΡΑΦΙΚΟ ΜΟΥΣΕΙΟ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum
+                gCalStart: "20250923T180000",
+                gCalEnd: "20251005T210000"
+            },
+            {
+                date: "ΤΕΤΑΡΤΗ 24/09/25",
+                time: "19:30",
+                title: "Βιβλιοπαρουσίαση: «Εκεί που στάζει η ζωή» της Δήμητρας Ι. Παλαπάνη",
+                description: "Εκδόσεις Μετρονόμος. Την ποιητική συλλογή θα παρουσιάσουν: Γιώτα Κεφαλά και Μαρίνα Μπέττα. Ποιήματα θα απαγγείλουν «Φίλες και φίλοι εραστές της ποίησης».",
+                location: "ΑΥΛΕΙΟΣ ΧΩΡΟΣ ΙΣΤΟΡΙΚΟΥ & ΛΑΟΓΡΑΦΙΚΟΥ ΜΟΥΣΕΙΟΥ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum Courtyard
+                gCalStart: "20250924T193000",
+                gCalEnd: "20250924T213000"
+            },
+            {
+                date: "ΠΑΡΑΣΚΕΥΗ 26/09/25 έως ΚΥΡΙΑΚΗ 28/09/25",
+                time: "ΠΑΡ: 17:00-20:00, ΣΑΒ: 10:00-13:00 & 17:00-20:00, ΚΥΡ: 10:00-13:00",
+                title: "«ΡΟΔΑΝΙ:ΜΙΑ ΑΠΡΟΣΜΕΝΗ ΣΥΝΑΝΤΗΣΗ ΤΩΝ ΠΑΙΔΙΩΝ ΜΕ ΤΑ ΒΙΒΛΙΑ»",
+                description: "Το Ροδάνι είναι μια ξύλινη βιβλιοθήκη πάνω σε ρόδες, που προσκαλεί τα παιδιά ηλικίας (5 έως 12 ετών) να γνωρίσουν τον μαγευτικό κόσμο των βιβλίων.",
+                location: "ΠΛΑΤΕΙΑ ΚΟΝΙΤΣΗΣ / ΠΛΑΤΕΙΑ ΕΛΕΥΘΕΡΙΑΣ / ΠΛΑΤΕΙΑ ΑΝΤΑΓΟΡΑ",
+                googleMaps: "https://maps.app.goo.gl/4X9z8Q1yG7w5eE6Q6", // Placeholder for Eleftherias Square (central location)
+                gCalStart: "20250926T170000",
+                gCalEnd: "20250928T130000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 27/09/25",
+                time: "20:00",
+                title: "ΒΡΑΔΙΑ ΑΦΙΕΡΩΜΕΝΗ ΣΤΗΝ ΠΑΓΚΟΣΜΙΑ ΗΜΕΡΑ ΤΟΥΡΙΣΜΟΥ",
+                description: "Μουσικοχορευτική εκδήλωση αφιερωμένη στην Παγκόσμια Ημέρα Τουρισμού με παραδοσιακή μουσική και χορούς, σε συνεργασία με τον ΜΟΡΦΩΤΙΚΟ ΠΟΛΙΤΙΣΤΙΚΟ ΣΥΛΛΟΓΟ ΑΣΦΕΝΔΙΟΥ «Ο ΘΕΟΚΡΙΤΟΣ».",
+                location: "ΠΛΑΤΕΙΑ ΤΙΓΚΑΚΙΟΥ",
+                googleMaps: "https://maps.app.goo.gl/h7K8L2xQ3zR4V5Y6A", // Placeholder for Tigaki Square
+                gCalStart: "20250927T200000",
+                gCalEnd: "20250927T220000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 27/09/25",
+                time: "22:00",
+                title: "ΣΥΝΑΥΛΙΑ ΜΕ ΤΗΝ ΙΟΥΛΙΑ ΚΑΡΑΠΑΤΑΚΗ",
+                description: "Είσοδος με εισιτήριο.",
+                location: "ΓΗΠΕΔΟ ΠΟΔΟΣΦΑΙΡΟΥ ΠΥΛΙΟΥ",
+                googleMaps: "https://maps.app.goo.gl/p7Q8R9S0T1U2V3W4X", // Placeholder for Pyli Football Field
+                gCalStart: "20250927T220000",
+                gCalEnd: "20250927T235900"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 27/09/25 & ΚΥΡΙΑΚΗ 28/09/25",
+                time: "ΣΑΒ: 10:00 (ΣΕΜΙΝΑΡΙΟ), 19:00 (ΟΜΙΛΙΑ), ΚΥΡ: 20:00 (ΣΥΝΑΥΛΙΑ)",
+                title: "ΔΙΗΜΕΡΟ ΧΑΛΚΙΝΩΝ ΠΝΕΥΣΤΩΝ-ΣΥΝΑΥΛΙΑ ΜΕ ΤΟ 'IONIAN BRASS QUINTET'",
+                description: "Το διήμερο περιλαμβάνει σεμινάριο χάλκινων πνευστών, ομιλία-διάλεξη με θέμα τα οφέλη της συμμετοχής των πολιτών κάθε ηλικίας σε μπάντες και σύνολα πνευστών & συναυλία με το Κουιντέτο Χάλκινων Πνευστών με έργα ποικίλης μουσικής, με έμφαση στους Έλληνες συνθέτες. Συμπράττει η ΦΙΛΑΡΜΟΝΙΚΗ ΟΡΧΗΣΤΡΑ ΔΗΜΟΥ ΚΩ.",
+                location: "ΙΣΤΟΡΙΚΟ & ΛΑΟΓΡΑΦΙΚΟ ΜΟΥΣΕΙΟ ΚΩ / ΡΩΜΑΪΚΟ ΩΔΕΙΟ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for main location
+                gCalStart: "20250927T100000",
+                gCalEnd: "20250928T220000"
+            },
+            // October
+            {
+                date: "ΣΑΒΒΑΤΟ 04/10/25",
+                time: "19:30",
+                title: "ΠΑΡΑΔΟΣΙΑΚΑ ΧΟΙΡΟΣΦΑΓΙΑ",
+                description: "Γιορτή με θέμα τα παραδοσιακά χοιροσφάγια, με τοπικά εδέσματα, τοπικούς χορούς και ζωντανή μουσική, σε συνεργασία με τον ΜΟΡΦΩΤΙΚΟ ΠΟΛΙΤΙΣΤΙΚΟ & ΕΞΩΡΑΪΣΤΙΚΟ ΣΥΛΛΟΓΟ ΠΥΛΙΟΥ «Ο ΑΠΕΛΛΗΣ».",
+                location: "ΠΛΑΤΕΙΑ ΑΓΙΟΥ ΝΙΚΟΛΑΟΥ, ΠΥΛΙ",
+                googleMaps: "https://maps.app.goo.gl/F0G1H2I3J4K5L6M7N", // Placeholder for Agios Nikolaos Square, Pyli
+                gCalStart: "20251004T193000",
+                gCalEnd: "20251004T223000"
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 05/10/25",
+                time: "20:00",
+                title: "ΜΟΥΣΙΚΗ ΕΚΔΗΛΩΣΗ με ΡΕΜΠΕΤΙΚΑ ΤΡΑΓΟΥΔΙΑ",
+                description: "Σε συνεργασία με τη ΧΟΡΩΔΙΑ ΤΟΥ ΣΥΛΛΟΓΟΥ ΕΚΠΑΙΔΕΥΤΙΚΩΝ Π/Ε ΚΩ-ΝΙΣΥΡΟΥ. Τη Χορωδία συνοδεύουν οι μουσικοί: Ηλίας Παπαηλίας, Περικλής Ντόβας, Νίκος Αρμπιλιάς. Επιμέλεια κειμένων-Δ/νση Χορωδίας και ακορντεόν, Χρήστος Γαμβρέλλης.",
+                location: "ΑΥΛΕΙΟΣ ΧΩΡΟΣ ΝΑΟΥ ΑΓΙΟΥ ΓΕΩΡΓΙΟΥ ΤΗΣ ΝΕΑΣ ΑΛΙΚΑΡΝΑΣΣΟΥ",
+                googleMaps: "https://maps.app.goo.gl/Q1R2S3T4U5V6W7X8Y", // Placeholder for Agios Georgios Church Courtyard, Nea Alikarnassos
+                gCalStart: "20251005T200000",
+                gCalEnd: "20251005T220000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 11/10/25 & ΚΥΡΙΑΚΗ 12/10/25",
+                time: "ΣΑΒ: 18:00-21:00, ΚΥΡ: 11:00-20:00",
+                title: "ΕΚΘΕΣΗ ΑΓΙΟΓΡΑΦΙΑΣ",
+                description: "Διήμερη έκθεση έργων απ' τους μαθητές του καλλιτεχνικού εργαστήριου του Συλλόγου, σε συνεργασία με το ΜΟΡΦΩΤΙΚΟ ΠΟΛΙΤΙΣΤΙΚΟ ΣΥΛΛΟΓΟ ΑΣΦΕΝΔΙΟΥ «Ο ΘΕΟΚΡΙΤΟΣ».",
+                location: "ΕΚΚΛΗΣΙΑΣΤΙΚΟ ΜΟΥΣΕΙΟ ΤΗΣ ΙΕΡΑΣ ΜΗΤΡΟΠΟΛΕΩΣ ΚΩΟΥ & ΝΙΣΥΡΟΥ",
+                googleMaps: "https://maps.app.goo.gl/U5V6W7X8Y9Z0A1B2C", // Placeholder for Ecclesiastical Museum of Kos and Nisyros Metropolis
+                gCalStart: "20251011T180000",
+                gCalEnd: "20251012T200000"
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 12/10/25 έως ΚΥΡΙΑΚΗ 19/10/25",
+                time: "10:00-12:30 & 18:00-20:00",
+                title: "ΕΙΚΑΣΤΙΚΗ ΕΚΘΕΣΗ “THE VOLT ART PROJECT\"",
+                description: "Πρόκειται για μια εικαστική έκθεση που περιλαμβάνει γλυπτά, κολάζ, πρωτοτυπίες ως προς την αισθητική και την τεχνοτροπία και μία εγκατάσταση τέχνης, αποτελούμενο από γλυπτό και ψηφιακή απεικόνιση, σε συνεργασία με το 2ο ΔΗΜΟΤΙΚΟ ΣΧΟΛΕΙΟ ΚΩ.",
+                location: "ΙΣΤΟΡΙΚΟ & ΛΑΟΓΡΑΦΙΚΟ ΜΟΥΣΕΙΟ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum
+                gCalStart: "20251012T100000",
+                gCalEnd: "20251019T200000"
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 12/10/25 έως ΚΥΡΙΑΚΗ 19/10/25",
+                title: "«ΙΠΠΟΚΡΑΤΙΚΗ ΕΒΔΟΜΑΔΑ»",
+                description: "Η «Ιπποκρατική Εβδομάδα» έχει ως στόχο της τη Διεθνοποίηση του Αυθεντικού Όρκου του Ιπποκράτη, από το ΔΙΕΘΝΕΣ ΙΠΠΟΚΡΑΤΕΙΟ ΙΔΡΥΜΑ ΚΩ.",
+                location: "ΔΙΕΘΝΕΣ ΙΠΠΟΚΡΑΤΕΙΟ ΙΔΡΥΜΑ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/k9R0S1T2U3V4W5X6Y", // Placeholder for International Hippocratic Foundation of Kos
+                gCalStart: "20251012T090000", // Assuming daytime events
+                gCalEnd: "20251019T170000" // Assuming end of working day
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 26/10/25",
+                time: "11:00",
+                title: "ΟΜΙΛΙΑ ΓΙΑ ΤΟ ΕΠΟΣ ΤΟΥ 1940",
+                description: "Ομιλητής: Νικόλαος Σ. Κανελλόπουλος, επίκουρος καθηγητής Στρατιωτικής Ιστορίας και Ανάλυσης Στρατιωτικών Επιχειρήσεων στη Στρατιωτική Σχολή Ευελπίδων. Στο χώρο θα πραγματοποιηθεί έκθεση υλικού εποχής, σε συνεργασία με τον Π.Ο. ΚΩΩΝ «Ο ΦΙΛΗΤΑΣ».",
+                location: "ΔΙΕΘΝΕΣ ΙΠΠΟΚΡΑΤΕΙΟ ΙΔΡΥΜΑ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/k9R0S1T2U3V4W5X6Y", // Placeholder for International Hippocratic Foundation of Kos
+                gCalStart: "20251026T110000",
+                gCalEnd: "20251026T130000"
+            },
+            // November
+            {
+                date: "ΚΥΡΙΑΚΗ 09/11/25",
+                time: "17:00",
+                title: "ΠΑΡΟΥΣΙΑΣΗ του βιβλίου «ΟΙ ΕΝΟΧΟΙ» του συγγραφέα ΝΙΚΟΛΑΟΥ ΑΡΓΥΡΟΠΟΥΛΟΥ",
+                description: "Για το βιβλίο θα μιλήσει ο Δημήτρης Καϊμάκης, απόστρατος αξιωματικός και μέλος του Συλλόγου, σε συνεργασία με το ΣΥΛΛΟΓΟ ΣΤΕΡΕΟΕΛΛΑΔΙΤΩΝ ΚΩ «Η ΡΟΥΜΕΛΗ».",
+                location: "ΠΟΛΙΤΙΣΤΙΚΟ ΚΕΝΤΡΟ ΠΥΛΙΟΥ «ΓΑΛΗΝΟΣ ΦΛΑΣΚΟΣ»",
+                googleMaps: "https://maps.app.goo.gl/d2F3G4H5I6J7K8L9M", // Placeholder for Pyli Cultural Center "Galinos Flaskos"
+                gCalStart: "20251109T170000",
+                gCalEnd: "20251109T190000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 15/11/25",
+                time: "18:00",
+                title: "ΜΟΥΣΙΚΟΧΟΡΕΥΤΙΚΗ ΕΚΔΗΛΩΣΗ ΚΑΙ ΠΑΡΟΥΣΙΑΣΗ ΤΟΥ ΒΙΒΛΙΟΥ του συγγραφέα ΓΙΑΝΝΗ ΚΑΛΠΟΥΖΟΥ με τίτλο: «ΜΕΘΥΣΤΗΣ. ΣΤΑ ΧΩΜΑΤΑ ΤΗΣ ΚΡΗΤΗΣ»",
+                description: "Το βιβλίο θα παρουσιάσουν: Μαρία Αμοιρίδου και Μαρίνα Μπέττα. Συμμετέχουν: Βασίλης Κοκκαλάκης και ο Νικόλας Παπασταματίου, σε συνεργασία με το ΓΥΜΝΑΣΙΟ ΑΝΤΙΜΑΧΕΙΑΣ, το ΓΕΛ ΑΝΤΙΜΑΧΕΙΑΣ & το Ιο ΙΠΠΟΚΡΑΤΕΙΟ ΓΕΛ ΚΩ.",
+                location: "ΠΟΛΙΤΙΣΤΙΚΟ ΚΕΝΤΡΟ ΠΥΛΙΟΥ «ΓΑΛΗΝΟΣ ΦΛΑΣΚΟΣ»",
+                googleMaps: "https://maps.app.goo.gl/d2F3G4H5I6J7K8L9M", // Placeholder for Pyli Cultural Center "Galinos Flaskos"
+                gCalStart: "20251115T180000",
+                gCalEnd: "20251115T200000"
+            },
+            {
+                date: "ΚΥΡΙΑΚΗ 16/11/25",
+                title: "ΕΠΙΣΚΕΨΕΙΣ ΣΕ ΑΝΟΙΧΤΑ ΟΙΝΟΠΕΙΙΑ ΤΗΣ ΚΩ",
+                description: "Στο πλαίσιο της Παγκόσμιας Ημέρας Οινοτουρισμού, πολλά οινοποιεία στην Κω θα είναι ανοιχτά για το κοινό, προσφέροντας την ευκαιρία να γνωρίσετε τα κρασιά τους και να ζήσετε μια μοναδική οινοτουριστική εμπειρία.",
+                location: "Διάφορα οινοποιεία της Κω",
+                googleMaps: "https://maps.app.goo.gl/F0G1H2I3J4K5L6M7N", // Placeholder for Kos (general area for wineries)
+                gCalStart: "20251116T100000", // Assuming typical winery opening hours
+                gCalEnd: "20251116T170000"
+            },
+            {
+                date: "ΣΑΒΒΑΤΟ 29/11/25 & ΚΥΡΙΑΚΗ 30/11/25",
+                time: "ΣΑΒ: 18:00-21:00, ΚΥΡ: 11:00-20:00",
+                title: "ΕΚΘΕΣΗ ΕΙΚΑΣΤΙΚΩΝ ΤΕΧΝΩΝ",
+                description: "Διήμερη έκθεση έργων απ' τους μαθητές του καλλιτεχνικού εργαστήριου του Συλλόγου, σε συνεργασία με το ΜΟΡΦΩΤΙΚΟ ΠΟΛΙΤΙΣΤΙΚΟ ΣΥΛΛΟΓΟ ΑΣΦΕΝΔΙΟΥ «Ο ΘΕΟΚΡΙΤΟΣ».",
+                location: "ΙΣΤΟΡΙΚΟ & ΛΑΟΓΡΑΦΙΚΟ ΜΟΥΣΕΙΟ ΚΩ",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum
+                gCalStart: "20251129T180000",
+                gCalEnd: "20251130T200000"
+            }
+        ];
+
+        function generateGoogleCalendarLink(event) {
+            const startDate = event.gCalStart;
+            const endDate = event.gCalEnd;
+            const title = encodeURIComponent(event.title);
+            const description = encodeURIComponent(`${event.description}\n\nLocation: ${event.location}`);
+            const location = encodeURIComponent(event.location);
+
+            return `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${description}&location=${location}&sf=true&output=xml`;
+        }
+
+        function generateWhatsAppShareLink(event) {
+            const message = encodeURIComponent(`Check out this event: ${event.title} on ${event.date} at ${event.location}. ${event.description} More info: ${event.googleMaps}`);
+            return `https://wa.me/?text=${message}`;
+        }
+
+        function generateEmailShareLink(event) {
+            const subject = encodeURIComponent(`Event Invitation: ${event.title}`);
+            const body = encodeURIComponent(`Hi,\n\nI thought you might be interested in this event:\n\n*Event:* ${event.title}\n*Date:* ${event.date}\n*Time:* ${event.time}\n*Location:* ${event.location}\n*Description:* ${event.description}\n\nFind it on Google Maps: ${event.googleMaps}\n\nHope to see you there!\n\nBest regards.`);
+            return `mailto:?subject=${subject}&body=${body}`;
+        }
+
+        function renderEvents() {
+            const eventsList = document.getElementById('events-list');
+            eventsList.innerHTML = ''; // Clear previous events
+
+            events.forEach(event => {
+                const eventCard = document.createElement('div');
+                eventCard.className = 'event-card p-6 flex flex-col justify-between';
+
+                eventCard.innerHTML = `
+                    <div>
+                        <h2 class="text-2xl font-bold mb-2">${event.title}</h2>
+                        <p class="event-date text-lg mb-2"><i class="far fa-calendar-alt mr-2"></i>${event.date}</p>
+                        <p class="text-gray-700 mb-1"><i class="far fa-clock mr-2"></i>${event.time}</p>
+                        <p class="event-location text-md mb-3"><i class="fas fa-map-marker-alt mr-2"></i>${event.location}</p>
+                        <p class="text-gray-600 text-sm mb-4">${event.description}</p>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-between gap-3 mt-4">
+                        <a href="${event.googleMaps}" target="_blank" class="btn-primary flex items-center text-sm">
+                            <i class="fas fa-external-link-alt mr-2"></i> View on Map
+                        </a>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="${generateGoogleCalendarLink(event)}" target="_blank" class="btn-share text-sm">
+                                <i class="far fa-calendar-plus"></i> Add to Calendar
+                            </a>
+                            <a href="${generateWhatsAppShareLink(event)}" target="_blank" class="btn-share text-sm">
+                                <i class="fab fa-whatsapp"></i> Share WhatsApp
+                            </a>
+                            <a href="${generateEmailShareLink(event)}" target="_blank" class="btn-share text-sm">
+                                <i class="far fa-envelope"></i> Share Email
+                            </a>
+                        </div>
+                    </div>
+                `;
+                eventsList.appendChild(eventCard);
+            });
+        }
+
+        // Render events on page load
+        document.addEventListener('DOMContentLoaded', renderEvents);
+    </script>
+</body>
+</html>

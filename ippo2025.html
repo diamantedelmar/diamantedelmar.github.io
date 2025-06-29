@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ΙΠΠΟΚΡΑΤΕΙΑ 2025 Events</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f5f1; /* Light cream */
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .event-card {
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        .btn-primary {
+            background-color: #4a90e2; /* Blue */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            background-color: #357ABD;
+        }
+        .btn-share {
+            background-color: #6a7fdb; /* Purple-blue */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-share:hover {
+            background-color: #536AC6;
+        }
+        .header-bg {
+            background-color: #2c3e50; /* Dark blue/grey */
+            color: white;
+        }
+        .event-date {
+            color: #d35400; /* Orange-brown */
+            font-weight: 700;
+        }
+        .event-location {
+            color: #27ae60; /* Green */
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="header-bg py-8 shadow-lg rounded-b-3xl">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2">HIPPOCRATEIA 2025</h1>
+            <p class="text-xl md:text-2xl font-light">Events Program</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <div id="events-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Events will be loaded here by JavaScript -->
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center py-6 mt-12 rounded-t-3xl">
+        <p>&copy; 2025 Municipality of Kos. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const events = [
+            // June
+            {
+                date: "SATURDAY 21/06/25 & SUNDAY 22/06/25",
+                time: "SATURDAY 19:00 (OPENING), SUNDAY 18:00-20:00 (OPERATING HOURS)",
+                title: "PAINTING AND HAGIOGRAPHY EXHIBITION",
+                description: "Exhibition of works by students of FRIDART Painting & Hagiography Workshop by Maria Vamvakousi.",
+                location: "KOS HISTORICAL & FOLKLORE MUSEUM",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum
+                gCalStart: "20250621T190000",
+                gCalEnd: "20250622T200000"
+            },
+            {
+                date: "TUESDAY 24/06/25",
+                time: "19:00",
+                title: "CONCERT WITH STUDENTS OF MARIA ORFANOUDAKI'S MUSIC SCHOOL",
+                description: "Student concert of classical and contemporary music.",
+                location: "COURTYARD OF KOS HISTORICAL & FOLKLORE MUSEUM",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum Courtyard
+                gCalStart: "20250624T190000",
+                gCalEnd: "20250624T210000"
+            },
+            {
+                date: "WEDNESDAY 25/06/25",
+                time: "19:30",
+                title: "KLIDONAS CUSTOM",
+                description: "Event with the re-enactment of Fanou and Klidonas, accompanied by dances from the children's and youth sections of the Pyli Cultural and Beautification Association 'O APELIS'.",
+                location: "MARMARI OPEN AIR THEATRE",
+                googleMaps: "https://maps.app.goo.gl/s9t9U12cQ1Xz2JtM6", // Placeholder for Marmari Open Air Theatre
+                gCalStart: "20250625T193000",
+                gCalEnd: "20250625T213000"
+            },
+            {
+                date: "WEDNESDAY 25/06/25",
+                time: "19:30",
+                title: "RHYTHMIC GYMNASTICS AND MODERN DANCE PERFORMANCE",
+                description: "In collaboration with the Cultural, Athletic Association 'ANAMORFOSI-ANAPLASI'. Featuring children's and youth sections of the Association.",
+                location: "KARDAMENA OPEN AIR THEATRE",
+                googleMaps: "https://maps.app.goo.gl/e7xK9L2xP5yV3K9T7", // Placeholder for Kardamena Open Air Theatre
+                gCalStart: "20250625T193000",
+                gCalEnd: "20250625T213000"
+            },
+            {
+                date: "THURSDAY 26/06/25",
+                time: "20:00",
+                title: "KLIDONAS CUSTOM",
+                description: "Event with the re-enactment of Fanou and Klidonas, accompanied by dances from the children's and youth sections of the Lyceum of Greek Women, Kos branch.",
+                location: "ELEFTHERIAS SQUARE, KOS",
+                googleMaps: "https://maps.app.goo.gl/4X9z8Q1yG7w5eE6Q6", // Placeholder for Eleftherias Square, Kos
+                gCalStart: "20250626T200000",
+                gCalEnd: "20250626T220000"
+            },
+            {
+                date: "SATURDAY 28/06/25",
+                time: "20:30",
+                title: "DANCE EVENT 'ELIKONIA'",
+                description: "An evening dedicated to Greek dances with special emphasis on zeibekiko, in collaboration with 'ALEGRIA DANCE LAB' Dance School.",
+                location: "ELEFTHERIAS SQUARE, KOS",
+                googleMaps: "https://maps.app.goo.gl/4X9z8Q1yG7w5eE6Q6", // Placeholder for Eleftherias Square, Kos
+                gCalStart: "20250628T203000",
+                gCalEnd: "20250628T223000"
+            },
+            {
+                date: "SATURDAY 28/06/25 & SUNDAY 29/06/25",
+                time: "SATURDAY 11:00 (KOS PARADE), 19:00 (KARDAMENA PARADE), SUNDAY 20:30 (CONCERT)",
+                title: "COLLABORATION OF DELTA MUNICIPALITY YOUTH ORCHESTRA SINDOU AND KOS MUNICIPAL PHILHARMONIC",
+                description: "Parade in central streets of Kos town and in the port and streets of Kardamena. Concert in Eleftherias Square.",
+                location: "CENTRAL STREETS OF KOS TOWN / KARDAMENA PORT AND STREETS / ELEFTHERIAS SQUARE, KOS",
+                googleMaps: "https://maps.app.goo.gl/4X9z8Q1yG7w5eE6Q6", // Placeholder for Eleftherias Square, Kos (main event location)
+                gCalStart: "20250628T110000",
+                gCalEnd: "20250629T223000"
+            },
+            {
+                date: "SUNDAY 29/06/25",
+                time: "19:30",
+                title: "CHILDREN'S ACTIVITIES WITH A SEA THEME",
+                description: "In collaboration with the Kardamena Cultural Association 'ARGO'. The event takes place in the framework of Maritime Week.",
+                location: "KARDAMENA OPEN AIR THEATRE",
+                googleMaps: "https://maps.app.goo.gl/e7xK9L2xP5yV3K9T7", // Placeholder for Kardamena Open Air Theatre
+                gCalStart: "20250629T193000",
+                gCalEnd: "20250629T213000"
+            },
+            {
+                date: "MONDAY 30/06/25",
+                time: "20:00",
+                title: "KLIDONAS CUSTOM",
+                description: "Event with the re-enactment of Fanou and Klidonas, accompanied by dances from sections of the Kefalos Cultural Association 'AGIOS NIKOLAOS'.",
+                location: "KEFALOS PORT",
+                googleMaps: "https://maps.app.goo.gl/s9t9U12cQ1Xz2JtM6", // Placeholder for Kefalos Port
+                gCalStart: "20250630T200000",
+                gCalEnd: "20250630T220000"
+            },
+            // July
+            {
+                date: "THURSDAY 03/07/25",
+                time: "20:00",
+                title: "PRESENTATION OF MARIA MAMALIGKA'S NOVELLA TITLED 'MERKANDO'",
+                description: "In collaboration with P.O. KOS 'O FILETAS', the Lyceum of Greek Women-Kos branch, D.R.E.P.P.O 'FAINARETI' and the 'ESTIA' BOOKSTORE. The book will be presented by Minas G. Hadjiantoniou and Theodosis Diakogiannis.",
+                location: "COURTYARD OF KOS HISTORICAL & FOLKLORE MUSEUM",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Kos Historical & Folklore Museum Courtyard
+                gCalStart: "20250703T200000",
+                gCalEnd: "20250703T220000"
+            },
+            {
+                date: "THURSDAY 03/07/25",
+                time: "19:00",
+                title: "THEATRICAL PERFORMANCE 'BIRDS' by ARISTOPHANES",
+                description: "In collaboration with P.S. AVEROF MUNICIPALITY OF KOS. The performance features children, parents and pedagogical staff of the Station.",
+                location: "ROMAN ODEON OF KOS",
+                googleMaps: "https://maps.app.goo.gl/wJ5P7L4xQ9zR1V8X9", // Placeholder for Roman Odeon of Kos
+                gCalStart: "20250703T190000",
+                gCalEnd: "20250703T210000"
+            },
+            {
+                date: "SATURDAY 05/07/25",
+                time: "20:00",
+                title: "SHEPHERD'S FESTIVAL",
+                description: "Traditional festival on rural life, with local delicacies, traditional dances and live music, in collaboration with the Antimachia Cultural Association 'I PROODOS'.",
+                location: "TRADITIONAL HOUSE, ANTIMACHIA MILL",
+                googleMaps: "https://maps.app.goo.gl/g6Lp8qV9zP4r5JgN8", // Placeholder for Antimachia Traditional House/Mill
+                gCalStart: "20250705T200000",
+                gCalEnd: "20250705T230000"
+            },
+            {
+                date: "SUNDAY 06/07/25",
+                time: "20:30",
+                title: "MUSIC AND DANCE PERFORMANCE 'DANCES AND SONGS OF THE LAND AND THE SEA'",
+                description: "End of Lyceum Year, in collaboration with the Lyceum of Greek Women Kardamena.",
+                location: "KARDAMENA OPEN AIR THEATRE",
+                googleMaps: "https://maps.app.goo.gl/e7xK9L2xP5yV3K9T7", // Placeholder for Kardamena Open Air Theatre
+                gCalStart: "20250706T203000",
+                gCalEnd: "20250706T223000"
+            },
+            {
+                date: "MONDAY 07/07/25",
+                time: "20:30",
+                title: "THE GATHERING OF SOUTHERN DODECANESE LYRE PLAYERS IN KEFALOS, KOS",
+                description: "Music and dance gathering to highlight the richness of the Dodecanese Lyre, as found today in the Dodecanese. Focusing on the Southern Dodecanese (Kos, Halki, Symi, Rhodes, Karpathos, Kassos). Featuring lyre and lute players from Rhodes and Karpathos.",
+                location: "KEFALOS PORT",
+                googleMaps: "https://maps.app.goo.gl/s9t9U12cQ1Xz2JtM6", // Placeholder for Kefalos Port
+                gCalStart: "20250707T203000",
+                gCalEnd: "20250707T230000"
+            },
+            {
+                date: "SATURDAY 12/07/25",
+                time: "20:00",
+                title: "MUSIC EVENING",
+                description: "Traditional music and dances and local gastronomy, in collaboration with the Asfendiou Cultural Association 'O THEOKRITOS'.",
+                location: "TIGAKI SQUARE",
+                googleMaps: "https://maps.app.goo.gl/h7K8L2xQ3zR4V5Y6A", // Placeholder for Tigaki Square
+                gCalStart: "20250712T200000",
+                gCalEnd: "20250712T230000"
+            },
+            {
+                date: "SATURDAY 12/07/25",
+                time: "20:00",
+                title: "CONCERT WITH SINFONIETTA ATHENS",
+                description: "By the Artistic Director of ERT, GEORGE ARAVIDIS, in collaboration with the ERATEIO CONSERVATORY OF ATHENS and piano teacher MARIA ORFANOUDAKI. A unique concert of classical and Greek repertoire, accompanied by piano & children's choir of Maria Orfanoudaki's students, in collaboration with Vangelis Vatsineas.",
+                location: "INTERNATIONAL HIPPOCRATIC FOUNDATION OF KOS",
+                googleMaps: "https://maps.app.goo.gl/k9R0S1T2U3V4W5X6Y", // Placeholder for International Hippocratic Foundation of Kos
+                gCalStart: "20250712T200000",
+                gCalEnd: "20250712T220000"
+            },
+            {
+                date: "SUNDAY 13/07/25",
+                time: "20:00",
+                title: "MUSIC AND DANCE PERFORMANCE 'Tonight my guitar...'",
+                description: "In collaboration with the Lyceum of Greek Women-Kos branch. Dances by the sections of the Lyceum of Greek Women Kos accompanied by a traditional music ensemble. Featuring a small choir of Kantadores.",
+                location: "COURTYARD OF THE 7TH PRIMARY SCHOOL OF KOS",
+                googleMaps: "https://maps.app.goo.gl/L8M9N0O1P2Q3R4S5T", // Placeholder for 7th Primary School of Kos Courtyard
+                gCalStart: "20250713T200000",
+                gCalEnd: "20250713T220000"
+            },
+            {
+                date: "TUESDAY 15/07/25",
+                time: "20:30",
+                title: "CHAMBER SONGS. FAIRY TALES & SONGS",
+                description: "In collaboration with the LIONS CLUB OF KOS 'O HIPPOCRATES'. On stage 4 musicians. They tell funny stories and fairy tales. They sing about love, generosity, free time, companionship, the cycle of life, joy, play and of course dance.",
+                location: "ROMAN ODEON OF KOS",
+                googleMaps: "https://maps.app.goo.gl/wJ5P7L4xQ9zR1V8X9", // Placeholder for Roman Odeon of Kos
+                gCalStart: "20250715T203000",
+                gCalEnd: "20250715T223000"
+            },
+            {
+                date: "WEDNESDAY 16/07/25",
+                time: "19:30",
+                title: "CHILDREN'S THEATRICAL PERFORMANCE 'THE TICKLER'",
+                description: "By DIMITRIS BASLAM, in collaboration with the LIONS CLUB OF KOS 'O HIPPOCRATES'.",
+                location: "KON/OU KIAPOKA SQUARE, ZIPARI OPEN AIR THEATRE",
+                googleMaps: "https://maps.app.goo.gl/tU6S7E8P9Q0R1S2T3", // Placeholder for Zipari Open Air Theatre
+                gCalStart: "20250716T193000",
+                gCalEnd: "20250716T213000"
+            },
+            {
+                date: "FRIDAY 18/07/25",
+                time: "22:00",
+                title: "CONCERT WITH THE BAND PYX LAX",
+                description: "Ticketed entry.",
+                location: "PYLI FOOTBALL FIELD",
+                googleMaps: "https://maps.app.goo.gl/p7Q8R9S0T1U2V3W4X", // Placeholder for Pyli Football Field
+                gCalStart: "20250718T220000",
+                gCalEnd: "20250718T235900" // Assuming it might run late
+            },
+            {
+                date: "SUNDAY 20/07/25",
+                time: "20:30",
+                title: "CONCERT WITH THE ORCHESTRA 'TA MANOUSAKIA' AND KAITI KOULIA",
+                description: "Island feast with traditional dances and songs in the city center.",
+                location: "ELEFTHERIAS SQUARE, KOS",
+                googleMaps: "https://maps.app.goo.gl/4X9z8Q1yG7w5eE6Q6", // Placeholder for Eleftherias Square, Kos
+                gCalStart: "20250720T203000",
+                gCalEnd: "20250720T223000"
+            },
+            {
+                date: "FRIDAY 25/07/25",
+                time: "21:00",
+                title: "CONCERT WITH MARINA SATTI",
+                description: "Ticketed entry.",
+                location: "KOS MARINA",
+                googleMaps: "https://maps.app.goo.gl/a7B8C9D0E1F2G3H4I", // Placeholder for Kos Marina
+                gCalStart: "20250725T210000",
+                gCalEnd: "20250725T230000"
+            },
+            {
+                date: "SATURDAY 26/07/25",
+                time: "20:30",
+                title: "'TRAVELLING IN GREECE' - MUSIC AND DANCE PERFORMANCE",
+                description: "Performance with Greek traditional dances, in collaboration with ELENI DROSOU DANCE SCHOOL.",
+                location: "ELEFTHERIAS SQUARE, KOS",
+                googleMaps: "https://maps.app.goo.gl/4X9z8Q1yG7w5eE6Q6", // Placeholder for Eleftherias Square, Kos
+                gCalStart: "20250726T203000",
+                gCalEnd: "20250726T223000"
+            },
+            {
+                date: "SUNDAY 27/07/25",
+                time: "20:00",
+                title: "MUSIC EVENT 'SELAS'",
+                description: "Performance of ecclesiastical hymns by hymnodist Nektaria Karantzi accompanied by 2 musical instruments, in collaboration with WOMEN WITHOUT BORDERS KOS.",
+                location: "ROMAN ODEON",
+                googleMaps: "https://maps.app.goo.gl/wJ5P7L4xQ9zR1V8X9", // Placeholder for Roman Odeon of Kos
+                gCalStart: "20250727T200000",
+                gCalEnd: "20250727T220000"
+            },
+            {
+                date: "SUNDAY 27/07/25",
+                time: "21:30",
+                title: "'A LOVE FOR SUMMER...'",
+                description: "Music event-tribute to New Wave. Also featuring the Adult Choir of 'Arion' Association, in collaboration with the 'ARION' MUSIC LOVERS ASSOCIATION.",
+                location: "AGIOI ANARGYROI, KARDAMENA",
+                googleMaps: "https://maps.app.goo.gl/p7Q8R9S0T1U2V3W4X", // Placeholder for Agioi Anargyroi, Kardamena
+                gCalStart: "20250727T213000",
+                gCalEnd: "20250727T233000"
+            },
+            {
+                date: "MONDAY 28/07/25",
+                time: "17:00-20:00",
+                title: "'WHEN CHILDREN SPEAK WITH COLORS'",
+                description: "Exhibition of children's paintings from the winter workshops of the Association under the guidance of Lise-Lotte Iversen, in collaboration with the Kardamena Cultural Association 'ARGO'.",
+                location: "MARITIME & FOLKLORE MUSEUM OF KARDAMENA",
+                googleMaps: "https://maps.app.goo.gl/P2Q3R4S5T6U7V8W9X", // Placeholder for Maritime & Folklore Museum of Kardamena
+                gCalStart: "20250728T170000",
+                gCalEnd: "20250728T200000"
+            },
+            {
+                date: "MONDAY 28/07/25",
+                time: "22:00",
+                title: "CONCERT WITH ELENA PAPARIZOU",
+                description: "Tic
