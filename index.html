@@ -158,6 +158,16 @@
                             <i data-lucide="shopping-bag" class="w-10 h-10 text-blue-500 mb-2"></i>
                             <span class="font-semibold text-gray-700">Local Products</span>
                         </button>
+                        <!-- New button for Itinerary -->
+                        <button onclick="showSection('itinerary-section')" class="grid-button">
+                            <i data-lucide="list-checks" class="w-10 h-10 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700">Itinerary</span>
+                        </button>
+                        <!-- New button for Island Hopping -->
+                        <button onclick="showSection('island-hopping-section')" class="grid-button">
+                            <i data-lucide="sailboat" class="w-10 h-10 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700">Island Hopping</span>
+                        </button>
                         <button onclick="showSection('transport-section')" class="grid-button">
                             <i data-lucide="bus" class="w-10 h-10 text-blue-500 mb-2"></i>
                             <span class="font-semibold text-gray-700">Getting Around</span>
@@ -362,7 +372,7 @@
                 <div class="card p-6">
                     <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="shopping-cart" class="w-5 h-5 mr-2 text-blue-500"></i>Nearby Essentials</h3>
                     <p class="text-gray-600"><strong>Supermarket:</strong> AB Vassilopoulos is just a 1-minute walk away for groceries.</p>
-                    <p class="text-gray-600 mt-2"><strong>ATM:</strong> Available at the entrance of the AB Vassilopoulos supermarket.</p>
+                    <p class="text-gray-600 mt-2"><strong>ATM:</b> Available at the entrance of the AB Vassilopoulos supermarket.</p>
                     <p class="text-gray-600 mt-2"><strong>Pharmacy (Φαρμακείο):</strong> Several nearby. Look for a green cross sign. A list of on-duty pharmacies is posted on their doors.</p>
                 </div>
             </div>
@@ -433,7 +443,7 @@
                 <p class="text-gray-700 mb-4">Kos is rich in local produce and traditional goods that make for wonderful souvenirs. Here are some of our favorites:</p>
 
                 <div class="card overflow-hidden p-0">
-                    <img src="https://www.greektasteonline.co.uk/cdn/shop/files/thimarisiomeli.jpg?v=1715667573" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/melikoukouvas.jpg?itok=f4f4f4f4';" alt="Kos Honey" class="w-full h-40 object-cover">
+                    <img src="https://placehold.co/400x200/a0c49d/ffffff?text=Kos+Honey" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/melikoukouvas.jpg?itok=f4f4f4f4';" alt="Kos Honey" class="w-full h-40 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-xl mb-2 text-gray-800">Kos Honey</h3>
                         <p class="text-gray-600 mb-2">Kos is known for its excellent thyme honey, rich in aroma and flavor. It's a natural sweetener and a healthy treat.</p>
@@ -443,7 +453,7 @@
                 </div>
 
                 <div class="card overflow-hidden p-0">
-                    <img src="https://www.meatandgrillstories.com/wp-content/uploads/2023/02/%CE%BA%CF%81%CE%B1%CF%83%CE%BF%CF%84%CF%85%CF%81%CE%B9-%CE%BA%CF%89-3.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/tyriposa.jpg?itok=f4f4f4f4';" alt="Posa Cheese" class="w-full h-40 object-cover">
+                    <img src="https://placehold.co/400x200/c4d7e0/ffffff?text=Posa+Cheese" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/tyriposa.jpg?itok=f4f4f4f4';" alt="Posa Cheese" class="w-full h-40 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-xl mb-2 text-gray-800">Posa Cheese (Wine Cheese)</h3>
                         <p class="text-gray-600 mb-2">A unique local cheese, "Posa" (or "Tyri tis Posas") is traditionally aged in red wine sediment, giving it a distinctive reddish hue and a rich, spicy flavor.</p>
@@ -453,7 +463,7 @@
                 </div>
 
                 <div class="card overflow-hidden p-0">
-                    <img src="https://nistisimo.gr/recipeimages/669/669_1.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/glykotomatas.jpg?itok=f4f4f4f4';" alt="Tomato Spoon Sweet" class="w-full h-40 object-cover">
+                    <img src="https://placehold.co/400x200/f8e8a6/ffffff?text=Tomato+Spoon+Sweet" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/glykotomatas.jpg?itok=f4f4f4f4';" alt="Tomato Spoon Sweet" class="w-full h-40 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-xl mb-2 text-gray-800">Tomato Spoon Sweet (Glyko Tomataki)</h3>
                         <p class="text-gray-600 mb-2">A traditional Greek "spoon sweet" made from small, unripe tomatoes. It's candied and has a unique, delightful flavor, often served with coffee or as a dessert.</p>
@@ -463,7 +473,7 @@
                 </div>
 
                 <div class="card overflow-hidden p-0">
-                    <img src="https://www.greekflavours.com/cdn/shop/files/evoo-from-lakonia-pgi-500ml-466260.png?v=1746177743&width=1445" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/ladi.jpg?itok=f4f4f4f4';" alt="Kos Olive Oil" class="w-full h-40 object-cover">
+                    <img src="https://placehold.co/400x200/d4a5a5/ffffff?text=Olive+Oil" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/ladi.jpg?itok=f4f4f4f4';" alt="Kos Olive Oil" class="w-full h-40 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-xl mb-2 text-gray-800">Extra Virgin Olive Oil</h3>
                         <p class="text-gray-600 mb-2">Greece is famous for its olive oil, and Kos produces excellent quality extra virgin olive oil. It's a staple in Greek cuisine and a healthy choice.</p>
@@ -473,7 +483,7 @@
                 </div>
 
                 <div class="card overflow-hidden p-0">
-                    <img src="https://www.getactive.gr/wp-content/uploads/2021/10/herbspices.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/votanakos.jpg?itok=f4f4f4f4';" alt="Local Herbs and Spices" class="w-full h-40 object-cover">
+                    <img src="https://placehold.co/400x200/b0d9b1/ffffff?text=Herbs+and+Spices" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/votanakos.jpg?itok=f4f4f4f4';" alt="Local Herbs and Spices" class="w-full h-40 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-xl mb-2 text-gray-800">Local Herbs and Spices</h3>
                         <p class="text-gray-600 mb-2">The island's climate is perfect for growing aromatic herbs like oregano, thyme, and sage. These make for fragrant and practical souvenirs.</p>
@@ -483,7 +493,7 @@
                 </div>
 
                 <div class="card overflow-hidden p-0">
-                    <img src="https://static.kos4all.com/wp-content/uploads/2014/03/Zia_Village_Kos_Kos4all_003.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/keramika.jpg?itok=f4f4f4f4';" alt="Handmade Ceramics" class="w-full h-40 object-cover">
+                    <img src="https://placehold.co/400x200/98c1d9/ffffff?text=Ceramics" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/keramika.jpg?itok=f4f4f4f4';" alt="Handmade Ceramics" class="w-full h-40 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-xl mb-2 text-gray-800">Handmade Ceramics</h3>
                         <p class="text-gray-600 mb-2">You'll find beautiful handmade pottery and ceramics throughout Kos, often featuring traditional Greek designs or vibrant colors. From decorative plates to functional mugs, they make lovely keepsakes.</p>
@@ -492,6 +502,149 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+
+        <!-- New section for Itinerary -->
+        <div id="itinerary-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">5-Day Kos Itinerary</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <p class="text-gray-700 mb-4">Here's a suggested 5-day itinerary to help you make the most of your visit to Kos Island, blending history, relaxation, and local experiences.</p>
+
+                <!-- Day 1 -->
+                <div class="card overflow-hidden p-0">
+                    <img src="https://placehold.co/400x200/ADD8E6/000000?text=Kos+Town+Harbor" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop';" alt="Kos Town Harbor" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Day 1: Ancient History & Kos Town Charm</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li><strong>Morning:</strong> Explore the <a href="https://www.google.com/maps/search/?api=1&query=Neratzia+Castle+Kos" target="_blank" class="text-blue-600 hover:underline">Castle of Neratzia</a> at the harbor entrance.</li>
+                            <li><strong>Lunch:</strong> Enjoy fresh seafood at a taverna by the old port.</li>
+                            <li><strong>Afternoon:</strong> Wander through the ancient Agora and visit the <a href="https://www.google.com/maps/search/?api=1&query=Ancient+Agora+Kos" target="_blank" class="text-blue-600 hover:underline">Roman Odeon</a>.</li>
+                            <li><strong>Evening:</strong> Stroll through the charming streets of Kos Town, enjoy dinner at a local restaurant, and perhaps a drink at a bar in Eleftherias Square.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="card overflow-hidden p-0">
+                    <img src="https://placehold.co/400x200/90EE90/000000?text=Asklepion" onerror="this.onerror=null;this.src='https://www.vacanzegreche.com/public/img/data/2019101794859527_asklepion-isola-di-kos.jpg';" alt="Asklepion" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Day 2: Healing History & Mountain Village Sunset</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li><strong>Morning:</strong> Visit the <a href="https://www.google.com/maps/search/?api=1&query=Asklepion+Kos" target="_blank" class="text-blue-600 hover:underline">Asklepion</a>, the ancient healing center associated with Hippocrates.</li>
+                            <li><strong>Lunch:</strong> Have lunch in the picturesque mountain village of <a href="https://www.google.com/maps/search/?api=1&query=Zia+Village+Kos" target="_blank" class="text-blue-600 hover:underline">Zia</a>.</li>
+                            <li><strong>Afternoon:</strong> Explore Zia's artisan shops and enjoy the panoramic views.</li>
+                            <li><strong>Evening:</strong> Experience a breathtaking sunset from Zia, followed by dinner at one of its traditional tavernas.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="card overflow-hidden p-0">
+                    <img src="https://placehold.co/400x200/FFD700/000000?text=Paradise+Beach" onerror="this.onerror=null;this.src='https://www.vacanzekos.com/wp-content/uploads/2016/02/paradise-beach.jpg';" alt="Paradise Beach" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Day 3: Southern Beaches & Thermal Springs</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li><strong>Morning:</strong> Head to the south coast for a day of relaxation at <a href="https://www.google.com/maps/search/?api=1&query=Paradise+Beach+Kos" target="_blank" class="text-blue-600 hover:underline">Paradise Beach</a>, known for its golden sand and clear waters.</li>
+                            <li><strong>Lunch:</strong> Grab a bite at a beachside taverna at Paradise Beach.</li>
+                            <li><strong>Afternoon:</strong> Visit <a href="https://www.google.com/maps/search/?api=1&query=Therma+Beach+Kos" target="_blank" class="text-blue-600 hover:underline">Therma Beach</a> and enjoy a natural spa experience in the hot springs.</li>
+                            <li><strong>Evening:</strong> Return to Kos Town for a relaxed dinner or try a new spot near your accommodation.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 4 -->
+                <div class="card overflow-hidden p-0">
+                    <img src="https://placehold.co/400x200/87CEEB/000000?text=Kefalos+Bay" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop';" alt="Kefalos Bay" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Day 4: Western Charm & Traditional Villages</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li><strong>Morning:</strong> Drive to the western side of the island to explore the traditional village of <a href="https://www.google.com/maps/search/?api=1&query=Kefalos+village+Kos" target="_blank" class="text-blue-600 hover:underline">Kefalos</a> and its old town.</li>
+                            <li><strong>Lunch:</strong> Enjoy lunch with a view at a taverna overlooking Kefalos Bay.</li>
+                            <li><strong>Afternoon:</strong> Relax at <a href="https://www.google.com/maps/search/?api=1&query=Agios+Stefanos+Beach+Kefalos+Kos" target="_blank" class="text-blue-600 hover:underline">Agios Stefanos Beach</a>, with its iconic islet of Kastri and its small church.</li>
+                            <li><strong>Evening:</strong> Head back towards Kos Town, perhaps stopping in a village like Antimachia for a traditional Greek dinner.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 5 -->
+                <div class="card overflow-hidden p-0">
+                    <img src="https://placehold.co/400x200/FFB6C1/000000?text=Lambi+Beach" onerror="this.onerror=null;this.src='https://media.jet2.com/is/image/jet2/313976-kgs_lambi_0813_02_ps?$Original-Dynamic(max1280x1280)$&wid=1920&hei=500&fit=crop%2C1&dpr=off';" alt="Lambi Beach" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Day 5: Relaxation & Departure Prep</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li><strong>Morning:</strong> Enjoy a leisurely morning at <a href="https://www.google.com/maps/search/?api=1&query=Lambi+Beach+Kos" target="_blank" class="text-blue-600 hover:underline">Lambi Beach</a>, close to Kos Town, for swimming and sunbathing.</li>
+                            <li><strong>Lunch:</strong> Casual lunch at a beach bar or cafe in Lambi.</li>
+                            <li><strong>Afternoon:</strong> Last-minute souvenir shopping in Kos Town or revisit a favorite spot.</li>
+                            <li><strong>Evening:</strong> Farewell dinner at a special restaurant in Kos Town, reflecting on your amazing trip.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New section for Island Hopping -->
+        <div id="island-hopping-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Island Hopping from Kos</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <p class="text-gray-700 mb-4">Kos is an excellent base for exploring nearby islands. Here are some popular options for day trips:</p>
+
+                <!-- Nisyros Island -->
+                <div class="card overflow-hidden p-0">
+                    <img src="https://placehold.co/400x200/8B4513/FFFFFF?text=Nisyros+Volcano" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1628189531122-8353e813a8c5?q=80&w=800&auto=format&fit=crop';" alt="Nisyros Volcano" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Nisyros Island: The Volcanic Gem</h3>
+                        <p class="text-gray-600 mb-2">Nisyros is a small, picturesque island dominated by its active volcano, one of the few accessible hydrothermal craters in the world.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>What to do:</strong> Visit the <a href="https://www.google.com/maps/search/?api=1&query=Stefanos+Crater+Nisyros" target="_blank" class="text-blue-600 hover:underline">Stefanos Crater</a> (walk inside!), explore the charming capital of Mandraki with its white-washed houses and the Monastery of Panagia Spiliani.</li>
+                            <li><strong>Ferry Schedule:</strong> Daily departures from Kos Town port, usually in the morning (e.g., 9:00 AM - 10:00 AM) with return in the late afternoon (e.g., 3:00 PM - 4:00 PM). Journey time is approximately 1-1.5 hours.</li>
+                            <li><strong>Booking:</strong> Tickets can be purchased at the port from various tour operators or online. It's advisable to book in advance during peak season.</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=ferry+kos+to+nisyros+schedule" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Search latest schedules <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Pserimos Island -->
+                <div class="card overflow-hidden p-0">
+                    <img src="https://placehold.co/400x200/B0E0E6/000000?text=Pserimos+Beach" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop';" alt="Pserimos Beach" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Pserimos Island: Tranquil Escape</h3>
+                        <p class="text-gray-600 mb-2">Pserimos is a small, quiet island known for its beautiful sandy beach and crystal-clear waters, perfect for a relaxing day away from the crowds.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>What to do:</strong> Swim and sunbathe on the main beach, enjoy fresh fish at one of the few tavernas, and experience the peaceful island life.</li>
+                            <li><strong>Ferry Schedule:</strong> Often part of a "3-Island Cruise" from Kos.</li>
+                            <li><strong>Booking:</strong> Tickets usually purchased directly from vendors at Kos Town port.</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=boat+trips+kos+to+pserimos+schedule" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Search latest schedules <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- 3-Island Cruise -->
+                <div class="card overflow-hidden p-0">
+                    <img src="https://placehold.co/400x200/ADD8E6/000000?text=3+Island+Cruise" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop';" alt="3 Island Cruise" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">3-Island Day Excursion: Pserimos, Kalymnos & Plati</h3>
+                        <p class="text-gray-600 mb-2">A very popular full-day boat trip from Kos Harbor, offering a taste of three different Dodecanese islands.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>Pserimos:</strong> Enjoy the tranquil main beach and small village.</li>
+                            <li><strong>Kalymnos:</strong> Explore Pothia, the capital, known for its sponge diving history and vibrant harbor.</li>
+                            <li><strong>Plati:</strong> A tiny uninhabited islet with stunning turquoise waters, perfect for swimming and snorkeling.</li>
+                            <li><strong>Schedule:</strong> Boats typically depart Kos Harbor between 9:30 AM and 10:30 AM, returning around 4:30 PM to 5:30 PM. Includes stops at each island for swimming and exploration.</li>
+                            <li><strong>Booking:</strong> Numerous boats offer this excursion directly from Kos Harbor. You can usually book on the spot the day before or the morning of departure. Prices vary by boat and inclusions (e.g., lunch).</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=3+island+cruise+kos+harbor" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Search 3-Island Cruises <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1233,7 +1386,7 @@
                 date: "SUNDAY 12/10/25 to SUNDAY 19/10/25",
                 title: "'HIPPOCRATIC WEEK'",
                 description: "The 'Hippocratic Week' aims at the Internationalization of the Authentic Oath of Hippocrates, by the INTERNATIONAL HIPPOCRATIC FOUNDATION OF KOS.",
-                location: "INTERNATIONAL HIPPOCRATIC FOUNDATION OF KOS",
+                location: "INTERNATIONAL HIPPOCRATIC+FOUNDATION+OF+KOS",
                 googleMaps: "https://www.google.com/maps/search/?api=1&query=INTERNATIONAL+HIPPOCRATIC+FOUNDATION+OF+KOS",
                 gCalStart: "20251012T090000",
                 gCalEnd: "20251019T170000"
@@ -1331,6 +1484,7 @@
                     const formattedSelectedDate = selectedDate.replace(/-/g, '');
 
                     // Check if the selected date falls within the event's start and end date range
+                    // This handles multi-day events correctly
                     return formattedSelectedDate >= eventStartDate && formattedSelectedDate <= eventEndDate;
                 });
             }
@@ -1392,6 +1546,12 @@
                     if (dateFilterInput) {
                         dateFilterInput.removeEventListener('change', renderEvents); // Prevent multiple listeners
                         dateFilterInput.addEventListener('change', renderEvents);
+                        // Set default date to today for events section
+                        const today = new Date();
+                        const yyyy = today.getFullYear();
+                        const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+                        const dd = String(today.getDate()).padStart(2, '0');
+                        dateFilterInput.value = `${yyyy}-${mm}-${dd}`;
                     }
                     renderEvents(); // Render events initially when section is shown
                 }
