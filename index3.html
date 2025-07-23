@@ -20,7 +20,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(247, 250, 252, 0.95); /* light gray with transparency */
+            background-color: rgba(255, 255, 255, 0.95); /* light gray with transparency */
             backdrop-filter: blur(10px);
             z-index: 50;
             overflow-y: auto;
@@ -71,9 +71,9 @@
             font-weight: 600;
         }
         #home-screen {
-            background-image: url('https://images.unsplash.com/photo-1602261595832-de4243563a33?q=80&w=1974&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
+            background-image: url('https://lh3.googleusercontent.com/p/AF1QipOvnHKcpr8hklmM3Q1-3MTL3wGNtYYa5Y1O2WYi=s1360-w1360-h1020?q=80&w=1974&auto=format&fit=crop');
+            background-size: small;
+            background-position: top;
         }
         .chat-bubble {
             max-width: 75%;
@@ -522,7 +522,7 @@
             
             try {
                 const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-                const apiKey = ""; 
+                const apiKey = "AIzaSyDd1fUY4syyAvclAWcVo0mr8nsnvbAZLQ4"; 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
                 
                 const response = await fetch(apiUrl, {
