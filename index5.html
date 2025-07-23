@@ -119,7 +119,7 @@
         }
         /* AI Concierge Styles */
         #ai-concierge-section .chat-container {
-            height: calc(100vh - 200px);
+            height: calc(100vh - 80px); /* Adjusted height */
             display: flex;
             flex-direction: column;
         }
@@ -135,6 +135,7 @@
             padding: 0.75rem 1rem;
             border-radius: 1rem;
             max-width: 80%;
+            line-height: 1.5;
         }
         #ai-concierge-section .user-message {
             background-color: #4a90e2;
@@ -152,6 +153,7 @@
             display: flex;
             padding: 1rem;
             border-top: 1px solid #e5e7eb;
+            background-color: #fff;
         }
         #ai-concierge-section #ai-input {
             flex-grow: 1;
@@ -159,6 +161,7 @@
             border-radius: 0.5rem;
             padding: 0.5rem 0.75rem;
             font-size: 1rem;
+            outline: none;
         }
         #ai-concierge-section #ai-send-btn {
             background-color: #4a90e2;
@@ -168,6 +171,10 @@
             padding: 0.5rem 1rem;
             margin-left: 0.5rem;
             cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #ai-concierge-section #ai-send-btn:hover {
+            background-color: #357ABD;
         }
     </style>
 </head>
@@ -368,7 +375,7 @@
                 </div>
             </div>
         </div>
-        </div>
+        
         <div id="transport-section" class="section-screen">
             <header class="section-header p-4 flex items-center shadow-md">
                 <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
@@ -702,8 +709,10 @@
                     </div>
                 </div>
                 <div class="input-area">
-                    <input type="text" id="ai-input" placeholder="Type your message...">
-                    <button id="ai-send-btn">Send</button>
+                    <input type="text" id="ai-input" placeholder="Type your message..." autocomplete="off">
+                    <button id="ai-send-btn">
+                        <i data-lucide="send" class="w-5 h-5"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -717,65 +726,9 @@
     <script type="module">
         import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
+        // --- Configuration ---
         const API_KEY = "AIzaSyDd1fUY4syyAvclAWcVo0mr8nsnvbAZLQ4";
         const genAI = new GoogleGenerativeAI(API_KEY);
-
-        async function run(prompt) {
-          const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-          const result = await model.generateContent(prompt);
-          const response = await result.response;
-          const text = response.text();
-          return text;
-        }
-
-        const aiInput = document.getElementById('ai-input');
-        const aiSendBtn = document.getElementById('ai-send-btn');
-        const aiChatBox = document.getElementById('ai-chat-box');
-
-        aiSendBtn.addEventListener('click', sendMessageToAI);
-        aiInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendMessageToAI();
-            }
-        });
-
-        async function sendMessageToAI() {
-            const userInput = aiInput.value.trim();
-            if (userInput === "") return;
-
-            // Display user's message
-            const userMessageElem = document.createElement('div');
-            userMessageElem.className = 'chat-message user-message';
-            userMessageElem.textContent = userInput;
-            aiChatBox.appendChild(userMessageElem);
-            aiChatBox.scrollTop = aiChatBox.scrollHeight;
-
-            aiInput.value = "";
-
-            // Get context from the welcome book
-            const context = document.body.innerText;
-            const prompt = `Based on the following information from the welcome book, answer the user's question. \n\nWelcome Book Content:\n${context}\n\nUser's Question: ${userInput}`;
-            
-            try {
-                const aiResponse = await run(prompt);
-                const aiMessageElem = document.createElement('div');
-                aiMessageElem.className = 'chat-message ai-message';
-                aiMessageElem.textContent = aiResponse;
-                aiChatBox.appendChild(aiMessageElem);
-                aiChatBox.scrollTop = aiChatBox.scrollHeight;
-            } catch (error) {
-                console.error("Error with AI API:", error);
-                const errorMessageElem = document.createElement('div');
-                errorMessageElem.className = 'chat-message ai-message';
-                errorMessageElem.textContent = "Sorry, I'm having trouble connecting to my brain right now. Please try again later.";
-                aiChatBox.appendChild(errorMessageElem);
-                aiChatBox.scrollTop = aiChatBox.scrollHeight;
-            }
-        }
-    </script>
-
-    <script>
-        let eventsRendered = false;
         
         const events = [
             // June
@@ -1563,6 +1516,120 @@
             }
         ];
 
+        // --- DOM Elements ---
+        const homeScreen = document.getElementById('home-screen');
+        const aiInput = document.getElementById('ai-input');
+        const aiSendBtn = document.getElementById('ai-send-btn');
+        const aiChatBox = document.getElementById('ai-chat-box');
+        
+        let currentSection = null;
+        let welcomeBookContext = '';
+
+        // --- Functions ---
+
+        // AI Chat Function
+        async function runAI(prompt) {
+          const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+          const result = await model.generateContent(prompt);
+          const response = await result.response;
+          return response.text();
+        }
+
+        async function sendMessageToAI() {
+            const userInput = aiInput.value.trim();
+            if (userInput === "") return;
+
+            // Display user's message
+            const userMessageElem = document.createElement('div');
+            userMessageElem.className = 'chat-message user-message';
+            userMessageElem.textContent = userInput;
+            aiChatBox.appendChild(userMessageElem);
+            aiChatBox.scrollTop = aiChatBox.scrollHeight;
+
+            aiInput.value = "";
+            aiInput.disabled = true;
+            aiSendBtn.disabled = true;
+            
+            // Create a thinking indicator
+            const thinkingElem = document.createElement('div');
+            thinkingElem.className = 'chat-message ai-message';
+            thinkingElem.innerHTML = '<span class="italic">Thinking...</span>';
+            aiChatBox.appendChild(thinkingElem);
+            aiChatBox.scrollTop = aiChatBox.scrollHeight;
+
+
+            const prompt = `Based *only* on the following information from the welcome book, please answer the user's question concisely and helpfully. Do not mention that you are an AI or that you are basing your answer on the provided text. Just answer the question directly. If the information is not in the text, say "I'm sorry, that information isn't available in the welcome guide. For more help, please contact your host, Ioannis."\n\nWelcome Book Content:\n${welcomeBookContext}\n\nUser's Question: ${userInput}`;
+            
+            try {
+                const aiResponse = await runAI(prompt);
+                thinkingElem.textContent = aiResponse; // Replace "Thinking..." with the actual response
+            } catch (error) {
+                console.error("Error with AI API:", error);
+                thinkingElem.textContent = "Sorry, I'm having trouble connecting to my brain right now. Please try again later.";
+            } finally {
+                aiInput.disabled = false;
+                aiSendBtn.disabled = false;
+                aiInput.focus();
+                aiChatBox.scrollTop = aiChatBox.scrollHeight;
+            }
+        }
+        
+        // Navigation and UI Functions
+        function showSection(sectionId) {
+            homeScreen.style.display = 'none';
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+                currentSection = section;
+                section.scrollTop = 0; // Scroll to top of the new section
+                
+                if (sectionId === 'events-section') {
+                    const dateFilterInput = document.getElementById('event-date-filter');
+                    if (dateFilterInput) {
+                        dateFilterInput.addEventListener('change', renderEvents);
+                        // Set default date to today for events section
+                        const today = new Date();
+                        const yyyy = today.getFullYear();
+                        const mm = String(today.getMonth() + 1).padStart(2, '0');
+                        const dd = String(today.getDate()).padStart(2, '0');
+                        dateFilterInput.value = `${yyyy}-${mm}-${dd}`;
+                    }
+                    renderEvents(); // Render events initially
+                }
+            }
+        }
+        window.showSection = showSection; // Expose to global scope for onclick
+
+        function goBack() {
+            if (currentSection) {
+                currentSection.classList.remove('active');
+                currentSection = null;
+            }
+            setTimeout(() => {
+                 homeScreen.style.display = 'block';
+            }, 300); // Delay to allow transition
+        }
+        window.goBack = goBack; // Expose to global scope for onclick
+
+        function copyToClipboard(elementSelector) {
+            const textToCopy = document.querySelector(elementSelector).innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showToast();
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+        window.copyToClipboard = copyToClipboard; // Expose to global scope for onclick
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2000);
+        }
+
+        // Event Calendar Functions
         function generateGoogleCalendarLink(event) {
             const startDate = event.gCalStart;
             const endDate = event.gCalEnd;
@@ -1578,33 +1645,20 @@
             return `https://wa.me/?text=${message}`;
         }
 
-        function generateEmailShareLink(event) {
-            const subject = encodeURIComponent(`Event Invitation: ${event.title}`);
-            const body = encodeURIComponent(`Hi,\n\nI thought you might be interested in this event:\n\n*Event:* ${event.title}\n*Date:* ${event.date}\n*Time:* ${event.time}\n*Location:* ${event.location}\n*Description:* ${event.description}\n\nFind it on Google Maps: ${event.googleMaps}\n\nHope to see you there!\n\nBest regards.`);
-            return `mailto:?subject=${subject}&body=${body}`;
-        }
-
         function renderEvents() {
             const eventsList = document.getElementById('events-list');
             const noEventsMessage = document.getElementById('no-events-message');
-            eventsList.innerHTML = ''; // Clear previous events
-            noEventsMessage.classList.add('hidden'); // Hide no events message by default
+            eventsList.innerHTML = '';
+            noEventsMessage.classList.add('hidden');
 
             const selectedDate = document.getElementById('event-date-filter').value;
             let filteredEvents = events;
 
             if (selectedDate) {
-                // Filter events based on selected date
                 filteredEvents = events.filter(event => {
-                    // Extract year, month, day from gCalStart for comparison
-                    const eventStartDate = event.gCalStart ? event.gCalStart.substring(0, 8) : ''; // YYYYMMDD
-                    const eventEndDate = event.gCalEnd ? event.gCalEnd.substring(0, 8) : ''; // YYYYMMDD
-
-                    // Format selected date to YYYYMMDD for comparison
+                    const eventStartDate = event.gCalStart ? event.gCalStart.substring(0, 8) : '';
+                    const eventEndDate = event.gCalEnd ? event.gCalEnd.substring(0, 8) : '';
                     const formattedSelectedDate = selectedDate.replace(/-/g, '');
-
-                    // Check if the selected date falls within the event's start and end date range
-                    // This handles multi-day events correctly
                     return formattedSelectedDate >= eventStartDate && formattedSelectedDate <= eventEndDate;
                 });
             }
@@ -1615,7 +1669,6 @@
                 filteredEvents.forEach(event => {
                     const eventCard = document.createElement('div');
                     eventCard.className = 'event-card p-6 flex flex-col justify-between';
-
                     eventCard.innerHTML = `
                         <div>
                             <h2 class="text-2xl font-bold mb-2">${event.title}</h2>
@@ -1643,81 +1696,27 @@
             }
         }
 
-        // Initialize Lucide icons
-        lucide.createIcons();
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
 
-        let currentSection = null;
-        const homeScreen = document.getElementById('home-screen');
-        const sections = document.querySelectorAll('.section-screen');
-
-        // Function to show a section
-        function showSection(sectionId) {
-            homeScreen.style.display = 'none';
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.classList.add('active');
-                currentSection = section;
-                // Scroll to top of the new section
-                section.scrollTop = 0;
-                
-                if (sectionId === 'events-section') {
-                    // Attach event listener for date filter when events section is shown
-                    const dateFilterInput = document.getElementById('event-date-filter');
-                    if (dateFilterInput) {
-                        dateFilterInput.removeEventListener('change', renderEvents); // Prevent multiple listeners
-                        dateFilterInput.addEventListener('change', renderEvents);
-                        // Set default date to today for events section
-                        const today = new Date();
-                        const yyyy = today.getFullYear();
-                        const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-                        const dd = String(today.getDate()).padStart(2, '0');
-                        dateFilterInput.value = `${yyyy}-${mm}-${dd}`;
-                    }
-                    renderEvents(); // Render events initially when section is shown
+            // Capture the welcome book context once, excluding the AI concierge section itself
+            let content = [];
+            document.querySelectorAll('.section-screen').forEach(section => {
+                if(section.id !== 'ai-concierge-section') {
+                    content.push(section.innerText);
                 }
-            }
-        }
+            });
+            welcomeBookContext = content.join('\n\n');
 
-        // Function to go back to the home screen
-        function goBack() {
-            if (currentSection) {
-                currentSection.classList.remove('active');
-                currentSection = null;
-            }
-            // A short delay to allow the transition to complete
-            setTimeout(() => {
-                 homeScreen.style.display = 'block';
-            }, 300);
-        }
-
-        // Function to copy text to clipboard and show a toast notification
-        function copyToClipboard(elementSelector) {
-            const textToCopy = document.querySelector(elementSelector).innerText;
-            
-            // A temporary textarea is created to execute the copy command
-            const textArea = document.createElement('textarea');
-            textArea.value = textToCopy;
-            document.body.appendChild(textArea);
-            textArea.select();
-            
-            try {
-                document.execCommand('copy');
-                showToast();
-            } catch (err) {
-                console.error('Failed to copy text: ', err);
-            }
-            
-            document.body.removeChild(textArea);
-        }
-
-        // Function to show a toast notification
-        function showToast() {
-            const toast = document.getElementById('toast');
-            toast.style.opacity = '1';
-            setTimeout(() => {
-                toast.style.opacity = '0';
-            }, 2000); // Hide after 2 seconds
-        }
+            // Setup AI Chat Listeners
+            aiSendBtn.addEventListener('click', sendMessageToAI);
+            aiInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessageToAI();
+                }
+            });
+        });
 
     </script>
 </body>
