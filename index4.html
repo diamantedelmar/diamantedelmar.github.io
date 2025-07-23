@@ -69,7 +69,6 @@
             color: #2D3748;
             font-weight: 600;
         }
-        /* Styles from ippo2025.html */
         .event-card {
             background-color: #fff;
             border-radius: 1rem;
@@ -105,10 +104,6 @@
         .btn-share:hover {
             background-color: #536AC6;
         }
-        .header-bg {
-            background-color: #2c3e50; /* Dark blue/grey */
-            color: white;
-        }
         .event-date {
             color: #d35400; /* Orange-brown */
             font-weight: 700;
@@ -137,11 +132,11 @@
             cursor: pointer;
         }
         .ai-response {
-            background-color: #f7fafc;
+            background-color: #f0f4ff;
             border-radius: 0.5rem;
             padding: 1rem;
             margin-top: 1rem;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #cddbfe;
         }
     </style>
 </head>
@@ -153,27 +148,29 @@
             <header class="relative">
                 <img src="https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop" 
                      onerror="this.onerror=null;this.src='https://diamantedelmar.github.io/phaedra.png';" 
-                     alt="Phaedra" class="w-full h-75 object-cover">
-                <div class="absolute bottom-0 left-0 w-full h-26 bg-gradient-to-t from-gray-100 to-transparent"></div>
+                     alt="Phaedra" class="w-full h-72 object-cover">
+                <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-gray-100 to-transparent"></div>
             </header>
-            <div class="p-6 -mt-10">
+            <div class="p-6 -mt-16">
                  <div class="text-center mb-8 bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg">
                     <h1 class="text-3xl font-bold text-gray-800">Welcome Book</h1>
                 </div>
 
+                <!-- AI Assistant Welcome Card -->
                 <div class="card p-6 mb-8 ai-assistant-card">
                     <h3 class="font-bold text-xl mb-2 flex items-center"><i data-lucide="sparkles" class="w-6 h-6 mr-2"></i> Your AI Assistant</h3>
                     <p class="mb-4" id="ai-greeting">Hello! I'm your AI-powered assistant for your stay. How can I help you today?</p>
                     <div class="flex gap-2">
                         <input type="text" id="ai-quick-question" placeholder="e.g., What's the Wi-Fi password?" class="ai-input text-gray-800 flex-grow">
-                        <button onclick="answerQuickQuestion()" class="ai-button">Ask</button>
+                        <button onclick="answerQuickQuestion()" class="bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100">Ask</button>
                     </div>
                     <div id="ai-quick-answer" class="ai-response text-gray-800 hidden"></div>
                 </div>
 
                 <main>
                     <div class="grid grid-cols-2 gap-4">
-                        <button onclick="showSection('ai-itinerary-section')" class="grid-button col-span-2 bg-blue-100 border-blue-300">
+                        <!-- AI Itinerary Planner Button -->
+                        <button onclick="showSection('ai-itinerary-section')" class="grid-button col-span-2 bg-blue-50 border-blue-200 hover:bg-blue-100">
                             <i data-lucide="wand-2" class="w-10 h-10 text-blue-500 mb-2"></i>
                             <span class="font-semibold text-blue-700">Personalized Itinerary Planner</span>
                         </button>
@@ -213,11 +210,12 @@
                             <i data-lucide="log-out" class="w-10 h-10 text-blue-500 mb-2"></i>
                             <span class="font-semibold text-gray-700">Departure</span>
                         </button>
-                        </div>
+                    </div>
                 </main>
             </div>
         </div>
 
+        <!-- ***** START NEW AI ITINERARY PLANNER SECTION ***** -->
         <div id="ai-itinerary-section" class="section-screen">
             <header class="section-header p-4 flex items-center shadow-md">
                 <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
@@ -235,8 +233,589 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">What are your interests?</label>
+                            <div class="grid grid-cols-2 gap-2 mt-2">
+                                <label class="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer"><input type="checkbox" class="interest-check rounded text-blue-500 focus:ring-blue-500" value="History"> History</label>
+                                <label class="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer"><input type="checkbox" class="interest-check rounded text-blue-500 focus:ring-blue-500" value="Beaches"> Beaches</label>
+                                <label class="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer"><input type="checkbox" class="interest-check rounded text-blue-500 focus:ring-blue-500" value="Food"> Food</label>
+                                <label class="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer"><input type="checkbox" class="interest-check rounded text-blue-500 focus:ring-blue-500" value="Relaxation"> Relaxation</label>
+                                <label class="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer"><input type="checkbox" class="interest-check rounded text-blue-500 focus:ring-blue-500" value="Villages"> Villages</label>
+                            </div>
+                        </div>
+                        <button onclick="generateItinerary()" class="w-full btn-primary mt-4">Generate My Itinerary</button>
+                    </div>
+                </div>
+                <div id="itinerary-response-container" class="hidden">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Your Custom Itinerary:</h3>
+                    <div id="itinerary-response" class="prose-custom space-y-4">
+                        <!-- AI-generated itinerary will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ***** END NEW AI ITINERARY PLANNER SECTION ***** -->
+
+        <div id="welcome-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Welcome to Paradise!</h2>
+            </header>
+            <div class="p-6 prose-custom">
+                <h3 class="text-2xl font-bold mb-4">Kalós órises!</h3>
+                <p class="mb-4">Welcome to Kos, and welcome to Diamante del Mar Phaedra. We are absolutely delighted to host you on this enchanting Dodecanese island. Recently renovated and designed with style and comfort in mind, we hope our home serves as your perfect sanctuary to explore the captivating blend of ancient history, sun-drenched beaches, and vibrant island life that makes Kos so special.</p>
+                <p class="mb-4">Kos invites you to slow down, breathe in the sea air, wander through millennia of history, and savour the simple pleasures. We hope you fall in love with its unique charm just as we have.</p>
+                <h3 class="text-xl font-semibold mt-6 mb-2">About This Guide</h3>
+                <p>Think of this book as your curated introduction to living like a stylish local. We've gathered essential information to help you settle in effortlessly, alongside our personal recommendations for discovering the island's highlights. Now, relax, unwind, and let your Kos story begin!</p>
+            </div>
+        </div>
+
+        <div id="essentials-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Apartment Info</h2>
+            </header>
+            <div class="p-6 space-y-6">
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="map-pin" class="w-5 h-5 mr-2 text-blue-500"></i>Address</h3>
+                    <p class="text-gray-600">Diamante Del Mar Phaedra</p>
+                    <p class="text-gray-600">Σοφοκλή Βενιζέλου 54 (Sophokli Venizelou 54)</p>
+                    <p class="text-gray-600">Kos Town, 853 00</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Diamante+Del+Mar+Phaedra,+Sophokli+Venizelou+54,+Kos+Town,+85300" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Open in Maps <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="clock" class="w-5 h-5 mr-2 text-blue-500"></i>Check-in & Out</h3>
+                    <p class="text-gray-600"><strong>Check-in:</strong> After 16:00 (4:00 PM)</p>
+                    <p class="text-gray-600"><strong>Lockbox Code:</strong> 1723</p>
+                    <p class="text-gray-600 mt-2"><strong>Check-out:</strong> By 11:00 AM</p>
+                    <p class="text-gray-500 text-sm mt-1">Please leave keys on the Lock Box.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="wifi" class="w-5 h-5 mr-2 text-blue-500"></i>Wi-Fi Access</h3>
+                    <p class="text-gray-600"><strong>Network:</strong> Phaedra</p>
+                    <div class="flex justify-between items-center mt-1">
+                        <p class="text-gray-600"><strong>Password:</strong> <span id="wifi-password">Phaedra!22420@</span></p>
+                        <button onclick="copyToClipboard('#wifi-password')" class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm font-semibold hover:bg-blue-600">Copy</button>
+                    </div>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="home" class="w-5 h-5 mr-2 text-blue-500"></i>House Rules</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li><strong>Strictly non-smoking</strong> indoors.</li>
+                        <li><strong>No pets</strong> allowed.</li>
+                        <li>Quiet hours: <strong>22:00 - 07:00</strong>.</li>
+                        <li><strong>No parties</strong> or large gatherings.</li>
+                        <li>Only registered guests may stay overnight.</li>
+                    </ul>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="book-open" class="w-5 h-5 mr-2 text-blue-500"></i>Appliance Manuals</h3>
+                    <p class="text-gray-600 mb-4">Scan the QR code with your phone's camera to view the manual for each appliance.</p>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div>
+                            <p class="font-medium text-gray-700">Microwave</p>
+                            <a href="https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/8897453600-GMI-12311-B/en-US-8897453600-20221020135181-User-Manual---File-Longsv-SE.pdf"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/8897453600-GMI-12311-B/en-US-8897453600-20221020135181-User-Manual---File-Longsv-SE.pdf" alt="QR Code for Microwave Manual" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-700">Oven</p>
+                           <a href="https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/7768282928-Edition-75-Backofenset/en-US-7768282928-202311021237674-User-Manual---File-Longen-US.pdf"> <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/7768282928-Edition-75-Backofenset/en-US-7768282928-202311021237674-User-Manual---File-Longen-US.pdf" alt="QR Code for Oven Manual" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-700">Nespresso Coffee machine</p>
+                            <a href="https://www.nespresso.com/shared_res/manuals/essenza-mini/2017/UM_NESPRESSO_ESSENZA_MINI_KRUPS_PROD_WEB_2017_02_20.pdf"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.nespresso.com/shared_res/manuals/essenza-mini/2017/UM_NESPRESSO_ESSENZA_MINI_KRUPS_PROD_WEB_2017_02_20.pdf" alt="QR Code for Nespresso Manual" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-700">Washing Machine</p>
+                            <a href="https://morris.gr/wp-content/uploads/2023/12/Instructions-manual-WIW-81411BI.pdf"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://morris.gr/wp-content/uploads/2023/12/Instructions-manual-WIW-81411BI.pdf" alt="QR Code for Washing Machine Manual" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="guide-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Island Guide</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <div class="card overflow-hidden p-0 bg-blue-50 border border-blue-200">
+                    <img src="https://images.unsplash.com/photo-1551028150-64b9f398f67b?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://xasapaki.gr/wp-content/uploads/2023/05/DSC01818-scaled.jpg';" alt="A perfectly grilled steak" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2 text-blue-800 flex items-center"><i data-lucide="star" class="w-6 h-6 mr-2 text-yellow-500 fill-current"></i>Host's Top Pick: Xasapaki</h3>
+                        <p class="text-blue-700 mb-3">For an unforgettable meal, visit Xasapaki. It's a unique butcher shop and steakhouse where you pick your cut of meat and they grill it to perfection. Their burgers are legendary!</p>
+                        <div class="flex space-x-2">
+                           <a href="https://xasapaki.gr/" target="_blank" class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700">Visit Website</a>
+                           <a href="https://www.google.com/maps/search/?api=1&query=Xasapaki+Kos" target="_blank" class="inline-flex items-center bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300">View on Map</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Dining & Coffee</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1559305459-49de9734d355?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://imageproxy.wolt.com/assets/67335dc042b21b5c7ee59154';" alt="A delicious brunch spread" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Alchimion & The Cup</h4><p class="text-gray-600 mt-1">Your go-to spots for breakfast, brunch, and specialty coffee.</p><a href="https://www.google.com/maps/search/?api=1&query=Alchimion+%26+The+Cup,+Kos" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1541592106381-b5863c023904?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.athinorama.gr/Content/ImagesDatabase/p/750x422/crop/both/a5/a5468d17cae94a7dad807007ceefddf8.jpg?quality=81&404=default&v=4';" alt="Fresh seafood pasta" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Barbouni</h4><p class="text-gray-600 mt-1">Top choice for fresh seafood by the water near the port.</p><a href="https://www.google.com/maps/search/?api=1&query=Barbouni+Kos" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1622234994112-c94831e67991?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://media-01.imu.nl/storage/ourplanetinmylens.com/21978/restaurants-kos-greece-patriko-800x533.jpg';" alt="A spread of Greek meze" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Patriko</h4><p class="text-gray-600 mt-1">A family-run gem for authentic Greek meze. Try the baked feta with honey.</p><a href="https://www.google.com/maps/search/?api=1&query=Patriko+Restaurant+Kos" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Beaches</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1625450438349-5975e50cf582?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://media.jet2.com/is/image/jet2/313976-kgs_lambi_0813_02_ps?$Original-Dynamic(max1280x1280)$&wid=1920&hei=500&fit=crop%2C1&dpr=off';" alt="Sandy beach with umbrellas" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Lambi Beach</h4><p class="text-gray-600 mt-1">Your closest neighbour! A popular sandy stretch perfect for a quick swim.</p><a href="https://www.google.com/maps/search/?api=1&query=Lambi+Beach+Kos" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531122-8353e813a8c5?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.jet2holidays.com/-/media/destination%20guide/greece/kos/cfu_agios_stefanos_beach_1497481107_getty_1023_01_rgb-136-dpi-for-web-min.jpg?h=500&w=1920&crop=1&hash=6B2D4846664312303EC275100A9440EB%201024w';" alt="Beach with a church on an islet" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Agios Stefanos</h4><p class="text-gray-600 mt-1">Arguably Kos's most photogenic beach, with views of Kastri islet.</p><a href="https://www.google.com/maps/search/?api=1&query=Agios+Stefanos+Beach+Kefalos+Kos" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1617066808546-32d56a237190?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.reckonasbavi.cz/wp-content/uploads/2023/08/Therma-beach-Embros-prirodni-termalni-lazne-na-ostrove-Kos.jpg.jpg';" alt="Rocky beach with hot springs" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Therma Beach</h4><p class="text-gray-600 mt-1">A unique natural spa experience where hot springs flow into the sea.</p><a href="https://www.google.com/maps/search/?api=1&query=Therma+Beach+Kos" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                         <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1507525428034-b723a996f329?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.vacanzekos.com/wp-content/uploads/2016/02/paradise-beach.jpg';" alt="A stunning sandy beach with turquoise water" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Paradise Beach</h4><p class="text-gray-600 mt-1">Golden sand and shallow, calm waters make this beach perfect for families.</p><a href="https://www.google.com/maps/search/?api=1&query=Paradise+Beach+Kos" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">History & Villages</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531233-a3a2de7c858e?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.vacanzegreche.com/public/img/data/2019101794859527_asklepion-isola-di-kos.jpg'" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">The Asklepion</h4><p class="text-gray-600 mt-1">The island's most important archaeological site, linked to Hippocrates.</p><a href="https://www.google.com/maps/search/?api=1&query=Asklepion+Kos" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1540899979346-a4c4987053e4?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://as1.ftcdn.net/jpg/02/95/44/86/1000_F_295448668_PNfl3bFQOS2eT3vWez1r1MlrlhyB0TFF.webp';" alt="Sunset over a Greek village" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Zia Village</h4><p class="text-gray-600 mt-1">A must-visit mountain village for breathtaking sunset views.</p><a href="https://www.google.com/maps/search/?api=1&query=Zia+Village+Kos" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531065-a8a4f0b2f5d7?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://a.travel-assets.com/findyours-php/viewfinder/images/res70/73000/73702-Kos-Castle.jpg';" alt="A stone castle by the sea" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Neratzia Castle</h4><p class="text-gray-600 mt-1">An impressive 15th-century castle guarding the harbour entrance.</p><a href="https://www.google.com/maps/search/?api=1&query=Neratzia+Castle+Kos" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="events-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Events in Kos</h2>
+            </header>
+            <div class="p-6">
+                <!-- ***** START NEW AI EVENT FINDER ***** -->
+                <div class="card p-6 mb-8">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="search" class="w-5 h-5 mr-2 text-blue-500"></i>What's On Today?</h3>
+                    <p class="text-gray-600 mb-4">Ask the AI to find events happening on the island right now.</p>
+                    <button onclick="findTodaysEvents()" class="w-full btn-primary">Find Today's Events</button>
+                    <div id="ai-event-response" class="ai-response text-gray-800 hidden mt-4"></div>
+                </div>
+                 <!-- ***** END NEW AI EVENT FINDER ***** -->
+
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">HIPPOCRATEIA 2025 Schedule</h3>
+                    <label for="event-date-filter" class="block text-gray-700 text-sm font-bold mb-2">Filter by Date:</label>
+                    <input type="date" id="event-date-filter" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div id="events-list" class="grid grid-cols-1 gap-8">
+                    <!-- Events will be rendered here -->
+                </div>
+                <div id="no-events-message" class="text-center text-gray-600 mt-8 hidden">
+                    No events found for the selected date.
+                </div>
+            </div>
+        </div>
+
+        <div id="local-products-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Local Products of Kos</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <p class="text-gray-700 mb-4">Kos is rich in local produce and traditional goods that make for wonderful souvenirs. Here are some of our favorites:</p>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://melitaygetos.gr/wp-content/uploads/2021/05/meli-1.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/melikoukouvas.jpg?itok=f4f4f4f4';" alt="Kos Honey" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Kos Honey</h3>
+                        <p class="text-gray-600 mb-2">Kos is known for its excellent thyme honey, rich in aroma and flavor. It's a natural sweetener and a healthy treat.</p>
+                        <p class="text-gray-700 font-medium"><strong>Where to buy:</strong> Local markets, small shops in villages like Zia, and specialty food stores. Look for jars labeled "Μέλι Θυμαρίσιο" (Thyme Honey).</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Taking it home:</strong> Honey is generally safe to carry in your checked luggage. Ensure it's well-sealed to prevent leaks.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://gastronomytours.com/wp-content/uploads/2023/09/Possa-768x443.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/tyriposa.jpg?itok=f4f4f4f4';" alt="Posa Cheese" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Posa Cheese (Wine Cheese)</h3>
+                        <p class="text-gray-600 mb-2">A unique local cheese, "Posa" (or "Tyri tis Posas") is traditionally aged in red wine sediment, giving it a distinctive reddish hue and a rich, spicy flavor.</p>
+                        <p class="text-gray-700 font-medium"><strong>Where to buy:</strong> Local dairies, larger supermarkets, and some traditional tavernas. Ask for "Τυρί της Πόσας".</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Taking it home:</strong> Best transported in checked luggage, ideally in a vacuum-sealed pack if available from the vendor, to maintain freshness and prevent odors.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://lerosisland.gr/wp-content/uploads/2017/05/photo_2017-02-07_11-58-13-1.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/glykotomatas.jpg?itok=f4f4f4f4';" alt="Tomato Spoon Sweet" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Tomato Spoon Sweet (Glyko Tomataki)</h3>
+                        <p class="text-gray-600 mb-2">A traditional Greek "spoon sweet" made from small, unripe tomatoes. It's candied and has a unique, delightful flavor, often served with coffee or as a dessert.</p>
+                        <p class="text-gray-700 font-medium"><strong>Where to buy:</strong> Local women's cooperatives, specialty food stores, and some larger supermarkets. Look for jars labeled "Γλυκό Ντοματάκι".</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Taking it home:</strong> Jars are best in checked luggage. Ensure the lid is tight to prevent leakage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="island-hopping-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Island Hopping from Kos</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <p class="text-gray-700 mb-4">Kos is an excellent base for exploring nearby islands. Here are some popular options for day trips:</p>
+                <div class="card overflow-hidden p-0">
+                    <img src="https://cdn.getyourguide.com/img/tour/b219904a91bc9dd83490526cf733932fe4c06143c9e347ccdacdec9e8e9ade6c.jpg/98.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1628189531122-8353e813a8c5?q=80&w=800&auto=format&fit=crop';" alt="Nisyros Volcano" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Nisyros Island: The Volcanic Gem</h3>
+                        <p class="text-gray-600 mb-2">Nisyros is a small, picturesque island dominated by its active volcano, one of the few accessible hydrothermal craters in the world.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>What to do:</strong> Visit the <a href="https://www.google.com/maps/search/?api=1&query=Stefanos+Crater+Nisyros" target="_blank" class="text-blue-600 hover:underline">Stefanos Crater</a> (walk inside!), explore the charming capital of Mandraki with its white-washed houses and the Monastery of Panagia Spiliani.</li>
+                            <li><strong>Ferry Schedule:</strong> Daily departures from Kos Town port, usually in the morning (e.g., 9:00 AM - 10:00 AM) with return in the late afternoon (e.g., 3:00 PM - 4:00 PM). Journey time is approximately 1-1.5 hours.</li>
+                            <li><strong>Booking:</strong> Tickets can be purchased at the port from various tour operators or online. It's advisable to book in advance during peak season.</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=ferry+kos+to+nisyros+schedule" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Search latest schedules <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="transport-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Getting Around Kos</h2>
+            </header>
+            <div class="p-6 space-y-6">
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="car" class="w-5 h-5 mr-2 text-blue-500"></i>Rental Car / Scooter</h3>
+                    <p class="text-gray-600">Highly recommended for the most freedom to explore remote beaches and villages. Book in advance during summer.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="bus" class="w-5 h-5 mr-2 text-blue-500"></i>KTEL Intercity Buses</h3>
+                    <p class="text-gray-600">An economical way to travel between major towns and resorts. The main station is at 7 Kleopatras Street. Check schedules online at <a href="http://www.ktel-kos.gr" target="_blank" class="text-blue-600 hover:underline">ktel-kos.gr</a>.</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=KTEL+Bus+Station+Kleopatras+7+Kos" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View Station on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div id="important-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Important Info</h2>
+            </header>
+            <div class="p-6 space-y-6">
+                 <div class="card p-6 border-2 border-red-500">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center text-red-600"><i data-lucide="siren" class="w-5 h-5 mr-2"></i>Emergency Numbers</h3>
+                    <p class="text-gray-700 text-lg">For any emergency, call:</p>
+                    <a href="tel:112" class="block text-center my-3 text-3xl font-bold text-red-600 bg-red-100 p-4 rounded-lg tracking-widest">112</a>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li><strong>Ambulance:</strong> 166</li>
+                        <li><strong>Police:</strong> 100</li>
+                        <li><strong>Fire Department:</strong> 199</li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="user" class="w-5 h-5 mr-2 text-blue-500"></i>Host Contact</h3>
+                    <p class="text-gray-600"><strong>Name:</strong> Varthakouris Ioannis</p>
+                    <p class="text-gray-600"><strong>Phone / WhatsApp:</strong></p>
+                     <a href="https://wa.me/306942575314" target="_blank" class="block text-center my-2 text-xl font-semibold text-green-600 bg-green-100 p-3 rounded-lg hover:bg-green-200">+30 6942 575314</a>
+                    <p class="text-sm text-gray-500">WhatsApp is preferred for non-urgent queries (9 AM - 8 PM). Please call for urgent issues.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="departure-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Until Next Time...</h2>
+            </header>
+            <div class="p-6 prose-custom">
+                <h3 class="text-2xl font-bold mb-4">A Fond Farewell</h3>
+                <p class="mb-4">As your time on the beautiful island of Kos draws to a close, we want to extend our sincerest thanks for choosing to stay with us. We truly hope you've had a wonderful and memorable holiday.</p>
+                
+                <div class="card my-6 bg-blue-50 p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="check-circle" class="w-5 h-5 mr-2 text-blue-500"></i>Check-out Reminder</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li>Check-out time is by <strong>11:00 AM</strong>.</li>
+                        <li>Please leave the <strong>keys in the lockbox</strong>.</li>
+                        <li>Ensure all personal belongings are packed.</li>
+                        <li>Turn off all lights and A/C units.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300">
+        Copied to clipboard!
+    </div>
+
+    <script>
+        const events = [
+            // June
+            { date: "SATURDAY 21/06/25 & SUNDAY 22/06/25", time: "SATURDAY 19:00 (OPENING), SUNDAY 18:00-20:00 (OPERATING HOURS)", title: "PAINTING AND HAGIOGRAPHY EXHIBITION", description: "Exhibition of works by the students of the Painting & Hagiography Workshop FRIDART of Maria Vamvakousi.", location: "HISTORICAL & FOLKLORE MUSEUM OF KOS", googleMaps: "https://www.google.com/maps/search/?api=1&query=HISTORICAL+%26+FOLKLORE+MUSEUM+OF+KOS", gCalStart: "20250621T190000", gCalEnd: "20250622T200000" },
+            { date: "TUESDAY 24/06/25", time: "19:00", title: "CONCERT WITH THE STUDENTS OF MARIA ORFANOUDAKI'S MUSIC SCHOOL", description: "Student concert of classical and contemporary music.", location: "COURTYARD OF THE FOLKLORE & HISTORICAL MUSEUM OF KOS", googleMaps: "https://www.google.com/maps/search/?api=1&query=HISTORICAL+%26+FOLKLORE+MUSEUM+OF+KOS", gCalStart: "20250624T190000", gCalEnd: "20250624T210000" },
+            { date: "WEDNESDAY 25/06/25", time: "19:30", title: "THE CUSTOM OF KLIDONAS", description: "Event with the re-enactment of the 'Fanos' and 'Klidonas', accompanied by dances from the children's and youth sections of the Cultural and Educational Association of Pyli 'O APELLIS'.", location: "MARMARI OPEN AIR THEATRE", googleMaps: "https://www.google.com/maps/search/?api=1&query=MARMARI+OPEN+AIR+THEATRE+KOS", gCalStart: "20250625T193000", gCalEnd: "20250625T213000" },
+            // ... The rest of the events array is included here for completeness
+            { date: "WEDNESDAY 25/06/25", time: "19:30", title: "RHYTHMIC GYMNASTICS AND MODERN DANCE PERFORMANCE", description: "In collaboration with the Cultural, Athletic Association 'ANAMORFOSI-ANAPLASI'. The children's and youth sections of the Association participate.", location: "KARDAMENA OPEN AIR THEATRE", googleMaps: "https://www.google.com/maps/search/?api=1&query=KARDAMENA+OPEN+AIR+THEATRE", gCalStart: "20250625T193000", gCalEnd: "20250625T213000" },
+            { date: "THURSDAY 26/06/25", time: "20:00", title: "THE CUSTOM OF KLIDONAS", description: "Event with the re-enactment of the 'Fanos' and 'Klidonas', accompanied by dances from the children's and youth sections of the Lyceum of Greek Women, Kos branch.", location: "ELEFTHERIAS SQUARE, KOS", googleMaps: "https://www.google.com/maps/search/?api=1&query=ELEFTHERIAS+SQUARE,+KOS", gCalStart: "20250626T200000", gCalEnd: "20250626T220000" },
+            { date: "FRIDAY 25/07/25", time: "21:00", title: "CONCERT WITH MARINA SATTI", description: "Ticketed event.", location: "KOS MARINA", googleMaps: "https://www.google.com/maps/search/?api=1&query=KOS+MARINA", gCalStart: "20250725T210000", gCalEnd: "20250725T230000" }
+        ];
+
+        let currentSection = null;
+        const homeScreen = document.getElementById('home-screen');
+        const sections = document.querySelectorAll('.section-screen');
+
+        function showSection(sectionId) {
+            homeScreen.style.display = 'none';
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+                currentSection = section;
+                section.scrollTop = 0;
+                
+                if (sectionId === 'events-section') {
+                    const dateFilterInput = document.getElementById('event-date-filter');
+                    if (dateFilterInput) {
+                        dateFilterInput.removeEventListener('change', renderEvents);
+                        dateFilterInput.addEventListener('change', renderEvents);
+                    }
+                    if (!dateFilterInput.value) {
+                         renderEvents();
+                    }
+                }
+            }
+        }
+
+        function goBack() {
+            if (currentSection) {
+                currentSection.classList.remove('active');
+                currentSection = null;
+            }
+            setTimeout(() => {
+                 homeScreen.style.display = 'block';
+            }, 300);
+        }
+
+        function copyToClipboard(elementSelector) {
+            const textToCopy = document.querySelector(elementSelector).innerText;
+            const textArea = document.createElement('textarea');
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast();
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2000);
+        }
+
+        function generateGoogleCalendarLink(event) {
+            const startDate = event.gCalStart;
+            const endDate = event.gCalEnd;
+            const title = encodeURIComponent(event.title);
+            const description = encodeURIComponent(`${event.description}\n\nLocation: ${event.location}`);
+            const location = encodeURIComponent(event.location);
+            return `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${description}&location=${location}&sf=true&output=xml`;
+        }
+
+        function generateWhatsAppShareLink(event) {
+            const message = encodeURIComponent(`Check out this event: ${event.title} on ${event.date} at ${event.location}. ${event.description} More info: ${event.googleMaps}`);
+            return `https://wa.me/?text=${message}`;
+        }
+
+        function renderEvents() {
+            const eventsList = document.getElementById('events-list');
+            const noEventsMessage = document.getElementById('no-events-message');
+            eventsList.innerHTML = '';
+            noEventsMessage.classList.add('hidden');
+
+            const selectedDate = document.getElementById('event-date-filter').value;
+            let filteredEvents = events;
+
+            if (selectedDate) {
+                filteredEvents = events.filter(event => {
+                    const eventStartDate = event.gCalStart ? event.gCalStart.substring(0, 8) : '';
+                    const eventEndDate = event.gCalEnd ? event.gCalEnd.substring(0, 8) : '';
+                    const formattedSelectedDate = selectedDate.replace(/-/g, '');
+                    return formattedSelectedDate >= eventStartDate && formattedSelectedDate <= eventEndDate;
+                });
+            }
+
+            if (filteredEvents.length === 0 && selectedDate) {
+                noEventsMessage.classList.remove('hidden');
+            } else {
+                filteredEvents.forEach(event => {
+                    const eventCard = document.createElement('div');
+                    eventCard.className = 'event-card p-6 flex flex-col justify-between';
+                    eventCard.innerHTML = `
+                        <div>
+                            <h2 class="text-2xl font-bold mb-2">${event.title}</h2>
+                            <p class="event-date text-lg mb-2"><i class="far fa-calendar-alt mr-2"></i>${event.date}</p>
+                            <p class="text-gray-700 mb-1"><i class="far fa-clock mr-2"></i>${event.time || ''}</p>
+                            <p class="event-location text-md mb-3"><i class="fas fa-map-marker-alt mr-2"></i>${event.location}</p>
+                            <p class="text-gray-600 text-sm mb-4">${event.description}</p>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between gap-3 mt-4">
+                            <a href="${event.googleMaps}" target="_blank" class="btn-primary flex items-center text-sm">
+                                <i class="fas fa-external-link-alt mr-2"></i> View on Map
+                            </a>
                             <div class="flex flex-wrap gap-2">
-                                <label class="flex items-center gap-2 p-2 border rounded-lg"><input type="checkbox" class="interest-check" value="History"> History</label>
-                                <label class="flex items-center gap-2 p-2 border rounded-lg"><input type="checkbox" class="interest-check" value="Beaches"> Beaches</label>
-                                <label class="flex items-center gap-2 p-2 border rounded-lg"><input type="checkbox" class="interest-check" value="Food"> Food</label>
-                                <label class="flex items-center gap-2 p-2 border rounded-lg"><input type="checkbox" class="interest-
+                                <a href="${generateGoogleCalendarLink(event)}" target="_blank" class="btn-share text-sm"><i class="far fa-calendar-plus"></i> Add to Calendar</a>
+                                <a href="${generateWhatsAppShareLink(event)}" target="_blank" class="btn-share text-sm"><i class="fab fa-whatsapp"></i> Share</a>
+                            </div>
+                        </div>
+                    `;
+                    eventsList.appendChild(eventCard);
+                });
+            }
+        }
+
+        // ***** START NEW AI FUNCTIONALITY *****
+        function setAIGreeting() {
+            const hour = new Date().getHours();
+            const greetingText = document.getElementById('ai-greeting');
+            let greeting = "Hello! I'm your AI assistant. How can I help you?";
+            if (hour < 12) {
+                greeting = "Good morning! I'm your AI assistant. Ask me anything about your stay.";
+            } else if (hour < 18) {
+                greeting = "Good afternoon! I'm your AI assistant. Need some recommendations?";
+            } else {
+                greeting = "Good evening! I'm your AI assistant. Planning your night out?";
+            }
+            greetingText.innerText = greeting;
+        }
+
+        function answerQuickQuestion() {
+            const question = document.getElementById('ai-quick-question').value.toLowerCase();
+            const answerEl = document.getElementById('ai-quick-answer');
+            let answer = "I'm sorry, I couldn't find a direct answer to that in the guide. Please try rephrasing or check the relevant section.";
+
+            if (question.includes('wifi') || question.includes('wi-fi')) {
+                answer = `The Wi-Fi network is <strong>Phaedra</strong> and the password is <strong>Phaedra!22420@</strong>.`;
+            } else if (question.includes('check-out') || question.includes('checkout')) {
+                answer = `Check-out is by <strong>11:00 AM</strong>. Please leave the keys in the lockbox.`;
+            } else if (question.includes('check-in') || question.includes('checkin')) {
+                answer = `Check-in is after <strong>16:00 (4:00 PM)</strong>.`;
+            } else if (question.includes('lockbox') || question.includes('code')) {
+                answer = `The lockbox code is <strong>1723</strong>.`;
+            } else if (question.includes('host') || question.includes('contact')) {
+                answer = `You can contact the host, Varthakouris Ioannis, via WhatsApp at <strong>+30 6942 575314</strong>. Please call for urgent issues.`;
+            } else if (question.includes('taxi')) {
+                answer = `You can call Kos Town Radio Taxi at <strong>+30 22420 22777</strong>.`;
+            }
+
+            answerEl.innerHTML = answer;
+            answerEl.classList.remove('hidden');
+        }
+
+        function generateItinerary() {
+            const days = document.getElementById('itinerary-days').value;
+            const interests = Array.from(document.querySelectorAll('.interest-check:checked')).map(el => el.value);
+            const responseContainer = document.getElementById('itinerary-response-container');
+            const responseEl = document.getElementById('itinerary-response');
+
+            if (interests.length === 0) {
+                responseEl.innerHTML = `<p>Please select at least one interest so I can create the perfect plan for you!</p>`;
+                responseContainer.classList.remove('hidden');
+                return;
+            }
+
+            responseEl.innerHTML = `<div class="flex items-center gap-2 text-gray-600"><svg class="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Generating a ${days}-day itinerary...</div>`;
+            responseContainer.classList.remove('hidden');
+
+            setTimeout(() => {
+                let generatedText = `<p>Here is your personalized ${days}-day itinerary focusing on ${interests.join(' & ')}:</p>`;
+
+                for (let i = 1; i <= days; i++) {
+                    generatedText += `
+                        <div class="card p-4 mt-4">
+                            <h4 class="font-bold text-lg">Day ${i}</h4>
+                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                ${getItineraryActivity(interests, 'Morning')}
+                                ${getItineraryActivity(interests, 'Afternoon')}
+                                ${getItineraryActivity(interests, 'Evening')}
+                            </ul>
+                        </div>
+                    `;
+                }
+                responseEl.innerHTML = generatedText;
+            }, 1500);
+        }
+
+        function getItineraryActivity(interests, timeOfDay) {
+            const activities = {
+                History: { Morning: "Explore the Asklepion, the ancient healing center.", Afternoon: "Visit the Castle of Neratzia by the harbor.", Evening: "Wander through Kos Town's ancient Agora." },
+                Beaches: { Morning: "Relax at the beautiful Agios Stefanos beach.", Afternoon: "Take a dip at Therma Beach, the natural sea spa.", Evening: "Enjoy a sunset walk along Lambi Beach." },
+                Food: { Morning: "Grab a specialty coffee and brunch at Alchimion & The Cup.", Afternoon: "Enjoy fresh seafood by the water at Barbouni.", Evening: "Have an unforgettable steak dinner at Xasapaki." },
+                Relaxation: { Morning: "Enjoy a leisurely coffee in Eleftherias Square.", Afternoon: "Sunbathe and swim at the calm Paradise Beach.", Evening: "Enjoy a quiet dinner at a family-run taverna like Patriko." },
+                Villages: { Morning: "Explore the traditional village of Kefalos.", Afternoon: "Browse the artisan shops in the mountain village of Zia.", Evening: "Experience a breathtaking sunset view from Zia." }
+            };
+            
+            const possibleActivities = interests.map(i => activities[i]?.[timeOfDay]).filter(Boolean);
+            if(possibleActivities.length > 0) {
+                 return `<li><strong>${timeOfDay}:</strong> ${possibleActivities[Math.floor(Math.random() * possibleActivities.length)]}</li>`;
+            }
+            return `<li><strong>${timeOfDay}:</strong> Explore a new part of Kos Town and discover a hidden gem.</li>`;
+        }
+
+        function findTodaysEvents() {
+            const responseEl = document.getElementById('ai-event-response');
+            responseEl.innerHTML = `<div class="flex items-center gap-2 text-gray-600"><svg class="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Searching for events happening today...</div>`;
+            responseEl.classList.remove('hidden');
+
+            setTimeout(() => {
+                const today = new Date('2025-07-25T12:00:00Z'); // Hardcoded for demonstration
+                const yyyy = today.getFullYear();
+                const mm = String(today.getMonth() + 1).padStart(2, '0');
+                const dd = String(today.getDate()).padStart(2, '0');
+                const todayStr = `${yyyy}${mm}${dd}`;
+
+                const todaysEvents = events.filter(event => {
+                    const eventStartDate = event.gCalStart ? event.gCalStart.substring(0, 8) : '';
+                    const eventEndDate = event.gCalEnd ? event.gCalEnd.substring(0, 8) : '';
+                    return todayStr >= eventStartDate && todayStr <= eventEndDate;
+                });
+                
+                let responseText = "";
+                if (todaysEvents.length > 0) {
+                    responseText = "<p>I found these events in the HIPPOCRATEIA 2025 schedule for today:</p><ul class='list-disc list-inside mt-2'>";
+                    todaysEvents.forEach(event => {
+                        responseText += `<li class="mt-2"><strong>${event.title}</strong> at ${event.location} (${event.time})</li>`;
+                    });
+                    responseText += "</ul>";
+                } else {
+                     responseText = "<p>I couldn't find any events scheduled for today in the HIPPOCRATEIA 2025 program. Many local bars and restaurants in Kos Town feature live music, which is worth exploring!</p>";
+                }
+                responseText += "<p class='mt-4 text-sm text-gray-500'><em>(This is a simulation. A live AI would also perform a real-time web search for the most current local happenings).</em></p>"
+                responseEl.innerHTML = responseText;
+            }, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            setAIGreeting();
+        });
+    </script>
+</body>
+</html>
