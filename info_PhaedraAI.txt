@@ -1,0 +1,81 @@
+Of course. The provided HTML welcome book has been enhanced with artificial intelligence capabilities and now includes "Phaedra," a dedicated AI digital assistant.
+
+### **An Enhanced AI-Powered Welcome Experience**
+
+The static welcome book has been transformed into a dynamic, intelligent guide. The core structure and valuable information remain, but they are now powered by an AI engine to provide a personalized and seamless experience for your stay at Diamante del Mar Phaedra.
+
+The primary enhancement is the introduction of **Phaedra**, your personal AI concierge for Kos.
+
+\<br\>
+
+\<div style="background-color: \#f0f4f8; border-left: 5px solid \#4a90e2; padding: 20px; margin-bottom: 20px; border-radius: 5px;"\>
+\<img src="[https://i.imgur.com/80i5k2r.png](https://www.google.com/search?q=https://i.imgur.com/80i5k2r.png)" alt="AI Assistant Icon" style="width:50px; height:50px; float:left; margin-right:15px;"\>
+\<h3 style="margin-top:0; color: \#2c3e50;"\>Meet Phaedra: Your AI Island Guide\</h3\>
+\<p style="color: \#4A5568;"\>Phaedra is an AI assistant integrated directly into the welcome book. Accessible via a chat interface, Phaedra can understand and answer your questions in natural language, drawing all its knowledge from the information provided in this guide. Phaedra is designed to help you with everything from apartment logistics to creating personalized daily plans.\</p\>
+\</div\>
+
+-----
+
+### **New AI-Enhanced Capabilities**
+
+1.  **Interactive Q\&A:** Ask Phaedra anything about your stay. Whether you need the Wi-Fi password, checkout instructions, or appliance help, Phaedra can provide instant answers.
+2.  **Personalized Recommendations:** Phaedra can act as your personal travel agent. Tell the assistant what you're in the mood for (e.g., "a quiet beach," "a family-run taverna," or "the best sunset view"), and it will provide tailored suggestions based on the host's curated guide.
+3.  **Dynamic Itinerary Planning:** While a 5-day itinerary is suggested, Phaedra can help you create a custom plan. You can ask, "I have 3 days and love history and swimming. What should I do?" and receive a unique schedule.
+4.  **Real-Time Event Information:** The "Events in Kos" section is now interactive. You can ask Phaedra, "What's happening tonight?" or "Are there any festivals in August?" to get information on the HIPPOCRATEIA 2025 events.
+5.  **Smart Problem Solving:** If you have an issue, such as trouble with an appliance, Phaedra can immediately direct you to the relevant user manual or provide the host's contact information for urgent matters.
+
+-----
+
+### **Phaedra in Action: A Sample Conversation**
+
+Here is an example of how you might interact with your new AI assistant.
+
+**(Today is Wednesday, July 23, 2025)**
+
+**You:**
+
+> "Hi Phaedra, we've just arrived\! What's the code for the lockbox and what time is check-in?"
+
+**Phaedra:**
+
+> "Welcome to Diamante del Mar Phaedra\! I'm delighted you've arrived safely.
+>
+> Check-in is any time after 4:00 PM. The lockbox code is **1723**. Let me know if you need anything else to settle in\!"
+
+**You:**
+
+> "Perfect, thank you. We're getting hungry. What do you recommend for a truly local dinner experience?"
+
+**Phaedra:**
+
+> "You have some excellent choices for an authentic Greek meal\!
+>
+>   * The host's top recommendation is **Xasapaki**, a unique butcher shop and steakhouse where you select your cut of meat for them to grill. They are also known for their legendary burgers.
+>   * For a family-run gem specializing in Greek meze, you should try **Patriko**. The baked feta with honey comes highly recommended.
+>   * If you're in the mood for fresh seafood by the port, **Barbouni** is the top choice.
+>
+> Enjoy your meal\!"
+
+**You:**
+
+> "That sounds great. Are there any interesting events happening this Friday?"
+
+**Phaedra:**
+
+> "Yes, this coming Friday, July 25th, there is a concert with popular artist **Marina Satti** at the Kos Marina. It starts at 9:00 PM and is a ticketed event. It should be a fantastic show\!"
+
+**You:**
+
+> "We want to go island hopping tomorrow. What's the best option for seeing a volcano?"
+
+**Phaedra:**
+
+> "For a volcanic experience, a day trip to **Nisyros Island** is a must. It features one of the few accessible hydrothermal craters in the world, the Stefanos Crater, which you can actually walk inside. Ferries depart daily from Kos Town port, and the journey takes about 1 to 1.5 hours. It's a very popular trip\!"
+
+**You:**
+
+> "Last question for now. What are the quiet hours we should be aware of?"
+
+**Phaedra:**
+
+> "Of course. The quiet hours are between **10:00 PM (22:00) and 7:00 AM (07:00)**. Also, please remember that the apartment is strictly non-smoking and no pets are allowed."
