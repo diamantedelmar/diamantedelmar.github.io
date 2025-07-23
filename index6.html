@@ -162,15 +162,11 @@
                         <!-- AI Features -->
                         <button onclick="showSection('ai-concierge-section')" class="grid-button col-span-1">
                             <i data-lucide="sparkles" class="w-10 h-10 text-purple-500 mb-2"></i>
-                            <span class="font-semibold text-gray-700 text-sm">AI Concierge</span>
+                            <span class="font-semibold text-gray-700 text-sm">Phaedra</span>
                         </button>
                         <button onclick="showSection('ai-itinerary-section')" class="grid-button col-span-1">
                             <i data-lucide="calendar-check" class="w-10 h-10 text-green-500 mb-2"></i>
                             <span class="font-semibold text-gray-700 text-sm">AI Itinerary</span>
-                        </button>
-                         <button onclick="showSection('ai-recipes-section')" class="grid-button col-span-1">
-                            <i data-lucide="chef-hat" class="w-10 h-10 text-orange-500 mb-2"></i>
-                            <span class="font-semibold text-gray-700 text-sm">AI Recipes</span>
                         </button>
                         
                         <!-- Original Buttons -->
@@ -186,6 +182,10 @@
                             <i data-lucide="map" class="w-8 h-8 text-blue-500 mb-2"></i>
                             <span class="font-semibold text-gray-700 text-sm">Island Guide</span>
                         </button>
+                        <button onclick="showSection('natural-beauty-section')" class="grid-button">
+                            <i data-lucide="leaf" class="w-8 h-8 text-green-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Natural Beauty</span>
+                        </button>
                         <button onclick="showSection('events-section')" class="grid-button">
                             <i data-lucide="calendar-days" class="w-8 h-8 text-blue-500 mb-2"></i>
                             <span class="font-semibold text-gray-700 text-sm">Events</span>
@@ -193,6 +193,10 @@
                         <button onclick="showSection('local-products-section')" class="grid-button">
                             <i data-lucide="shopping-bag" class="w-8 h-8 text-blue-500 mb-2"></i>
                             <span class="font-semibold text-gray-700 text-sm">Local Goods</span>
+                        </button>
+                        <button onclick="showSection('local-recipes-section')" class="grid-button">
+                            <i data-lucide="utensils-crossed" class="w-8 h-8 text-orange-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Local Recipes</span>
                         </button>
                         <button onclick="showSection('island-hopping-section')" class="grid-button">
                             <i data-lucide="sailboat" class="w-8 h-8 text-blue-500 mb-2"></i>
@@ -221,11 +225,11 @@
                 <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
                     <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
                 </button>
-                <h2 class="text-xl font-bold text-gray-800 mx-auto">AI Concierge</h2>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Phaedra</h2>
             </header>
             <div class="p-4 flex-grow overflow-y-auto flex flex-col" id="chat-container">
                 <!-- Chat messages will be appended here -->
-                <div class="chat-bubble ai">Hello! How can I help you today? Ask me about the apartment, the island, or anything else.</div>
+                <div class="chat-bubble ai">Hello! I'm Phaedra, your AI Concierge. How can I help you today?</div>
             </div>
             <div class="p-4 bg-white border-t">
                 <div class="mb-2">
@@ -242,7 +246,7 @@
                     </div>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <input type="text" id="chat-input" class="flex-grow border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your question...">
+                    <input type="text" id="chat-input" class="flex-grow border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ask Phaedra a question...">
                     <button onclick="handleChatSubmit()" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 focus:outline-none">
                         <i data-lucide="send" class="w-6 h-6"></i>
                     </button>
@@ -278,26 +282,6 @@
             </div>
         </div>
         
-        <!-- AI RECIPES SECTION -->
-        <div id="ai-recipes-section" class="section-screen">
-            <header class="section-header p-4 flex items-center shadow-md">
-                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
-                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
-                </button>
-                <h2 class="text-xl font-bold text-gray-800 mx-auto">AI Recipes from Kos</h2>
-            </header>
-            <div class="p-6 space-y-4">
-                <div class="card p-4 text-center">
-                    <h3 class="font-semibold text-lg mb-2">Taste the Island</h3>
-                    <p class="text-gray-600 mb-4">Get a delicious recipe suggestion using fresh, local ingredients from Kos.</p>
-                    <button onclick="generateRecipe()" class="w-full btn-primary">Suggest a Recipe</button>
-                </div>
-                <div id="recipe-output" class="prose-custom space-y-4">
-                     <div class="text-center p-4 text-gray-500">Your recipe will appear here.</div>
-                </div>
-            </div>
-        </div>
-
         <!-- AI REVIEW ASSISTANT (in Departure Section) -->
         <div id="departure-section" class="section-screen">
             <header class="section-header p-4 flex items-center shadow-md">
@@ -480,6 +464,130 @@
             </div>
         </div>
         
+        <!-- Natural Beauty Section (New) -->
+        <div id="natural-beauty-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Natural Beauty of Kos</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <p class="text-gray-700 mb-4">For its relatively small size, Kos is an island of incredible natural diversity. From salt lakes and wetlands to volcanic springs and lush forests, there's so much to explore beyond the beaches.</p>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://kos.gr/img/asset/YXNzZXRzL2ltYWdlcy9wYWdlcy9uYXR1cmFsLWJlYXV0eS9hbGlraS10aWdrYWtpL2FsaWtpLXRpZ2tlay1rYXJvdXNlbC0xLmpwZw==?p=large&s=73467e45e7f0d04c0d9a24440049753e" onerror="this.onerror=null;this.src='https://placehold.co/800x400/a7d8de/ffffff?text=Aliki+Salt+Lake';" alt="Aliki Salt Lake" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Aliki Salt Lake, Tigaki</h3>
+                        <p class="text-gray-600 mb-2">A stunning coastal wetland that was once used for salt production. Today, it's a protected nature reserve, bustling with life, especially during autumn and winter when it becomes a haven for migratory birds like flamingos.</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Aliki+Salt+Lake+Tigaki+Kos" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://kos.gr/img/asset/YXNzZXRzL2ltYWdlcy9wYWdlcy9uYXR1cmFsLWJlYXV0eS9kaWthaW9zLW1vdW50YWluL2Rpa2Fpb3MtbW91bnRhaW4ta2Fyb3VzZWwtMS5qcGc=?p=large&s=8e50337c284768393e11749714397686" onerror="this.onerror=null;this.src='https://placehold.co/800x400/a7d8de/ffffff?text=Mount+Dikaios';" alt="Mount Dikaios" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Mount Dikaios</h3>
+                        <p class="text-gray-600 mb-2">Rising to 846 meters, Mount Dikaios offers breathtaking panoramic views of Kos and the surrounding islands. The slopes are covered in pine forests and plane trees, making it a wonderful destination for hiking, especially in the spring when wildflowers are in bloom.</p>
+                         <a href="https://www.google.com/maps/search/?api=1&query=Mount+Dikaios+Kos" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://kos.gr/img/asset/YXNzZXRzL2ltYWdlcy9wYWdlcy9uYXR1cmFsLWJlYXV0eS9wbGFrYS1mb3Jlc3QvcGxha2EtZm9yZXN0LWthcm91c2VsLTEuanBn?p=large&s=83d6a6933f7c97576d1e4e136b957929" onerror="this.onerror=null;this.src='https://placehold.co/800x400/a7d8de/ffffff?text=Plaka+Forest';" alt="Plaka Forest" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Plaka Forest</h3>
+                        <p class="text-gray-600 mb-2">A beautiful pine forest near Antimachia, famous for its resident peacocks and cats. It's a cool, shaded oasis perfect for a picnic, a gentle walk, and enjoying a bit of tranquility away from the summer heat.</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Plaka+Forest+Kos" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Local Recipes Section (New) -->
+        <div id="local-recipes-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Local Recipes</h2>
+            </header>
+            <div class="p-6 space-y-8 prose-custom">
+                <p class="text-gray-700 mb-4">Take a step out of your comfort zone and try something new, making the most of your holiday on Kos Island with these traditional dishes!</p>
+
+                <div class="card p-6">
+                    <h3 class="font-semibold text-xl mb-2 text-gray-800">Pligouri (Bulgur) with Pork</h3>
+                    <p class="mb-4">A hearty and traditional dish where bulgur wheat is slow-cooked with tender pork, creating a rich and flavorful meal that's a staple in local homes.</p>
+                    <h4 class="font-semibold text-lg mb-2">Ingredients:</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>500g pork, cut into small cubes</li>
+                        <li>1 cup coarse bulgur wheat (pligouri)</li>
+                        <li>1 large onion, chopped</li>
+                        <li>2 cloves garlic, minced</li>
+                        <li>400g chopped tomatoes (canned or fresh)</li>
+                        <li>2 tablespoons olive oil</li>
+                        <li>2.5 cups vegetable or chicken broth</li>
+                        <li>Salt and freshly ground black pepper to taste</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mb-2">Instructions:</h4>
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li>Heat the olive oil in a large pot or Dutch oven over medium-high heat. Add the pork and cook until browned on all sides.</li>
+                        <li>Add the chopped onion and cook until softened, about 5 minutes. Stir in the garlic and cook for another minute until fragrant.</li>
+                        <li>Rinse the bulgur wheat under cold water and add it to the pot. Stir for a minute to toast it slightly.</li>
+                        <li>Pour in the chopped tomatoes and broth. Season with salt and pepper, and bring to a boil.</li>
+                        <li>Reduce the heat to low, cover the pot, and let it simmer for about 20-25 minutes, or until the bulgur is tender and has absorbed most of the liquid.</li>
+                        <li>Let it stand for 5-10 minutes off the heat before fluffing with a fork and serving.</li>
+                    </ol>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="font-semibold text-xl mb-2 text-gray-800">Ntolmadakia (Stuffed Vine Leaves)</h3>
+                    <p class="mb-4">Tender vine leaves are wrapped around a filling of rice and fresh herbs. They can be served warm or cold, often with a slice of lemon and a dollop of yogurt.</p>
+                    <h4 class="font-semibold text-lg mb-2">Ingredients:</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>1 jar (about 250g) of vine leaves in brine</li>
+                        <li>1 cup short-grain rice, rinsed</li>
+                        <li>1 large onion, finely chopped</li>
+                        <li>1/2 cup chopped fresh dill</li>
+                        <li>1/2 cup chopped fresh mint</li>
+                        <li>1/2 cup olive oil, divided</li>
+                        <li>2 cups hot water</li>
+                        <li>Juice of 2 lemons</li>
+                        <li>Salt and pepper to taste</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mb-2">Instructions:</h4>
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li>Carefully separate the vine leaves and rinse them well. Blanch them in boiling water for 3-5 minutes to soften, then drain.</li>
+                        <li>In a bowl, mix the rice, onion, dill, mint, half of the olive oil, juice of 1 lemon, salt, and pepper.</li>
+                        <li>Lay a vine leaf flat (shiny side down). Place a teaspoon of the filling near the stem. Fold the bottom ends over the filling, then fold in the sides, and roll up tightly. Repeat for all leaves.</li>
+                        <li>Line the bottom of a wide pot with a few extra vine leaves. Arrange the stuffed leaves snugly in layers.</li>
+                        <li>Pour the remaining olive oil, lemon juice, and hot water over the top. Place an inverted heatproof plate on top to keep them from unravelling.</li>
+                        <li>Bring to a gentle boil, then reduce heat, cover, and simmer for 45-60 minutes until the rice is cooked. Let them cool in the pot before serving.</li>
+                    </ol>
+                </div>
+                
+                <div class="card p-6">
+                    <h3 class="font-semibold text-xl mb-2 text-gray-800">Krasotyri Saganaki (Fried Wine Cheese)</h3>
+                    <p class="mb-4">A unique local delicacy, pan-fried to perfection. The wine-infused cheese becomes warm and slightly melted on the inside with a delicious crispy crust.</p>
+                    <h4 class="font-semibold text-lg mb-2">Ingredients:</h4>
+                     <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>1 slice of Krasotyri (wine cheese), about 1.5cm thick</li>
+                        <li>2 tablespoons all-purpose flour</li>
+                        <li>2 tablespoons olive oil</li>
+                        <li>1 lemon wedge, for serving</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mb-2">Instructions:</h4>
+                     <ol class="list-decimal list-inside space-y-2">
+                        <li>Dredge the slice of krasotyri in the flour, making sure it's fully coated on all sides. Pat off any excess.</li>
+                        <li>Heat the olive oil in a small, non-stick frying pan over medium-high heat.</li>
+                        <li>Carefully place the floured cheese in the hot pan. Fry for 2-3 minutes per side, until a deep golden-brown crust forms.</li>
+                        <li>Remove from the pan and place on a plate. Serve immediately with a generous squeeze of fresh lemon juice over the top.</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+
         <!-- Transport Section (Restored) -->
         <div id="transport-section" class="section-screen">
             <header class="section-header p-4 flex items-center shadow-md"><button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200"><i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i></button><h2 class="text-xl font-bold text-gray-800 mx-auto">Getting Around Kos</h2></header>
@@ -557,15 +665,24 @@
             </div>
         </div>
 
-        <!-- Local Products Section (Restored) -->
+        <!-- Local Products Section (Restored & Enhanced) -->
         <div id="local-products-section" class="section-screen">
             <header class="section-header p-4 flex items-center shadow-md">
                 <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
                     <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
                 </button>
-                <h2 class="text-xl font-bold text-gray-800 mx-auto">Local Products of Kos</h2>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Local Products & Recipes</h2>
             </header>
             <div class="p-6 space-y-8">
+                <div class="card p-4 text-center bg-orange-50 border-orange-200 border">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center justify-center text-orange-800"><i data-lucide="chef-hat" class="w-6 h-6 mr-2"></i>Taste the Island with AI Recipes</h3>
+                    <p class="text-gray-600 mb-4">Get a delicious recipe suggestion using the fresh, local ingredients of Kos.</p>
+                    <button onclick="generateRecipe()" class="w-full btn-primary bg-orange-500 hover:bg-orange-600">Suggest a Recipe</button>
+                </div>
+                <div id="recipe-output" class="prose-custom space-y-4">
+                     <div class="text-center p-4 text-gray-500 hidden">Your recipe will appear here.</div>
+                </div>
+
                 <p class="text-gray-700 mb-4">Kos is rich in local produce and traditional goods that make for wonderful souvenirs. Here are some of our favorites:</p>
 
                 <div class="card overflow-hidden p-0">
@@ -974,7 +1091,7 @@
         const chatInput = document.getElementById('chat-input');
         
         function getWelcomeBookContext() {
-            const sectionsToScan = ['welcome-section', 'essentials-section', 'guide-section', 'transport-section', 'important-section', 'departure-section', 'local-products-section', 'island-hopping-section'];
+            const sectionsToScan = ['welcome-section', 'essentials-section', 'guide-section', 'transport-section', 'important-section', 'departure-section', 'local-products-section', 'island-hopping-section', 'natural-beauty-section', 'local-recipes-section'];
             let context = "Welcome Book Information:\n";
             sectionsToScan.forEach(id => {
                 const section = document.getElementById(id);
@@ -1002,9 +1119,9 @@
 
             if (knowledgeSource === 'welcomeBook') {
                 const context = getWelcomeBookContext();
-                prompt = `You are a helpful AI concierge for the 'Diamante del Mar Phaedra' apartment in Kos, Greece. Based *only* on the provided "Welcome Book Information" below, answer the user's question. If the answer is not in the text, say "I'm sorry, that information is not in the welcome book." Do not use any external knowledge.\n\n${context}\n\nUser Question: "${userMessage}"`;
+                prompt = `You are Phaedra, a helpful AI concierge for the 'Diamante del Mar Phaedra' apartment in Kos, Greece. Based *only* on the provided "Welcome Book Information" below, answer the user's question. If the answer is not in the text, say "I'm sorry, that information is not in the welcome book." Do not use any external knowledge.\n\n${context}\n\nUser Question: "${userMessage}"`;
             } else {
-                prompt = `You are a helpful AI concierge for a tourist in Kos, Greece. Answer the following question: "${userMessage}"`;
+                prompt = `You are Phaedra, a helpful AI concierge for a tourist in Kos, Greece. Answer the following question: "${userMessage}"`;
             }
 
             const aiResponse = await callGeminiAPI(prompt);
@@ -1024,6 +1141,7 @@
         // 2. AI RECIPES
         async function generateRecipe() {
             const outputContainer = document.getElementById('recipe-output');
+            outputContainer.querySelector('div').classList.add('hidden'); // Hide placeholder
             showLoading('recipe-output');
             const prompt = "You are a creative chef specializing in Greek island cuisine. Suggest a simple and delicious recipe using one or more of these local products from Kos, Greece: Posa cheese (wine cheese), Kos thyme honey, local olive oil, fresh fish (like sea bream or sea bass), and cherry tomatoes. Provide a catchy name for the recipe, a short description, the list of ingredients, and step-by-step instructions. Format the response nicely with headings.";
             const response = await callGeminiAPI(prompt);
