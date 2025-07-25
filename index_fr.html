@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue à Diamante del Mar Phaedra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .section-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f7fafc; /* light gray */
+            z-index: 50;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .section-screen.active {
+            transform: translateX(0);
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .grid-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 1rem;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid rgba(226, 232, 240, 1);
+            transition: all 0.2s ease-in-out;
+        }
+        .grid-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .section-header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+        .prose-custom p, .prose-custom li {
+            color: #4A5568;
+        }
+        .prose-custom h3 {
+            color: #2D3748;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background-color: #4a90e2; /* Blue */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            background-color: #357ABD;
+        }
+        .event-card {
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        .btn-share {
+            background-color: #6a7fdb; /* Purple-blue */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-share:hover {
+            background-color: #536AC6;
+        }
+        /* Loading Spinner */
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #FFF;
+            border-bottom-color: #4a90e2;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Chat UI styles */
+        .chat-bubble {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            margin-bottom: 0.5rem;
+            word-wrap: break-word;
+        }
+        .chat-bubble.user {
+            background-color: #4a90e2;
+            color: white;
+            border-bottom-right-radius: 0.25rem;
+            align-self: flex-end;
+        }
+        .chat-bubble.ai {
+            background-color: #e2e8f0;
+            color: #2d3748;
+            border-bottom-left-radius: 0.25rem;
+            align-self: flex-start;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div id="app" class="max-w-md mx-auto min-h-screen bg-gray-100">
+        
+        <div id="home-screen">
+            <header class="relative">
+                <img src="https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop" 
+                     onerror="this.onerror=null;this.src='https://diamantedelmar.github.io/phaedra.png';" 
+                     alt="Phaedra" class="w-full h-60 object-cover">
+                <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-gray-100 to-transparent"></div>
+            </header>
+            <div class="p-4 -mt-10">
+                 <div class="text-center mb-6 bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg">
+                    <h1 class="text-3xl font-bold text-gray-800">Livret d'Accueil</h1>
+                </div>
+                <main>
+                    <div class="grid grid-cols-3 gap-4">
+                        <button onclick="showSection('ai-concierge-section')" class="grid-button col-span-1">
+                            <i data-lucide="sparkles" class="w-10 h-10 text-purple-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Phaedra</span>
+                        </button>
+                        <button onclick="showSection('ai-itinerary-section')" class="grid-button col-span-1">
+                            <i data-lucide="calendar-check" class="w-10 h-10 text-green-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Itinéraire IA</span>
+                        </button>
+                        
+                        <button onclick="showSection('welcome-section')" class="grid-button">
+                            <i data-lucide="sun" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Bienvenue</span>
+                        </button>
+                        <button onclick="showSection('essentials-section')" class="grid-button">
+                            <i data-lucide="key-round" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Appartement</span>
+                        </button>
+                        <button onclick="showSection('guide-section')" class="grid-button">
+                            <i data-lucide="map" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Guide de l'île</span>
+                        </button>
+                        <button onclick="showSection('natural-beauty-section')" class="grid-button">
+                            <i data-lucide="leaf" class="w-8 h-8 text-green-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Beautés Naturelles</span>
+                        </button>
+                        <button onclick="showSection('events-section')" class="grid-button">
+                            <i data-lucide="calendar-days" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Événements</span>
+                        </button>
+                        <button onclick="showSection('local-products-section')" class="grid-button">
+                            <i data-lucide="shopping-bag" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Produits Locaux</span>
+                        </button>
+                        <button onclick="showSection('local-recipes-section')" class="grid-button">
+                            <i data-lucide="utensils-crossed" class="w-8 h-8 text-orange-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Recettes Locales</span>
+                        </button>
+                        <button onclick="showSection('island-hopping-section')" class="grid-button">
+                            <i data-lucide="sailboat" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Îles Voisines</span>
+                        </button>
+                        <button onclick="showSection('transport-section')" class="grid-button">
+                            <i data-lucide="bus" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Transports</span>
+                        </button>
+                        <button onclick="showSection('important-section')" class="grid-button">
+                            <i data-lucide="siren" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Infos Clés</span>
+                        </button>
+                        <button onclick="showSection('departure-section')" class="grid-button">
+                            <i data-lucide="log-out" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Départ</span>
+                        </button>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <div id="ai-concierge-section" class="section-screen flex flex-col h-full">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Phaedra</h2>
+            </header>
+            <div class="p-4 flex-grow overflow-y-auto flex flex-col" id="chat-container">
+                <div class="chat-bubble ai">Bonjour ! Je suis Phaedra, votre concierge IA. Comment puis-je vous aider aujourd'hui ?</div>
+            </div>
+            <div class="p-4 bg-white border-t">
+                <div class="mb-2">
+                    <label class="text-sm font-medium text-gray-600">Source de Connaissances :</label>
+                    <div class="flex items-center space-x-4 mt-1">
+                        <label class="flex items-center">
+                            <input type="radio" name="knowledgeSource" value="welcomeBook" class="form-radio text-blue-500" checked>
+                            <span class="ml-2 text-sm text-gray-700">Livret d'Accueil</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="knowledgeSource" value="webSearch" class="form-radio text-blue-500">
+                            <span class="ml-2 text-sm text-gray-700">Recherche Web</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <input type="text" id="chat-input" class="flex-grow border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Posez une question à Phaedra...">
+                    <button onclick="handleChatSubmit()" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 focus:outline-none">
+                        <i data-lucide="send" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="ai-itinerary-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Planificateur d'Itinéraire IA</h2>
+            </header>
+            <div class="p-6 space-y-4">
+                <div class="card p-4">
+                    <h3 class="font-semibold text-lg mb-2">Créez Votre Voyage Parfait</h3>
+                    <div>
+                        <label for="stay-days" class="block text-sm font-medium text-gray-700">Combien de jours restez-vous ?</label>
+                        <input type="number" id="stay-days" value="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
+                    </div>
+                    <div class="mt-4">
+                        <label for="interests" class="block text-sm font-medium text-gray-700">Quels sont vos centres d'intérêt ?</label>
+                        <textarea id="interests" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="ex: plages, histoire, gastronomie, randonnée, vie nocturne, détente..."></textarea>
+                    </div>
+                    <button onclick="generateItinerary()" class="mt-4 w-full btn-primary">Générer l'Itinéraire</button>
+                </div>
+                <div id="itinerary-output" class="prose-custom space-y-4">
+                    <div class="text-center p-4 text-gray-500">Votre itinéraire personnalisé apparaîtra ici.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="departure-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">À la Prochaine Fois...</h2>
+            </header>
+            <div class="p-6 prose-custom">
+                <h3 class="text-2xl font-bold mb-4">Un Adieu Chaleureux</h3>
+                <p class="mb-4">Alors que votre séjour sur la magnifique île de Kos touche à sa fin, nous tenons à vous remercier sincèrement d'avoir choisi de séjourner chez nous. Nous espérons sincèrement que vous avez passé des vacances merveilleuses et mémorables.</p>
+                
+                <div class="card my-6 bg-blue-50 p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="check-circle" class="w-5 h-5 mr-2 text-blue-500"></i>Rappel pour le Départ</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li>L'heure de départ est fixée à <strong>11:00</strong>.</li>
+                        <li>Veuillez laisser les <strong>clés dans la boîte à clés</strong>.</li>
+                        <li>Assurez-vous d'avoir emballé tous vos effets personnels.</li>
+                        <li>Éteignez toutes les lumières et les climatiseurs.</li>
+                    </ul>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2">Partagez Votre Expérience</h3>
+                <p>Si vous avez apprécié votre séjour, nous vous serions incroyablement reconnaissants de bien vouloir laisser un avis. Vos commentaires aident les futurs voyageurs à découvrir notre petit coin de paradis.</p>
+                
+                <div class="card p-4 my-6 not-prose">
+                     <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="edit-3" class="w-5 h-5 mr-2 text-purple-500"></i>Assistant d'Avis IA</h3>
+                     <p class="text-sm text-gray-600 mb-2">Besoin d'aide pour rédiger votre avis ? Notez quelques mots-clés et laissez notre assistant IA vous aider.</p>
+                     <div>
+                        <label for="review-keywords" class="block text-sm font-medium text-gray-700">Mots-clés sur votre séjour :</label>
+                        <textarea id="review-keywords" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="ex: vue magnifique, propre, excellent emplacement, hôte sympathique..."></textarea>
+                    </div>
+                    <button onclick="generateReview()" class="mt-4 w-full bg-purple-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-600">Générer un Avis</button>
+                    <div id="review-output" class="mt-4 space-y-2">
+                        </div>
+                </div>
+
+                <p>Vous pouvez publier votre avis sur la plateforme que vous avez utilisée pour la réservation (Booking.com ou Airbnb) ou sur notre <a href="https://g.page/r/CbUXM_AzUnc5EAE/review" target="_blank" class="text-blue-600 hover:underline">Profil Google Business</a>.</p>
+                
+                <h3 class="text-xl font-semibold mt-6 mb-2">Restons Connectés</h3>
+                <p>Suivez-nous sur Instagram <a href="https://www.instagram.com/diamantedelmar.phaedra" target="_blank" class="text-blue-600 hover:underline">@diamantedelmar.phaedra</a> ou contactez-nous pour de futurs séjours à diamantedelmarphaedra@gmail.com.</p>
+
+                <p class="mt-8">Merci encore. Nous vous souhaitons un bon et agréable voyage !</p>
+            </div>
+        </div>
+
+        <div id="welcome-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Bienvenue au Paradis !</h2>
+            </header>
+            <div class="p-6 prose-custom">
+                <h3 class="text-2xl font-bold mb-4">Kalós órises! (Bienvenue !)</h3>
+                <p class="mb-4">Bienvenue à Kos, et bienvenue à Diamante del Mar Phaedra. Nous sommes absolument ravis de vous accueillir sur cette île enchanteresse du Dodécanèse. Récemment rénovée et conçue avec style et confort, nous espérons que notre maison sera votre sanctuaire parfait pour explorer le mélange captivant d'histoire ancienne, de plages ensoleillées et de vie insulaire animée qui rend Kos si spéciale.</p>
+                <p class="mb-4">Kos vous invite à ralentir, à respirer l'air marin, à vous promener à travers des millénaires d'histoire et à savourer les plaisirs simples. Nous espérons que vous tomberez amoureux de son charme unique, tout comme nous.</p>
+                <h3 class="text-xl font-semibold mt-6 mb-2">À Propos de ce Guide</h3>
+                <p>Considérez ce livre comme votre introduction personnalisée à la vie d'un élégant local. Nous avons rassemblé des informations essentielles pour vous aider à vous installer sans effort, ainsi que nos recommandations personnelles pour découvrir les points forts de l'île. Maintenant, détendez-vous, relaxez-vous et que votre histoire à Kos commence !</p>
+            </div>
+        </div>
+
+        <div id="essentials-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Infos sur l'Appartement</h2>
+            </header>
+            <div class="p-6 space-y-6">
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="map-pin" class="w-5 h-5 mr-2 text-blue-500"></i>Adresse</h3>
+                    <p class="text-gray-600">Diamante Del Mar Phaedra</p>
+                    <p class="text-gray-600">Σοφοκλή Βενιζέλου 54 (Sophokli Venizelou 54)</p>
+                    <p class="text-gray-600">Ville de Kos, 853 00</p>
+                    <a href="https://maps.google.com/?q=Sophokli+Venizelou+54,+Kos+853+00" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Ouvrir dans Maps <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="clock" class="w-5 h-5 mr-2 text-blue-500"></i>Arrivée & Départ</h3>
+                    <p class="text-gray-600"><strong>Arrivée (Check-in) :</strong> Après 16:00</p>
+                    <p class="text-gray-600"><strong>Code de la boîte à clés :</strong> 1723</p>
+                    <p class="text-gray-600 mt-2"><strong>Départ (Check-out) :</strong> Avant 11:00</p>
+                    <p class="text-gray-500 text-sm mt-1">Veuillez remettre les clés dans la boîte à clés.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="wifi" class="w-5 h-5 mr-2 text-blue-500"></i>Accès Wi-Fi</h3>
+                    <p class="text-gray-600"><strong>Réseau :</strong> Phaedra</p>
+                    <div class="flex justify-between items-center mt-1">
+                        <p class="text-gray-600"><strong>Mot de passe :</strong> <span id="wifi-password">Phaedra!22420@</span></p>
+                        <button onclick="copyToClipboard('#wifi-password', 'Mot de passe copié !')" class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm font-semibold hover:bg-blue-600">Copier</button>
+                    </div>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="home" class="w-5 h-5 mr-2 text-blue-500"></i>Règlement Intérieur</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li><strong>Strictement non-fumeur</strong> à l'intérieur.</li>
+                        <li><strong>Animaux non admis</strong>.</li>
+                        <li>Heures de tranquillité : <strong>22:00 - 07:00</strong>.</li>
+                        <li><strong>Pas de fêtes</strong>, événements ou grands rassemblements.</li>
+                        <li>Seuls les clients enregistrés peuvent passer la nuit.</li>
+                    </ul>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="book-open" class="w-5 h-5 mr-2 text-blue-500"></i>Manuels des Appareils</h3>
+                    <p class="text-gray-600 mb-4">Scannez le code QR avec l'appareil photo de votre téléphone pour voir le manuel de chaque appareil.</p>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div>
+                            <p class="font-medium text-gray-700">Micro-ondes</p>
+                            <a href="https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/8897453600-GMI-12311-B/en-US-8897453600-20221020135181-User-Manual---File-Longsv-SE.pdf"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/8897453600-GMI-12311-B/en-US-8897453600-20221020135181-User-Manual---File-Longsv-SE.pdf" alt="QR Code for Microwave Manual" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-700">Four</p>
+                           <a href="https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/7768282928-Edition-75-Backofenset/en-US-7768282928-202311021237674-User-Manual---File-Longen-US.pdf"> <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/7768282928-Edition-75-Backofenset/en-US-7768282928-202311021237674-User-Manual---File-Longen-US.pdf" alt="QR Code for Oven Manual" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-700">Machine à café Nespresso</p>
+                            <a href="https://www.nespresso.com/shared_res/manuals/essenza-mini/2017/UM_NESPRESSO_ESSENZA_MINI_KRUPS_PROD_WEB_2017_02_20.pdf"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.nespresso.com/shared_res/manuals/essenza-mini/2017/UM_NESPRESSO_ESSENZA_MINI_KRUPS_PROD_WEB_2017_02_20.pdf" alt="QR Code for Nespresso Manual" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-700">Machine à laver</p>
+                            <a href="https://morris.gr/wp-content/uploads/2023/12/Instructions-manual-WIW-81411BI.pdf"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://morris.gr/wp-content/uploads/2023/12/Instructions-manual-WIW-81411BI.pdf" alt="QR Code for Washing Machine Manual" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="guide-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Guide de l'île</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <div class="card overflow-hidden p-0 bg-blue-50 border border-blue-200">
+                    <img src="https://images.unsplash.com/photo-1551028150-64b9f398f67b?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://xasapaki.gr/wp-content/uploads/2023/05/DSC01818-scaled.jpg';" alt="Un steak parfaitement grillé" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2 text-blue-800 flex items-center"><i data-lucide="star" class="w-6 h-6 mr-2 text-yellow-500 fill-current"></i>Le Choix de l'Hôte : Xasapaki</h3>
+                        <p class="text-blue-700 mb-3">Pour un repas inoubliable, visitez Xasapaki. C'est une boucherie et un steakhouse unique où vous choisissez votre morceau de viande et ils le grillent à la perfection. Leurs hamburgers sont considérés comme les meilleurs de l'île et les entrées comme le carpaccio de bœuf sont également très appréciées !</p>
+                        <div class="flex space-x-2">
+                           <a href="https://xasapaki.gr/" target="_blank" class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700">Voir le Site Web</a>
+                           <a href="https://maps.app.goo.gl/hR6NfGgGf8E8qZ6f7" target="_blank" class="inline-flex items-center bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300">Voir sur la Carte</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Restaurants & Cafés</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1559305459-49de9734d355?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://imageproxy.wolt.com/assets/67335dc042b21b5c7ee59154';" alt="Un délicieux brunch" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Alchimion & The Cup</h4><p class="text-gray-600 mt-1">Juste à votre porte, Alchimion propose un brunch décontracté (Kayianas, Shakshuka) tandis que The Cup sert un café de spécialité exceptionnel ("third wave").</p><a href="https://maps.app.goo.gl/3A9iEa2uUvY4gJgw5" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Voir sur la Carte <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1541592106381-b5863c023904?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.athinorama.gr/Content/ImagesDatabase/p/750x422/crop/both/a5/a5468d17cae94a7dad807007ceefddf8.jpg?quality=81&404=default&v=4';" alt="Pâtes aux fruits de mer frais" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Barbouni</h4><p class="text-gray-600 mt-1">Le meilleur choix pour des fruits de mer frais au bord de l'eau, près du port. Apprécié pour des plats comme les croquettes de morue et les tagliatelles à l'encre de seiche. Réservez à l'avance pour une table au bord de l'eau.</p><a href="https://maps.app.goo.gl/kG1xQoD7bE2v5z8E7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Voir sur la Carte <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1622234994112-c94831e67991?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://media-01.imu.nl/storage/ourplanetinmylens.com/21978/restaurants-kos-greece-patriko-800x533.jpg';" alt="Un assortiment de mezze grecs" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Patriko</h4><p class="text-gray-600 mt-1">Un joyau familial pour d'authentiques mezze grecs. Essayez la feta au four avec du miel ou leur salade signature Patriko.</p><a href="https://maps.app.goo.gl/C2zY6G4kS4wSg4Rk7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Voir sur la Carte <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1574929823616-1937a4d33595?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.tripadvisor.com.gr/Attraction_Review-g666312-d1222441-Reviews-Platanos-Kos_Town_Kos_Dodecanese_South_Aegean.html';" alt="Dîner sous un grand platane" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Platanos Restaurant</h4><p class="text-gray-600 mt-1">Pour un repas chargé d'histoire et de romantisme, dînez sous le légendaire Platane d'Hippocrate. Offre une cuisine de haute qualité et une ambiance merveilleuse.</p><a href="https://maps.app.goo.gl/rWfA8L3Q8jJqfRzY6" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Voir sur la Carte <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Plages</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1625450438349-5975e50cf582?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://media.jet2.com/is/image/jet2/313976-kgs_lambi_0813_02_ps?$Original-Dynamic(max1280x1280)$&wid=1920&hei=500&fit=crop%2C1&dpr=off';" alt="Plage de sable avec parasols" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Plage de Lambi</h4><p class="text-gray-600 mt-1">Votre voisine la plus proche (à 200m) ! Une longue étendue de sable populaire avec des eaux peu profondes, bien organisée avec des bars et des sports nautiques.</p><a href="https://maps.app.goo.gl/ggrD1a8D9b8vC73D9" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Voir sur la Carte <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531122-8353e813a8c5?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.jet2holidays.com/-/media/destination%20guide/greece/kos/cfu_agios_stefanos_beach_1497481107_getty_1023_01_rgb-136-dpi-for-web-min.jpg?h=500&w=1920&crop=1&hash=6B2D4846664312303EC275100A9440EB%201024w';" alt="Plage avec une église sur un îlot" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Agios Stefanos</h4><p class="text-gray-600 mt-1">Probablement la plage la plus photogénique de Kos, avec l'îlot de Kastri et les ruines de basiliques du Ve siècle juste au bord du rivage.</p><a href="https://maps.app.goo.gl/qL8sU53zQ2pG8c187" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Voir sur la Carte <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1617066808546-32d56a237190?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.reckonasbavi.cz/wp-content/uploads/2023/08/Therma-beach-Embros-prirodni-termalni-lazne-na-ostrove-Kos.jpg.jpg';" alt="Plage rocheuse avec sources chaudes" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Plage de Therma</h4><p class="text-gray-600 mt-1">Une expérience unique de spa naturel où des sources chaudes aux bienfaits thérapeutiques se jettent dans la mer. Caractérisée par son sable de galets noirs volcaniques.</p><a href="https://maps.app.goo.gl/8T1JvU5nUa1wP9W86" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Voir sur la Carte <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                         <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1507525428034-b723a996f329?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.vacanzekos.com/wp-content/uploads/2016/02/paradise-beach.jpg';" alt="Une superbe plage de sable aux eaux turquoise" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Paradise Beach</h4><p class="text-gray-600 mt-1">Porte bien son nom avec son sable doré et ses eaux calmes et peu profondes, ce qui rend cette plage parfaite pour les familles. Peut être très fréquentée.</p><a href="https://maps.app.goo.gl/VjP7zQjR9eG8m4RCA" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Voir sur la Carte <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Histoire & Villages</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531233-a3a2de7c858e?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.vacanzegreche.com/public/img/data/2019101794859527_asklepion-isola-di-kos.jpg'" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">L'Asclépiéion</h4><p class="text-gray-600 mt-1">Le site archéologique le plus important de l'île. Un sanctuaire de guérison lié à Hippocrate, le "Père de la Médecine Moderne".</p><a href="https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Voir sur la Carte <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1540899979346-a4c4987053e4?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://as1.ftcdn.net/jpg/02/95/44/86/1000_F_295448668_PNfl3bFQOS2eT3vWez1r1MlrlhyB0TFF.webp';" alt="Coucher de soleil sur un village grec" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Village de Zia</h4><p class="text-gray-600 mt-1">Un village de montagne incontournable pour des vues panoramiques à couper le souffle au coucher du soleil. Le restaurant Oromedon est fortement recommandé.</p><a href="https://maps.app.goo.gl/9z4Y2E3u8vX5F5vJ8" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Voir sur la Carte <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531065-a8a4f0b2f5d7?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://a.travel-assets.com/findyours-php/viewfinder/images/res70/73000/73702-Kos-Castle.jpg';" alt="Un château en pierre au bord de la mer" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Château de Neratzia</h4><p class="text-gray-600 mt-1">Un impressionnant château des Chevaliers du XVe siècle gardant l'entrée du port. Vérifiez son statut de restauration avant de visiter.</p><a href="https://maps.app.goo.gl/6pCgxXmUqB8qgU7E7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Voir sur la Carte <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="natural-beauty-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Beautés Naturelles de Kos</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <p class="text-gray-700 mb-4">Malgré sa taille relativement petite, Kos est une île d'une incroyable diversité naturelle. Des lacs salés et zones humides aux sources volcaniques et forêts luxuriantes, il y a tant à explorer au-delà des plages.</p>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/02/Alykes-Wetlands-Tigaki-Kos-003.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/a7d8de/ffffff?text=Aliki+Salt+Lake';" alt="Lac Salé d'Aliki" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Lac Salé d'Aliki, Tigaki</h3>
+                        <p class="text-gray-600 mb-2">Une magnifique zone humide côtière autrefois utilisée pour la production de sel. Aujourd'hui, c'est une réserve naturelle protégée, pleine de vie, surtout en automne et en hiver où elle devient un refuge pour les oiseaux migrateurs comme les flamants roses.</p>
+                        <a href="https://maps.app.goo.gl/3fTcvZ6gC4M1rCqq8" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Voir sur la Carte <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/01/Dikeos-mount-Kos-001.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/a7d8de/ffffff?text=Mount+Dikaios';" alt="Mont Dikaios" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Mont Dikaios</h3>
+                        <p class="text-gray-600 mb-2">S'élevant à 846 mètres, le Mont Dikaios offre des vues panoramiques à couper le souffle sur Kos et les îles environnantes. Les pentes sont couvertes de forêts de pins et de platanes, ce qui en fait une destination merveilleuse pour la randonnée, surtout au printemps lorsque les fleurs sauvages sont en pleine floraison.</p>
+                         <a href="https://maps.app.goo.gl/2k5y2E9L4eXjS9vP8" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Voir sur la Carte <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/02/Plaka-forest-kos-001.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/a7d8de/ffffff?text=Plaka+Forest';" alt="Forêt de Plaka" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Forêt de Plaka</h3>
+                        <p class="text-gray-600 mb-2">Une belle forêt de pins près d'Antimachia, célèbre pour ses paons et ses chats résidents. C'est une oasis fraîche et ombragée, parfaite pour un pique-nique, une promenade douce et pour profiter d'un peu de tranquillité loin de la chaleur estivale.</p>
+                        <a href="https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Voir sur la Carte <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="local-recipes-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Recettes Locales</h2>
+            </header>
+            <div class="p-6 space-y-8 prose-custom">
+                <p class="text-gray-700 mb-4">Sortez de votre zone de confort et essayez quelque chose de nouveau, en profitant au maximum de vos vacances sur l'île de Kos avec ces plats traditionnels !</p>
+
+                <div class="card p-6">
+                    <h3 class="font-semibold text-xl mb-2 text-gray-800">Pligouri (Boulgour) au Porc</h3>
+                    <p class="mb-4">Un plat copieux et traditionnel où le boulgour est mijoté lentement avec du porc tendre, créant un repas riche et savoureux qui est un incontournable des foyers locaux.</p>
+                    <h4 class="font-semibold text-lg mb-2">Ingrédients :</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>500g de porc, coupé en petits cubes</li>
+                        <li>1 tasse de boulgour à gros grains (pligouri)</li>
+                        <li>1 gros oignon, haché</li>
+                        <li>2 gousses d'ail, émincées</li>
+                        <li>400g de tomates concassées (en conserve ou fraîches)</li>
+                        <li>2 cuillères à soupe d'huile d'olive</li>
+                        <li>2,5 tasses de bouillon de légumes ou de poulet</li>
+                        <li>Sel et poivre noir fraîchement moulu au goût</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mb-2">Instructions :</h4>
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li>Faire chauffer l'huile d'olive dans une grande marmite ou une cocotte à feu moyen-vif. Ajouter le porc et faire dorer de tous les côtés.</li>
+                        <li>Ajouter l'oignon haché et cuire jusqu'à ce qu'il soit tendre, environ 5 minutes. Incorporer l'ail et cuire encore une minute jusqu'à ce qu'il soit parfumé.</li>
+                        <li>Rincer le boulgour sous l'eau froide et l'ajouter à la marmite. Remuer pendant une minute pour le faire légèrement griller.</li>
+                        <li>Verser les tomates concassées et le bouillon. Saler et poivrer, puis porter à ébullition.</li>
+                        <li>Réduire le feu au minimum, couvrir la marmite et laisser mijoter pendant environ 20-25 minutes, ou jusqu'à ce que le boulgour soit tendre et ait absorbé la plupart du liquide.</li>
+                        <li>Laisser reposer 5 à 10 minutes hors du feu avant de l'égrener avec une fourchette et de servir.</li>
+                    </ol>
+                    <a href="https://www.youtube.com/watch?v=VzTF-o2irHg" target="_blank" class="inline-flex items-center mt-4 text-blue-600 font-semibold hover:underline">Voir le Tutoriel Vidéo <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="font-semibold text-xl mb-2 text-gray-800">Ntolmadakia (Feuilles de Vigne Farcies)</h3>
+                    <p class="mb-4">De tendres feuilles de vigne sont enroulées autour d'une garniture de riz et d'herbes fraîches. Elles peuvent être servies chaudes ou froides, souvent avec une tranche de citron et une cuillerée de yaourt.</p>
+                    <h4 class="font-semibold text-lg mb-2">Ingrédients :</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>1 bocal (environ 250g) de feuilles de vigne en saumure</li>
+                        <li>1 tasse de riz à grain court, rincé</li>
+                        <li>1 gros oignon, finement haché</li>
+                        <li>1/2 tasse d'aneth frais haché</li>
+                        <li>1/2 tasse de menthe fraîche hachée</li>
+                        <li>1/2 tasse d'huile d'olive, divisée</li>
+                        <li>2 tasses d'eau chaude</li>
+                        <li>Jus de 2 citrons</li>
+                        <li>Sel et poivre au goût</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mb-2">Instructions :</h4>
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li>Séparer délicatement les feuilles de vigne et bien les rincer. Les blanchir dans l'eau bouillante pendant 3 à 5 minutes pour les ramollir, puis les égoutter.</li>
+                        <li>Dans un bol, mélanger le riz, l'oignon, l'aneth, la menthe, la moitié de l'huile d'olive, le jus d'un citron, le sel et le poivre.</li>
+                        <li>Poser une feuille de vigne à plat (côté brillant vers le bas). Placer une cuillère à café de farce près de la tige. Replier les extrémités inférieures sur la farce, puis replier les côtés et rouler fermement. Répéter pour toutes les feuilles.</li>
+                        <li>Tapisser le fond d'une large marmite avec quelques feuilles de vigne supplémentaires. Disposer les feuilles farcies bien serrées en couches.</li>
+                        <li>Verser le reste de l'huile d'olive, le jus de citron et l'eau chaude sur le dessus. Placer une assiette résistante à la chaleur retournée sur le dessus pour les empêcher de se dérouler.</li>
+                        <li>Porter à légère ébullition, puis réduire le feu, couvrir et laisser mijoter pendant 45 à 60 minutes jusqu'à ce que le riz soit cuit. Laisser refroidir dans la marmite avant de servir.</li>
+                    </ol>
+                    <a href="https://www.youtube.com/watch?v=2wLEzvXVKm4" target="_blank" class="inline-flex items-center mt-4 text-blue-600 font-semibold hover:underline">Voir le Tutoriel Vidéo <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                
+                <div class="card p-6">
+                    <h3 class="font-semibold text-xl mb-2 text-gray-800">Krasotyri Saganaki (Fromage au Vin Frit)</h3>
+                    <p class="mb-4">Une spécialité locale unique, poêlée à la perfection. Le fromage infusé au vin devient chaud et légèrement fondant à l'intérieur avec une délicieuse croûte croustillante.</p>
+                    <h4 class="font-semibold text-lg mb-2">Ingrédients :</h4>
+                     <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>1 tranche de Krasotyri (fromage au vin), d'environ 1,5 cm d'épaisseur</li>
+                        <li>2 cuillères à soupe de farine tout usage</li>
+                        <li>2 cuillères à soupe d'huile d'olive</li>
+                        <li>1 quartier de citron, pour servir</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mb-2">Instructions :</h4>
+                     <ol class="list-decimal list-inside space-y-2">
+                        <li>Enrober la tranche de krasotyri de farine, en veillant à ce qu'elle soit entièrement recouverte de tous les côtés. Tapoter pour enlever l'excédent.</li>
+                        <li>Faire chauffer l'huile d'olive dans une petite poêle antiadhésive à feu moyen-vif.</li>
+                        <li>Placer délicatement le fromage fariné dans la poêle chaude. Faire frire 2 à 3 minutes de chaque côté, jusqu'à formation d'une croûte dorée.</li>
+                        <li>Retirer de la poêle et placer sur une assiette. Servir immédiatement avec un généreux filet de jus de citron frais sur le dessus.</li>
+                    </ol>
+                    <a href="https://youtu.be/k1MZGsJT0Fw" target="_blank" class="inline-flex items-center mt-4 text-blue-600 font-semibold hover:underline">Voir le Tutoriel Vidéo <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="transport-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md"><button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200"><i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i></button><h2 class="text-xl font-bold text-gray-800 mx-auto">Se Déplacer à Kos</h2></header>
+            <div class="p-6 space-y-6">
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="car" class="w-5 h-5 mr-2 text-blue-500"></i>Location de Voiture / Scooter</h3>
+                    <p class="text-gray-600">Fortement recommandé pour une liberté maximale afin d'explorer les plages et villages isolés. Prévoyez de payer environ 35-60 €/jour pour une voiture et 25 €/jour pour un scooter. Réservez à l'avance en été.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="bus" class="w-5 h-5 mr-2 text-blue-500"></i>Bus Interurbains KTEL</h3>
+                    <p class="text-gray-600">Un moyen économique de voyager entre les principales villes et stations balnéaires. La gare principale se trouve au 7 rue Kleopatras. Consultez les horaires en ligne sur <a href="http://www.ktel-kos.gr" target="_blank" class="text-blue-600 hover:underline">ktel-kos.gr</a>.</p>
+                    <a href="https://maps.app.goo.gl/u7PdwWwY821HDPqX8" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Voir la Gare sur la Carte <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="bus-front" class="w-5 h-5 mr-2 text-blue-500"></i>Bus Urbains DEAS</h3>
+                    <p class="text-gray-600">Pour les déplacements dans la ville de Kos et ses environs comme Lambi, Psalidi et l'Asclépiéion. Consultez les horaires sur le site web/l'application Kos Mobility.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="bike" class="w-5 h-5 mr-2 text-blue-500"></i>Vélo</h3>
+                    <p class="text-gray-600">Le terrain plat de Kos en fait une excellente option, avec des pistes cyclables dédiées de la ville de Kos à Tigaki et Psalidi. Les locations sont largement disponibles pour environ 5-10 €/jour.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="taxi" class="w-5 h-5 mr-2 text-blue-500"></i>Taxis</h3>
+                    <p class="text-gray-600">Facilement disponibles. Trouvez-les aux stations (comme à Akti Kountouriotou) ou réservez par téléphone. Convenez d'un prix pour les longs trajets. Radio Taxi de la ville de Kos : <a href="tel:+302242022777" class="text-blue-600 hover:underline">+30 22420 22777</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="important-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md"><button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200"><i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i></button><h2 class="text-xl font-bold text-gray-800 mx-auto">Informations Importantes</h2></header>
+            <div class="p-6 space-y-6">
+                <div class="card p-6 border-2 border-red-500">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center text-red-600"><i data-lucide="siren" class="w-5 h-5 mr-2"></i>Numéros d'Urgence</h3>
+                    <p class="text-gray-700 text-lg">Pour toute urgence, appelez le numéro d'urgence européen :</p>
+                    <a href="tel:112" class="block text-center my-3 text-3xl font-bold text-red-600 bg-red-100 p-4 rounded-lg tracking-widest">112</a>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li><strong>Ambulance :</strong> 166</li>
+                        <li><strong>Police :</strong> 100</li>
+                        <li><strong>Pompiers :</strong> 199</li>
+                        <li><strong>Garde-côtes :</strong> 108</li>
+                        <li><strong>Police touristique :</strong> 171</li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="user" class="w-5 h-5 mr-2 text-blue-500"></i>Contact de l'Hôte</h3>
+                    <p class="text-gray-600"><strong>Nom :</strong> Varthakouris Ioannis</p>
+                    <p class="text-gray-600"><strong>Téléphone / WhatsApp :</strong></p>
+                     <a href="https://wa.me/306942575314" target="_blank" class="block text-center my-2 text-xl font-semibold text-green-600 bg-green-100 p-3 rounded-lg hover:bg-green-200">+30 6942 575314</a>
+                    <p class="text-sm text-gray-500">WhatsApp ou Viber est préférable pour les questions non urgentes (9h - 20h). Veuillez appeler pour les problèmes urgents.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="shopping-cart" class="w-5 h-5 mr-2 text-blue-500"></i>Services de Proximité</h3>
+                    <p class="text-gray-600"><strong>Supermarché :</strong> AB Vassilopoulos se trouve à seulement 1 minute à pied pour les courses.</p>
+                    <p class="text-gray-600 mt-2"><strong>Distributeur automatique :</strong> Disponible à l'entrée du supermarché AB Vassilopoulos.</p>
+                    <p class="text-gray-600 mt-2"><strong>Pharmacie (Φαρμακείο) :</strong> Plusieurs à proximité. Cherchez un panneau avec une croix verte. Une liste des pharmacies de garde ("Εφημερεύον") est affichée sur leurs portes.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="events-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">HIPPOCRATEIA 2025</h2>
+            </header>
+            <div class="p-6">
+                <div class="mb-6">
+                    <label for="event-date-filter" class="block text-gray-700 text-sm font-bold mb-2">Filtrer par Date :</label>
+                    <input type="date" id="event-date-filter" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div id="events-list" class="grid grid-cols-1 gap-8">
+                    </div>
+                <div id="no-events-message" class="text-center text-gray-600 mt-8 hidden">
+                    Aucun événement trouvé pour la date sélectionnée.
+                </div>
+            </div>
+        </div>
+
+        <div id="local-products-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Produits Locaux & Recettes</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <div class="card p-4 text-center bg-orange-50 border-orange-200 border">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center justify-center text-orange-800"><i data-lucide="chef-hat" class="w-6 h-6 mr-2"></i>Goûtez l'île avec les Recettes IA</h3>
+                    <p class="text-gray-600 mb-4">Obtenez une suggestion de recette délicieuse utilisant les ingrédients frais et locaux de Kos.</p>
+                    <button onclick="generateRecipe()" class="w-full btn-primary bg-orange-500 hover:bg-orange-600">Suggérer une Recette</button>
+                </div>
+                <div id="recipe-output" class="prose-custom space-y-4">
+                     <div class="text-center p-4 text-gray-500 hidden">Votre recette apparaîtra ici.</div>
+                </div>
+
+                <p class="text-gray-700 mb-4">Kos est riche en produits locaux et traditionnels qui font de merveilleux souvenirs. Voici quelques-uns de nos favoris :</p>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://melitaygetos.gr/wp-content/uploads/2021/05/meli-1.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/melikoukouvas.jpg?itok=f4f4f4f4';" alt="Miel de Kos" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Miel de Kos</h3>
+                        <p class="text-gray-600 mb-2">Kos est réputée pour son excellent miel de thym, riche en arôme et en saveur. C'est un édulcorant naturel et une gâterie saine.</p>
+                        <p class="text-gray-700 font-medium"><strong>Où acheter :</strong> Marchés locaux, petites boutiques dans les villages comme Zia, et épiceries fines. Cherchez les pots étiquetés "Μέλι Θυμαρίσιο" (Miel de Thym).</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Pour le ramener :</strong> Le miel peut généralement être transporté en toute sécurité dans vos bagages enregistrés. Assurez-vous qu'il est bien scellé pour éviter les fuites.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://gastronomytours.com/wp-content/uploads/2023/09/Possa-768x443.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/tyriposa.jpg?itok=f4f4f4f4';" alt="Fromage Posa" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Fromage Posa (Fromage au Vin)</h3>
+                        <p class="text-gray-600 mb-2">Un fromage local unique, le "Posa" (ou "Tyri tis Posas") est traditionnellement affiné dans des lies de vin rouge, ce qui lui donne une teinte rougeâtre distinctive et une saveur riche et épicée.</p>
+                        <p class="text-gray-700 font-medium"><strong>Où acheter :</strong> Laiteries locales, grands supermarchés, et certaines tavernes traditionnelles. Demandez du "Τυρί της Πόσας".</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Pour le ramener :</strong> Il est préférable de le transporter dans les bagages enregistrés, idéalement dans un emballage sous vide si le vendeur le propose, pour maintenir la fraîcheur et éviter les odeurs.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://lerosisland.gr/wp-content/uploads/2017/05/photo_2017-02-07_11-58-13-1.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/glykotomatas.jpg?itok=f4f4f4f4';" alt="Confiture de Tomate" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Confiture de Tomate (Glyko Tomataki)</h3>
+                        <p class="text-gray-600 mb-2">Une "confiture à la cuillère" grecque traditionnelle faite à partir de petites tomates vertes. Elle est confite et a une saveur unique et délicieuse, souvent servie avec le café ou en dessert.</p>
+                        <p class="text-gray-700 font-medium"><strong>Où acheter :</strong> Coopératives de femmes locales, épiceries fines, et certains grands supermarchés. Cherchez les pots étiquetés "Γλυκό Ντοματάκι".</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Pour la ramener :</strong> Les pots sont mieux dans les bagages enregistrés. Assurez-vous que le couvercle est bien serré pour éviter les fuites.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://www.argiro.gr/wp-content/uploads/2021/08/elaiolado-scaled-1-1320x720.jpeg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/ladi.jpg?itok=f4f4f4f4';" alt="Huile d'Olive de Kos" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Huile d'Olive Vierge Extra</h3>
+                        <p class="text-gray-600 mb-2">La Grèce est célèbre pour son huile d'olive, et Kos produit une huile d'olive vierge extra d'excellente qualité. C'est un aliment de base de la cuisine grecque et un choix sain.</p>
+                        <p class="text-gray-700 font-medium"><strong>Où acheter :</strong> Directement auprès des producteurs d'huile d'olive (certains proposent des visites), sur les marchés locaux et dans les supermarchés. Cherchez "Εξαιρετικό Παρθένο Ελαιόλαδο".</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Pour la ramener :</strong> Pour de plus grandes quantités, les bagages enregistrés sont nécessaires. De nombreux magasins vendent de l'huile d'olive dans des boîtes ou des bouteilles spécialement conçues pour le voyage et étanches.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://www.thegreekfood.com/wp-content/uploads/2012/05/herbs-and-spices.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/votanakos.jpg?itok=f4f4f4f4';" alt="Herbes et Épices Locales" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Herbes et Épices Locales</h3>
+                        <p class="text-gray-600 mb-2">Le climat de l'île est parfait pour la culture d'herbes aromatiques comme l'origan, le thym et la sauge. Ce sont des souvenirs parfumés et pratiques.</p>
+                        <p class="text-gray-700 font-medium"><strong>Où acheter :</strong> Marchés locaux, boutiques de souvenirs, et même certains supermarchés. Cherchez des herbes séchées en petits sachets ou en bouquets décoratifs.</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Pour les ramener :</strong> Peuvent être transportées dans les bagages à main et enregistrés. Assurez-vous qu'elles sont bien emballées pour conserver leur arôme et éviter les déversements.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/03/Zia_Village_Kos_Kos4all_003.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/keramika.jpg?itok=f4f4f4f4';" alt="Céramiques Artisanales" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Céramiques Artisanales</h3>
+                        <p class="text-gray-600 mb-2">Vous trouverez de magnifiques poteries et céramiques faites à la main dans tout Kos, souvent avec des motifs grecs traditionnels ou des couleurs vives. Des assiettes décoratives aux tasses fonctionnelles, elles font de jolis souvenirs.</p>
+                        <p class="text-gray-700 font-medium"><strong>Où acheter :</strong> Boutiques d'artisans dans la ville de Kos et les villages, en particulier dans les zones à tradition artisanale.</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Pour les ramener :</strong> Emballez soigneusement les articles fragiles dans vos bagages enregistrés, en utilisant des vêtements ou du papier bulle pour les protéger. Envisagez d'expédier les pièces plus grandes ou très délicates.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="island-hopping-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Excursions vers les îles depuis Kos</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <p class="text-gray-700 mb-4">Kos est une excellente base pour explorer les îles voisines. Voici quelques options populaires pour des excursions d'une journée :</p>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://cdn.getyourguide.com/img/tour/b219904a91bc9dd83490526cf733932fe4c06143c9e347ccdacdec9e8e9ade6c.jpg/98.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1628189531122-8353e813a8c5?q=80&w=800&auto=format&fit=crop';" alt="Volcan de Nisyros" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Île de Nisyros : Le Joyau Volcanique</h3>
+                        <p class="text-gray-600 mb-2">Nisyros est une petite île pittoresque dominée par son volcan actif, l'un des rares cratères hydrothermaux accessibles au monde.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>À faire :</strong> Visitez le <a href="https://maps.app.goo.gl/3QxP6f1hN8fK9dYZA" target="_blank" class="text-blue-600 hover:underline">cratère Stefanos</a> (marchez à l'intérieur !), explorez la charmante capitale de Mandraki avec ses maisons blanchies à la chaux et le monastère de Panagia Spiliani.</li>
+                            <li><strong>Horaires des ferries :</strong> Départs quotidiens du port de la ville de Kos, généralement le matin (par exemple, 9h00 - 10h00) avec retour en fin d'après-midi (par exemple, 15h00 - 16h00). Le trajet dure environ 1h-1h30.</li>
+                            <li><strong>Réservation :</strong> Les billets peuvent être achetés au port auprès de divers opérateurs touristiques ou en ligne. Il est conseillé de réserver à l'avance en haute saison.</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=ferry+kos+to+nisyros+schedule" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Chercher les derniers horaires <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://www.aegeanislands.gr/app/uploads/2020/07/shutterstock_197048153-1.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop';" alt="Plage de Pserimos" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Île de Pserimos : Évasion Tranquille</h3>
+                        <p class="text-gray-600 mb-2">Pserimos est une petite île tranquille connue pour sa belle plage de sable et ses eaux cristallines, parfaite pour une journée de détente loin de la foule.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>À faire :</strong> Nagez et bronzez sur la plage principale, dégustez du poisson frais dans l'une des rares tavernes et découvrez la vie insulaire paisible.</li>
+                            <li><strong>Horaires des ferries :</strong> Fait souvent partie d'une "Croisière des 3 îles" au départ de Kos.</li>
+                            <li><strong>Réservation :</strong> Les billets sont généralement achetés directement auprès des vendeurs au port de la ville de Kos.</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=boat+trips+kos+to+pserimos+schedule" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Chercher les derniers horaires <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://sailawaykos.com/wp-content/uploads/2018/11/3-Islads-Nisyros-Cruise-5-840x560.png" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop';" alt="Croisière 3 îles" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Excursion d'une journée 3 îles : Pserimos, Kalymnos & Plati</h3>
+                        <p class="text-gray-600 mb-2">Une excursion en bateau très populaire d'une journée complète au départ du port de Kos, offrant un aperçu de trois îles différentes du Dodécanèse.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>Pserimos :</strong> Profitez de la plage principale tranquille et du petit village.</li>
+                            <li><strong>Kalymnos :</strong> Explorez Pothia, la capitale, connue pour son histoire de pêche à l'éponge et son port animé.</li>
+                            <li><strong>Plati :</strong> Un minuscule îlot inhabité aux eaux turquoise magnifiques, parfait pour la baignade et la plongée en apnée.</li>
+                            <li><strong>Horaires :</strong> Les bateaux partent généralement du port de Kos entre 9h30 et 10h30, et reviennent vers 16h30-17h30. Comprend des arrêts sur chaque île pour la baignade et l'exploration.</li>
+                            <li><strong>Réservation :</strong> De nombreux bateaux proposent cette excursion directement depuis le port de Kos. Vous pouvez généralement réserver sur place la veille ou le matin du départ. Les prix varient selon le bateau et les inclusions (par exemple, le déjeuner).</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=3+island+cruise+kos+harbor" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Chercher des croisières 3 îles <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300">
+        Message copié !
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const API_KEY = "AIzaSyALAR-YIwFpAlVvv2bLZfF-iuYOAJAPHgM";
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+        
+        // --- DATA ---
+        const events = [
+            // Juin
+            { date: "SAMEDI 21/06/25 & DIMANCHE 22/06/25", time: "SAMEDI 19:00 (OUVERTURE), DIMANCHE 18:00-20:00 (HEURES D'OUVERTURE)", title: "EXPOSITION DE PEINTURE ET D'HAGIOGRAPHIE", description: "Exposition des œuvres des élèves de l'atelier de Peinture & Hagiographie FRIDART de Maria Vamvakousi.", location: "MUSÉE HISTORIQUE & FOLKLORIQUE DE KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250621T190000", gCalEnd: "20250622T200000" },
+            { date: "MARDI 24/06/25", time: "19:00", title: "CONCERT AVEC LES ÉLÈVES DE L'ÉCOLE DE MUSIQUE DE MARIA ORFANOUDAKI", description: "Concert d'élèves de musique classique et contemporaine.", location: "COUR DU MUSÉE FOLKLORIQUE & HISTORIQUE DE KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250624T190000", gCalEnd: "20250624T210000" },
+            { date: "MERCREDI 25/06/25", time: "19:30", title: "LA COUTUME DE KLIDONAS", description: "Événement avec la reconstitution du 'Fanos' et du 'Klidonas', accompagné de danses par les sections enfants et jeunes de l'Association Culturelle et Éducative de Pyli 'O APELLIS'.", location: "THÉÂTRE EN PLEIN AIR DE MARMARI", googleMaps: "https://maps.app.goo.gl/bXb9C6t4wY2R8xZq7", gCalStart: "20250625T193000", gCalEnd: "20250625T213000" },
+            { date: "MERCREDI 25/06/25", time: "19:30", title: "SPECTACLE DE GYMNASTIQUE RYTHMIQUE ET DE DANSE MODERNE", description: "En collaboration avec l'Association Culturelle et Sportive 'ANAMORFOSI-ANAPLASI'. Les sections enfants et jeunes de l'Association participent.", location: "THÉÂTRE EN PLEIN AIR DE KARDAMENA", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250625T193000", gCalEnd: "20250625T213000" },
+            { date: "JEUDI 26/06/25", time: "20:00", title: "LA COUTUME DE KLIDONAS", description: "Événement avec la reconstitution du 'Fanos' et du 'Klidonas', accompagné de danses par les sections enfants et jeunes du Lycée des Femmes Grecques, branche de Kos.", location: "PLACE ELEFTHERIAS, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250626T200000", gCalEnd: "20250626T220000" },
+            { date: "SAMEDI 28/06/25", time: "20:30", title: "ÉVÉNEMENT DE DANSE 'ELIKONIA'", description: "Une soirée dédiée aux danses grecques avec un accent particulier sur le zeibekiko, en collaboration avec l'école de danse 'ALEGRIA DANCE LAB'.", location: "PLACE ELEFTHERIAS, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250628T203000", gCalEnd: "20250628T223000" },
+            { date: "SAMEDI 28/06/25 & DIMANCHE 29/06/25", time: "SAMEDI 11:00 (PARADE KOS), 19:00 (PARADE KARDAMENA), DIMANCHE 20:30 (CONCERT)", title: "COLLABORATION DE L'ORCHESTRE DES JEUNES DE SINDOS ET DE LA PHILHARMONIE DE KOS", description: "Parade dans les rues centrales de la ville de Kos et du port et des rues de Kardamena. Concert sur la place Eleftherias.", location: "RUES CENTRALES DE KOS / PORT ET RUES DE KARDAMENA / PLACE ELEFTHERIAS, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250628T110000", gCalEnd: "20250629T223000" },
+            { date: "DIMANCHE 29/06/25", time: "19:30", title: "ACTIVITÉS POUR ENFANTS SUR LE THÈME DE LA MER", description: "En collaboration avec l'ASSOCIATION CULTURELLE DE KARDAMENA 'ARGO'. L'événement se déroule dans le cadre de la Semaine Maritime.", location: "THÉÂTRE EN PLEIN AIR DE KARDAMENA", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250629T193000", gCalEnd: "20250629T213000" },
+            { date: "LUNDI 30/06/25", time: "20:00", title: "LA COUTUME DE KLIDONAS", description: "Événement avec la reconstitution du 'Fanos' et du 'Klidonas', accompagné de danses par des sections de l'Association Culturelle de Kefalos 'AGIOS NIKOLAOS'.", location: "PORT DE KEFALOS", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250630T200000", gCalEnd: "20250630T220000" },
+            // Juillet
+            { date: "JEUDI 03/07/25", time: "20:00", title: "PRÉSENTATION DE LA NOUVELLE DE MARIA MAMALIGA 'MERCANTO'", description: "En collaboration avec P.O. KOON 'O FILITAS', LYCEUM DES FEMMES GRECQUES-branche de Kos, DREPPO 'FAINARETI' et la LIBRAIRIE 'ESTIA'.", location: "COUR DU MUSÉE FOLKLORIQUE & HISTORIQUE DE KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250703T200000", gCalEnd: "20250703T220000" },
+            { date: "JEUDI 03/07/25", time: "19:00", title: "PIÈCE DE THÉÂTRE 'LES OISEAUX' d'ARISTOPHANE", description: "En collaboration avec P.S. AVEROF MUNICIPALITÉ DE KOS. Les enfants, parents et personnel pédagogique de la Station participent.", location: "ODÉON ROMAIN DE KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250703T190000", gCalEnd: "20250703T210000" },
+            { date: "SAMEDI 05/07/25", time: "20:00", title: "FÊTE DU BERGER", description: "Fête traditionnelle sur le thème de la vie rurale, avec des spécialités locales, des danses locales et de la musique live, en collaboration avec l'ASSOCIATION CULTURELLE D'ANTIMACHIA 'I PROODOS'.", location: "MAISON TRADITIONNELLE, MOULIN D'ANTIMACHIA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250705T200000", gCalEnd: "20250705T230000" },
+            { date: "DIMANCHE 06/07/25", time: "20:30", title: "SPECTACLE DE MUSIQUE ET DE DANSE 'DANSES ET CHANTS DE LA TERRE ET DE LA MER'", description: "Clôture de l'Année du Lycée, en collaboration avec le LYCEUM DES FEMMES GRECQUES DE KARDAMENA.", location: "THÉÂTRE EN PLEIN AIR DE KARDAMENA", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250706T203000", gCalEnd: "20250706T223000" },
+            { date: "LUNDI 07/07/25", time: "20:30", title: "RENCONTRE DES JOUEURS DE LYRE DU DODÉCANÈSE DU SUD À KEFALOS, KOS", description: "Rencontre musicale et de danse pour mettre en valeur la richesse de la Lyre du Dodécanèse.", location: "PORT DE KEFALOS", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250707T203000", gCalEnd: "20250707T230000" },
+            { date: "SAMEDI 12/07/25", time: "20:00", title: "NUIT MUSICALE", description: "Musique et danses traditionnelles et gastronomie locale, en collaboration avec l'ASSOCIATION CULTURELLE ET ÉDUCATIVE D'ASFENDIOU 'O THEOKRITOS'.", location: "PLACE DE TIGAKI", googleMaps: "https://maps.app.goo.gl/fWzS9wU7Z6qR8pXz5", gCalStart: "20250712T200000", gCalEnd: "20250712T230000" },
+            { date: "SAMEDI 12/07/25", time: "20:00", title: "CONCERT AVEC LA SINFONIETTA D'ATHÈNES", description: "Un concert unique de répertoire classique et grec, accompagné au piano et par un chœur d'enfants.", location: "FONDATION HIPPOCRATIQUE INTERNATIONALE DE KOS", googleMaps: "https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7", gCalStart: "20250712T200000", gCalEnd: "20250712T220000" },
+            { date: "DIMANCHE 13/07/25", time: "20:00", title: "SPECTACLE DE MUSIQUE ET DANSE 'Ce soir ma guitare...'", description: "En collaboration avec le LYCEUM DES FEMMES GRECQUES-branche de Kos. Les sections du Lycée des Femmes Grecques de Kos dansent avec l'accompagnement d'un groupe de musique traditionnelle.", location: "COUR DE LA 7ème ÉCOLE PRIMAIRE DE KOS", googleMaps: "https://maps.app.goo.gl/9t7B4e9v6tP6fXqK8", gCalStart: "20250713T200000", gCalEnd: "20250713T220000" },
+            { date: "MARDI 15/07/25", time: "20:30", title: "CHANSONS DE CHAMBRE. CONTES DE FÉES & CHANSONS", description: "En collaboration avec le LIONS CLUB DE KOS 'HIPPOCRATES'. 4 musiciens sur scène. Ils racontent des histoires comiques et des contes de fées.", location: "ODÉON ROMAIN", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250715T203000", gCalEnd: "20250715T223000" },
+            { date: "MERCREDI 16/07/25", time: "19:30", title: "SPECTACLE THÉÂTRAL POUR ENFANTS 'LE CHATOUILLEUR'", description: "Par DIMITRIS BASLAM, en collaboration avec le LIONS CLUB DE KOS 'HIPPOCRATES'.", location: "PLACE K. KIAPOKA, THÉÂTRE EN PLEIN AIR DE ZIPARI", googleMaps: "https://maps.app.goo.gl/eU5fC7wY8tJ8vXmP9", gCalStart: "20250716T193000", gCalEnd: "20250716T213000" },
+            { date: "VENDREDI 18/07/25", time: "22:00", title: "CONCERT AVEC LE GROUPE PYX LAX", description: "Événement payant.", location: "TERRAIN DE FOOTBALL DE PYLI", googleMaps: "https://maps.app.goo.gl/hG5b8tF7yX5wR8vV9", gCalStart: "20250718T220000", gCalEnd: "20250718T235900" },
+            { date: "DIMANCHE 20/07/25", time: "20:30", title: "CONCERT AVEC L'ORCHESTRE 'TA MANOUSAKIA' ET KAITI KOULIA", description: "Festival insulaire avec danses et chants traditionnels au centre-ville.", location: "PLACE ELEFTHERIAS, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250720T203000", gCalEnd: "20250720T223000" },
+            { date: "VENDREDI 25/07/25", time: "21:00", title: "CONCERT AVEC MARINA SATTI", description: "Événement payant.", location: "MARINA DE KOS", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250725T210000", gCalEnd: "20250725T230000" },
+            { date: "SAMEDI 26/07/25", time: "20:30", title: "'VOYAGE EN GRÈCE' - SPECTACLE DE MUSIQUE ET DE DANSE", description: "Spectacle de danses traditionnelles grecques, en collaboration avec l'ÉCOLE DE DANSE ELENI DROUSOU.", location: "PLACE ELEFTHERIAS, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250726T203000", gCalEnd: "20250726T223000" },
+            { date: "DIMANCHE 27/07/25", time: "20:00", title: "ÉVÉNEMENT MUSICAL 'SELAS'", description: "Interprétation d'hymnes ecclésiastiques par la cantatrice Nektaria Karantzi accompagnée de 2 instruments de musique, en collaboration avec FEMMES SANS FRONTIÈRES KOS.", location: "ODÉON ROMAIN", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250727T200000", gCalEnd: "20250727T220000" },
+            { date: "DIMANCHE 27/07/25", time: "21:30", title: "'UN AMOUR D'ÉTÉ...'", description: "Événement musical-hommage à la Nouvelle Vague. Le Chœur d'Adultes de l'Association 'Arion' participe également.", location: "AGIOI ANARGYROI, KARDAMENA", googleMaps: "https://maps.app.goo.gl/z6eX8v9wQ5yR7fWc7", gCalStart: "20250727T213000", gCalEnd: "20250727T233000" },
+            { date: "LUNDI 28/07/25", time: "17:00-20:00", title: "'QUAND LES ENFANTS PARLENT AVEC LES COULEURS'", description: "Exposition de peintures d'enfants des ateliers d'hiver de l'Association sous la direction de Lise-Lotte Iversen.", location: "MUSÉE MARITIME & FOLKLORIQUE DE KARDAMENA", googleMaps: "https://maps.app.goo.gl/6tX8wP5vY9zR7fWb9", gCalStart: "20250728T170000", gCalEnd: "20250728T200000" },
+            { date: "LUNDI 28/07/25", time: "22:00", title: "CONCERT AVEC ELENA PAPARIZOU", description: "Événement payant.", location: "TERRAIN DE FOOTBALL DE PYLI", googleMaps: "https://maps.app.goo.gl/hG5b8tF7yX5wR8vV9", gCalStart: "20250728T220000", gCalEnd: "20250728T235900" },
+            { date: "JEUDI 31/07/25", time: "20:00", title: "PRÉSENTATION DU LIVRE de l'ancien vice-recteur PANAGIOTIS NOUTSOS", description: "Présentation du livre 'LA MER VIENT-ELLE EN PÊCHANT ? LA MÉTHODE DIALECTIQUE DE QUESTION-RÉPONSE'.", location: "COUR DU MUSÉE HISTORIQUE & FOLKLORIQUE DE KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250731T200000", gCalEnd: "20250731T220000" },
+            // Août
+            { date: "SAMEDI 02/08/25", time: "20:00", title: "FESTIVAL D'ÉTÉ", description: "Nous célébrons l'été avec de la musique live, des danses locales, du vin et des spécialités locales, en collaboration avec le CLUB ATHLÉTIQUE 'ANTIMACHOS'.", location: "ANCIENNE ÉCOLE PRIMAIRE DE MASTICHARI", googleMaps: "https://maps.app.goo.gl/kXv9zL5wR8yV7fWdA", gCalStart: "20250802T200000", gCalEnd: "20250802T230000" },
+            { date: "SAMEDI 02/08/25 & DIMANCHE 03/08/25", time: "19:00-21:00", title: "WEEK-END ARTISTIQUE", description: "Événement de deux jours avec un concert, des activités artistiques et une exposition des œuvres des élèves du Centre d'Études d'Art & de Musique.", location: "MUSÉE HISTORIQUE & FOLKLORIQUE DE KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250802T190000", gCalEnd: "20250803T210000" },
+            { date: "DIMANCHE 03/08/25", time: "20:00", title: "FÊTE DU POISSON", description: "Fête traditionnelle sur le thème du poisson, des pêcheurs, etc., avec des spécialités locales, des danses locales et de la musique live.", location: "PORT DE KEFALOS", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250803T200000", gCalEnd: "20250803T230000" },
+            { date: "LUNDI 04/08/25", time: "21:30", title: "CONCERT AVEC NATASSA BOFILIOU", description: "Événement payant.", location: "MARINA DE KOS", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250804T213000", gCalEnd: "20250804T233000" },
+            { date: "MERCREDI 06/08/25", time: "20:00", title: "PRÉSENTATION DU LIVRE de KOSTAS SKANDALIDIS", description: "'PROVERBES ET EXPRESSIONS PROVERBIALES DU DODÉCANÈSE (ANTHOLOGIE)'.", location: "COUR DU MUSÉE HISTORIQUE-FOLKLORIQUE DE KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250806T200000", gCalEnd: "20250806T220000" },
+            { date: "MERCREDI 06/08/25 au JEUDI 07/08/25", time: "18:30-21:00", title: "EXPOSITION DE PEINTURE PAR LE GROUPE D'ARTISTES AMATEURS DE KOS 'AIGLI'", description: "Sous les auspices de P.O. KOON 'O FILITAS'.", location: "MUSÉE HISTORIQUE & FOLKLORIQUE DE KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250806T183000", gCalEnd: "20250807T210000" },
+            { date: "JEUDI 07/08/25", time: "21:00", title: "'LES CHANSONS DE SOTIRIA'", description: "Un spectacle musical dédié à l''Archontissa du rebetiko', Sotiria Bellou.", location: "ODÉON ROMAIN", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250807T210000", gCalEnd: "20250807T230000" },
+            { date: "JEUDI 07/08/25", time: "21:15", title: "PIÈCE DE THÉÂTRE 'LE VIEIL HOMME ET LA MER'", description: "Basé sur l'œuvre d'Ernest Hemingway. Avec Tasos Nousias. Événement payant.", location: "MARINA DE KOS", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250807T211500", gCalEnd: "20250807T231500" },
+            { date: "VENDREDI 08/08/25", time: "20:00", title: "PRÉSENTATION DU LIVRE DE KOSTAS I. PATOURIS 'LA ROSE QUI A ALLUMÉ LE SOLEIL'", description: "En mémoire de l'enseignante Stamatia Oikonomidi-Koutsou, en collaboration avec DREPPO 'FAINARETI'.", location: "COUR DU MUSÉE FOLKLORIQUE & HISTORIQUE DE KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250808T200000", gCalEnd: "20250808T220000" },
+            { date: "SAMEDI 09/08/25", time: "21:00", title: "'PLEINE LUNE' AVEC KERASIA SAMARA", description: "Spectacle musical et poétique pour la Pleine Lune d'août. Giorgos Koubogiannis accompagne au piano.", location: "ODÉON ROMAIN", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250809T210000", gCalEnd: "20250809T230000" },
+            { date: "DIMANCHE 10/08/25", time: "21:00", title: "CONCERT-HOMMAGE AU COMPOSITEUR GIANNIS SPANOS", description: "Une soirée avec les chansons de Giannis Spanos, de la Nouvelle Vague et du cinéma grec.", location: "ODÉON ROMAIN DE KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250810T210000", gCalEnd: "20250810T230000" },
+            { date: "MERCREDI 13/08/25", time: "20:00", title: "PRÉSENTATION DU LIVRE de l'ancien recteur STAMATIS ALACHIOTIS 'LA FILLE ANONYME'", description: "En collaboration avec P.O. KOON 'O FILITAS' et l'UNION DE KOS ATHÈNES 'HIPPOCRATES'.", location: "COUR DU MUSÉE HISTORIQUE & FOLKLORIQUE DE KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250813T200000", gCalEnd: "20250813T220000" },
+            { date: "MERCREDI 13/08/25", time: "22:00", title: "CONCERT AVEC STELIOS ROKKOS", description: "Événement payant.", location: "TERRAIN DE FOOTBALL DE PYLI", googleMaps: "https://maps.app.goo.gl/hG5b8tF7yX5wR8vV9", gCalStart: "20250813T220000", gCalEnd: "20250813T235900" },
+            { date: "SAMEDI 16/08/25", time: "19:00", title: "'MIKRASIATIKI VENGHERA' - NUIT REBETIKO AVEC KATERINA TSIRIDOU", description: "Spectacle musical-narratif avec des chansons, traditions et histoires d'Asie Mineure.", location: "THÉÂTRE EN PLEIN AIR DE KARDAMENA", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250816T190000", gCalEnd: "20250816T210000" },
+            { date: "VENDREDI 22/08/25", time: "20:30", title: "'ODE À LA POÉSIE'", description: "Soirée de poésie avec un concert et des récitations organisée par Dimitris Vonapartis.", location: "ODÉON ROMAIN DE KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250822T203000", gCalEnd: "20250822T223000" },
+            { date: "SAMEDI 23/08/25", time: "20:00", title: "FÊTE DU MIEL", description: "Fête traditionnelle avec des spécialités locales sur le thème du miel, encadrée par un concert de musique traditionnelle.", location: "MOULIN, ANTIMACHIA", googleMaps: "https://maps.app.goo.gl/wJ5p5yQ8zX9wS6vR8", gCalStart: "20250823T200000", gCalEnd: "20250823T230000" },
+            { date: "DIMANCHE 24/08/25", time: "20:30", title: "'THEODORA JOUE POUR LA LUNE'", description: "Concert de piano solo par Theodora Hostogian, 16 ans, avec un répertoire grec et classique.", location: "THÉÂTRE EN PLEIN AIR DE KARDAMENA", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250824T203000", gCalEnd: "20250824T223000" },
+            { date: "MERCREDI 27/08/25", time: "21:00", title: "PIÈCE DE THÉÂTRE 'EN ATTENDANT LE 8'", description: "Par PANOS NIAGOS de l'ATELIER THÉÂTRAL DE LA MUNICIPALITÉ DE KOS.", location: "COUR DU MUSÉE HISTORIQUE & FOLKLORIQUE DE KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250827T210000", gCalEnd: "20250827T230000" },
+            { date: "MERCREDI 27/08/25 au SAMEDI 30/08/25", title: "'ALIKARNASSEIA DE KOS 2025'", description: "Le programme de quatre jours comprend des discours, des concerts, des danses traditionnelles, la renaissance de la coutume 'kourbani' et une exposition de photos.", location: "Lieux divers", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250827T180000", gCalEnd: "20250830T230000" },
+            { date: "VENDREDI 29/08/25", time: "21:00", title: "PIÈCE DE THÉÂTRE 'EN ATTENDANT LE 8'", description: "Par PANOS NIAGOS de l'ATELIER THÉÂTRAL DE LA MUNICIPALITÉ DE KOS.", location: "THÉÂTRE TSIGKOURA, KEFALOS", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250829T210000", gCalEnd: "20250829T230000" },
+            { date: "SAMEDI 30/08/25", time: "20:00", title: "FÊTE DU VIN", description: "Fête traditionnelle sur le thème du vin, avec des spécialités locales, des danses locales et de la musique live.", location: "THÉÂTRE EN PLEIN AIR D'EVANGELISTRIAS, ASFENDIOU", googleMaps: "https://maps.app.goo.gl/rWfA8L3Q8jJqfRzY6", gCalStart: "20250830T200000", gCalEnd: "20250830T230000" },
+            { date: "DIMANCHE 31/08/25", time: "21:00", title: "'L'ART EST UNE FEMME'", description: "Un grand hommage aux plus grandes interprètes féminines du 20ème siècle.", location: "ODÉON ROMAIN DE KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250831T210000", gCalEnd: "20250831T230000" }
+        ];
+
+        // --- UI & NAVIGATION ---
+        lucide.createIcons();
+        let currentSection = null;
+        const homeScreen = document.getElementById('home-screen');
+
+        function showSection(sectionId) {
+            homeScreen.style.display = 'none';
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+                currentSection = section;
+                section.scrollTop = 0;
+                
+                if (sectionId === 'events-section') {
+                    const dateFilterInput = document.getElementById('event-date-filter');
+                    if (dateFilterInput) {
+                        dateFilterInput.removeEventListener('change', renderEvents);
+                        dateFilterInput.addEventListener('change', renderEvents);
+                        const today = new Date();
+                        const yyyy = today.getFullYear();
+                        const mm = String(today.getMonth() + 1).padStart(2, '0');
+                        const dd = String(today.getDate()).padStart(2, '0');
+                        dateFilterInput.value = `${yyyy}-${mm}-${dd}`;
+                    }
+                    renderEvents(); 
+                }
+            }
+        }
+
+        function goBack() {
+            if (currentSection) {
+                currentSection.classList.remove('active');
+                currentSection = null;
+            }
+            setTimeout(() => {
+                 homeScreen.style.display = 'block';
+            }, 300);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2000);
+        }
+
+        function copyToClipboard(elementSelector, toastMessage) {
+            const textToCopy = document.querySelector(elementSelector).innerText;
+            const textArea = document.createElement('textarea');
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(toastMessage);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                showToast('Échec de la copie !');
+            }
+            document.body.removeChild(textArea);
+        }
+        
+        function copyGeneratedText(text, toastMessage) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(toastMessage);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                showToast('Échec de la copie !');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // --- EVENTS SECTION LOGIC ---
+        function generateGoogleCalendarLink(event) {
+            const startDate = event.gCalStart;
+            const endDate = event.gCalEnd;
+            const title = encodeURIComponent(event.title);
+            const description = encodeURIComponent(`${event.description}\n\nLieu: ${event.location}`);
+            const location = encodeURIComponent(event.location);
+            return `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${description}&location=${location}&sf=true&output=xml`;
+        }
+
+        function generateWhatsAppShareLink(event) {
+            const message = encodeURIComponent(`Découvrez cet événement : ${event.title} le ${event.date} à ${event.location}. ${event.description} Plus d'infos : ${event.googleMaps}`);
+            return `https://wa.me/?text=${message}`;
+        }
+
+        function renderEvents() {
+            const eventsList = document.getElementById('events-list');
+            const noEventsMessage = document.getElementById('no-events-message');
+            eventsList.innerHTML = '';
+            noEventsMessage.classList.add('hidden');
+
+            const selectedDate = document.getElementById('event-date-filter').value;
+            let filteredEvents = events;
+
+            if (selectedDate) {
+                filteredEvents = events.filter(event => {
+                    const eventStartDate = event.gCalStart ? event.gCalStart.substring(0, 8) : '';
+                    const eventEndDate = event.gCalEnd ? event.gCalEnd.substring(0, 8) : '';
+                    const formattedSelectedDate = selectedDate.replace(/-/g, '');
+                    return formattedSelectedDate >= eventStartDate && formattedSelectedDate <= eventEndDate;
+                });
+            }
+
+            if (filteredEvents.length === 0) {
+                noEventsMessage.classList.remove('hidden');
+            } else {
+                filteredEvents.forEach(event => {
+                    const eventCard = document.createElement('div');
+                    eventCard.className = 'event-card p-6 flex flex-col justify-between';
+                    eventCard.innerHTML = `
+                        <div>
+                            <h2 class="text-2xl font-bold mb-2">${event.title}</h2>
+                            <p class="text-lg mb-2"><i class="far fa-calendar-alt mr-2"></i>${event.date}</p>
+                            <p class="text-gray-700 mb-1"><i class="far fa-clock mr-2"></i>${event.time || ''}</p>
+                            <p class="text-md mb-3"><i class="fas fa-map-marker-alt mr-2"></i>${event.location}</p>
+                            <p class="text-gray-600 text-sm mb-4">${event.description}</p>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between gap-3 mt-4">
+                            <a href="${event.googleMaps}" target="_blank" class="btn-primary flex items-center text-sm">
+                                <i class="fas fa-external-link-alt mr-2"></i> Voir sur la carte
+                            </a>
+                            <div class="flex flex-wrap gap-2">
+                                <a href="${generateGoogleCalendarLink(event)}" target="_blank" class="btn-share text-sm">
+                                    <i class="far fa-calendar-plus"></i> Ajouter au calendrier
+                                </a>
+                                <a href="${generateWhatsAppShareLink(event)}" target="_blank" class="btn-share text-sm">
+                                    <i class="fab fa-whatsapp"></i> Partager
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    eventsList.appendChild(eventCard);
+                });
+            }
+        }
+
+        // --- GEMINI API HANDLER ---
+        async function callGeminiAPI(prompt) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }]
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorBody = await response.json();
+                    console.error("API Error:", errorBody);
+                    return `Erreur: ${errorBody.error.message}`;
+                }
+
+                const data = await response.json();
+                 if (data.candidates && data.candidates.length > 0 && data.candidates[0].content.parts.length > 0) {
+                    return data.candidates[0].content.parts[0].text;
+                } else {
+                    return "Désolé, je n'ai pas pu générer de réponse. L'API a renvoyé un résultat inattendu.";
+                }
+            } catch (error) {
+                console.error("Fetch Error:", error);
+                return "Erreur : Impossible de se connecter au service d'IA. Veuillez vérifier votre connexion réseau.";
+            }
+        }
+
+        function showLoading(containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `<div class="flex justify-center items-center p-8"><div class="loader"></div></div>`;
+        }
+
+        // --- AI FEATURES ---
+
+        // 1. AI CONCIERGE
+        const chatContainer = document.getElementById('chat-container');
+        const chatInput = document.getElementById('chat-input');
+        
+        function getWelcomeBookContext() {
+            const sectionsToScan = ['welcome-section', 'essentials-section', 'guide-section', 'transport-section', 'important-section', 'departure-section', 'local-products-section', 'island-hopping-section', 'natural-beauty-section', 'local-recipes-section', 'events-section'];
+            let context = "Informations du livret d'accueil :\n";
+            sectionsToScan.forEach(id => {
+                const section = document.getElementById(id);
+                if (section) {
+                    context += `\n--- Section: ${id.replace('-section','')} ---\n`;
+                    context += section.innerText || section.textContent;
+                }
+            });
+            return context;
+        }
+
+        async function handleChatSubmit() {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+
+            chatContainer.innerHTML += `<div class="chat-bubble user">${userMessage}</div>`;
+            chatInput.value = '';
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            chatContainer.innerHTML += `<div id="ai-loading" class="chat-bubble ai"><div class="loader" style="width:24px; height:24px; border-bottom-color: #4a90e2;"></div></div>`;
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            const knowledgeSource = document.querySelector('input[name="knowledgeSource"]:checked').value;
+            let prompt;
+
+            if (knowledgeSource === 'welcomeBook') {
+                const context = getWelcomeBookContext();
+                prompt = `Vous êtes Phaedra, une concierge IA serviable pour l'appartement 'Diamante del Mar Phaedra' à Kos, en Grèce. En vous basant *uniquement* sur les "Informations du livret d'accueil" fournies ci-dessous, répondez à la question de l'utilisateur. Si la réponse ne se trouve pas dans le texte, dites "Je suis désolée, cette information n'est pas dans le livret d'accueil." N'utilisez aucune connaissance externe.\n\n${context}\n\nQuestion de l'utilisateur: "${userMessage}"`;
+            } else {
+                prompt = `Vous êtes Phaedra, une concierge IA serviable pour un touriste à Kos, en Grèce. Répondez à la question suivante en français: "${userMessage}"`;
+            }
+
+            const aiResponse = await callGeminiAPI(prompt);
+            
+            const loadingBubble = document.getElementById('ai-loading');
+            loadingBubble.innerHTML = aiResponse.replace(/\n/g, '<br>');
+            loadingBubble.removeAttribute('id');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleChatSubmit();
+            }
+        });
+
+        // 2. AI RECIPES
+        async function generateRecipe() {
+            const outputContainer = document.getElementById('recipe-output');
+            outputContainer.querySelector('div').classList.add('hidden'); // Hide placeholder
+            showLoading('recipe-output');
+            const prompt = "Vous êtes un chef créatif spécialisé dans la cuisine des îles grecques. Suggérez une recette simple et délicieuse utilisant un ou plusieurs de ces produits locaux de Kos, en Grèce : fromage Posa (fromage au vin), miel de thym de Kos, huile d'olive locale, poisson frais (comme la daurade ou le bar) et tomates cerises. Donnez un nom accrocheur à la recette, une courte description, la liste des ingrédients et les instructions étape par étape. Mettez en forme la réponse joliment avec des titres, en français.";
+            const response = await callGeminiAPI(prompt);
+            outputContainer.innerHTML = response.replace(/\n/g, '<br>');
+        }
+
+        // 3. AI ITINERARY
+        async function generateItinerary() {
+            const outputContainer = document.getElementById('itinerary-output');
+            const days = document.getElementById('stay-days').value;
+            const interests = document.getElementById('interests').value;
+
+            if (!days || !interests) {
+                outputContainer.innerHTML = `<div class="text-center p-4 text-red-500">Veuillez entrer le nombre de jours et vos centres d'intérêt.</div>`;
+                return;
+            }
+            
+            showLoading('itinerary-output');
+            const guideContext = getWelcomeBookContext();
+            const prompt = `Vous êtes un guide touristique expert pour Kos, en Grèce. Créez un itinéraire personnalisé jour par jour pour un voyage de ${days} jours pour un touriste dont les intérêts sont : "${interests}". Utilisez les recommandations de l'hôte du guide ci-dessous en priorité. Pour chaque jour, suggérez une activité le matin, une activité l'après-midi et une suggestion de dîner. Soyez créatif et pratique. Rédigez la réponse en français.\n\nGuide de l'hôte:\n${guideContext}`;
+            
+            const response = await callGeminiAPI(prompt);
+            outputContainer.innerHTML = response.replace(/\n/g, '<br>');
+        }
+
+        // 4. AI REVIEW ASSISTANT
+        async function generateReview() {
+            const outputContainer = document.getElementById('review-output');
+            const keywords = document.getElementById('review-keywords').value;
+            
+            if (!keywords) {
+                outputContainer.innerHTML = `<p class="text-red-500 text-sm">Veuillez entrer au moins un mot-clé.</p>`;
+                return;
+            }
+
+            outputContainer.innerHTML = `<div class="flex justify-center items-center p-4"><div class="loader"></div></div>`;
+            
+            const prompt = `Vous êtes un assistant serviable pour un client d'hôtel. En vous basant sur ces mots-clés : "${keywords}", rédigez un avis amical et positif pour une location de vacances. Faites en sorte qu'il paraisse naturel et personnel. La propriété s'appelle 'Diamante del Mar Phaedra'. L'avis doit faire environ 3 à 5 phrases. Rédigez l'avis en français.`;
+
+            const response = await callGeminiAPI(prompt);
+            
+            const reviewText = response;
+            
+            outputContainer.innerHTML = `
+                <textarea id="generated-review-text" rows="5" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">${reviewText}</textarea>
+                <button onclick="copyGeneratedText(document.getElementById('generated-review-text').value, 'Avis copié !')" class="mt-2 w-full bg-gray-500 text-white px-3 py-1 rounded-lg text-sm font-semibold hover:bg-gray-600">Copier l'Avis</button>
+            `;
+        }
+
+    </script>
+</body>
+</html>

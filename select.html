@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Diamante del Mar Phaedra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .language-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .language-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-md mx-auto min-h-screen flex flex-col justify-center items-center p-4">
+        <header class="relative w-full mb-8">
+            <img src="https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop" 
+                 onerror="this.onerror=null;this.src='https://diamantedelmar.github.io/phaedra.png';" 
+                 alt="View of Kos island" class="w-full h-60 object-cover rounded-2xl shadow-xl">
+            <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-gray-100 to-transparent"></div>
+        </header>
+        
+        <div class="text-center -mt-16 z-10 w-full">
+            <div class="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg">
+                <h1 class="text-3xl font-bold text-gray-800">Welcome</h1>
+                <p class="text-gray-600 mt-2">Please select your language</p>
+            </div>
+        </div>
+
+        <main class="w-full mt-8">
+            <div class="grid grid-cols-2 gap-4">
+                <a href="index_en.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇬🇧</span>
+                    <span class="block font-semibold text-gray-700 mt-2">English</span>
+                </a>
+                <a href="index_es.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇪🇸</span>
+                    <span class="block font-semibold text-gray-700 mt-2">Español</span>
+                </a>
+                <a href="index_de.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇩🇪</span>
+                    <span class="block font-semibold text-gray-700 mt-2">Deutsch</span>
+                </a>
+                <a href="index_fr.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇫🇷</span>
+                    <span class="block font-semibold text-gray-700 mt-2">Français</span>
+                </a>
+                <a href="index_it.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇮🇹</span>
+                    <span class="block font-semibold text-gray-700 mt-2">Italiano</span>
+                </a>
+                <a href="index_nl.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇳🇱</span>
+                    <span class="block font-semibold text-gray-700 mt-2">Nederlands</span>
+                </a>
+                <a href="index_tr.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇹🇷</span>
+                    <span class="block font-semibold text-gray-700 mt-2">Türkçe</span>
+                </a>
+                <a href="index_el.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇬🇷</span>
+                    <span class="block font-semibold text-gray-700 mt-2">Ελληνικά</span>
+                </a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
