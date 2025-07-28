@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diamante del Mar Phaedra'ya Hoş Geldiniz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .section-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f7fafc; /* light gray */
+            z-index: 50;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .section-screen.active {
+            transform: translateX(0);
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .grid-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 1rem;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid rgba(226, 232, 240, 1);
+            transition: all 0.2s ease-in-out;
+        }
+        .grid-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .section-header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+        .prose-custom p, .prose-custom li {
+            color: #4A5568;
+        }
+        .prose-custom h3 {
+            color: #2D3748;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background-color: #4a90e2; /* Blue */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            background-color: #357ABD;
+        }
+        .event-card {
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        .btn-share {
+            background-color: #6a7fdb; /* Purple-blue */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-share:hover {
+            background-color: #536AC6;
+        }
+        /* Loading Spinner */
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #FFF;
+            border-bottom-color: #4a90e2;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Chat UI styles */
+        .chat-bubble {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            margin-bottom: 0.5rem;
+            word-wrap: break-word;
+        }
+        .chat-bubble.user {
+            background-color: #4a90e2;
+            color: white;
+            border-bottom-right-radius: 0.25rem;
+            align-self: flex-end;
+        }
+        .chat-bubble.ai {
+            background-color: #e2e8f0;
+            color: #2d3748;
+            border-bottom-left-radius: 0.25rem;
+            align-self: flex-start;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div id="app" class="max-w-md mx-auto min-h-screen bg-gray-100">
+        
+        <div id="home-screen">
+            <header class="relative">
+                <img src="https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop" 
+                     onerror="this.onerror=null;this.src='https://diamantedelmar.github.io/phaedra.png';" 
+                     alt="Phaedra" class="w-full h-60 object-cover">
+                <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-gray-100 to-transparent"></div>
+            </header>
+            <div class="p-4 -mt-10">
+                 <div class="text-center mb-6 bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg">
+                    <h1 class="text-3xl font-bold text-gray-800">Hoş Geldiniz Kitabı</h1>
+                </div>
+                <main>
+                    <div class="grid grid-cols-3 gap-4">
+                        <button onclick="showSection('ai-concierge-section')" class="grid-button col-span-1">
+                            <i data-lucide="sparkles" class="w-10 h-10 text-purple-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Phaedra</span>
+                        </button>
+                        <button onclick="showSection('ai-itinerary-section')" class="grid-button col-span-1">
+                            <i data-lucide="calendar-check" class="w-10 h-10 text-green-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">AI Seyahat Planı</span>
+                        </button>
+                        
+                        <button onclick="showSection('welcome-section')" class="grid-button">
+                            <i data-lucide="sun" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Hoş Geldiniz</span>
+                        </button>
+                        <button onclick="showSection('essentials-section')" class="grid-button">
+                            <i data-lucide="key-round" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Daire</span>
+                        </button>
+                        <button onclick="showSection('guide-section')" class="grid-button">
+                            <i data-lucide="map" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Ada Rehberi</span>
+                        </button>
+                        <button onclick="showSection('natural-beauty-section')" class="grid-button">
+                            <i data-lucide="leaf" class="w-8 h-8 text-green-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Doğal Güzellikler</span>
+                        </button>
+                        <button onclick="showSection('events-section')" class="grid-button">
+                            <i data-lucide="calendar-days" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Etkinlikler</span>
+                        </button>
+                        <button onclick="showSection('local-products-section')" class="grid-button">
+                            <i data-lucide="shopping-bag" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Yerel Ürünler</span>
+                        </button>
+                        <button onclick="showSection('local-recipes-section')" class="grid-button">
+                            <i data-lucide="utensils-crossed" class="w-8 h-8 text-orange-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Yerel Tarifler</span>
+                        </button>
+                        <button onclick="showSection('island-hopping-section')" class="grid-button">
+                            <i data-lucide="sailboat" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Ada Gezintisi</span>
+                        </button>
+                        <button onclick="showSection('transport-section')" class="grid-button">
+                            <i data-lucide="bus" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Ulaşım</span>
+                        </button>
+                        <button onclick="showSection('important-section')" class="grid-button">
+                            <i data-lucide="siren" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Önemli</span>
+                        </button>
+                        <button onclick="showSection('departure-section')" class="grid-button">
+                            <i data-lucide="log-out" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Ayrılış</span>
+                        </button>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <div id="ai-concierge-section" class="section-screen flex flex-col h-full">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Phaedra</h2>
+            </header>
+            <div class="p-4 flex-grow overflow-y-auto flex flex-col" id="chat-container">
+                <div class="chat-bubble ai">Merhaba! Ben Phaedra, yapay zeka konsiyerjiniz. Bugün size nasıl yardımcı olabilirim?</div>
+            </div>
+            <div class="p-4 bg-white border-t">
+                <div class="mb-2">
+                    <label class="text-sm font-medium text-gray-600">Bilgi Kaynağı:</label>
+                    <div class="flex items-center space-x-4 mt-1">
+                        <label class="flex items-center">
+                            <input type="radio" name="knowledgeSource" value="welcomeBook" class="form-radio text-blue-500" checked>
+                            <span class="ml-2 text-sm text-gray-700">Hoş Geldiniz Kitabı</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="knowledgeSource" value="webSearch" class="form-radio text-blue-500">
+                            <span class="ml-2 text-sm text-gray-700">Web Araması</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <input type="text" id="chat-input" class="flex-grow border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Phaedra'ya bir soru sorun...">
+                    <button onclick="handleChatSubmit()" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 focus:outline-none">
+                        <i data-lucide="send" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="ai-itinerary-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">AI Seyahat Planlayıcısı</h2>
+            </header>
+            <div class="p-6 space-y-4">
+                <div class="card p-4">
+                    <h3 class="font-semibold text-lg mb-2">Mükemmel Seyahatinizi Oluşturun</h3>
+                    <div>
+                        <label for="stay-days" class="block text-sm font-medium text-gray-700">Kaç gün kalacaksınız?</label>
+                        <input type="number" id="stay-days" value="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
+                    </div>
+                    <div class="mt-4">
+                        <label for="interests" class="block text-sm font-medium text-gray-700">İlgi alanlarınız nelerdir?</label>
+                        <textarea id="interests" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="örn., plajlar, tarih, yemek, yürüyüş, gece hayatı, dinlenme..."></textarea>
+                    </div>
+                    <button onclick="generateItinerary()" class="mt-4 w-full btn-primary">Seyahat Planı Oluştur</button>
+                </div>
+                <div id="itinerary-output" class="prose-custom space-y-4">
+                    <div class="text-center p-4 text-gray-500">Kişiselleştirilmiş seyahat planınız burada görünecektir.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="departure-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Bir Sonraki Sefere Kadar...</h2>
+            </header>
+            <div class="p-6 prose-custom">
+                <h3 class="text-2xl font-bold mb-4">Hoşçakalın</h3>
+                <p class="mb-4">Diamante del Mar Phaedra ve güzel Kos adasındaki zamanınız sona ererken, bizimle kalmayı tercih ettiğiniz için en içten teşekkürlerimizi sunarız. Umarız harika, dinlendirici ve unutulmaz bir tatil geçirmişsinizdir.</p>
+                
+                <div class="card my-6 bg-blue-50 p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="check-circle" class="w-5 h-5 mr-2 text-blue-500"></i>Çıkış Hatırlatıcısı</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li>Çıkış saati <strong>11:00</strong>'dir.</li>
+                        <li>Lütfen <strong>anahtarları kilitli kutuda</strong> bırakın.</li>
+                        <li>Tüm kişisel eşyalarınızın toplandığından emin olun.</li>
+                        <li>Tüm ışıkları ve klimaları kapatın.</li>
+                    </ul>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2">Deneyiminizi Paylaşın</h3>
+                <p>Konaklamanızdan memnun kaldıysanız, bir yorum bırakırsanız çok minnettar oluruz. Geri bildirimleriniz, gelecekteki gezginlerin küçük cennetimizi keşfetmelerine yardımcı olur.</p>
+                
+                <div class="card p-4 my-6 not-prose">
+                     <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="edit-3" class="w-5 h-5 mr-2 text-purple-500"></i>AI Yorum Asistanı</h3>
+                     <p class="text-sm text-gray-600 mb-2">Yorum yazma konusunda yardıma mı ihtiyacınız var? Birkaç anahtar kelime yazın ve yapay zeka asistanımızın size yardımcı olmasına izin verin.</p>
+                     <div>
+                        <label for="review-keywords" class="block text-sm font-medium text-gray-700">Konaklamanızla ilgili anahtar kelimeler:</label>
+                        <textarea id="review-keywords" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="örn., güzel manzara, temiz, harika konum, dost canlısı ev sahibi..."></textarea>
+                    </div>
+                    <button onclick="generateReview()" class="mt-4 w-full bg-purple-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-600">Yorum Oluştur</button>
+                    <div id="review-output" class="mt-4 space-y-2">
+                        </div>
+                </div>
+
+                <p>Yorumunuzu rezervasyon yaptığınız platformda (Booking.com veya Airbnb) veya <a href="https://g.page/r/CbUXM_AzUnc5EAE/review" target="_blank" class="text-blue-600 hover:underline">Google İşletme Profilimizde</a> yayınlayabilirsiniz.</p>
+                
+                <h3 class="text-xl font-semibold mt-6 mb-2">Bağlantıda Kalın</h3>
+                <p>Bizi Instagram'da takip edin <a href="https://www.instagram.com/diamantedelmar.phaedra" target="_blank" class="text-blue-600 hover:underline">@diamantedelmar.phaedra</a> veya gelecekteki konaklamalarınız için diamantedelmarphaedra@gmail.com adresinden bizimle iletişime geçin.</p>
+
+                <p class="mt-8">Bir kez daha teşekkür ederiz. Güvenli ve keyifli bir yolculuk dileriz!</p>
+            </div>
+        </div>
+
+        <div id="welcome-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Cennete Hoş Geldiniz!</h2>
+            </header>
+            <div class="p-6 prose-custom">
+                <h3 class="text-2xl font-bold mb-4">Kalós órises!</h3>
+                <p class="mb-4">Kos'a hoş geldiniz ve Diamante del Mar Phaedra'ya hoş geldiniz. Bu büyüleyici Oniki Adalar adasında size ev sahipliği yapmaktan büyük mutluluk duyuyoruz. Yakın zamanda yenilenen ve stil ve konfor düşünülerek tasarlanan evimizin, Kos'u bu kadar özel kılan antik tarihin, güneşli plajların ve canlı ada yaşamının büyüleyici karışımını keşfetmeniz için mükemmel bir sığınak olmasını umuyoruz.</p>
+                <p class="mb-4">Kos sizi yavaşlamaya, deniz havasını solumaya, binlerce yıllık tarihte dolaşmaya ve basit zevklerin tadını çıkarmaya davet ediyor. Umarız eşsiz çekiciliğine bizim gibi aşık olursunuz.</p>
+                <h3 class="text-xl font-semibold mt-6 mb-2">Bu Rehber Hakkında</h3>
+                <p>Bu kitabı, şık bir yerli gibi yaşamanıza yardımcı olacak özenle hazırlanmış bir giriş olarak düşünün. Adası'nın öne çıkanlarını keşfetmeniz için kişisel önerilerimizle birlikte, kolayca yerleşmenize yardımcı olacak temel bilgileri bir araya getirdik. Şimdi, rahatlayın, gevşeyin ve Kos hikayeniz başlasın!</p>
+            </div>
+        </div>
+
+        <div id="essentials-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Daire Bilgileri</h2>
+            </header>
+            <div class="p-6 space-y-6">
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="map-pin" class="w-5 h-5 mr-2 text-blue-500"></i>Adres</h3>
+                    <p class="text-gray-600">Diamante Del Mar Phaedra</p>
+                    <p class="text-gray-600">Σοφοκλή Βενιζέλου 54 (Sophokli Venizelou 54)</p>
+                    <p class="text-gray-600">Kos Şehri, 853 00</p>
+                    <a href="https://maps.google.com/?q=Sophokli+Venizelou+54,+Kos+853+00" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Haritalarda Aç <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="clock" class="w-5 h-5 mr-2 text-blue-500"></i>Giriş & Çıkış</h3>
+                    <p class="text-gray-600"><strong>Giriş:</strong> 16:00 (4:00 PM) Sonrası</p>
+                    <p class="text-gray-600"><strong>Kilitli Kutu Kodu:</strong> 1723</p>
+                    <p class="text-gray-600 mt-2"><strong>Çıkış:</strong> 11:00 AM'e Kadar</p>
+                    <p class="text-gray-500 text-sm mt-1">Lütfen anahtarları Kilitli Kutuya bırakın.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="wifi" class="w-5 h-5 mr-2 text-blue-500"></i>Wi-Fi Erişimi</h3>
+                    <p class="text-gray-600"><strong>Ağ:</strong> Phaedra</p>
+                    <div class="flex justify-between items-center mt-1">
+                        <p class="text-gray-600"><strong>Şifre:</strong> <span id="wifi-password">Phaedra!22420@</span></p>
+                        <button onclick="copyToClipboard('#wifi-password', 'Şifre kopyalandı!')" class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm font-semibold hover:bg-blue-600">Kopyala</button>
+                    </div>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="home" class="w-5 h-5 mr-2 text-blue-500"></i>Ev Kuralları</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li>Kapalı alanda <strong>kesinlikle sigara içilmez</strong>.</li>
+                        <li><strong>Evcil hayvan</strong> yasaktır.</li>
+                        <li>Sakin saatler: <strong>22:00 - 07:00</strong>.</li>
+                        <li><strong>Parti</strong>, etkinlik veya büyük toplantı yasaktır.</li>
+                        <li>Sadece kayıtlı misafirler geceleyebilir.</li>
+                    </ul>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="book-open" class="w-5 h-5 mr-2 text-blue-500"></i>Cihaz Kılavuzları</h3>
+                    <p class="text-gray-600 mb-4">Her cihazın kılavuzunu görüntülemek için telefonunuzun kamerasıyla QR kodunu tarayın.</p>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div>
+                            <p class="font-medium text-gray-700">Mikrodalga</p>
+                            <a href="https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/8897453600-GMI-12311-B/en-US-8897453600-20221020135181-User-Manual---File-Longsv-SE.pdf"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/8897453600-GMI-12311-B/en-US-8897453600-20221020135181-User-Manual---File-Longsv-SE.pdf" alt="Mikrodalga Kılavuzu için QR Kodu" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-700">Fırın</p>
+                           <a href="https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/7768282928-Edition-75-Backofenset/en-US-7768282928-202311021237674-User-Manual---File-Longen-US.pdf"> <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/7768282928-Edition-75-Backofenset/en-US-7768282928-202311021237674-User-Manual---File-Longen-US.pdf" alt="Fırın Kılavuzu için QR Kodu" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-700">Nespresso Kahve Makinesi</p>
+                            <a href="https://www.nespresso.com/shared_res/manuals/essenza-mini/2017/UM_NESPRESSO_ESSENZA_MINI_KRUPS_PROD_WEB_2017_02_20.pdf"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.nespresso.com/shared_res/manuals/essenza-mini/2017/UM_NESPRESSO_ESSENZA_MINI_KRUPS_PROD_WEB_2017_02_20.pdf" alt="Nespresso Kılavuzu için QR Kodu" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-700">Çamaşır Makinesi</p>
+                            <a href="https://morris.gr/wp-content/uploads/2023/12/Instructions-manual-WIW-81411BI.pdf"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://morris.gr/wp-content/uploads/2023/12/Instructions-manual-WIW-81411BI.pdf" alt="Çamaşır Makinesi Kılavuzu için QR Kodu" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="guide-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Ada Rehberi</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <div class="card overflow-hidden p-0 bg-blue-50 border border-blue-200">
+                    <img src="https://images.unsplash.com/photo-1551028150-64b9f398f67b?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://xasapaki.gr/wp-content/uploads/2023/05/DSC01818-scaled.jpg';" alt="Mükemmel ızgara biftek" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2 text-blue-800 flex items-center"><i data-lucide="star" class="w-6 h-6 mr-2 text-yellow-500 fill-current"></i>Ev Sahibinin Favorisi: Xasapaki</h3>
+                        <p class="text-blue-700 mb-3">Unutulmaz bir yemek için Xasapaki'yi ziyaret edin. Burası, etinizi seçip mükemmel bir şekilde ızgara yaptırdığınız eşsiz bir kasap ve biftek evidir. Burgerleri adanın en iyisi olarak övülür ve dana carpaccio gibi mezeler de harika yorumlar alır!</p>
+                        <div class="flex space-x-2">
+                           <a href="https://xasapaki.gr/" target="_blank" class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700">Web Sitesini Ziyaret Edin</a>
+                           <a href="https://maps.app.goo.gl/hR6NfGgGf8E8qZ6f7" target="_blank" class="inline-flex items-center bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300">Haritada Görüntüle</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Yemek & Kahve</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1559305459-49de9734d355?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://imageproxy.wolt.com/assets/67335dc042b21b5c7ee59154';" alt="Lezzetli bir kahvaltı" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Alchimion & The Cup</h4><p class="text-gray-600 mt-1">Kapınızın hemen önünde, Alchimion rahat brunch (Kayianas, Shakshuka) sunarken, The Cup olağanüstü "üçüncü nesil" kahve servis eder.</p><a href="https://maps.app.goo.gl/3A9iEa2uUvY4gJgw5" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Haritada Görüntüle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1541592106381-b5863c023904?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.athinorama.gr/Content/ImagesDatabase/p/750x422/crop/both/a5/a5468d17cae94a7dad807007ceefddf8.jpg?quality=81&404=default&v=4';" alt="Taze deniz ürünleri makarnası" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Barbouni</h4><p class="text-gray-600 mt-1">Liman yakınında su kenarında taze deniz ürünleri için en iyi seçim. Morina kroketleri ve kalamar mürekkebi tagliatelle gibi yemekleri övgüyle karşılanıyor. Su kenarı bir masa için önceden rezervasyon yaptırın.</p><a href="https://maps.app.goo.gl/kG1xQoD7bE2v5z8E7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Haritada Görüntüle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1622234994112-c94831e67991?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://media-01.imu.nl/storage/ourplanetinmylens.com/21978/restaurants-kos-greece-patriko-800x533.jpg';" alt="Bir Yunan meze tabağı" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Patriko</h4><p class="text-gray-600 mt-1">Otantik Yunan mezeleri için aile işletmesi bir cevher. Ballı fırında feta peynirini veya özel Patriko Salatası'nı deneyin.</p><a href="https://maps.app.goo.gl/C2zY6G4kS4wSg4Rk7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Haritada Görüntüle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1574929823616-1937a4d33595?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://platanoskos.gr/wp-content/uploads/2024/07/DSC03696-scaled.jpg';" alt="Büyük bir çınar ağacının altında yemek yemek" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Platanos Restaurant</h4><p class="text-gray-600 mt-1">Tarih ve romantizmle dolu bir yemek için, efsanevi Hipokrat Çınar Ağacı'nın altında yemek yiyin. Yüksek kaliteli yemekler ve harika bir ambiyans sunar.</p><a href="https://maps.app.goo.gl/rWfA8L3Q8jJqfRzY6" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Haritada Görüntüle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Plajlar</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1625450438349-5975e50cf582?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://media.jet2.com/is/image/jet2/313976-kgs_lambi_0813_02_ps?$Original-Dynamic(max1280x1280)$&wid=1920&hei=500&fit=crop%2C1&dpr=off';" alt="Şemsiyeli kumlu plaj" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Lambi Plajı</h4><p class="text-gray-600 mt-1">En yakın komşunuz (200m uzaklıkta)! Sığ suları olan popüler, uzun ve kumlu bir sahil şeridi, barlar ve su sporları ile iyi organize edilmiştir.</p><a href="https://maps.app.goo.gl/ggrD1a8D9b8vC73D9" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Haritada Görüntüle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531122-8353e813a8c5?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.jet2holidays.com/-/media/destination%20guide/greece/kos/cfu_agios_stefanos_beach_1497481107_getty_1023_01_rgb-136-dpi-for-web-min.jpg?h=500&w=1920&crop=1&hash=6B2D4846664312303EC275100A9440EB%201024w';" alt="Adacıkta kilisesi olan plaj" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Agios Stefanos</h4><p class="text-gray-600 mt-1">Kos'un tartışmasız en fotojenik plajı, Kastri adacığı ve 5. yüzyıl bazilikalarının kalıntıları hemen kıyıda.</p><a href="https://maps.app.goo.gl/qL8sU53zQ2pG8c187" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Haritada Görüntüle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1617066808546-32d56a237190?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.reckonasbavi.cz/wp-content/uploads/2023/08/Therma-beach-Embros-prirodni-termalni-lazne-na-ostrove-Kos.jpg.jpg';" alt="Kaplıcalı kayalık plaj" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Therma Plajı</h4><p class="text-gray-600 mt-1">Şifalı termal suların denize aktığı eşsiz bir doğal spa deneyimi. Volkanik siyah çakıllı kumu vardır.</p><a href="https://maps.app.goo.gl/8T1JvU5nUa1wP9W86" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Haritada Görüntüle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                         <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1507525428034-b723a996f329?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.vacanzekos.com/wp-content/uploads/2016/02/paradise-beach.jpg';" alt="Turkuaz renkli suya sahip çarpıcı bir kumlu plaj" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Paradise Plajı</h4><p class="text-gray-600 mt-1">Altın kumları ve sığ, sakin suları ile adını hak ediyor, bu plaj aileler için mükemmel. Çok kalabalık olabilir.</p><a href="https://maps.app.goo.gl/VjP7zQjR9eG8m4RCA" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Haritada Görüntüle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Tarih & Köyler</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531233-a3a2de7c858e?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.vacanzegreche.com/public/img/data/2019101794859527_asklepion-isola-di-kos.jpg'" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Asklepion</h4><p class="text-gray-600 mt-1">Adanın en önemli arkeolojik alanı. Modern Tıp'ın Babası Hippokrates ile bağlantılı bir şifa tapınağı.</p><a href="https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Haritada Görüntüle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1540899979346-a4c4987053e4?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://as1.ftcdn.net/jpg/02/95/44/86/1000_F_295448668_PNfl3bFQOS2eT3vWez1r1MlrlhyB0TFF.webp';" alt="Bir Yunan köyü üzerinde gün batımı" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Zia Köyü</h4><p class="text-gray-600 mt-1">Nefes kesen panoramik gün batımı manzaraları için mutlaka ziyaret edilmesi gereken bir dağ köyü. Oromedon restoranı şiddetle tavsiye edilir.</p><a href="https://maps.app.goo.gl/9z4Y2E3u8vX5F5vJ8" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Haritada Görüntüle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531065-a8a4f0b2f5d7?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://a.travel-assets.com/findyours-php/viewfinder/images/res70/73000/73702-Kos-Castle.jpg';" alt="Deniz kenarında taş bir kale" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Neratzia Kalesi</h4><p class="text-gray-600 mt-1">Liman girişini koruyan etkileyici bir 15. yüzyıl Şövalye kalesi. Ziyaret etmeden önce restorasyon durumunu kontrol edin.</p><a href="https://maps.app.goo.gl/6pCgxXmUqB8qgU7E7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Haritada Görüntüle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="natural-beauty-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Kos'un Doğal Güzellikleri</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <p class="text-gray-700 mb-4">Göreceli olarak küçük boyutuna rağmen, Kos inanılmaz bir doğal çeşitliliğe sahip bir adadır. Tuz gölleri ve sulak alanlardan volkanik kaynaklara ve yemyeşil ormanlara kadar, plajların ötesinde keşfedilecek çok şey var.</p>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/02/Alykes-Wetlands-Tigaki-Kos-003.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/a7d8de/ffffff?text=Aliki+Salt+Lake';" alt="Aliki Tuz Gölü" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Aliki Tuz Gölü, Tigaki</h3>
+                        <p class="text-gray-600 mb-2">Bir zamanlar tuz üretimi için kullanılan çarpıcı bir kıyı sulak alanı. Bugün, özellikle sonbahar ve kış aylarında flamingolar gibi göçmen kuşlar için bir sığınak haline gelen, yaşam dolu, korunan bir doğa rezervidir.</p>
+                        <a href="https://maps.app.goo.gl/3fTcvZ6gC4M1rCqq8" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Haritada Görüntüle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/01/Dikeos-mount-Kos-001.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/a7d8de/ffffff?text=Mount+Dikaios';" alt="Dikaios Dağı" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Dikaios Dağı</h3>
+                        <p class="text-gray-600 mb-2">846 metre yüksekliğe ulaşan Dikaios Dağı, Kos ve çevredeki adaların nefes kesen panoramik manzaralarını sunar. Yamaçlar çam ormanları ve çınar ağaçlarıyla kaplıdır, özellikle ilkbaharda kır çiçekleri açtığında yürüyüş için harika bir yerdir.</p>
+                         <a href="https://maps.app.goo.gl/2k5y2E9L4eXjS9vP8" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Haritada Görüntüle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/02/Plaka-forest-kos-001.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/a7d8de/ffffff?text=Plaka+Forest';" alt="Plaka Ormanı" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Plaka Ormanı</h3>
+                        <p class="text-gray-600 mb-2">Antimachia yakınlarındaki güzel bir çam ormanı, sakin tavus kuşları ve kedileriyle ünlüdür. Piknik yapmak, hafif bir yürüyüş yapmak ve yaz sıcağından uzakta biraz huzur bulmak için mükemmel, serin, gölgelik bir vahadır.</p>
+                        <a href="https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Haritada Görüntüle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="local-recipes-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Yerel Tarifler</h2>
+            </header>
+            <div class="p-6 space-y-8 prose-custom">
+                <p class="text-gray-700 mb-4">Konfor alanınızdan bir adım atın ve bu geleneksel yemeklerle Kos Adası'ndaki tatilinizin tadını çıkararak yeni bir şeyler deneyin!</p>
+
+                <div class="card p-6">
+                    <h3 class="font-semibold text-xl mb-2 text-gray-800">Domuz Etli Bulgur (Pligouri)</h3>
+                    <p class="mb-4">Bulgur buğdayının yumuşak domuz eti ile yavaş yavaş pişirilmesiyle hazırlanan doyurucu ve geleneksel bir yemek olup, yerel evlerde temel bir besindir.</p>
+                    <h4 class="font-semibold text-lg mb-2">Malzemeler:</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>500g domuz eti, küçük küpler halinde doğranmış</li>
+                        <li>1 su bardağı iri bulgur (pligouri)</li>
+                        <li>1 büyük soğan, doğranmış</li>
+                        <li>2 diş sarımsak, kıyılmış</li>
+                        <li>400g doğranmış domates (konserve veya taze)</li>
+                        <li>2 yemek kaşığı zeytinyağı</li>
+                        <li>2.5 su bardağı sebze veya tavuk suyu</li>
+                        <li>Tuz ve taze çekilmiş karabiber</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mb-2">Talimatlar:</h4>
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li>Geniş bir tencere veya dökme demir tencerede zeytinyağını orta ateşte ısıtın. Domuz etini ekleyip her tarafı kızarana kadar pişirin.</li>
+                        <li>Doğranmış soğanı ekleyip yaklaşık 5 dakika yumuşayana kadar pişirin. Sarımsağı ekleyip kokusu çıkana kadar bir dakika daha pişirin.</li>
+                        <li>Bulguru soğuk su altında yıkayın ve tencereye ekleyin. Hafifçe kavurmak için bir dakika karıştırın.</li>
+                        <li>Doğranmış domatesleri ve suyu dökün. Tuz ve karabiberle tatlandırın ve kaynamaya bırakın.</li>
+                        <li>Isıyı düşürün, tencerenin kapağını kapatın ve bulgur yumuşayana ve sıvının çoğunu emene kadar yaklaşık 20-25 dakika kısık ateşte pişirin.</li>
+                        <li>Çatal yardımıyla kabartmadan ve servis yapmadan önce ocaktan alıp 5-10 dakika bekletin.</li>
+                    </ol>
+                    <a href="https://www.youtube.com/watch?v=VzTF-o2irHg" target="_blank" class="inline-flex items-center mt-4 text-blue-600 font-semibold hover:underline">Video Eğitimi İzle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="font-semibold text-xl mb-2 text-gray-800">Ntolmadakia (Yaprak Sarma)</h3>
+                    <p class="mb-4">Pirinç ve taze otlarla doldurulmuş asma yaprakları sarılır. Sıcak veya soğuk servis edilebilir, genellikle bir dilim limon ve bir kaşık yoğurt ile.</p>
+                    <h4 class="font-semibold text-lg mb-2">Malzemeler:</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>1 kavanoz (yaklaşık 250g) salamura asma yaprağı</li>
+                        <li>1 su bardağı kısa taneli pirinç, yıkanmış</li>
+                        <li>1 büyük soğan, ince doğranmış</li>
+                        <li>1/2 su bardağı doğranmış taze dereotu</li>
+                        <li>1/2 su bardağı doğranmış taze nane</li>
+                        <li>1/2 su bardağı zeytinyağı, ayrılmış</li>
+                        <li>2 su bardağı sıcak su</li>
+                        <li>2 limonun suyu</li>
+                        <li>Tuz ve karabiber</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mb-2">Talimatlar:</h4>
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li>Asma yapraklarını dikkatlice ayırın ve iyice yıkayın. Yumuşatmak için kaynar suda 3-5 dakika haşlayın, sonra süzün.</li>
+                        <li>Bir kapta pirinç, soğan, dereotu, nane, zeytinyağının yarısı, 1 limonun suyu, tuz ve karabiberi karıştırın.</li>
+                        <li>Bir asma yaprağını düz bir zemine (parlak tarafı aşağı gelecek şekilde) serin. Sapın yakınına bir çay kaşığı dolgu yerleştirin. Alt uçlarını dolgunun üzerine katlayın, sonra yanlarını katlayın ve sıkıca sarın. Tüm yapraklar için tekrarlayın.</li>
+                        <li>Geniş bir tencerenin dibini birkaç fazladan asma yaprağı ile kaplayın. Doldurulmuş yaprakları sıkıca katmanlar halinde dizin.</li>
+                        <li>Üzerine kalan zeytinyağını, limon suyunu ve sıcak suyu gezdirin. Üzerine ters çevrilmiş ısıya dayanıklı bir tabak koyarak dağılmalarını önleyin.</li>
+                        <li>Hafifçe kaynamaya bırakın, sonra ısıyı düşürün, kapağını kapatın ve pirinç pişene kadar 45-60 dakika kısık ateşte pişirin. Servis yapmadan önce tencerede soğumalarını bekleyin.</li>
+                    </ol>
+                    <a href="https://www.youtube.com/watch?v=2wLEzvXVKm4" target="_blank" class="inline-flex items-center mt-4 text-blue-600 font-semibold hover:underline">Video Eğitimi İzle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                
+                <div class="card p-6">
+                    <h3 class="font-semibold text-xl mb-2 text-gray-800">Krasotyri Saganaki (Kızarmış Şarap Peyniri)</h3>
+                    <p class="mb-4">Eşsiz bir yerel lezzet, mükemmel bir şekilde tavada kızartılır. Şaraplı peynir, lezzetli çıtır bir kabukla içeride sıcak ve hafifçe erimiş hale gelir.</p>
+                    <h4 class="font-semibold text-lg mb-2">Malzemeler:</h4>
+                     <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>1 dilim Krasotyri (şarap peyniri), yaklaşık 1.5 cm kalınlığında</li>
+                        <li>2 yemek kaşığı çok amaçlı un</li>
+                        <li>2 yemek kaşığı zeytinyağı</li>
+                        <li>1 limon dilimi, servis için</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mb-2">Talimatlar:</h4>
+                     <ol class="list-decimal list-inside space-y-2">
+                        <li>Krasotyri dilimini una bulayın, her tarafının tamamen kaplandığından emin olun. Fazla unu silkeleyin.</li>
+                        <li>Küçük, yapışmaz bir tavada zeytinyağını orta-yüksek ateşte ısıtın.</li>
+                        <li>Unlanmış peyniri dikkatlice sıcak tavaya yerleştirin. Her iki tarafı da derin altın rengi bir kabuk oluşana kadar her iki tarafını 2-3 dakika kızartın.</li>
+                        <li>Tavadan çıkarın ve bir tabağa koyun. Hemen üzerine cömertçe taze limon suyu sıkarak servis yapın.</li>
+                    </ol>
+                    <a href="https://youtu.be/k1MZGsJT0Fw" target="_blank" class="inline-flex items-center mt-4 text-blue-600 font-semibold hover:underline">Video Eğitimi İzle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="transport-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md"><button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200"><i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i></button><h2 class="text-xl font-bold text-gray-800 mx-auto">Kos'ta Dolaşım</h2></header>
+            <div class="p-6 space-y-6">
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="car" class="w-5 h-5 mr-2 text-blue-500"></i>Kiralık Araba / Scooter</h3>
+                    <p class="text-gray-600">Uzaktaki plajları ve köyleri keşfetmek için en fazla özgürlüğü sağlar. Bir araba için günlük ~€35-60, bir scooter için ise günlük ~€25 ödemeyi bekleyebilirsiniz. Yaz aylarında önceden rezervasyon yaptırın.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="bus" class="w-5 h-5 mr-2 text-blue-500"></i>KTEL Şehirlerarası Otobüsler</h3>
+                    <p class="text-gray-600">Büyük kasabalar ve tatil köyleri arasında seyahat etmenin ekonomik bir yolu. Ana istasyon Kleopatras Caddesi 7 numaradadır. Tarifeleri <a href="http://www.ktel-kos.gr" target="_blank" class="text-blue-600 hover:underline">ktel-kos.gr</a> adresinden çevrimiçi kontrol edin.</p>
+                    <a href="https://maps.app.goo.gl/u7PdwWwY821HDPqX8" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">İstasyonu Haritada Görüntüle <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="bus-front" class="w-5 h-5 mr-2 text-blue-500"></i>DEAS Şehir İçi Otobüsler</h3>
+                    <p class="text-gray-600">Kos Şehri ve Lambi, Psalidi ve Asklepion gibi yakın bölgelere seyahat için. Tarifeleri <a href="http://mobility.kos.gr" target="_blank" class="text-blue-600 hover:underline">Kos Mobility web sitesi/uygulaması</a> üzerinden kontrol edin.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="bike" class="w-5 h-5 mr-2 text-blue-500"></i>Bisiklet</h3>
+                    <p class="text-gray-600">Kos'un düz arazisi bisiklet sürmeyi harika bir seçenek haline getiriyor, Kos Şehri'nden Tigaki ve Psalidi'ye özel bisiklet yolları var. Kiralık bisikletler günlük ~€5-10 karşılığında geniş çapta mevcuttur.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="taxi" class="w-5 h-5 mr-2 text-blue-500"></i>Taksiler</h3>
+                    <p class="text-gray-600">Kolayca bulunabilir. Duraklarda (Akti Kountouriotou gibi) bulun veya telefonla rezervasyon yapın. Uzun yolculuklar için fiyat konusunda anlaşın. Kos Şehri Radyo Taksi: <a href="tel:+302242022777" class="text-blue-600 hover:underline">+30 22420 22777</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="important-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md"><button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200"><i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i></button><h2 class="text-xl font-bold text-gray-800 mx-auto">Önemli Bilgiler</h2></header>
+            <div class="p-6 space-y-6">
+                <div class="card p-6 border-2 border-red-500">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center text-red-600"><i data-lucide="siren" class="w-5 h-5 mr-2"></i>Acil Durum Numaraları</h3>
+                    <p class="text-gray-700 text-lg">Herhangi bir acil durum için Avrupa Acil Durum Numarasını arayın:</p>
+                    <a href="tel:112" class="block text-center my-3 text-3xl font-bold text-red-600 bg-red-100 p-4 rounded-lg tracking-widest">112</a>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li><strong>Ambulans:</strong> 166</li>
+                        <li><strong>Polis:</strong> 100</li>
+                        <li><strong>İtfaiye:</strong> 199</li>
+                        <li><strong>Sahil Güvenlik:</strong> 108</li>
+                        <li><strong>Turist Polisi:</strong> 171</li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="user" class="w-5 h-5 mr-2 text-blue-500"></i>Ev Sahibi İletişim</h3>
+                    <p class="text-gray-600"><strong>Adı:</strong> Varthakouris Ioannis</p>
+                    <p class="text-gray-600"><strong>Telefon / WhatsApp:</strong></p>
+                     <a href="https://wa.me/306942575314" target="_blank" class="block text-center my-2 text-xl font-semibold text-green-600 bg-green-100 p-3 rounded-lg hover:bg-green-200">+30 6942 575314</a>
+                    <p class="text-sm text-gray-500">Acil olmayan sorular için WhatsApp veya Viber tercih edilir (09:00 - 20:00). Acil durumlar için lütfen arayın.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="shopping-cart" class="w-5 h-5 mr-2 text-blue-500"></i>Yakınlardaki Temel İhtiyaçlar</h3>
+                    <p class="text-gray-600"><strong>Süpermarket:</strong> AB Vassilopoulos market alışverişi için sadece 1 dakikalık yürüme mesafesindedir.</p>
+                    <p class="text-gray-600 mt-2"><strong>ATM:</b> AB Vassilopoulos süpermarketinin girişinde mevcuttur.</p>
+                    <p class="text-gray-600 mt-2"><strong>Eczane (Φαρμακείο):</strong> Yakınlarda birkaç tane var. Yeşil bir haç işareti arayın. Nöbetçi eczanelerin ("Εφημερεύον") listesi kapılarında asılıdır.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="events-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">HİPPOKRATYA 2025</h2>
+            </header>
+            <div class="p-6">
+                <div class="mb-6">
+                    <label for="event-date-filter" class="block text-gray-700 text-sm font-bold mb-2">Tarihe Göre Filtrele:</label>
+                    <input type="date" id="event-date-filter" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div id="events-list" class="grid grid-cols-1 gap-8">
+                    </div>
+                <div id="no-events-message" class="text-center text-gray-600 mt-8 hidden">
+                    Seçilen tarih için etkinlik bulunamadı.
+                </div>
+            </div>
+        </div>
+
+        <div id="local-products-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Yerel Ürünler ve Tarifler</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <div class="card p-4 text-center bg-orange-50 border-orange-200 border">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center justify-center text-orange-800"><i data-lucide="chef-hat" class="w-6 h-6 mr-2"></i>AI Tarifleriyle Adası Tadın</h3>
+                    <p class="text-gray-600 mb-4">Kos'un taze, yerel malzemelerini kullanarak lezzetli bir tarif önerisi alın.</p>
+                    <button onclick="generateRecipe()" class="w-full btn-primary bg-orange-500 hover:bg-orange-600">Tarif Öner</button>
+                </div>
+                <div id="recipe-output" class="prose-custom space-y-4">
+                     <div class="text-center p-4 text-gray-500 hidden">Tarifiniz burada görünecektir.</div>
+                </div>
+
+                <p class="text-gray-700 mb-4">Kos, harika hediyelik eşyalar için yerel ürünler ve geleneksel ürünler açısından zengindir. İşte favorilerimizden bazıları:</p>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://melitaygetos.gr/wp-content/uploads/2021/05/meli-1.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/melikoukouvas.jpg?itok=f4f4f4f4';" alt="Kos Balı" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Kos Balı</h3>
+                        <p class="text-gray-600 mb-2">Kos, aroması ve lezzetiyle zengin, mükemmel kekik balıyla bilinir. Doğal bir tatlandırıcı ve sağlıklı bir ikramdır.</p>
+                        <p class="text-gray-700 font-medium"><strong>Nereden alınır:</strong> Yerel pazarlar, Zia gibi köylerdeki küçük dükkanlar ve özel gıda mağazaları. "Μέλι Θυμαρίσιο" (Kekik Balı) etiketli kavanozları arayın.</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Eve götürmek:</strong> Bal, genellikle kontrol edilmiş bagajda güvenle taşınabilir. Sızıntıları önlemek için iyi kapatıldığından emin olun.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://gastronomytours.com/wp-content/uploads/2023/09/Possa-768x443.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/tyriposa.jpg?itok=f4f4f4f4';" alt="Posa Peyniri" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Posa Peyniri (Şarap Peyniri)</h3>
+                        <p class="text-gray-600 mb-2">Eşsiz bir yerel peynir olan "Posa" (veya "Tyri tis Posas"), geleneksel olarak kırmızı şarap tortusunda olgunlaştırılır, bu da ona belirgin bir kırmızımsı renk ve zengin, baharatlı bir lezzet verir.</p>
+                        <p class="text-gray-700 font-medium"><strong>Nereden alınır:</strong> Yerel mandıralar, büyük süpermarketler ve bazı geleneksel tavernalar. "Τυρί της Πόσας" isteyin.</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Eve götürmek:</strong> Kontrol edilmiş bagajda, tercihen satıcıdan alınabiliyorsa vakumlu pakette, tazeliğini korumak ve kokuları önlemek için en iyi şekilde taşınır.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://lerosisland.gr/wp-content/uploads/2017/05/photo_2017-02-07_11-58-13-1.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/glykotomatas.jpg?itok=f4f4f4f4';" alt="Domates Kaşık Tatlısı" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Domates Kaşık Tatlısı (Glyko Tomataki)</h3>
+                        <p class="text-gray-600 mb-2">Küçük, olgunlaşmamış domateslerden yapılan geleneksel bir Yunan "kaşık tatlısı". Şekerlenmiş ve eşsiz, hoş bir lezzeti vardır, genellikle kahve ile veya tatlı olarak servis edilir.</p>
+                        <p class="text-gray-700 font-medium"><strong>Nereden alınır:</strong> Yerel kadın kooperatifleri, özel gıda mağazaları ve bazı büyük süpermarketler. "Γλυκό Ντοματάκι" etiketli kavanozları arayın.</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Eve götürmek:</strong> Kavanozlar kontrol edilmiş bagajda en iyisidir. Sızıntıyı önlemek için kapağın sıkı olduğundan emin olun.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://www.argiro.gr/wp-content/uploads/2021/08/elaiolado-scaled-1-1320x720.jpeg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/ladi.jpg?itok=f4f4f4f4';" alt="Kos Zeytinyağı" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Sızma Zeytinyağı</h3>
+                        <p class="text-gray-600 mb-2">Yunanistan zeytinyağı ile ünlüdür ve Kos mükemmel kalitede sızma zeytinyağı üretir. Yunan mutfağının vazgeçilmezidir ve sağlıklı bir seçimdir.</p>
+                        <p class="text-gray-700 font-medium"><strong>Nereden alınır:</strong> Doğrudan zeytinyağı üreticilerinden (bazıları tur düzenler), yerel pazarlardan ve süpermarketlerden. "Εξαιρετικό Παρθένο Ελαιόλαδο" arayın.</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Eve götürmek:</strong> Daha büyük miktarlar için kontrol edilmiş bagaj gereklidir. Birçok dükkan, seyahat için özel olarak tasarlanmış, sızdırmaz teneke kutularda veya şişelerde zeytinyağı satmaktadır.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://www.thegreekfood.com/wp-content/uploads/2012/05/herbs-and-spices.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/votanakos.jpg?itok=f4f4f4f4';" alt="Yerel Otlar ve Baharatlar" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Yerel Otlar ve Baharatlar</h3>
+                        <p class="text-gray-600 mb-2">Adanın iklimi, kekik, mercanköşk ve adaçayı gibi aromatik otların yetişmesi için mükemmeldir. Bunlar, hoş kokulu ve pratik hediyelik eşyalar yapar.</p>
+                        <p class="text-gray-700 font-medium"><strong>Nereden alınır:</strong> Yerel pazarlar, hediyelik eşya dükkanları ve hatta bazı süpermarketler. Küçük torbalarda veya dekoratif demetlerde kurutulmuş otlar arayın.</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Eve götürmek:</strong> Hem el bagajında hem de kontrol edilmiş bagajda taşınabilir. Aromalarını korumak ve dökülmeyi önlemek için iyi paketlendiğinden emin olun.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/03/Zia_Village_Kos_Kos4all_003.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/keramika.jpg?itok=f4f4f4f4';" alt="El Yapımı Seramikler" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">El Yapımı Seramikler</h3>
+                        <p class="text-gray-600 mb-2">Kos genelinde, genellikle geleneksel Yunan tasarımları veya canlı renklerle süslenmiş güzel el yapımı çömlek ve seramikler bulacaksınız. Dekoratif tabaklardan işlevsel kupalara kadar, hoş hatıralar yaparlar.</p>
+                        <p class="text-gray-700 font-medium"><strong>Nereden alınır:</strong> Kos Şehri'ndeki ve köylerdeki zanaat dükkanları, özellikle zanaat geleneği olan bölgelerde.</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Eve götürmek:</strong> Kırılgan eşyaları, giysi veya balonlu naylon kullanarak dikkatlice kontrol edilmiş bagajınızda paketleyin. Daha büyük veya çok narin parçaları kargoyla göndermeyi düşünün.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="island-hopping-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Kos'tan Ada Gezintisi</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <p class="text-gray-700 mb-4">Kos, yakındaki adaları keşfetmek için mükemmel bir başlangıç noktasıdır. İşte günübirlik geziler için bazı popüler seçenekler:</p>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://cdn.getyourguide.com/img/tour/b219904a91bc9dd83490526cf733932fe4c06143c9e347ccdacdec9e8e9ade6c.jpg/98.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1628189531122-8353e813a8c5?q=80&w=800&auto=format&fit=crop';" alt="Nisyros Yanardağı" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Nisyros Adası: Volkanik Cevher</h3>
+                        <p class="text-gray-600 mb-2">Nisyros, aktif volkanıyla bilinen küçük, pitoresk bir adadır; dünyanın az sayıdaki erişilebilir hidrotermal kraterlerinden biridir.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>Ne Yapmalı:</strong> <a href="https://maps.app.goo.gl/3QxP6f1hN8fK9dYZA" target="_blank" class="text-blue-600 hover:underline">Stefanos Krateri</a>'ni ziyaret edin (içinde yürüyün!), beyaz badanalı evleri ve Panagia Spiliani Manastırı ile büyüleyici başkent Mandraki'yi keşfedin.</li>
+                            <li><strong>Feribot Tarifesi:</strong> Kos Şehri limanından günlük seferler, genellikle sabah (örn., 09:00 - 10:00) ve öğleden sonra geç saatlerde dönüş (örn., 15:00 - 16:00). Yolculuk süresi yaklaşık 1-1.5 saattir.</li>
+                            <li><strong>Rezervasyon:</strong> Biletler limanda çeşitli tur operatörlerinden veya çevrimiçi olarak satın alınabilir. Yoğun sezonda önceden rezervasyon yaptırmanız tavsiye edilir.</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=ferry+kos+to+nisyros+schedule" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">En Son Tarifeleri Ara <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://www.aegeanislands.gr/app/uploads/2020/07/shutterstock_197048153-1.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop';" alt="Pserimos Plajı" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Pserimos Adası: Huzurlu Kaçış</h3>
+                        <p class="text-gray-600 mb-2">Pserimos, güzel kumlu plajı ve kristal berraklığındaki sularıyla bilinen küçük, sakin bir adadır; kalabalıktan uzak, dinlendirici bir gün için mükemmeldir.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>Ne Yapmalı:</strong> Ana plajda yüzün ve güneşlenin, birkaç tavernadan birinde taze balık yiyin ve huzurlu ada yaşamını deneyimleyin.</li>
+                            <li><strong>Feribot Tarifesi:</strong> Genellikle Kos'tan yapılan bir "3 Ada Turu"nun bir parçasıdır.</li>
+                            <li><strong>Rezervasyon:</strong> Biletler genellikle Kos Şehri limanındaki satıcılardan doğrudan satın alınır.</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=boat+trips+kos+to+pserimos+schedule" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">En Son Tarifeleri Ara <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://sailawaykos.com/wp-content/uploads/2018/11/3-Islads-Nisyros-Cruise-5-840x560.png" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop';" alt="3 Ada Turu" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">3 Ada Günübirlik Gezi: Pserimos, Kalymnos & Plati</h3>
+                        <p class="text-gray-600 mb-2">Kos Limanı'ndan kalkan, üç farklı Oniki Adalar adasını tatma imkanı sunan çok popüler bir tam günlük tekne gezisi.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>Pserimos:</strong> Huzurlu ana plajın ve küçük köyün tadını çıkarın.</li>
+                            <li><strong>Kalymnos:</strong> Sünger dalış tarihi ve canlı limanıyla bilinen başkent Pothia'yı keşfedin.</li>
+                            <li><strong>Plati:</strong> Çarpıcı turkuaz sulara sahip, yüzme ve şnorkelle dalış için mükemmel, küçük, ıssız bir adacık.</li>
+                            <li><strong>Tarife:</strong> Tekneler genellikle Kos Limanı'ndan 09:30 - 10:30 arasında kalkar ve 16:30 - 17:30 civarında geri döner. Her adada yüzme ve keşif için duraklar içerir.</li>
+                            <li><strong>Rezervasyon:</strong> Birçok tekne bu geziyi doğrudan Kos Limanı'ndan sunmaktadır. Genellikle bir gün önceden veya kalkış sabahı yerinde rezervasyon yapabilirsiniz. Fiyatlar tekneye ve dahil olan hizmetlere (örn. öğle yemeği) göre değişir.</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=3+island+cruise+kos+harbor" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">3 Ada Turu Ara <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300">
+        Mesaj kopyalandı!
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const API_KEY = "AIzaSyALAR-YIwFpAlVvv2bLZfF-iuYOAJAPHgM";
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+        
+        // --- DATA ---
+        const events = [
+            // Haziran
+            { date: "CUMARTESİ 21/06/25 & PAZAR 22/06/25", time: "CUMARTESİ 19:00 (AÇILIŞ), PAZAR 18:00-20:00 (ÇALIŞMA SAATLERİ)", title: "RESİM VE HAGİOGRAFİ SERGİSİ", description: "Maria Vamvakousi'nin FRIDART Resim & Hagiografi Atölyesi öğrencilerinin eserleri sergisi.", location: "KOS TARİH VE FOLKLOR MÜZESİ", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250621T190000", gCalEnd: "20250622T200000" },
+            { date: "SALI 24/06/25", time: "19:00", title: "MARIA ORFANOUDAKI MÜZİK OKULU ÖĞRENCİLERİ İLE KONSER", description: "Klasik ve çağdaş müzik öğrenci konseri.", location: "KOS FOLKLOR VE TARİH MÜZESİ AVLU", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250624T190000", gCalEnd: "20250624T210000" },
+            { date: "ÇARŞAMBA 25/06/25", time: "19:30", title: "KLİDONAS GELENEĞİ", description: "Pyli Kültür ve Eğitim Derneği 'O APELLIS' çocuk ve gençlik bölümlerinin dansları eşliğinde 'Fanos' ve 'Klidonas'ın yeniden canlandırılması etkinliği.", location: "MARMARİ AÇIK HAVA TİYATROSU", googleMaps: "https://maps.app.goo.gl/bXb9C6t4wY2R8xZq7", gCalStart: "20250625T193000", gCalEnd: "20250625T213000" },
+            { date: "ÇARŞAMBA 25/06/25", time: "19:30", title: "RİTMİK CİMNASTİK VE MODERN DANS GÖSTERİSİ", description: "Kültür ve Spor Derneği 'ANAMORFOSI-ANAPLASI' ile işbirliği içinde. Derneğin çocuk ve gençlik bölümleri katılır.", location: "KARDAMENA AÇIK HAVA TİYATROSU", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250625T193000", gCalEnd: "20250625T213000" },
+            { date: "PERŞEMBE 26/06/25", time: "20:00", title: "KLİDONAS GELENEĞİ", description: "Yunan Kadınları Lisesi, Kos şubesi çocuk ve gençlik bölümlerinin dansları eşliğinde 'Fanos' ve 'Klidonas'ın yeniden canlandırılması etkinliği.", location: "ELEFTHERIAS MEYDANI, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250626T200000", gCalEnd: "20250626T220000" },
+            { date: "CUMARTESİ 28/06/25", time: "20:30", title: "DANS ETKİNLİĞİ 'ELİKONİA'", description: "'ALEGRIA DANCE LAB' Dans Okulu ile işbirliği içinde zeibekiko'ya özel vurgu yapılan bir Yunan dansları akşamı.", location: "ELEFTHERIAS MEYDANI, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250628T203000", gCalEnd: "20250628T223000" },
+            { date: "CUMARTESİ 28/06/25 & PAZAR 29/06/25", time: "CUMARTESİ 11:00 (KOS GEÇİT TÖRENİ), 19:00 (KARDAMENA GEÇİT TÖRENİ), PAZAR 20:30 (KONSER)", title: "DELTA BELEDİYESİ SİNDOS GENÇLİK ORKESTRASI VE KOS BELEDİYESİ FİLARMONİSİ İŞBİRLİĞİ", description: "Kos kasabasının merkezi caddelerinde ve Limanda ve Kardamena sokaklarında geçit töreni. Eleftherias Meydanı'nda konser.", location: "KOS KASABASI MERKEZ CADDELERİ / LİMAN VE KARDAMENA SOKAKLARI / ELEFTHERIAS MEYDANI, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250628T110000", gCalEnd: "20250629T223000" },
+            { date: "PAZAR 29/06/25", time: "19:30", title: "DENİZ TEMALI ÇOCUK ETKİNLİKLERİ", description: "KARDAMENA 'ARGO' KÜLTÜR DERNEĞİ ile işbirliği içinde. Etkinlik Denizcilik Haftası kapsamında düzenlenmektedir.", location: "KARDAMENA AÇIK HAVA TİYATROSU", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250629T193000", gCalEnd: "20250629T213000" },
+            { date: "PAZARTESİ 30/06/25", time: "20:00", title: "KLİDONAS GELENEĞİ", description: "Kefalos Kültür Derneği 'AGIOS NIKOLAOS' bölümlerinin dansları eşliğinde 'Fanos' ve 'Klidonas'ın yeniden canlandırılması etkinliği.", location: "KEFALOS LİMANI", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250630T200000", gCalEnd: "20250630T220000" },
+            // Temmuz
+            { date: "PERŞEMBE 03/07/25", time: "20:00", title: "MARIA MAMALIGA'NIN 'MERCANTO' ADLI KISA ROMANI SUNUMU", description: "P.O. KOON 'O FILITAS', YUNAN KADINLARI LİSESİ-Kos şubesi, DREPPO 'FAINARETI' ve 'ESTIA' KİTAPÇISI ile işbirliği içinde. Kitap Minas G. Hatzantoniou ve Theodosis Diakogiannis tarafından sunulacak.", location: "KOS FOLKLOR VE TARİH MÜZESİ AVLU", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250703T200000", gCalEnd: "20250703T220000" },
+            { date: "PERŞEMBE 03/07/25", time: "19:00", title: "ARİSTOFANES'İN 'KUŞLAR' ADLI TİYATRO OYUNCULUĞU", description: "KOS BELEDİYESİ P.S. AVEROF ile işbirliği içinde. İstasyonun çocukları, ebeveynleri ve pedagojik kadrosu gösteriye katılır.", location: "KOS ROMEN ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250703T190000", gCalEnd: "20250703T210000" },
+            { date: "CUMARTESİ 05/07/25", time: "20:00", title: "ÇOBANLAR BAYRAMI", description: "ANTIMACHIA 'I PROODOS' KÜLTÜR DERNEĞİ ile işbirliği içinde, kırsal yaşam temalı geleneksel festival, yerel lezzetler, yerel danslar ve canlı müzik eşliğinde.", location: "GELENEKSEL EV, ANTIMACHIA DEĞİRMENİ", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250705T200000", gCalEnd: "20250705T230000" },
+            { date: "PAZAR 06/07/25", time: "20:30", title: "MÜZİK VE DANS GÖSTERİSİ 'TOPRAĞIN VE DENİZİN DANSLARI VE ŞARKILARI'", description: "KARDAMENA YUNAN KADINLARI LİSESİ ile işbirliği içinde Lise Yılının kapanışı.", location: "KARDAMENA AÇIK HAVA TİYATROSU", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250706T203000", gCalEnd: "20250706T223000" },
+            { date: "PAZARTESİ 07/07/25", time: "20:30", title: "KOS, KEFALOS'TA GÜNEY DODECANES LİRA ÇALICILARI BULUŞMASI", description: "Oniki Adalar Lirinin zenginliğini vurgulamak için müzik ve dans buluşması, Güney Oniki Adalar'a (Kos, Halki, Symi, Rodos, Karpatos, Kasos) odaklanılarak. Rodos ve Karpatos'tan lira ve lavta çalıcıları katılır.", location: "KEFALOS LİMANI", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250707T203000", gCalEnd: "20250707T230000" },
+            { date: "CUMARTESİ 12/07/25", time: "20:00", title: "MÜZİK GECESİ", description: "ASFENDIOU 'O THEOKRITOS' KÜLTÜR VE EĞİTİM DERNEĞİ ile işbirliği içinde geleneksel müzik ve danslar ve yerel gastronomi.", location: "TİGAKİ MEYDANI", googleMaps: "https://maps.app.goo.gl/fWzS9wU7Z6qR8pXz5", gCalStart: "20250712T200000", gCalEnd: "20250712T230000" },
+            { date: "CUMARTESİ 12/07/25", time: "20:00", title: "ATİNA SİNFONİYETTA İLE KONSER", description: "ERT Sanat Yönetmeni GIORGOS ARAVIDIS'in, ATİNA ERATEİO KONSERVATUVARI ve piyano profesörü MARIA ORFANOUDAKI ile işbirliği içinde. Klasik ve Yunan repertuarından eşsiz bir konser, piyano ve Maria Orfanoudaki öğrencilerinin çocuk korosu eşliğinde, Vangelis Vatsineas ile işbirliği içinde.", location: "KOS ULUSLARARASI HİPPOKRAT VAKFI", googleMaps: "https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7", gCalStart: "20250712T200000", gCalEnd: "20250712T220000" },
+            { date: "PAZAR 13/07/25", time: "20:00", title: "MÜZİK VE DANS GÖSTERİSİ 'Bu Gece Gitarım...'", description: "YUNAN KADINLARI LİSESİ-Kos şubesi ile işbirliği içinde. Kos Yunan Kadınları Lisesi bölümleri, geleneksel bir müzik grubunun eşliğinde dans eder. Küçük bir Serenatçılar grubu katılır.", location: "KOS 7. İLKOKUL AVLU", googleMaps: "https://maps.app.goo.gl/9t7B4e9v6tP6fXqK8", gCalStart: "20250713T200000", gCalEnd: "20250713T220000" },
+            { date: "SALI 15/07/25", time: "20:30", title: "ODA ŞARKILARI. MASALLAR & ŞARKILAR", description: "KOS LİONS KULÜBÜ 'HİPPOKRAT' ile işbirliği içinde. Sahnede 4 müzisyen. Komik hikayeler ve masallar anlatırlar. Aşk, cömertlik, boş zaman, arkadaşlık, yaşam döngüsü, neşe, oyun ve elbette dans hakkında şarkı söylerler.", location: "ROMEN ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250715T203000", gCalEnd: "20250715T223000" },
+            { date: "ÇARŞAMBA 16/07/25", time: "19:30", title: "ÇOCUK TİYATRO OYUNCULUĞU 'GÜRÜLTÜCÜ'", description: "DIMITRIS BASLAM tarafından, KOS LİONS KULÜBÜ 'HİPPOKRAT' ile işbirliği içinde.", location: "K. KİAPOKA MEYDANI, ZIPARİ AÇIK HAVA TİYATROSU", googleMaps: "https://maps.app.goo.gl/eU5fC7wY8tJ8vXmP9", gCalStart: "20250716T193000", gCalEnd: "20250716T213000" },
+            { date: "CUMA 18/07/25", time: "22:00", title: "PYX LAX GRUBU İLE KONSER", description: "Biletli etkinlik.", location: "PYLI FUTBOL SAHASI", googleMaps: "https://maps.app.goo.gl/hG5b8tF7yX5wR8vV9", gCalStart: "20250718T220000", gCalEnd: "20250718T235900" },
+            { date: "PAZAR 20/07/25", time: "20:30", title: "'TA MANOUSAKIA' ORKESTRASI VE KAITI KOULIA İLE KONSER", description: "Şehir merkezinde geleneksel danslar ve şarkılarla ada festivali.", location: "ELEFTHERIAS MEYDANI, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250720T203000", gCalEnd: "20250720T223000" },
+            { date: "CUMA 25/07/25", time: "21:00", title: "MARINA SATTI İLE KONSER", description: "Biletli etkinlik.", location: "KOS MARİNA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250725T210000", gCalEnd: "20250725T230000" },
+            { date: "CUMARTESİ 26/07/25", time: "20:30", title: "'YUNANİSTAN'DA SEYAHAT' - MÜZİK VE DANS GÖSTERİSİ", description: "ELENI DROUSOU DANS OKULU ile işbirliği içinde geleneksel Yunan danslarıyla gösteri.", location: "ELEFTHERIAS MEYDANI, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250726T203000", gCalEnd: "20250726T223000" },
+            { date: "PAZAR 27/07/25", time: "20:00", title: "MÜZİK ETKİNLİĞİ 'SELAS'", description: "SINIR TANIMAYAN KOS KADINLARI ile işbirliği içinde kantocu Nektaria Karantzi'nin 2 müzik enstrümanı eşliğinde ilahi performansı.", location: "ROMEN ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250727T200000", gCalEnd: "20250727T220000" },
+            { date: "PAZAR 27/07/25", time: "21:30", title: "'YAZ İÇİN BİR AŞK...'", description: "Yeni Dalga'ya müzikal bir etkinlik-saygı duruşu. 'Arion' Derneği Yetişkin Korosu da katılır, 'ARION' MÜZİK DOSTLARI DERNEĞİ ile işbirliği içinde.", location: "AGIOI ANARGYROI, KARDAMENA", googleMaps: "https://maps.app.goo.gl/z6eX8v9wQ5yR7fWc7", gCalStart: "20250727T213000", gCalEnd: "20250727T233000" },
+            { date: "PAZARTESİ 28/07/25", time: "17:00-20:00", title: "'ÇOCUKLAR RENKLERLE KONUŞTUĞUNDA'", description: "Lise-Lotte Iversen rehberliğinde Derneğin kış atölyelerinden çocuk resim sergisi, KARDAMENA 'ARGO' KÜLTÜR DERNEĞİ ile işbirliği içinde.", location: "KARDAMENA DENİZCİLİK VE FOLKLOR MÜZESİ", googleMaps: "https://maps.app.goo.gl/6tX8wP5vY9zR7fWb9", gCalStart: "20250728T170000", gCalEnd: "20250728T200000" },
+            { date: "PAZARTESİ 28/07/25", time: "22:00", title: "ELENA PAPARIZOU İLE KONSER", description: "Biletli etkinlik.", location: "PYLI FUTBOL SAHASI", googleMaps: "https://maps.app.goo.gl/hG5b8tF7yX5wR8vV9", gCalStart: "20250728T220000", gCalEnd: "20250728T235900" },
+            { date: "PERŞEMBE 31/07/25", time: "20:00", title: "ESKİ REKTÖR PANAGIOTIS NOUTSOS'UN 'DENİZ BALIKÇILIKLA MI GELİR? DİYALEKTİK SORU-CEVAP YÖNTEMİ' ADLI KİTABININ SUNUMU", description: "P.O. KOON 'O FILITAS', YUNAN KADINLARI LİSESİ-Kos şubesi, DREPPO 'FAINARETI' ve 'ESTIA' KİTAPÇISI ile işbirliği içinde. Kitap Minas G. Hatzantoniou ve Theodosis Diakogiannis tarafından sunulacak.", location: "KOS TARİH VE FOLKLOR MÜZESİ AVLU", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250731T200000", gCalEnd: "20250731T220000" },
+            // Ağustos
+            { date: "CUMARTESİ 02/08/25", time: "20:00", title: "YAZ FESTİVALİ", description: "'ANTIMACHOS' SPOR KULÜBÜ ile işbirliği içinde canlı müzik, yerel danslar, şarap ve yerel lezzetlerle yazı kutluyoruz.", location: "ESKİ MASTİCHARİ İLKOKULU", googleMaps: "https://maps.app.goo.gl/kXv9zL5wR8yV7fWdA", gCalStart: "20250802T200000", gCalEnd: "20250802T230000" },
+            { date: "CUMARTESİ 02/08/25 & PAZAR 03/08/25", time: "19:00-21:00", title: "SANATSAL İKİ GÜN ETKİNLİĞİ", description: "Konser, sanatsal faaliyetler ve Sanat ve Müzik Araştırmaları Merkezi öğrencilerinin eserleri sergisi ile iki günlük etkinlik.", location: "KOS TARİH VE FOLKLOR MÜZESİ", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250802T190000", gCalEnd: "20250803T210000" },
+            { date: "PAZAR 03/08/25", time: "20:00", title: "BALIK FESTİVALİ", description: "KEFALOS KÜLTÜR DERNEĞİ 'AGIOS NIKOLAOS' ile işbirliği içinde balık, balıkçılar, ağ çekme vb. temalı geleneksel festival, yerel lezzetler, yerel danslar ve geleneksel ada şarkılarıyla canlı müzik eşliğinde.", location: "KEFALOS LİMANI", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250803T200000", gCalEnd: "20250803T230000" },
+            { date: "PAZARTESİ 04/08/25", time: "21:30", title: "NATASSA BOFILIOU İLE KONSER", description: "Biletli etkinlik.", location: "KOS MARİNA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250804T213000", gCalEnd: "20250804T233000" },
+            { date: "ÇARŞAMBA 06/08/25", time: "20:00", title: "KOSTAS SKANDALIDIS'İN 'DODECANES'TEN ATASÖZLERİ VE DEYİMLER (ANTOLOJİ)' ADLI KİTABININ SUNUMU", description: "P.O. KOON 'O FILITAS' ve ONİKİ ADALAR EDEBİYAT VE SANAT EVİ ile işbirliği içinde.", location: "KOS TARİHİ-FOLKLOR MÜZESİ AVLU", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250806T200000", gCalEnd: "20250806T220000" },
+            { date: "ÇARŞAMBA 06/08/25 - PERŞEMBE 07/08/25", time: "18:30-21:00", title: "KOS AMATÖR RESSAMLAR VE SANATÇILAR GRUBU 'AİGLİ' RESİM SERGİSİ", description: "P.O. KOON 'O FILITAS' himayesinde.", location: "KOS TARİH VE FOLKLOR MÜZESİ", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250806T183000", gCalEnd: "20250807T210000" },
+            { date: "PERŞEMBE 07/08/25", time: "21:00", title: "'SOTİRİA'NIN ŞARKILARI'", description: "'Rebetiko'nun Baş Leydisi' Sotiria Bellou'ya adanmış müzikal bir gösteri. Christina Maxouri ve dört mükemmel halk müziği müzisyeni sahnelerini kurar ve bizi Sotiria Bellou'nun hayatına ve şarkılarına başka bir yolculuğa davet eder, KOS ATİNA BİRLİĞİ 'HİPPOKRAT' ile işbirliği içinde.", location: "ROMEN ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250807T210000", gCalEnd: "20250807T230000" },
+            { date: "PERŞEMBE 07/08/25", time: "21:15", title: "TİYATRO OYUNCULUĞU 'DENİZ VE YAŞLI ADAM'", description: "Ernest Hemingway'in 'Yaşlı Adam ve Deniz' adlı eserinden uyarlanmış ve yönetmenliğini Marlen Kaminski yapmıştır. Başrollerde: Tasos Nousias, Vasilis Milionis, Faidra Soutou. Biletli etkinlik.", location: "KOS MARİNA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250807T211500", gCalEnd: "20250807T231500" },
+            { date: "CUMA 08/08/25", time: "20:00", title: "KOSTAS I. PATOURIS'İN 'GÜNEŞİ AYDINLATAN GÜL' ADLI KİTABININ SUNUMU", description: "Koordinasyon-giriş Minas G. Hatzantoniou. Kitap gazeteci Kleopatra Misailidou tarafından sunulacak. Öğretmen Stamatia Oikonomidi-Koutsou anısına, DREPPO 'FAINARETI' ile işbirliği içinde.", location: "KOS FOLKLOR VE TARİH MÜZESİ AVLU", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250808T200000", gCalEnd: "20250808T220000" },
+            { date: "CUMARTESİ 09/08/25", time: "21:00", title: "KERASİA SAMARA İLE 'DOLUNAY'", description: "Ağustos Dolunayı için müzikal ve şiirsel performans. Giorgos Koubogiannis piyanoda eşlik eder, YUNANİSTAN KADINLARI BİRLİĞİ-Kos Şubesi ile işbirliği içinde.", location: "ROMEN ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250809T210000", gCalEnd: "20250809T230000" },
+            { date: "PAZAR 10/08/25", time: "21:00", title: "BESTECİ GİANNİS SPANOS'A SAYGI KONSERİ", description: "Yeni Dalga ve Yunan Sineması'ndan hepimizin sevdiği Giannis Spanos şarkılarının 'boîte' tarzında, piyano ve iki sesle bir akşamı. Büyük bestecimizin uzun süreli işbirlikçisi Chrysoula Stefanaki ile. Panagiotis Kypraios katılır. Piyano, müzikal yönetim ve küratörlük Tsambikos Kamateros tarafından, KOS MÜZİK ARAŞTIRMALARI MERKEZİ ile işbirliği içinde.", location: "KOS ROMEN ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250810T210000", gCalEnd: "20250810T230000" },
+            { date: "ÇARŞAMBA 13/08/25", time: "20:00", title: "ESKİ REKTÖR STAMATIS ALACHIOTIS'İN 'ANONİM KIZ' ADLI KİTABININ SUNUMU", description: "P.O. KOON 'O FILITAS' ve KOS ATİNA BİRLİĞİ 'HİPPOKRAT' ile işbirliği içinde. Kitap: Noutsos Panagiotis, Skandalidis Kostas ve Trilianos Athanasios tarafından sunulacak.", location: "KOS TARİH VE FOLKLOR MÜZESİ AVLU", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250813T200000", gCalEnd: "20250813T220000" },
+            { date: "ÇARŞAMBA 13/08/25", time: "22:00", title: "STELIOS ROKKOS İLE KONSER", description: "Biletli etkinlik.", location: "PYLI FUTBOL SAHASI", googleMaps: "https://maps.app.goo.gl/hG5b8tF7yX5wR8vV9", gCalStart: "20250813T220000", gCalEnd: "20250813T235900" },
+            { date: "CUMARTESİ 16/08/25", time: "19:00", title: "'MİKASİATİKİ VENGHERA' - KATERINA TSIRIDOU İLE REBETİKO GECESİ", description: "Şarkılar, gelenekler ve Küçük Asya'dan hikayelerle müzikal-anlatı performansı. Anlatım: Maria Siouta, KARDAMENA 'ARGO' KÜLTÜR DERNEĞİ ile işbirliği içinde.", location: "KARDAMENA AÇIK HAVA TİYATROSU", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250816T190000", gCalEnd: "20250816T210000" },
+            { date: "CUMA 22/08/25", time: "20:30", title: "'ŞİİRE OD'", description: "Dimitris Vonapartis'in küratörlüğünde konser ve şiir okumalarıyla şiir akşamı.", location: "KOS ROMEN ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250822T203000", gCalEnd: "20250822T223000" },
+            { date: "CUMARTESİ 23/08/25", time: "20:00", title: "BAL FESTİVALİ", description: "ANTIMACHIA 'I PROODOS' KÜLTÜR DERNEĞİ ile işbirliği içinde, bal temalı geleneksel festival, Maria Anamaterou ile geleneksel müzik konseri eşliğinde yerel lezzetlerle.", location: "DEĞİRMEN, ANTIMACHIA", googleMaps: "https://maps.app.goo.gl/wJ5p5yQ8zX9wS6vR8", gCalStart: "20250823T200000", gCalEnd: "20250823T230000" },
+            { date: "PAZAR 24/08/25", time: "20:30", title: "'THEODORA AY İÇİN ÇALIYOR'", description: "16 yaşındaki Theodora Hostogian'dan Yunan ve klasik repertuarla Ağustos Ayı ışığında solo piyano konseri, KARDAMENA 'ARGO' KÜLTÜR DERNEĞİ ile işbirliği içinde.", location: "KARDAMENA AÇIK HAVA TİYATROSU", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250824T203000", gCalEnd: "20250824T223000" },
+            { date: "ÇARŞAMBA 27/08/25", time: "21:00", title: "TİYATRO OYUNCULUĞU '8'İ BEKLİYORUM'", description: "KOS BELEDİYESİ TİYATRO ATÖLYESİ'nden PANOS NİAGOS tarafından. Yönetmen: Chrysa Orfanou. Başrollerde: Chrysa Orfanou, Christina Politou ve Giorgos Tyras.", location: "KOS TARİH VE FOLKLOR MÜZESİ AVLU", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250827T210000", gCalEnd: "20250827T230000" },
+            { date: "ÇARŞAMBA 27/08/25 - CUMARTESİ 30/08/25", title: "'KOS'UN ALİKARNASYA'SI 2025'", description: "Dört günlük programda konuşmalar, konserler, geleneksel danslar, 'kurban' geleneğinin canlandırılması ve fotoğraf sergisi yer alıyor, KOS KÜÇÜK ASYA DERNEĞİ 'HERODOT' ile işbirliği içinde.", location: "Çeşitli yerler (detaylar belirtilmemiş)", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250827T180000", gCalEnd: "20250830T230000" },
+            { date: "CUMA 29/08/25", time: "21:00", title: "TİYATRO OYUNCULUĞU '8'İ BEKLİYORUM'", description: "KOS BELEDİYESİ TİYATRO ATÖLYESİ'nden PANOS NİAGOS tarafından. Yönetmen: Chrysa Orfanou. Başrollerde: Chrysa Orfanou, Christina Politou ve Giorgos Tyras.", location: "TSIGKOURA TİYATROSU, KEFALOS", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250829T210000", gCalEnd: "20250829T230000" },
+            { date: "CUMARTESİ 30/08/25", time: "20:00", title: "ŞARAP FESTİVALİ", description: "ASFENDIOU 'O THEOKRITOS' KÜLTÜR VE EĞİTİM DERNEĞİ ile işbirliği içinde şarap temalı geleneksel festival, yerel lezzetler, yerel danslar ve canlı müzik eşliğinde.", location: "EVANGELİSTRİAS AÇIK HAVA TİYATROSU, ASFENDIOU", googleMaps: "https://maps.app.goo.gl/rWfA8L3Q8jJqfRzY6", gCalStart: "20250830T200000", gCalEnd: "20250830T230000" },
+            { date: "PAZAR 31/08/25", time: "21:00", title: "'SANAT BİR KADINDIR'", description: "20. yüzyılın en büyük kadın sanatçılarına, savaş arası dönemden bugüne kadar başlayan büyük bir saygı duruşu. Şarkılar Chrysoula Stefanaki'nin sesinden duyulur. Piyano ve müzik yönetimi: Nikos Kouros. Akordeon: Tsambikos Kamateros, KOS MÜZİK ARAŞTIRMALARI MERKEZİ ile işbirliği içinde.", location: "KOS ROMEN ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250831T210000", gCalEnd: "20250831T230000" },
+            // Eylül
+            { date: "PAZARTESİ 01/09/25", time: "20:00", title: "ÇOCUK TİYATROSU 'POUPOULAR'", description: "KOS TİYATRO ATÖLYESİ-ACTA'dan çocuk müzikal tiyatro gösterisi. Yönetmen: Foivos Symeonidis.", location: "PYLI KÜLTÜR MERKEZİ 'GALINOS FLASKOS'", googleMaps: "https://maps.app.goo.gl/jR8fG5vW9yY7xXzW8", gCalStart: "20250901T200000", gCalEnd: "20250901T220000" },
+            { date: "ÇARŞAMBA 03/09/25", time: "20:00", title: "ANDREAS HATZIMICHAIL'İN 'KOS'TA FUTBOL 1927'DEN GÜNÜMÜZE' ADLI KİTABININ SUNUMU", description: "D.O.P.A.V.S. KOS yayını. Kitap spor gazetecisi Giorgos Pitsis ve Beden Eğitimi profesörü Giannis Trikoilis tarafından sunulacak.", location: "KOS TARİH VE FOLKLOR MÜZESİ AVLU", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250903T200000", gCalEnd: "20250903T220000" },
+            { date: "CUMARTESİ 06/09/25", time: "19:00", title: "MARIA LAKATA'NIN 'TZİVAGERA VE BÜLBÜL' ADLI ÇOCUK KİTABININ ETKİLEŞİMLİ SUNUMU", description: "Kitabın sesli kitabından dinlenilmesi ve şarkıların canlı dramatizasyonu ile birlikte gerçekleştirilecektir. Konuşmacılar: yazar Maria Lakata, kitabın illüstratörü Danijela Palapani Curcic ve psikolog-psikoterapist Sissy Karathanou.", location: "PYLI KÜLTÜR MERKEZİ 'GALINOS FLASKOS'", googleMaps: "https://maps.app.goo.gl/jR8fG5vW9yY7xXzW8", gCalStart: "20250906T190000", gCalEnd: "20250906T210000" },
+            { date: "CUMARTESİ 06/09/25", time: "21:15", title: "TİYATRO OYUNCULUĞU 'O VE O'", description: "Mizah, duygu ve zamansız şarkılarla müzikal tiyatro gösterisi. Giorgos Konstantinou, Leonidas Kakouris ve Dimitris Starovas, insanlık ve hicivli bir bakış açısıyla dolu sürpriz bir gösteri yaratıyor. Biletli etkinlik.", location: "KOS MARİNA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250906T211500", gCalEnd: "20250906T231500" },
+            { date: "PAZAR 07/09/25", time: "20:00", title: "TİYATRO OYUNCULUĞU 'FİLM ANLATICI'", description: "Katia Gerou, Hernán Rivera Letelier'in simgesel metninde başrol oynuyor. Yönetmenliğini Maya Politaki yapıyor. Gösteri bizi 1960'ların Şili'sine götürüyor ve filmlerin hikayelerini anlatan ya da daha doğrusu canlandıran nadir bir yeteneğe sahip bir kızın maceralarını anlatıyor, KOS TİYATRO ATÖLYESİ-AACTA ile işbirliği içinde.", location: "KOS ROMEN ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250907T200000", gCalEnd: "20250907T220000" },
+            { date: "PAZARTESİ 08/09/25", time: "21:00", title: "BACHATA KING FESTİVALİ ÇERÇEVESİNDE BACHATA GECESİ", description: "Latin müzikli dans etkinliği.", location: "ELEFTHERIAS MEYDANI", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250908T210000", gCalEnd: "20250908T230000" },
+            { date: "SALI 09/09/25 - ÇARŞAMBA 17/09/25", time: "11:00-13:00 & 18:00-19:00", title: "İRİS MAVRAKİ'DEN ESKİ DODECANES SANATORYUMU 1947-1970 İÇİN 'NEFESİM İÇİN' ANISAL SERGİ", description: "Destek: KOS BELEDİYESİ KÜLTÜR DAİRESİ - KOS TABİP ODASI - 'DR.E.P.PO 'FAINARETI' - İLETİŞİM-EĞİTİM-KÜLTÜR FAALİYETLERİ.", location: "KOS TARİH VE FOLKLOR MÜZESİ", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250909T110000", gCalEnd: "20250917T190000" },
+            { date: "PAZAR 14/09/25", time: "20:00", title: "SOLO KEMAN VE KEMAN VE ELEKTRONİK ESERLERİ İLE KONSER, SOLOİST TANİA SİKELİANOU İLE", description: "Nikos Harizanos ve Kostas Mantzoros da elektronikte katılır.", location: "KOS ROMEN ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250914T200000", gCalEnd: "20250914T220000" },
+            { date: "CUMA 19/09/25", time: "19:30", title: "ÇOCUKLAR İÇİN EĞİTSEL ETKİNLİK", description: "'ATHENS FOR KIDS' Ekibi ile grup etkinlikleri ve beceri atölyeleri, KOS LİONS KULÜBÜ 'HİPPOKRAT' ile işbirliği içinde.", location: "KARDAMENA DENİZCİLİK VE FOLKLOR MÜZESİ", googleMaps: "https://maps.app.goo.gl/6tX8wP5vY9zR7fWb9", gCalStart: "20250919T193000", gCalEnd: "20250919T213000" },
+            { date: "CUMARTESİ 20/09/25 & PAZAR 21/09/25", time: "20:00", title: "KISA FİLMLER GÖSTERİMİ", description: "KOS SİNEMA KULÜBÜ ile işbirliği içinde 2024 Drama Yunan Kısa Film Festivali'nin ödüllü filmlerinin gösterimi.", location: "KOS TARİH VE FOLKLOR MÜZESİ AVLU", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250920T200000", gCalEnd: "20250921T220000" },
+            { date: "CUMARTESİ 20/09/25 & PAZAR 21/09/25", time: "20:30", title: "KOS'UN 8. GELENEKSEL MÜZİK VE DANS BULUŞMASI-'ANNA SARRİ-KARABESİNİ'", description: "'ARION' MÜZİK DOSTLARI DERNEĞİ ile işbirliği içinde iki günlük müzik ve dans etkinliği. Ortak organizatör: GÜNEY EGE BÖLGESİ.", location: "EVANGELİSTRİAS AÇIK HAVA TİYATROSU, ASFENDIOU", googleMaps: "https://maps.app.goo.gl/rWfA8L3Q8jJqfRzY6", gCalStart: "20250920T203000", gCalEnd: "20250921T223000" },
+            { date: "CUMARTESİ 20/09/25 - CUMA 26/09/25", time: "18:30-21:00", title: "FOTOĞRAF SERGİSİ 'EBEDİ ANLAR'", description: "Amatör fotoğrafçılar Maria Kypraiou ve Marina Orfanidou fotoğraflarını sergiliyor. Ortak tutkuları fotoğraf sanatı ve topraklarımızın doğal ve kültürel zenginliğini vurgulamaktır.", location: "KOS MARİNA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250920T183000", gCalEnd: "20250926T210000" },
+            { date: "SALI 23/09/25 - PAZAR 05/10/25", time: "18:00-21:00", title: "'ATİPİK BİR DOĞUŞ İÇİN GRAFİK ROTALAR' - GÖRSEL SANATLAR SERGİSİ", description: "Bu, heykeller, kolajlar, özgün estetik ve teknikler içeren bir görsel sanatlar sergisi ve 2. KOS İLKOKULU ile işbirliği içinde bir heykel ve dijital görüntülemeden oluşan bir sanat enstalasyonudur.", location: "KOS TARİH VE FOLKLOR MÜZESİ", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250923T180000", gCalEnd: "20251005T210000" },
+            { date: "ÇARŞAMBA 24/09/25", time: "19:30", title: "Dimitra I. Palapani'nin 'Hayatın damladığı yer' adlı kitabının sunumu", description: "Metronomos Yayınları. Şiir koleksiyonu: Yota Kefala ve Marina Betta tarafından sunulacak. 'Şiir dostları ve aşıkları' şiirler okuyacak.", location: "KOS TARİH VE FOLKLOR MÜZESİ AVLU", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250924T193000", gCalEnd: "20250924T213000" },
+            { date: "CUMA 26/09/25 - PAZAR 28/09/25", time: "CUMA: 17:00-20:00, CUMARTESİ: 10:00-13:00 & 17:00-20:00, PAZAR: 10:00-13:00", title: "'RODANİ: ÇOCUKLARIN KİTAPLARLA BEKLENMEDİK BULUŞMASI'", description: "Rodani, (5 ila 12 yaş arası) çocukları kitapların büyülü dünyasını tanımaya davet eden tekerlekli ahşap bir kütüphanedir.", location: "KONİTSİS MEYDANI / ELEFTHERIAS MEYDANI / ANTAGORA MEYDANI", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250926T170000", gCalEnd: "20250928T130000" },
+            { date: "CUMARTESİ 27/09/25", time: "20:00", title: "DÜNYA TURİZM GÜNÜNE ADANMIŞ AKŞAM", description: "ASFENDIOU 'O THEOKRITOS' KÜLTÜR VE EĞİTİM DERNEĞİ ile işbirliği içinde geleneksel müzik ve danslarla Dünya Turizm Günü'ne adanmış müzik ve dans etkinliği.", location: "TİGAKİ MEYDANI", googleMaps: "https://maps.app.goo.gl/fWzS9wU7Z6qR8pXz5", gCalStart: "20250927T200000", gCalEnd: "20250927T220000" },
+            { date: "CUMARTESİ 27/09/25", time: "22:00", title: "İOULIA KARAPATAKI İLE KONSER", description: "Biletli etkinlik.", location: "PYLI FUTBOL SAHASI", googleMaps: "https://maps.app.goo.gl/hG5b8tF7yX5wR8vV9", gCalStart: "20250927T220000", gCalEnd: "20250927T235900" },
+            { date: "CUMARTESİ 27/09/25 & PAZAR 28/09/25", time: "CUMARTESİ: 10:00 (SEMİNER), 19:00 (KONFERANS), PAZAR: 20:00 (KONSER)", title: "İKİ GÜNLÜK NEFESLİ ÇALGI ETKİNLİĞİ - 'İONİAN BRASS QUINTET' İLE KONSER", description: "İki günlük etkinlik, nefesli çalgı semineri, her yaştan vatandaşın orkestralara ve nefesli çalgı topluluklarına katılımının faydaları üzerine bir konuşma-konferans ve çeşitli müzik eserleri, özellikle Yunan bestecilerin eserleri ile bir Nefesli Çalgı Beşlisi konseri içerir. KOS BELEDİYESİ FİLARMONİ ORKESTRASI işbirliği yapar.", location: "KOS TARİH VE FOLKLOR MÜZESİ / KOS ROMEN ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250927T100000", gCalEnd: "20250928T220000" },
+            // Ekim
+            { date: "CUMARTESİ 04/10/25", time: "19:30", title: "GELENEKSEL DOMUZ BAYRAMI (CHOIROSFIGIA)", description: "PYLI 'O APELLIS' KÜLTÜR VE EĞİTİM DERNEĞİ ile işbirliği içinde geleneksel domuz kesimi temalı festival, yerel lezzetler, yerel danslar ve canlı müzik eşliğinde.", location: "AGIOS NIKOLAOS MEYDANI, PYLI", googleMaps: "https://maps.app.goo.gl/vS6X7W9zY4f6s7wE9", gCalStart: "20251004T193000", gCalEnd: "20251004T223000" },
+            { date: "PAZAR 05/10/25", time: "20:00", title: "REBETİKA ŞARKILARIYLA MÜZİK ETKİNLİĞİ", description: "KOS-NİSYROS İLKÖĞRETİM ÖĞRETMENLERİ DERNEĞİ KOROSU ile işbirliği içinde. Koro müzisyenler: Ilias Papailias, Periklis Ntonvas, Nikos Arbilias eşliğinde. Metin küratörlüğü-Koro yönetimi ve akordeon, Christos Gamvrellis.", location: "NEA ALİKARNASOS AGIOS GEORGIOS KİLİSESİ AVLU", googleMaps: "https://maps.app.goo.gl/wJ5p5yQ8zX9wS6vR8", gCalStart: "20251005T200000", gCalEnd: "20251005T220000" },
+            { date: "CUMARTESİ 11/10/25 & PAZAR 12/10/25", time: "CUMARTESİ: 18:00-21:00, PAZAR: 11:00-20:00", title: "HAGİOGRAFİ SERGİSİ", description: "ASFENDIOU 'O THEOKRITOS' KÜLTÜR VE EĞİTİM DERNEĞİ ile işbirliği içinde Derneğin sanat atölyesi öğrencilerinin eserleri sergisi.", location: "KOS & NİSYROS METROPOLİTİ DİN MÜZESİ", googleMaps: "https://maps.app.goo.gl/qL8sU53zQ2pG8c187", gCalStart: "20251011T180000", gCalEnd: "20251012T200000" },
+            { date: "PAZAR 12/10/25 - PAZAR 19/10/25", time: "10:00-12:30 & 18:00-20:00", title: "GÖRSEL SANATLAR SERGİSİ 'VOLT SANAT PROJESİ'", description: "Bu, heykeller, kolajlar, özgün estetik ve teknikler ve KOS 2. İLKOKULU ile işbirliği içinde bir heykel ve dijital görüntülemeden oluşan bir sanat enstalasyonu içeren bir görsel sanatlar sergisidir.", location: "KOS TARİH VE FOLKLOR MÜZESİ", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20251012T100000", gCalEnd: "20251019T200000" },
+            { date: "PAZAR 12/10/25 - PAZAR 19/10/25", title: "'HİPPOKRATİK HAFTA'", description: "'Hipokratik Hafta', KOS ULUSLARARASI HİPPOKRAT VAKFI tarafından Hipokrat'ın Özgün Yemini'nin Uluslararasılaşmasını hedeflemektedir.", location: "KOS ULUSLARARASI HİPPOKRAT VAKFI", googleMaps: "https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7", gCalStart: "20251012T090000", gCalEnd: "20251019T170000" },
+            { date: "PAZAR 26/10/25", time: "11:00", title: "1940 EPİĞİ ÜZERİNE KONUŞMA", description: "Konuşmacı: Nikolaos S. Kanellopoulos, Yunan Kara Harp Okulu Askeri Tarih ve Askeri Operasyon Analizi Yardımcı Profesörü. P.O. KOON 'O FILITAS' ile işbirliği içinde, yerinde dönem materyali sergisi düzenlenecek.", location: "KOS ULUSLARARASI HİPPOKRAT VAKFI", googleMaps: "https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7", gCalStart: "20251026T110000", gCalEnd: "20251026T130000" },
+            // Kasım
+            { date: "PAZAR 09/11/25", time: "17:00", title: "YAZAR NİKOLAOS ARGYROPOULOS'UN 'SUÇLU' KİTABININ SUNUMU", description: "Emekli subay ve Dernek üyesi Dimitris Kaimakis kitap hakkında konuşacak, KOS 'I ROUMELİ' STEREA HELLAS SAKİNLERİ DERNEĞİ ile işbirliği içinde.", location: "PYLI KÜLTÜR MERKEZİ 'GALINOS FLASKOS'", googleMaps: "https://maps.app.goo.gl/jR8fG5vW9yY7xXzW8", gCalStart: "20251109T170000", gCalEnd: "20251109T190000" },
+            { date: "CUMARTESİ 15/11/25", time: "18:00", title: "YAZAR GİANNİS KALPOUZOS'UN 'SARHOŞ. GİRİT TOPRAĞINDA' ADLI KİTABININ MÜZİK VE DANS ETKİNLİĞİ VE SUNUMU", description: "Kitabı sunanlar: Maria Amiridou ve Marina Betta. Katılımcılar: Vasilis Kokkalakis ve Nikolas Papastamatiou, ANTIMACHIA ORTAOKULU, ANTIMACHIA LİSESİ & KOS HİPPOKRATEİO LİSESİ ile işbirliği içinde.", location: "PYLI KÜLTÜR MERKEZİ 'GALINOS FLASKOS'", googleMaps: "https://maps.app.goo.gl/jR8fG5vW9yY7xXzW8", gCalStart: "20251115T180000", gCalEnd: "20251115T200000" },
+            { date: "PAZAR 16/11/25", title: "KOS'TA AÇIK ŞARAP EVLERİ ZİYARETLERİ", description: "Dünya Şarap Turizmi Günü kapsamında, Kos'taki birçok şarap imalathanesi halka açık olacak, şaraplarını tanıma ve eşsiz bir şarap turizmi deneyimi yaşama fırsatı sunacak.", location: "Kos'ta çeşitli şarap imalathaneleri", googleMaps: "https://www.google.com/maps/search/wineries+in+Kos", gCalStart: "20251116T100000", gCalEnd: "20251116T170000" },
+            { date: "CUMARTESİ 29/11/25 & PAZAR 30/11/25", time: "CUMARTESİ: 18:00-21:00, PAZAR: 11:00-20:00", title: "GÖRSEL SANATLAR SERGİSİ", description: "ASFENDIOU 'O THEOKRITOS' KÜLTÜR VE EĞİTİM DERNEĞİ ile işbirliği içinde Derneğin sanat atölyesi öğrencilerinin eserleri sergisi.", location: "KOS TARİH VE FOLKLOR MÜZESİ", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20251129T180000", gCalEnd: "20251130T200000" }
+        ];
+
+        // --- UI & NAVIGATION ---
+        lucide.createIcons();
+        let currentSection = null;
+        const homeScreen = document.getElementById('home-screen');
+
+        function showSection(sectionId) {
+            homeScreen.style.display = 'none';
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+                currentSection = section;
+                section.scrollTop = 0;
+                
+                if (sectionId === 'events-section') {
+                    const dateFilterInput = document.getElementById('event-date-filter');
+                    if (dateFilterInput) {
+                        dateFilterInput.removeEventListener('change', renderEvents);
+                        dateFilterInput.addEventListener('change', renderEvents);
+                        const today = new Date();
+                        const yyyy = today.getFullYear();
+                        const mm = String(today.getMonth() + 1).padStart(2, '0');
+                        const dd = String(today.getDate()).padStart(2, '0');
+                        dateFilterInput.value = `${yyyy}-${mm}-${dd}`;
+                    }
+                    renderEvents(); 
+                }
+            }
+        }
+
+        function goBack() {
+            if (currentSection) {
+                currentSection.classList.remove('active');
+                currentSection = null;
+            }
+            setTimeout(() => {
+                 homeScreen.style.display = 'block';
+            }, 300);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2000);
+        }
+
+        function copyToClipboard(elementSelector, toastMessage) {
+            const textToCopy = document.querySelector(elementSelector).innerText;
+            const textArea = document.createElement('textarea');
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(toastMessage);
+            } catch (err) {
+                console.error('Metin kopyalanamadı: ', err);
+                showToast('Kopyalama başarısız!');
+            }
+            document.body.removeChild(textArea);
+        }
+        
+        function copyGeneratedText(text, toastMessage) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(toastMessage);
+            } catch (err) {
+                console.error('Metin kopyalanamadı: ', err);
+                showToast('Kopyalama başarısız!');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // --- EVENTS SECTION LOGIC ---
+        function generateGoogleCalendarLink(event) {
+            const startDate = event.gCalStart;
+            const endDate = event.gCalEnd;
+            const title = encodeURIComponent(event.title);
+            const description = encodeURIComponent(`${event.description}\n\nKonum: ${event.location}`);
+            const location = encodeURIComponent(event.location);
+            return `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${description}&location=${location}&sf=true&output=xml`;
+        }
+
+        function generateWhatsAppShareLink(event) {
+            const message = encodeURIComponent(`Bu etkinliği kontrol edin: ${event.title} ${event.date} tarihinde ${event.location} adresinde. ${event.description} Daha fazla bilgi: ${event.googleMaps}`);
+            return `https://wa.me/?text=${message}`;
+        }
+
+        function renderEvents() {
+            const eventsList = document.getElementById('events-list');
+            const noEventsMessage = document.getElementById('no-events-message');
+            eventsList.innerHTML = '';
+            noEventsMessage.classList.add('hidden');
+
+            const selectedDate = document.getElementById('event-date-filter').value;
+            let filteredEvents = events;
+
+            if (selectedDate) {
+                filteredEvents = events.filter(event => {
+                    const eventStartDate = event.gCalStart ? event.gCalStart.substring(0, 8) : '';
+                    const eventEndDate = event.gCalEnd ? event.gCalEnd.substring(0, 8) : '';
+                    const formattedSelectedDate = selectedDate.replace(/-/g, '');
+                    return formattedSelectedDate >= eventStartDate && formattedSelectedDate <= eventEndDate;
+                });
+            }
+
+            if (filteredEvents.length === 0) {
+                noEventsMessage.classList.remove('hidden');
+            } else {
+                filteredEvents.forEach(event => {
+                    const eventCard = document.createElement('div');
+                    eventCard.className = 'event-card p-6 flex flex-col justify-between';
+                    eventCard.innerHTML = `
+                        <div>
+                            <h2 class="text-2xl font-bold mb-2">${event.title}</h2>
+                            <p class="text-lg mb-2"><i class="far fa-calendar-alt mr-2"></i>${event.date}</p>
+                            <p class="text-gray-700 mb-1"><i class="far fa-clock mr-2"></i>${event.time || ''}</p>
+                            <p class="text-md mb-3"><i class="fas fa-map-marker-alt mr-2"></i>${event.location}</p>
+                            <p class="text-gray-600 text-sm mb-4">${event.description}</p>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between gap-3 mt-4">
+                            <a href="${event.googleMaps}" target="_blank" class="btn-primary flex items-center text-sm">
+                                <i class="fas fa-external-link-alt mr-2"></i> Haritada Görüntüle
+                            </a>
+                            <div class="flex flex-wrap gap-2">
+                                <a href="${generateGoogleCalendarLink(event)}" target="_blank" class="btn-share text-sm">
+                                    <i class="far fa-calendar-plus"></i> Takvime Ekle
+                                </a>
+                                <a href="${generateWhatsAppShareLink(event)}" target="_blank" class="btn-share text-sm">
+                                    <i class="fab fa-whatsapp"></i> Paylaş
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    eventsList.appendChild(eventCard);
+                });
+            }
+        }
+
+        // --- GEMINI API HANDLER ---
+        async function callGeminiAPI(prompt) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }]
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorBody = await response.json();
+                    console.error("API Hatası:", errorBody);
+                    return `Hata: ${errorBody.error.message}`;
+                }
+
+                const data = await response.json();
+                 if (data.candidates && data.candidates.length > 0 && data.candidates[0].content.parts.length > 0) {
+                    return data.candidates[0].content.parts[0].text;
+                } else {
+                    return "Üzgünüm, bir yanıt oluşturamadım. API beklenmedik bir sonuç döndürdü.";
+                }
+            } catch (error) {
+                console.error("Çekme Hatası:", error);
+                return "Hata: AI hizmetine bağlanılamadı. Lütfen ağ bağlantınızı kontrol edin.";
+            }
+        }
+
+        function showLoading(containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `<div class="flex justify-center items-center p-8"><div class="loader"></div></div>`;
+        }
+
+        // --- AI FEATURES ---
+
+        // 1. AI KONSIYERJ
+        const chatContainer = document.getElementById('chat-container');
+        const chatInput = document.getElementById('chat-input');
+        
+        function getWelcomeBookContext() {
+            const sectionsToScan = ['welcome-section', 'essentials-section', 'guide-section', 'transport-section', 'important-section', 'departure-section', 'local-products-section', 'island-hopping-section', 'natural-beauty-section', 'local-recipes-section', 'events-section'];
+            let context = "Hoş Geldiniz Kitabı Bilgileri:\n";
+            sectionsToScan.forEach(id => {
+                const section = document.getElementById(id);
+                if (section) {
+                    context += `\n--- Bölüm: ${id.replace('-section','')} ---\n`;
+                    context += section.innerText || section.textContent;
+                }
+            });
+            return context;
+        }
+
+        async function handleChatSubmit() {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+
+            chatContainer.innerHTML += `<div class="chat-bubble user">${userMessage}</div>`;
+            chatInput.value = '';
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            chatContainer.innerHTML += `<div id="ai-loading" class="chat-bubble ai"><div class="loader" style="width:24px; height:24px; border-bottom-color: #4a90e2;"></div></div>`;
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            const knowledgeSource = document.querySelector('input[name="knowledgeSource"]:checked').value;
+            let prompt;
+
+            if (knowledgeSource === 'welcomeBook') {
+                const context = getWelcomeBookContext();
+                prompt = `Sen Kos, Yunanistan'daki 'Diamante del Mar Phaedra' dairesi için yardımcı bir yapay zeka konsiyerjsin. Sadece aşağıdaki "Hoş Geldiniz Kitabı Bilgileri"ne dayanarak kullanıcının sorusunu yanıtla. Cevap metinde yoksa, "Üzgünüm, bu bilgi hoş geldiniz kitabında yok." de. Harici bilgi kullanma.\n\n${context}\n\nKullanıcı Sorusu: "${userMessage}"`;
+            } else {
+                prompt = `Sen Kos, Yunanistan'da bir turist için yardımcı bir yapay zeka konsiyerjsin. Aşağıdaki soruyu yanıtla: "${userMessage}"`;
+            }
+
+            const aiResponse = await callGeminiAPI(prompt);
+            
+            const loadingBubble = document.getElementById('ai-loading');
+            loadingBubble.innerHTML = aiResponse.replace(/\n/g, '<br>');
+            loadingBubble.removeAttribute('id');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleChatSubmit();
+            }
+        });
+
+        // 2. AI TARİFLER
+        async function generateRecipe() {
+            const outputContainer = document.getElementById('recipe-output');
+            outputContainer.querySelector('div').classList.add('hidden'); // Yer tutucuyu gizle
+            showLoading('recipe-output');
+            const prompt = "Sen, Yunan adaları mutfağında uzmanlaşmış yaratıcı bir şefsin. Kos, Yunanistan'dan aşağıdaki yerel ürünlerden bir veya daha fazlasını kullanarak basit ve lezzetli bir tarif öner: Posa peyniri (şarap peyniri), Kos kekik balı, yerel zeytinyağı, taze balık (çipura veya levrek gibi) ve çeri domates. Tarif için akılda kalıcı bir isim, kısa bir açıklama, malzemeler listesi ve adım adım talimatlar sağla. Yanıtı başlıklar (h3, h4), paragraflar (p) ve listeler (ul, li) ile güzelce biçimlendir.";
+            const response = await callGeminiAPI(prompt);
+            outputContainer.innerHTML = response.replace(/\n/g, '<br>');
+        }
+
+        // 3. AI SEYAHAT PLANI
+        async function generateItinerary() {
+            const outputContainer = document.getElementById('itinerary-output');
+            const days = document.getElementById('stay-days').value;
+            const interests = document.getElementById('interests').value;
+
+            if (!days || !interests) {
+                outputContainer.innerHTML = `<div class="text-center p-4 text-red-500">Lütfen gün sayısını ve ilgi alanlarınızı girin.</div>`;
+                return;
+            }
+            
+            showLoading('itinerary-output');
+            const guideContext = getWelcomeBookContext();
+            const prompt = `Sen Kos, Yunanistan için uzman bir tur rehberisin. İlgi alanları "${interests}" olan bir turist için ${days} günlük kişiselleştirilmiş, günübirlik bir seyahat planı oluştur. Rehberdeki ev sahibinin önerilerine öncelik ver. Her gün için sabah aktivitesi, öğleden sonra aktivitesi ve akşam yemeği önerisi sun. Yaratıcı ve pratik ol. Yanıtı başlıklar (h3, h4), paragraflar (p) ve listeler (ul, li) ile düzgün HTML olarak biçimlendir.\n\nEv sahibinin Rehberi:\n${guideContext}`;
+            
+            const response = await callGeminiAPI(prompt);
+            outputContainer.innerHTML = response.replace(/\n/g, '<br>');
+        }
+
+        // 4. AI YORUM ASİSTANI
+        async function generateReview() {
+            const outputContainer = document.getElementById('review-output');
+            const keywords = document.getElementById('review-keywords').value;
+            
+            if (!keywords) {
+                outputContainer.innerHTML = `<p class="text-red-500 text-sm">Lütfen en az bir anahtar kelime girin.</p>`;
+                return;
+            }
+
+            outputContainer.innerHTML = `<div class="flex justify-center items-center p-4"><div class="loader"></div></div>`;
+            
+            const prompt = `Sen bir otel misafiri için yardımcı bir asistansın. Bu anahtar kelimelere: "${keywords}" dayanarak, bir tatil kiralama için dostane ve olumlu bir yorum yaz. Doğal ve kişisel bir ses tonu kullan. Mülkün adı 'Diamante del Mar Phaedra'. Yorum yaklaşık 3-5 cümle uzunluğunda olmalı.`;
+
+            const response = await callGeminiAPI(prompt);
+            
+            const reviewText = response;
+            
+            outputContainer.innerHTML = `
+                <textarea id="generated-review-text" rows="5" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">${reviewText}</textarea>
+                <button onclick="copyGeneratedText(document.getElementById('generated-review-text').value, 'Yorum kopyalandı!')" class="mt-2 w-full bg-gray-500 text-white px-3 py-1 rounded-lg text-sm font-semibold hover:bg-gray-600">Yorumu Kopyala</button>
+            `;
+        }
+
+    </script>
+</body>
+</html>
