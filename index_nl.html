@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welkom bij Diamante del Mar Phaedra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .section-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f7fafc; /* lichtgrijs */
+            z-index: 50;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .section-screen.active {
+            transform: translateX(0);
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .grid-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 1rem;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid rgba(226, 232, 240, 1);
+            transition: all 0.2s ease-in-out;
+        }
+        .grid-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .section-header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+        .prose-custom p, .prose-custom li {
+            color: #4A5568;
+        }
+        .prose-custom h3 {
+            color: #2D3748;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background-color: #4a90e2; /* Blauw */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            background-color: #357ABD;
+        }
+        .event-card {
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        .btn-share {
+            background-color: #6a7fdb; /* Paars-blauw */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-share:hover {
+            background-color: #536AC6;
+        }
+        /* Laadspinner */
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #FFF;
+            border-bottom-color: #4a90e2;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Chat UI stijlen */
+        .chat-bubble {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            margin-bottom: 0.5rem;
+            word-wrap: break-word;
+        }
+        .chat-bubble.user {
+            background-color: #4a90e2;
+            color: white;
+            border-bottom-right-radius: 0.25rem;
+            align-self: flex-end;
+        }
+        .chat-bubble.ai {
+            background-color: #e2e8f0;
+            color: #2d3748;
+            border-bottom-left-radius: 0.25rem;
+            align-self: flex-start;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div id="app" class="max-w-md mx-auto min-h-screen bg-gray-100">
+        
+        <div id="home-screen">
+            <header class="relative">
+                <img src="https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop" 
+                     onerror="this.onerror=null;this.src='https://diamantedelmar.github.io/phaedra.png';" 
+                     alt="Phaedra" class="w-full h-60 object-cover">
+                <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-gray-100 to-transparent"></div>
+            </header>
+            <div class="p-4 -mt-10">
+                 <div class="text-center mb-6 bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg">
+                    <h1 class="text-3xl font-bold text-gray-800">Welkomstboek</h1>
+                </div>
+                <main>
+                    <div class="grid grid-cols-3 gap-4">
+                        <button onclick="showSection('ai-concierge-section')" class="grid-button col-span-1">
+                            <i data-lucide="sparkles" class="w-10 h-10 text-purple-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Phaedra</span>
+                        </button>
+                        <button onclick="showSection('ai-itinerary-section')" class="grid-button col-span-1">
+                            <i data-lucide="calendar-check" class="w-10 h-10 text-green-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">AI Reisplan</span>
+                        </button>
+                        
+                        <button onclick="showSection('welcome-section')" class="grid-button">
+                            <i data-lucide="sun" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Welkom</span>
+                        </button>
+                        <button onclick="showSection('essentials-section')" class="grid-button">
+                            <i data-lucide="key-round" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Appartement</span>
+                        </button>
+                        <button onclick="showSection('guide-section')" class="grid-button">
+                            <i data-lucide="map" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Eilandgids</span>
+                        </button>
+                        <button onclick="showSection('natural-beauty-section')" class="grid-button">
+                            <i data-lucide="leaf" class="w-8 h-8 text-green-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Natuurlijke Schoonheid</span>
+                        </button>
+                        <button onclick="showSection('events-section')" class="grid-button">
+                            <i data-lucide="calendar-days" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Evenementen</span>
+                        </button>
+                        <button onclick="showSection('local-products-section')" class="grid-button">
+                            <i data-lucide="shopping-bag" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Lokale Producten</span>
+                        </button>
+                        <button onclick="showSection('local-recipes-section')" class="grid-button">
+                            <i data-lucide="utensils-crossed" class="w-8 h-8 text-orange-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Lokale Recepten</span>
+                        </button>
+                        <button onclick="showSection('island-hopping-section')" class="grid-button">
+                            <i data-lucide="sailboat" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Eilandhoppen</span>
+                        </button>
+                        <button onclick="showSection('transport-section')" class="grid-button">
+                            <i data-lucide="bus" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Vervoer</span>
+                        </button>
+                        <button onclick="showSection('important-section')" class="grid-button">
+                            <i data-lucide="siren" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Belangrijk</span>
+                        </button>
+                        <button onclick="showSection('departure-section')" class="grid-button">
+                            <i data-lucide="log-out" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Vertrek</span>
+                        </button>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <div id="ai-concierge-section" class="section-screen flex flex-col h-full">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Phaedra</h2>
+            </header>
+            <div class="p-4 flex-grow overflow-y-auto flex flex-col" id="chat-container">
+                <div class="chat-bubble ai">Hallo! Ik ben Phaedra, uw AI Concierge. Hoe kan ik u vandaag helpen?</div>
+            </div>
+            <div class="p-4 bg-white border-t">
+                <div class="mb-2">
+                    <label class="text-sm font-medium text-gray-600">Kennisbron:</label>
+                    <div class="flex items-center space-x-4 mt-1">
+                        <label class="flex items-center">
+                            <input type="radio" name="knowledgeSource" value="welcomeBook" class="form-radio text-blue-500" checked>
+                            <span class="ml-2 text-sm text-gray-700">Welkomstboek</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="knowledgeSource" value="webSearch" class="form-radio text-blue-500">
+                            <span class="ml-2 text-sm text-gray-700">Web Zoeken</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <input type="text" id="chat-input" class="flex-grow border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Stel Phaedra een vraag...">
+                    <button onclick="handleChatSubmit()" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 focus:outline-none">
+                        <i data-lucide="send" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="ai-itinerary-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">AI Reisplan Ontwerper</h2>
+            </header>
+            <div class="p-6 space-y-4">
+                <div class="card p-4">
+                    <h3 class="font-semibold text-lg mb-2">Creëer Uw Perfecte Reis</h3>
+                    <div>
+                        <label for="stay-days" class="block text-sm font-medium text-gray-700">Hoeveel dagen blijft u?</label>
+                        <input type="number" id="stay-days" value="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
+                    </div>
+                    <div class="mt-4">
+                        <label for="interests" class="block text-sm font-medium text-gray-700">Wat zijn uw interesses?</label>
+                        <textarea id="interests" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="bijv. stranden, geschiedenis, eten, wandelen, uitgaan, ontspanning..."></textarea>
+                    </div>
+                    <button onclick="generateItinerary()" class="mt-4 w-full btn-primary">Genereer Reisplan</button>
+                </div>
+                <div id="itinerary-output" class="prose-custom space-y-4">
+                    <div class="text-center p-4 text-gray-500">Uw persoonlijke reisplan verschijnt hier.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="departure-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Tot de volgende keer...</h2>
+            </header>
+            <div class="p-6 prose-custom">
+                <h3 class="text-2xl font-bold mb-4">Een hartelijk vaarwel</h3>
+                <p class="mb-4">Nu uw tijd in Diamante del Mar Phaedra en op het prachtige eiland Kos ten einde loopt, willen wij u oprecht bedanken voor uw verblijf bij ons. Wij hopen van harte dat u een heerlijke, ontspannende en memorabele vakantie heeft gehad.</p>
+                
+                <div class="card my-6 bg-blue-50 p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="check-circle" class="w-5 h-5 mr-2 text-blue-500"></i>Check-out Herinnering</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li>De check-out tijd is uiterlijk <strong>11:00 uur</strong>.</li>
+                        <li>Laat de <strong>sleutels in de sleutelkluis</strong>.</li>
+                        <li>Zorg ervoor dat al uw persoonlijke bezittingen zijn ingepakt.</li>
+                        <li>Schakel alle lichten en airco-units uit.</li>
+                    </ul>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2">Deel Uw Ervaring</h3>
+                <p>Als u van uw verblijf heeft genoten, zouden wij het zeer op prijs stellen als u een recensie achterlaat. Uw feedback helpt toekomstige reizigers ons kleine stukje paradijs te ontdekken.</p>
+                
+                <div class="card p-4 my-6 not-prose">
+                     <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="edit-3" class="w-5 h-5 mr-2 text-purple-500"></i>AI Recensie Assistent</h3>
+                     <p class="text-sm text-gray-600 mb-2">Hulp nodig bij het schrijven van uw recensie? Noteer enkele trefwoorden en laat onze AI-assistent u helpen.</p>
+                     <div>
+                        <label for="review-keywords" class="block text-sm font-medium text-gray-700">Trefwoorden over uw verblijf:</label>
+                        <textarea id="review-keywords" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="bijv. prachtig uitzicht, schoon, geweldige locatie, vriendelijke gastheer..."></textarea>
+                    </div>
+                    <button onclick="generateReview()" class="mt-4 w-full bg-purple-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-600">Genereer Recensie</button>
+                    <div id="review-output" class="mt-4 space-y-2">
+                        </div>
+                </div>
+
+                <p>U kunt uw recensie plaatsen op het platform dat u voor het boeken heeft gebruikt (Booking.com of Airbnb) of op ons <a href="https://g.page/r/CbUXM_AzUnc5EAE/review" target="_blank" class="text-blue-600 hover:underline">Google Bedrijfsprofiel</a>.</p>
+                
+                <h3 class="text-xl font-semibold mt-6 mb-2">Blijf Verbonden</h3>
+                <p>Volg ons op Instagram <a href="https://www.instagram.com/diamantedelmar.phaedra" target="_blank" class="text-blue-600 hover:underline">@diamantedelmar.phaedra</a> of neem contact met ons op voor toekomstige verblijven via diamantedelmarphaedra@gmail.com.</p>
+
+                <p class="mt-8">Nogmaals bedankt. Wij wensen u een veilige en aangename verdere reis!</p>
+            </div>
+        </div>
+
+        <div id="welcome-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Welkom in het Paradijs!</h2>
+            </header>
+            <div class="p-6 prose-custom">
+                <h3 class="text-2xl font-bold mb-4">Kalós órises!</h3>
+                <p class="mb-4">Welkom op Kos, en welkom bij Diamante del Mar Phaedra. We zijn absoluut verheugd u te mogen ontvangen op dit betoverende Dodekanesos-eiland. Recent gerenoveerd en ontworpen met stijl en comfort in gedachten, hopen we dat ons huis dient als uw perfecte toevluchtsoord van waaruit u de fascinerende mix van oude geschiedenis, zonovergoten stranden en het levendige eilandleven kunt verkennen die Kos zo speciaal maakt.</p>
+                <p class="mb-4">Kos nodigt u uit om te vertragen, de zeelucht in te ademen, door millennia van geschiedenis te dwalen en te genieten van de eenvoudige geneugten. We hopen dat u net zo verliefd wordt op de unieke charme als wij.</p>
+                <h3 class="text-xl font-semibold mt-6 mb-2">Over Deze Gids</h3>
+                <p>Beschouw dit boek als uw samengestelde introductie tot het leven als een stijlvolle local. We hebben essentiële informatie verzameld om u moeiteloos te laten settelen, naast onze persoonlijke aanbevelingen voor het ontdekken van de hoogtepunten van het eiland. Ontspan nu, kom tot rust en laat uw Kos-verhaal beginnen!</p>
+            </div>
+        </div>
+
+        <div id="essentials-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Appartement Info</h2>
+            </header>
+            <div class="p-6 space-y-6">
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="map-pin" class="w-5 h-5 mr-2 text-blue-500"></i>Adres</h3>
+                    <p class="text-gray-600">Diamante Del Mar Phaedra</p>
+                    <p class="text-gray-600">Σοφοκλή Βενιζέλου 54 (Sophokli Venizelou 54)</p>
+                    <p class="text-gray-600">Kos-stad, 853 00</p>
+                    <a href="https://maps.google.com/?q=Sophokli+Venizelou+54,+Kos+853+00" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Openen in Kaarten <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="clock" class="w-5 h-5 mr-2 text-blue-500"></i>Inchecken & Uitchecken</h3>
+                    <p class="text-gray-600"><strong>Inchecken:</strong> Na 16:00 (4:00 PM)</p>
+                    <p class="text-gray-600"><strong>Sleutelkluiscode:</strong> 1723</p>
+                    <p class="text-gray-600 mt-2"><strong>Uitchecken:</strong> Vóór 11:00 AM</p>
+                    <p class="text-gray-500 text-sm mt-1">Graag de sleutels terug in de sleutelkluis.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="wifi" class="w-5 h-5 mr-2 text-blue-500"></i>Wi-Fi Toegang</h3>
+                    <p class="text-gray-600"><strong>Netwerk:</strong> Phaedra</p>
+                    <div class="flex justify-between items-center mt-1">
+                        <p class="text-gray-600"><strong>Wachtwoord:</strong> <span id="wifi-password">Phaedra!22420@</span></p>
+                        <button onclick="copyToClipboard('#wifi-password', 'Wachtwoord gekopieerd!')" class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm font-semibold hover:bg-blue-600">Kopiëren</button>
+                    </div>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="home" class="w-5 h-5 mr-2 text-blue-500"></i>Huisregels</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li><strong>Binnen strikt rookvrij</strong>.</li>
+                        <li><strong>Geen huisdieren</strong> toegestaan.</li>
+                        <li>Stille uren: <strong>22:00 - 07:00</strong>.</li>
+                        <li><strong>Geen feesten</strong>, evenementen of grote bijeenkomsten.</li>
+                        <li>Alleen geregistreerde gasten mogen overnachten.</li>
+                    </ul>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="book-open" class="w-5 h-5 mr-2 text-blue-500"></i>Handleidingen Apparaten</h3>
+                    <p class="text-gray-600 mb-4">Scan de QR-code met de camera van uw telefoon om de handleiding van elk apparaat te bekijken.</p>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div>
+                            <p class="font-medium text-gray-700">Magnetron</p>
+                            <a href="https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/8897453600-GMI-12311-B/en-US-8897453600-20221020135181-User-Manual---File-Longsv-SE.pdf"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/8897453600-GMI-12311-B/en-US-8897453600-20221020135181-User-Manual---File-Longsv-SE.pdf" alt="QR-code voor Magnetron Handleiding" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-700">Oven</p>
+                           <a href="https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/7768282928-Edition-75-Backofenset/en-US-7768282928-202311021237674-User-Manual---File-Longen-US.pdf"> <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/7768282928-Edition-75-Backofenset/en-US-7768282928-202311021237674-User-Manual---File-Longen-US.pdf" alt="QR-code voor Oven Handleiding" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-700">Nespresso Koffiemachine</p>
+                            <a href="https://www.nespresso.com/shared_res/manuals/essenza-mini/2017/UM_NESPRESSO_ESSENZA_MINI_KRUPS_PROD_WEB_2017_02_20.pdf"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.nespresso.com/shared_res/manuals/essenza-mini/2017/UM_NESPRESSO_ESSENZA_MINI_KRUPS_PROD_WEB_2017_02_20.pdf" alt="QR-code voor Nespresso Handleiding" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-700">Wasmachine</p>
+                            <a href="https://morris.gr/wp-content/uploads/2023/12/Instructions-manual-WIW-81411BI.pdf"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://morris.gr/wp-content/uploads/2023/12/Instructions-manual-WIW-81411BI.pdf" alt="QR-code voor Wasmachine Handleiding" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="guide-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Eilandgids</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <div class="card overflow-hidden p-0 bg-blue-50 border border-blue-200">
+                    <img src="https://images.unsplash.com/photo-1551028150-64b9f398f67b?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://xasapaki.gr/wp-content/uploads/2023/05/DSC01818-scaled.jpg';" alt="Een perfect gegrilde biefstuk" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2 text-blue-800 flex items-center"><i data-lucide="star" class="w-6 h-6 mr-2 text-yellow-500 fill-current"></i>Favoriet van de Gastheer: Xasapaki</h3>
+                        <p class="text-blue-700 mb-3">Voor een onvergetelijke maaltijd, bezoek Xasapaki. Het is een unieke slagerij en steakhouse waar u uw stuk vlees kiest en zij het tot in de perfectie grillen. Hun hamburgers worden geprezen als de beste van het eiland en voorgerechten zoals rundercarpaccio oogsten ook lovende kritieken!</p>
+                        <div class="flex space-x-2">
+                           <a href="https://xasapaki.gr/" target="_blank" class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700">Bezoek Website</a>
+                           <a href="https://maps.app.goo.gl/hR6NfGgGf8E8qZ6f7" target="_blank" class="inline-flex items-center bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300">Bekijk op Kaart</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Dineren & Koffie</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1559305459-49de9734d355?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://imageproxy.wolt.com/assets/67335dc042b21b5c7ee59154';" alt="Een heerlijke brunchspread" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Alchimion & The Cup</h4><p class="text-gray-600 mt-1">Vlakbij, Alchimion biedt een ontspannen brunch (Kayianas, Shakshuka), terwijl The Cup uitzonderlijke "third wave" koffie serveert.</p><a href="https://maps.app.goo.gl/3A9iEa2uUvY4gJgw5" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Bekijk op Kaart <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1541592106381-b5863c023904?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.athinorama.gr/Content/ImagesDatabase/p/750x422/crop/both/a5/a5468d17cae94a7dad807007ceefddf8.jpg?quality=81&404=default&v=4';" alt="Verse zeevruchten pasta" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Barbouni</h4><p class="text-gray-600 mt-1">Topkeuze voor verse zeevruchten aan het water bij de haven. Geprezen om gerechten als kabeljauwkroketten en inktvistagliatelle. Reserveer vooruit voor een tafel aan het water.</p><a href="https://maps.app.goo.gl/kG1xQoD7bE2v5z8E7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Bekijk op Kaart <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1622234994112-c94831e67991?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://media-01.imu.nl/storage/ourplanetinmylens.com/21978/restaurants-kos-greece-patriko-800x533.jpg';" alt="Een selectie Griekse meze" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Patriko</h4><p class="text-gray-600 mt-1">Een door een familie gerund juweeltje voor authentieke Griekse meze. Probeer de gebakken feta met honing of hun kenmerkende Patriko Salade.</p><a href="https://maps.app.goo.gl/C2zY6G4kS4wSg4Rk7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Bekijk op Kaart <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1574929823616-1937a4d33595?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://platanoskos.gr/wp-content/uploads/2024/07/DSC03696-scaled.jpg';" alt="Dineren onder een grote plataan" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Platanos Restaurant</h4><p class="text-gray-600 mt-1">Voor een maaltijd doordrenkt van geschiedenis en romantiek, dineer onder de legendarische plataan van Hippocrates. Biedt hoogwaardig eten en een prachtige ambiance.</p><a href="https://maps.app.goo.gl/rWfA8L3Q8jJqfRzY6" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Bekijk op Kaart <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Stranden</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1625450438349-5975e50cf582?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://media.jet2.com/is/image/jet2/313976-kgs_lambi_0813_02_ps?$Original-Dynamic(max1280x1280)$&wid=1920&hei=500&fit=crop%2C1&dpr=off';" alt="Zandstrand met parasols" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Lambi Beach</h4><p class="text-gray-600 mt-1">Uw dichtstbijzijnde buur (200m)! Een populair, lang zandstrand met ondiep water, goed georganiseerd met bars en watersporten.</p><a href="https://maps.app.goo.gl/ggrD1a8D9b8vC73D9" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Bekijk op Kaart <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531122-8353e813a8c5?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.jet2holidays.com/-/media/destination%20guide/greece/kos/cfu_agios_stefanos_beach_1497481107_getty_1023_01_rgb-136-dpi-for-web-min.jpg?h=500&w=1920&crop=1&hash=6B2D4846664312303EC275100A9440EB%201024w';" alt="Strand met een kerk op een eilandje" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Agios Stefanos</h4><p class="text-gray-600 mt-1">Waarschijnlijk het meest fotogenieke strand van Kos, met het eilandje Kastri en ruïnes van 5e-eeuwse basilieken direct aan de kust.</p><a href="https://maps.app.goo.gl/qL8sU53zQ2pG8c187" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Bekijk op Kaart <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1617066808546-32d56a237190?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.reckonasbavi.cz/wp-content/uploads/2023/08/Therma-beach-Embros-prirodni-termalni-lazne-na-ostrove-Kos.jpg.jpg';" alt="Rotsachtig strand met warmwaterbronnen" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Therma Beach</h4><p class="text-gray-600 mt-1">Een unieke natuurlijke spa-ervaring waar warmwaterbronnen met therapeutische voordelen in zee stromen. Met vulkanisch zwart kiezelzand.</p><a href="https://maps.app.goo.gl/8T1JvU5nUa1wP9W86" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Bekijk op Kaart <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                         <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1507525428034-b723a996f329?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.vacanzekos.com/wp-content/uploads/2016/02/paradise-beach.jpg';" alt="Een prachtig zandstrand met turquoise water" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Paradise Beach</h4><p class="text-gray-600 mt-1">Doet zijn naam eer aan met goudkleurig zand en ondiep, kalm water, waardoor dit strand perfect is voor gezinnen. Kan erg druk worden.</p><a href="https://maps.app.goo.gl/VjP7zQjR9eG8m4RCA" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Bekijk op Kaart <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Geschiedenis & Dorpen</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531233-a3a2de7c858e?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.vacanzegreche.com/public/img/data/2019101794859527_asklepion-isola-di-kos.jpg'" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">De Asklepion</h4><p class="text-gray-600 mt-1">De belangrijkste archeologische vindplaats van het eiland. Een genezend heiligdom verbonden met Hippocrates, de "Vader van de Moderne Geneeskunde".</p><a href="https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Bekijk op Kaart <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1540899979346-a4c4987053e4?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://as1.ftcdn.net/jpg/02/95/44/86/1000_F_295448668_PNfl3bFQOS2eT3vWez1r1MlrlhyB0TFF.webp';" alt="Zonsondergang over een Grieks dorp" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Zia Dorp</h4><p class="text-gray-600 mt-1">Een absolute must-visit bergdorp voor adembenemende panoramische zonsondergangen. Restaurant Oromedon is een aanrader.</p><a href="https://maps.app.goo.gl/9z4Y2E3u8vX5F5vJ8" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Bekijk op Kaart <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531065-a8a4f0b2f5d7?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://a.travel-assets.com/findyours-php/viewfinder/images/res70/73000/73702-Kos-Castle.jpg';" alt="Een stenen kasteel aan zee" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Neratzia Kasteel</h4><p class="text-gray-600 mt-1">Een indrukwekkend 15e-eeuws kasteel van de Ridders dat de haveningang bewaakt. Controleer de restauratiestatus voordat u bezoekt.</p><a href="https://maps.app.goo.gl/6pCgxXmUqB8qgU7E7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Bekijk op Kaart <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="natural-beauty-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Natuurlijke Schoonheid van Kos</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <p class="text-gray-700 mb-4">Voor zijn relatief kleine omvang is Kos een eiland met een ongelooflijke natuurlijke diversiteit. Van zoutmeren en wetlands tot vulkanische bronnen en weelderige bossen, er is zoveel meer te ontdekken dan alleen de stranden.</p>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/02/Alykes-Wetlands-Tigaki-Kos-003.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/a7d8de/ffffff?text=Aliki+Salt+Lake';" alt="Aliki Zoutmeer" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Aliki Zoutmeer, Tigaki</h3>
+                        <p class="text-gray-600 mb-2">Een prachtig kustwetland dat ooit werd gebruikt voor zoutproductie. Tegenwoordig is het een beschermd natuurreservaat, bruisend van leven, vooral in de herfst en winter wanneer het een toevluchtsoord wordt voor trekvogels zoals flamingo's.</p>
+                        <a href="https://maps.app.goo.gl/3fTcvZ6gC4M1rCqq8" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Bekijk op Kaart <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/01/Dikeos-mount-Kos-001.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/a7d8de/ffffff?text=Mount+Dikaios';" alt="Mount Dikaios" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Mount Dikaios</h3>
+                        <p class="text-gray-600 mb-2">Mount Dikaios, met een hoogte van 846 meter, biedt adembenemende panoramische uitzichten op Kos en de omliggende eilanden. De hellingen zijn bedekt met dennenbossen en platanen, waardoor het een prachtige bestemming is om te wandelen, vooral in de lente wanneer de wilde bloemen bloeien.</p>
+                         <a href="https://maps.app.goo.gl/2k5y2E9L4eXjS9vP8" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Bekijk op Kaart <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/02/Plaka-forest-kos-001.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/a7d8de/ffffff?text=Plaka+Forest';" alt="Plaka Woud" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Plaka Woud</h3>
+                        <p class="text-gray-600 mb-2">Een prachtig dennenbos bij Antimachia, beroemd om zijn inwonende pauwen en katten. Het is een koele, schaduwrijke oase, perfect voor een picknick, een rustige wandeling en om te genieten van wat rust weg van de zomerse hitte.</p>
+                        <a href="https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Bekijk op Kaart <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="local-recipes-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Lokale Recepten</h2>
+            </header>
+            <div class="p-6 space-y-8 prose-custom">
+                <p class="text-gray-700 mb-4">Verlaat uw comfortzone en probeer iets nieuws, haal het meeste uit uw vakantie op het eiland Kos met deze traditionele gerechten!</p>
+
+                <div class="card p-6">
+                    <h3 class="font-semibold text-xl mb-2 text-gray-800">Pligouri (Bulgur) met Varkensvlees</h3>
+                    <p class="mb-4">Een stevig en traditioneel gerecht waarbij bulgur langzaam wordt gegaard met mals varkensvlees, wat een rijke en smaakvolle maaltijd oplevert die een hoofdbestanddeel is in lokale huizen.</p>
+                    <h4 class="font-semibold text-lg mb-2">Ingrediënten:</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>500g varkensvlees, in kleine blokjes gesneden</li>
+                        <li>1 kop grove bulgur (pligouri)</li>
+                        <li>1 grote ui, gehakt</li>
+                        <li>2 teentjes knoflook, gehakt</li>
+                        <li>400g gehakte tomaten (blik of vers)</li>
+                        <li>2 eetlepels olijfolie</li>
+                        <li>2,5 kopjes groente- of kippenbouillon</li>
+                        <li>Zout en versgemalen zwarte peper naar smaak</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mb-2">Instructies:</h4>
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li>Verhit de olijfolie in een grote pan of braadpan op middelhoog vuur. Voeg het varkensvlees toe en bak het aan alle kanten bruin.</li>
+                        <li>Voeg de gehakte ui toe en kook tot deze zacht is, ongeveer 5 minuten. Roer de knoflook erdoor en kook nog een minuut tot het geurig is.</li>
+                        <li>Spoel de bulgur af onder koud water en voeg deze toe aan de pan. Roer een minuut om het licht te roosteren.</li>
+                        <li>Giet de gehakte tomaten en bouillon erbij. Breng op smaak met zout en peper en breng aan de kook.</li>
+                        <li>Verlaag het vuur naar laag, dek de pan af en laat het ongeveer 20-25 minuten sudderen, of totdat de bulgur gaar is en het meeste vocht heeft opgenomen.</li>
+                        <li>Laat het 5-10 minuten van het vuur staan alvorens het met een vork los te maken en te serveren.</li>
+                    </ol>
+                    <a href="https://www.youtube.com/watch?v=VzTF-o2irHg" target="_blank" class="inline-flex items-center mt-4 text-blue-600 font-semibold hover:underline">Bekijk Video Handleiding <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="font-semibold text-xl mb-2 text-gray-800">Ntolmadakia (Gevulde Wijnbladeren)</h3>
+                    <p class="mb-4">Malse wijnbladeren worden gevuld met rijst en verse kruiden. Ze kunnen warm of koud worden geserveerd, vaak met een schijfje citroen en een lepel yoghurt.</p>
+                    <h4 class="font-semibold text-lg mb-2">Ingrediënten:</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>1 pot (ongeveer 250g) wijnbladeren in pekel</li>
+                        <li>1 kop kortkorrelige rijst, afgespoeld</li>
+                        <li>1 grote ui, fijngehakt</li>
+                        <li>1/2 kop gehakte verse dille</li>
+                        <li>1/2 kop gehakte verse munt</li>
+                        <li>1/2 kop olijfolie, verdeeld</li>
+                        <li>2 kopjes heet water</li>
+                        <li>Sap van 2 citroenen</li>
+                        <li>Zout en peper naar smaak</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mb-2">Instructies:</h4>
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li>Scheid de wijnbladeren voorzichtig en spoel ze goed af. Blancheer ze 3-5 minuten in kokend water om ze zacht te maken en laat ze vervolgens uitlekken.</li>
+                        <li>Meng in een kom de rijst, ui, dille, munt, de helft van de olijfolie, sap van 1 citroen, zout en peper.</li>
+                        <li>Leg een wijnblad plat (glimmende kant naar beneden). Plaats een theelepel vulling bij de steel. Vouw de onderkant over de vulling, vouw dan de zijkanten naar binnen en rol strak op. Herhaal dit voor alle bladeren.</li>
+                        <li>Bekleed de bodem van een brede pan met een paar extra wijnbladeren. Schik de gevulde bladeren dicht op elkaar in lagen.</li>
+                        <li>Giet de resterende olijfolie, citroensap en heet water erover. Plaats een omgekeerd hittebestendig bord erop om te voorkomen dat ze uit elkaar vallen.</li>
+                        <li>Breng zachtjes aan de kook, verlaag dan het vuur, dek af en laat 45-60 minuten sudderen tot de rijst gaar is. Laat ze afkoelen in de pan alvorens te serveren.</li>
+                    </ol>
+                    <a href="https://www.youtube.com/watch?v=2wLEzvXVKm4" target="_blank" class="inline-flex items-center mt-4 text-blue-600 font-semibold hover:underline">Bekijk Video Handleiding <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                
+                <div class="card p-6">
+                    <h3 class="font-semibold text-xl mb-2 text-gray-800">Krasotyri Saganaki (Gebakken Wijnkaas)</h3>
+                    <p class="mb-4">Een unieke lokale delicatesse, perfect gebakken in de pan. De met wijn doordrenkte kaas wordt warm en licht gesmolten vanbinnen met een heerlijke knapperige korst.</p>
+                    <h4 class="font-semibold text-lg mb-2">Ingrediënten:</h4>
+                     <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>1 plak Krasotyri (wijnkaas), ongeveer 1,5 cm dik</li>
+                        <li>2 eetlepels bloem voor alle doeleinden</li>
+                        <li>2 eetlepels olijfolie</li>
+                        <li>1 citroenpartje, om te serveren</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mb-2">Instructies:</h4>
+                     <ol class="list-decimal list-inside space-y-2">
+                        <li>Haal de plak krasotyri door de bloem, zorg ervoor dat deze aan alle kanten volledig bedekt is. Klop overtollige bloem af.</li>
+                        <li>Verhit de olijfolie in een kleine koekenpan met antiaanbaklaag op middelhoog vuur.</li>
+                        <li>Plaats de bebloemde kaas voorzichtig in de hete pan. Bak 2-3 minuten per kant, tot een diepgoudenbruine korst ontstaat.</li>
+                        <li>Haal uit de pan en leg op een bord. Serveer onmiddellijk met een royale scheut vers citroensap erover.</li>
+                    </ol>
+                    <a href="https://youtu.be/k1MZGsJT0Fw" target="_blank" class="inline-flex items-center mt-4 text-blue-600 font-semibold hover:underline">Bekijk Video Handleiding <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="transport-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md"><button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200"><i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i></button><h2 class="text-xl font-bold text-gray-800 mx-auto">Vervoer op Kos</h2></header>
+            <div class="p-6 space-y-6">
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="car" class="w-5 h-5 mr-2 text-blue-500"></i>Huurauto / Scooter</h3>
+                    <p class="text-gray-600">Sterk aanbevolen voor de meeste vrijheid om afgelegen stranden en dorpen te verkennen. Reken op ~€35-60/dag voor een auto en ~€25/dag voor een scooter. Reserveer in de zomerperiode van tevoren.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="bus" class="w-5 h-5 mr-2 text-blue-500"></i>KTEL Intercity Bussen</h3>
+                    <p class="text-gray-600">Een economische manier om te reizen tussen grote steden en resorts. Het hoofdstation bevindt zich aan Kleopatrasstraat 7. Controleer de dienstregelingen online op <a href="http://www.ktel-kos.gr" target="_blank" class="text-blue-600 hover:underline">ktel-kos.gr</a>.</p>
+                    <a href="https://maps.app.goo.gl/u7PdwWwY821HDPqX8" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Bekijk Station op Kaart <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="bus-front" class="w-5 h-5 mr-2 text-blue-500"></i>DEAS Stadsbussen</h3>
+                    <p class="text-gray-600">Voor reizen binnen Kos-stad en nabijgelegen gebieden zoals Lambi, Psalidi en de Asklepion. Controleer de dienstregelingen op de <a href="http://mobility.kos.gr" target="_blank" class="text-blue-600 hover:underline">Kos Mobility website/app.</a></p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="bike" class="w-5 h-5 mr-2 text-blue-500"></i>Fietsen</h3>
+                    <p class="text-gray-600">Het vlakke terrein van Kos maakt fietsen een geweldige optie, met speciale fietspaden van Kos-stad naar Tigaki en Psalidi. Huurfietsen zijn overal verkrijgbaar voor ~€5-10/dag.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="taxi" class="w-5 h-5 mr-2 text-blue-500"></i>Taxi's</h3>
+                    <p class="text-gray-600">Overal verkrijgbaar. Vind ze bij standplaatsen (zoals bij Akti Kountouriotou) of boek telefonisch. Spreek een prijs af voor lange ritten. Kos-stad Radio Taxi: <a href="tel:+302242022777" class="text-blue-600 hover:underline">+30 22420 22777</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="important-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md"><button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200"><i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i></button><h2 class="text-xl font-bold text-gray-800 mx-auto">Belangrijke Info</h2></header>
+            <div class="p-6 space-y-6">
+                <div class="card p-6 border-2 border-red-500">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center text-red-600"><i data-lucide="siren" class="w-5 h-5 mr-2"></i>Alarmnummers</h3>
+                    <p class="text-gray-700 text-lg">Voor elke noodsituatie, bel het Europese Alarmnummer:</p>
+                    <a href="tel:112" class="block text-center my-3 text-3xl font-bold text-red-600 bg-red-100 p-4 rounded-lg tracking-widest">112</a>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li><strong>Ambulance:</strong> 166</li>
+                        <li><strong>Politie:</strong> 100</li>
+                        <li><strong>Brandweer:</strong> 199</li>
+                        <li><strong>Kustwacht:</strong> 108</li>
+                        <li><strong>Toeristenpolitie:</strong> 171</li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="user" class="w-5 h-5 mr-2 text-blue-500"></i>Contact Gastheer</h3>
+                    <p class="text-gray-600"><strong>Naam:</strong> Varthakouris Ioannis</p>
+                    <p class="text-gray-600"><strong>Telefoon / WhatsApp:</strong></p>
+                     <a href="https://wa.me/306942575314" target="_blank" class="block text-center my-2 text-xl font-semibold text-green-600 bg-green-100 p-3 rounded-lg hover:bg-green-200">+30 6942 575314</a>
+                    <p class="text-sm text-gray-500">WhatsApp of Viber heeft de voorkeur voor niet-dringende vragen (9 AM - 8 PM). Bel voor dringende zaken.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="shopping-cart" class="w-5 h-5 mr-2 text-blue-500"></i>Essentiële Zaken in de Buurt</h3>
+                    <p class="text-gray-600"><strong>Supermarkt:</strong> AB Vassilopoulos is slechts 1 minuut lopen voor boodschappen.</p>
+                    <p class="text-gray-600 mt-2"><strong>Geldautomaat:</strong> Beschikbaar bij de ingang van de AB Vassilopoulos supermarkt.</p>
+                    <p class="text-gray-600 mt-2"><strong>Apotheek (Φαρμακείο):</strong> Verschillende in de buurt. Zoek naar een groen kruisteken. Een lijst van dienstdoende apotheken ("Εφημερεύον") hangt op hun deuren.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="events-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">HIPPOCRATEIA 2025</h2>
+            </header>
+            <div class="p-6">
+                <div class="mb-6">
+                    <label for="event-date-filter" class="block text-gray-700 text-sm font-bold mb-2">Filter op Datum:</label>
+                    <input type="date" id="event-date-filter" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div id="events-list" class="grid grid-cols-1 gap-8">
+                    </div>
+                <div id="no-events-message" class="text-center text-gray-600 mt-8 hidden">
+                    Geen evenementen gevonden voor de geselecteerde datum.
+                </div>
+            </div>
+        </div>
+
+        <div id="local-products-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Lokale Producten & Recepten</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <div class="card p-4 text-center bg-orange-50 border-orange-200 border">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center justify-center text-orange-800"><i data-lucide="chef-hat" class="w-6 h-6 mr-2"></i>Proef het Eiland met AI Recepten</h3>
+                    <p class="text-gray-600 mb-4">Ontvang een heerlijke receptsuggestie met de verse, lokale ingrediënten van Kos.</p>
+                    <button onclick="generateRecipe()" class="w-full btn-primary bg-orange-500 hover:bg-orange-600">Stel een Recept Voor</button>
+                </div>
+                <div id="recipe-output" class="prose-custom space-y-4">
+                     <div class="text-center p-4 text-gray-500 hidden">Uw recept verschijnt hier.</div>
+                </div>
+
+                <p class="text-gray-700 mb-4">Kos is rijk aan lokale producten en traditionele goederen die prachtige souvenirs zijn. Hier zijn enkele van onze favorieten:</p>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://melitaygetos.gr/wp-content/uploads/2021/05/meli-1.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/melikoukouvas.jpg?itok=f4f4f4f4';" alt="Kos Honing" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Kos Honing</h3>
+                        <p class="text-gray-600 mb-2">Kos staat bekend om zijn uitstekende tijmhoning, rijk aan aroma en smaak. Het is een natuurlijke zoetstof en een gezonde traktatie.</p>
+                        <p class="text-gray-700 font-medium"><strong>Waar te koop:</strong> Lokale markten, kleine winkels in dorpen zoals Zia, en speciaalzaken. Zoek naar potten met het label "Μέλι Θυμαρίσιο" (Tijmhoning).</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Meenemen naar huis:</strong> Honing kan over het algemeen veilig worden meegenomen in uw ingecheckte bagage. Zorg ervoor dat het goed is afgesloten om lekken te voorkomen.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://gastronomytours.com/wp-content/uploads/2023/09/Possa-768x443.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/tyriposa.jpg?itok=f4f4f4f4';" alt="Posa Kaas" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Posa Kaas (Wijnkaas)</h3>
+                        <p class="text-gray-600 mb-2">Een unieke lokale kaas, "Posa" (of "Tyri tis Posas") wordt traditioneel gerijpt in rode wijnsediment, wat het een kenmerkende roodachtige tint en een rijke, kruidige smaak geeft.</p>
+                        <p class="text-gray-700 font-medium"><strong>Waar te koop:</strong> Lokale zuivelbedrijven, grotere supermarkten en sommige traditionele tavernes. Vraag naar "Τυρί της Πόσας".</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Meenemen naar huis:</strong> Het beste te vervoeren in ingecheckte bagage, idealiter in een vacuümverpakking indien beschikbaar bij de verkoper, om de versheid te behouden en geuren te voorkomen.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://lerosisland.gr/wp-content/uploads/2017/05/photo_2017-02-07_11-58-13-1.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/glykotomatas.jpg?itok=f4f4f4f4';" alt="Tomaten Lepel Zoet" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Tomaten Lepel Zoet (Glyko Tomataki)</h3>
+                        <p class="text-gray-600 mb-2">Een traditionele Griekse "lepel zoet" gemaakt van kleine, onrijpe tomaten. Het is gekonfijt en heeft een unieke, heerlijke smaak, vaak geserveerd bij de koffie of als dessert.</p>
+                        <p class="text-gray-700 font-medium"><strong>Waar te koop:</strong> Lokale vrouwencoöperaties, speciaalzaken en sommige grotere supermarkten. Zoek naar potten met het label "Γλυκό Ντοματάκι".</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Meenemen naar huis:</strong> Potten kunnen het beste in ingecheckte bagage. Zorg ervoor dat het deksel goed sluit om lekkage te voorkomen.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://www.argiro.gr/wp-content/uploads/2021/08/elaiolado-scaled-1-1320x720.jpeg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/ladi.jpg?itok=f4f4f4f4';" alt="Kos Olijfolie" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Extra Vierge Olijfolie</h3>
+                        <p class="text-gray-600 mb-2">Griekenland staat bekend om zijn olijfolie, en Kos produceert uitstekende kwaliteit extra vierge olijfolie. Het is een hoofdbestanddeel in de Griekse keuken en een gezonde keuze.</p>
+                        <p class="text-gray-700 font-medium"><strong>Waar te koop:</strong> Rechtstreeks bij olijfolieproducenten (sommige bieden rondleidingen aan), lokale markten en supermarkten. Zoek naar "Εξαιρετικό Παρθένο Ελαιόλαδο".</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Meenemen naar huis:</strong> Voor grotere hoeveelheden is ingecheckte bagage noodzakelijk. Veel winkels verkopen olijfolie in speciaal ontworpen, lekvrije blikken of flessen voor op reis.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://www.thegreekfood.com/wp-content/uploads/2012/05/herbs-and-spices.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/votanakos.jpg?itok=f4f4f4f4';" alt="Lokale Kruiden en Specerijen" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Lokale Kruiden en Specerijen</h3>
+                        <p class="text-gray-600 mb-2">Het klimaat van het eiland is perfect voor het verbouwen van aromatische kruiden zoals oregano, tijm en salie. Deze zijn geurig en praktische souvenirs.</p>
+                        <p class="text-gray-700 font-medium"><strong>Waar te koop:</strong> Lokale markten, souvenirwinkels en zelfs sommige supermarkten. Zoek naar gedroogde kruiden in kleine zakjes of decoratieve bundels.</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Meenemen naar huis:</strong> Kan zowel in de handbagage als in de ingecheckte bagage worden meegenomen. Zorg ervoor dat ze goed verpakt zijn om hun aroma te behouden en morsen te voorkomen.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/03/Zia_Village_Kos_Kos4all_003.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/keramika.jpg?itok=f4f4f4f4';" alt="Handgemaakt Keramiek" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Handgemaakt Keramiek</h3>
+                        <p class="text-gray-600 mb-2">U vindt prachtige handgemaakte pottenbakkerij en keramiek overal op Kos, vaak met traditionele Griekse ontwerpen of levendige kleuren. Van decoratieve borden tot functionele mokken, ze zijn prachtige souvenirs.</p>
+                        <p class="text-gray-700 font-medium"><strong>Waar te koop:</strong> Ambachtelijke winkels in Kos-stad en dorpen, met name in gebieden met een ambachtelijke traditie.</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Meenemen naar huis:</strong> Pak breekbare items zorgvuldig in uw ingecheckte bagage, gebruik kleding of bubbeltjesplastic voor demping. Overweeg om grotere of zeer delicate stukken te laten verzenden.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="island-hopping-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Eilandhoppen vanaf Kos</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <p class="text-gray-700 mb-4">Kos is een uitstekende uitvalsbasis voor het verkennen van nabijgelegen eilanden. Hier zijn enkele populaire opties voor dagtochten:</p>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://cdn.getyourguide.com/img/tour/b219904a91bc9dd83490526cf733932fe4c06143c9e347ccdacdec9e8e9ade6c.jpg/98.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1628189531122-8353e813a8c5?q=80&w=800&auto=format&fit=crop';" alt="Nisyros Vulkaan" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Nisyros Eiland: Het Vulkanische Juweel</h3>
+                        <p class="text-gray-600 mb-2">Nisyros is een klein, pittoresk eiland dat wordt gedomineerd door zijn actieve vulkaan, een van de weinige toegankelijke hydrothermale kraters ter wereld.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>Wat te doen:</strong> Bezoek de <a href="https://maps.app.goo.gl/3QxP6f1hN8fK9dYZA" target="_blank" class="text-blue-600 hover:underline">Stefanos Krater</a> (loop erin!), verken de charmante hoofdstad Mandraki met zijn witgekalkte huizen en het klooster van Panagia Spiliani.</li>
+                            <li><strong>Veerdienstregeling:</strong> Dagelijkse afvaarten vanuit de haven van Kos-stad, meestal 's ochtends (bijv. 9:00 AM - 10:00 AM) met terugkeer in de late namiddag (bijv. 3:00 PM - 4:00 PM). De reistijd bedraagt ongeveer 1-1,5 uur.</li>
+                            <li><strong>Boeken:</strong> Tickets kunnen in de haven worden gekocht bij diverse touroperators of online. Het is raadzaam om tijdens het hoogseizoen van tevoren te boeken.</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=ferry+kos+to+nisyros+schedule" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Zoek de nieuwste dienstregelingen <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://www.aegeanislands.gr/app/uploads/2020/07/shutterstock_197048153-1.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop';" alt="Pserimos Strand" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Pserimos Eiland: Rustige Ontsnapping</h3>
+                        <p class="text-gray-600 mb-2">Pserimos is een klein, rustig eiland dat bekend staat om zijn prachtige zandstrand en kristalhelder water, perfect voor een ontspannen dag weg van de drukte.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>Wat te doen:</strong> Zwem en zonnebaad op het hoofdstrand, geniet van verse vis in een van de weinige tavernes, en ervaar het vredige eilandleven.</li>
+                            <li><strong>Veerdienstregeling:</strong> Vaak onderdeel van een "3-Eilanden Cruise" vanuit Kos.</li>
+                            <li><strong>Boeken:</strong> Tickets meestal rechtstreeks te koop bij verkopers in de haven van Kos-stad.</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=boat+trips+kos+to+pserimos+schedule" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Zoek de nieuwste dienstregelingen <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://sailawaykos.com/wp-content/uploads/2018/11/3-Islads-Nisyros-Cruise-5-840x560.png" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop';" alt="3 Eilanden Cruise" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">3-Eilanden Dagtocht: Pserimos, Kalymnos & Plati</h3>
+                        <p class="text-gray-600 mb-2">Een zeer populaire dagvullende boottocht vanuit de haven van Kos, die een voorproefje biedt van drie verschillende Dodekanesos-eilanden.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>Pserimos:</strong> Geniet van het rustige hoofdstrand en het kleine dorpje.</li>
+                            <li><strong>Kalymnos:</strong> Verken Pothia, de hoofdstad, bekend om zijn geschiedenis van sponsduiken en levendige haven.</li>
+                            <li><strong>Plati:</strong> Een klein onbewoond eilandje met prachtig turquoise water, perfect om te zwemmen en snorkelen.</li>
+                            <li><strong>Dienstregeling:</strong> Boten vertrekken meestal tussen 9:30 AM en 10:30 AM vanuit de haven van Kos, en keren rond 4:30 PM tot 5:30 PM terug. Inclusief stops op elk eiland om te zwemmen en te verkennen.</li>
+                            <li><strong>Boeken:</strong> Talrijke boten bieden deze excursie rechtstreeks vanuit de haven van Kos aan. U kunt meestal ter plekke boeken de dag ervoor of de ochtend van vertrek. Prijzen variëren per boot en inclusies (bijv. lunch).</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=3+island+cruise+kos+harbor" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Zoek 3-Eilanden Cruises <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300">
+        Bericht gekopieerd!
+    </div>
+
+    <script>
+        // --- CONFIGURATIE ---
+        const API_KEY = "AIzaSyALAR-YIwFpAlVvv2bLZfF-iuYOAJAPHgM";
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+        
+        // --- DATA ---
+        const events = [
+            // Juni
+            { date: "ZATERDAG 21/06/25 & ZONDAG 22/06/25", time: "ZATERDAG 19:00 (OPENING), ZONDAG 18:00-20:00 (OPENINGSTIJDEN)", title: "TENTOONSTELLING SCHILDERKUNST EN HAGIOGRAFIE", description: "Tentoonstelling van werken van de studenten van de Schilder- & Hagiografie Workshop FRIDART van Maria Vamvakousi.", location: "HISTORISCH & FOLKLORE MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250621T190000", gCalEnd: "20250622T200000" },
+            { date: "DINSDAG 24/06/25", time: "19:00", title: "CONCERT MET DE STUDENTEN VAN DE MUZIEKSCHOOL VAN MARIA ORFANOUDAKI", description: "Studentenconcert van klassieke en hedendaagse muziek.", location: "BINNENPLAATS VAN HET FOLKLORE & HISTORISCH MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250624T190000", gCalEnd: "20250624T210000" },
+            { date: "WOENSDAG 25/06/25", time: "19:30", title: "DE GEWOONTE VAN KLIDONAS", description: "Evenement met de heropvoering van de 'Fanos' en 'Klidonas', begeleid door dansen van de kinder- en jeugdsecties van de Culturele en Educatieve Vereniging van Pyli 'O APELLIS'.", location: "OPENLUCHTTHEATER MARMARI", googleMaps: "https://maps.app.goo.gl/bXb9C6t4wY2R8xZq7", gCalStart: "20250625T193000", gCalEnd: "20250625T213000" },
+            { date: "WOENSDAG 25/06/25", time: "19:30", title: "RITMISCHE GYMNASTIEK EN MODERNE DANSVOORSTELLING", description: "In samenwerking met de Culturele, Atletiekvereniging 'ANAMORFOSI-ANAPLASI'. De kinder- en jeugdsecties van de Vereniging nemen deel.", location: "OPENLUCHTTHEATER KARDAMENA", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250625T193000", gCalEnd: "20250625T213000" },
+            { date: "DONDERDAG 26/06/25", time: "20:00", title: "DE GEWOONTE VAN KLIDONAS", description: "Evenement met de heropvoering van de 'Fanos' en 'Klidonas', begeleid door dansen van de kinder- en jeugdsecties van het Lyceum van Griekse Vrouwen, afdeling Kos.", location: "ELEFTHERIAS PLEIN, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250626T200000", gCalEnd: "20250626T220000" },
+            { date: "ZATERDAG 28/06/25", time: "20:30", title: "DANSEVENEMENT 'ELIKONIA'", description: "Een avond gewijd aan Griekse dansen met speciale nadruk op zeibekiko, in samenwerking met de Dansschool 'ALEGRIA DANCE LAB'.", location: "ELEFTHERIAS PLEIN, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250628T203000", gCalEnd: "20250628T223000" },
+            { date: "ZATERDAG 28/06/25 & ZONDAG 29/06/25", time: "ZATERDAG 11:00 (KOS PARADE), 19:00 (KARDAMENA PARADE), ZONDAG 20:30 (CONCERT)", title: "SAMENWERKING VAN HET SINDOS JEUGDORKEST VAN DE GEMEENTE DELTA EN DE FILHARMONIE VAN DE GEMEENTE KOS", description: "Parade in de centrale straten van Kos-stad en de Haven en straten van Kardamena. Concert op het Eleftherias Plein.", location: "CENTRALE STRATEN VAN KOS-STAD / HAVEN EN STRATEN VAN KARDAMENA / ELEFTHERIAS PLEIN, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250628T110000", gCalEnd: "20250629T223000" },
+            { date: "ZONDAG 29/06/25", time: "19:30", title: "KINDERACTIVITEITEN MET EEN ZEETHEMA", description: "In samenwerking met de CULTURELE VERENIGING VAN KARDAMENA 'ARGO'. Het evenement wordt gehouden als onderdeel van de Maritieme Week.", location: "OPENLUCHTTHEATER KARDAMENA", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250629T193000", gCalEnd: "20250629T213000" },
+            { date: "MAANDAG 30/06/25", time: "20:00", title: "DE GEWOONTE VAN KLIDONAS", description: "Evenement met de heropvoering van de 'Fanos' en 'Klidonas', begeleid door dansen van secties van de Culturele Vereniging van Kefalos 'AGIOS NIKOLAOS'.", location: "HAVEN KEFALOS", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250630T200000", gCalEnd: "20250630T220000" },
+            // Juli
+            { date: "DONDERDAG 03/07/25", time: "20:00", title: "PRESENTATIE VAN MARIA MAMALIGA'S NOVELLA TITEL 'MERCANTO'", description: "In samenwerking met de P.O. KOON 'O FILITAS', het LYCEUM VAN GRIEKSE VROUWEN-afdeling Kos, DREPPO 'FAINARETI' en de 'ESTIA' BOEKWINKEL. Het boek wordt gepresenteerd door Minas G. Hatzantoniou en Theodosis Diakogiannis.", location: "BINNENPLAATS VAN HET FOLKLORE & HISTORISCH MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250703T200000", gCalEnd: "20250703T220000" },
+            { date: "DONDERDAG 03/07/25", time: "19:00", title: "THEATERVOORSTELLING 'DE VOGELS' VAN ARISTOFANES", description: "In samenwerking met de P.S. AVEROF GEMEENTE KOS. De kinderen, ouders en pedagogisch personeel van het Station nemen deel aan de voorstelling.", location: "ROMEINS ODEON VAN KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250703T190000", gCalEnd: "20250703T210000" },
+            { date: "ZATERDAG 05/07/25", time: "20:00", title: "HERDERSFEEST", description: "Traditioneel festival over het thema van het plattelandsleven, met lokale lekkernijen, lokale dansen en livemuziek, in samenwerking met de CULTURELE VERENIGING VAN ANTIMACHIA 'I PROODOS'.", location: "TRADITIONEEL HUIS, ANTIMACHIA MOLEN", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250705T200000", gCalEnd: "20250705T230000" },
+            { date: "ZONDAG 06/07/25", time: "20:30", title: "MUZIEK- EN DANSVOORSTELLING 'DANSEN EN LIEDEREN VAN HET LAND EN DE ZEE'", description: "Afsluiting van het Lyceumjaar, in samenwerking met het LYCEUM VAN GRIEKSE VROUWEN VAN KARDAMENA.", location: "OPENLUCHTTHEATER KARDAMENA", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250706T203000", gCalEnd: "20250706T223000" },
+            { date: "MAANDAG 07/07/25", time: "20:30", title: "DE ONTMOETING VAN LIERSPELLERS VAN DE ZUIDELIJKE DODECANESOS IN KEFALOS, KOS", description: "Muziek- en dansbijeenkomst om de rijkdom van de Dodekanesische Lier te benadrukken, met een focus op de Zuidelijke Dodekanesos (Kos, Halki, Symi, Rhodos, Karpathos, Kasos). Lier- en luitspelers uit Rhodos en Karpathos nemen deel.", location: "HAVEN KEFALOS", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250707T203000", gCalEnd: "20250707T230000" },
+            { date: "ZATERDAG 12/07/25", time: "20:00", title: "MUZIEKAVOND", description: "Traditionele muziek en dansen en lokale gastronomie, in samenwerking met de CULTURELE EN EDUCATIEVE VERENIGING VAN ASFENDIOU 'O THEOKRITOS'.", location: "TIGAKI PLEIN", googleMaps: "https://maps.app.goo.gl/fWzS9wU7Z6qR8pXz5", gCalStart: "20250712T200000", gCalEnd: "20250712T230000" },
+            { date: "ZATERDAG 12/07/25", time: "20:00", title: "CONCERT MET DE SINFONIETTA VAN ATHENE", description: "Van de Artistieke Directeur van ERT, GIORGOS ARAVIDIS, in samenwerking met het ERATEIO CONSERVATORIUM VAN ATHENE en de pianolerares MARIA ORFANOUDAKI. Een uniek concert van klassiek en Grieks repertoire, begeleid door piano & kinderkoor van studenten van Maria Orfanoudaki, in samenwerking met Vangelis Vatsineas.", location: "INTERNATIONALE HIPPOCRATISCHE STICHTING VAN KOS", googleMaps: "https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7", gCalStart: "20250712T200000", gCalEnd: "20250712T220000" },
+            { date: "ZONDAG 13/07/25", time: "20:00", title: "MUZIEK- EN DANSVOORSTELLING 'Vanavond mijn gitaar...'", description: "Afsluiting van het Lyceumjaar, in samenwerking met het LYCEUM VAN GRIEKSE VROUWEN-afdeling Kos. De secties van het Lyceum van Griekse Vrouwen van Kos dansen met de begeleiding van een traditionele muziekgroep. Een kleine groep Sereneders neemt deel.", location: "BINNENPLAATS VAN DE 7E BASISSCHOOL VAN KOS", googleMaps: "https://maps.app.goo.gl/9t7B4e9v6tP6fXqK8", gCalStart: "20250713T200000", gCalEnd: "20250713T220000" },
+            { date: "DINSDAG 15/07/25", time: "20:30", title: "KAMERLIEDEREN. SPROOKJES & LIEDEREN", description: "In samenwerking met de LIONS CLUB VAN KOS 'HIPPOCRATES'. 4 muzikanten op het podium. Ze vertellen komische verhalen en sprookjes. Ze zingen over liefde, vrijgevigheid, vrije tijd, vriendschap, de cirkel van het leven, vreugde, spel en natuurlijk dans.", location: "ROMEINS ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250715T203000", gCalEnd: "20250715T223000" },
+            { date: "WOENSDAG 16/07/25", time: "19:30", title: "KINDERTHEATERVOORSTELLING 'DE KRIEBELAAR'", description: "Door DIMITRIS BASLAM, in samenwerking met de LIONS CLUB VAN KOS 'HIPPOCRATES'.", location: "K. KIAPOKA PLEIN, ZIPARI OPENLUCHTTHEATER", googleMaps: "https://maps.app.goo.gl/eU5fC7wY8tJ8vXmP9", gCalStart: "20250716T193000", gCalEnd: "20250716T213000" },
+            { date: "VRIJDAG 18/07/25", time: "22:00", title: "CONCERT MET DE BAND PYX LAX", description: "Evenement met toegangsprijs.", location: "VOETBALVELD PYLI", googleMaps: "https://maps.app.goo.gl/hG5b8tF7yX5wR8vV9", gCalStart: "20250718T220000", gCalEnd: "20250718T235900" },
+            { date: "ZONDAG 20/07/25", time: "20:30", title: "CONCERT MET HET ORKEST 'TA MANOUSAKIA' EN KAITI KOULIA", description: "Eilandfestival met traditionele dansen en liederen in het stadscentrum.", location: "ELEFTHERIAS PLEIN, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250720T203000", gCalEnd: "20250720T223000" },
+            { date: "VRIJDAG 25/07/25", time: "21:00", title: "CONCERT MET MARINA SATTI", description: "Evenement met toegangsprijs.", location: "KOS MARINA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250725T210000", gCalEnd: "20250725T230000" },
+            { date: "ZATERDAG 26/07/25", time: "20:30", title: "'REIZEN IN GRIEKENLAND' - MUZIEK- EN DANSVOORSTELLING", description: "Voorstelling met traditionele Griekse dansen, in samenwerking met de ELENI DROUSOU DANSCHOOL.", location: "ELEFTHERIAS PLEIN, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250726T203000", gCalEnd: "20250726T223000" },
+            { date: "ZONDAG 27/07/25", time: "20:00", title: "MUZIEKEVENEMENT 'SELAS'", description: "Uitvoering van kerkelijke hymnes door de cantor Nektaria Karantzi begeleid door 2 muziekinstrumenten, in samenwerking met WOMEN WITHOUT BORDERS KOS.", location: "ROMEINS ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250727T200000", gCalEnd: "20250727T220000" },
+            { date: "ZONDAG 27/07/25", time: "21:30", title: "'EEN LIEFDE VOOR DE ZOMER...'", description: "Muzikaal evenement-tribute aan de New Wave. Het Volwassenenkoor van de 'Arion' Vereniging neemt ook deel, in samenwerking met de 'ARION' VRIENDEN VAN MUZIEK VERENIGING.", location: "AGIOI ANARGYROI, KARDAMENA", googleMaps: "https://maps.app.goo.gl/z6eX8v9wQ5yR7fWc7", gCalStart: "20250727T213000", gCalEnd: "20250727T233000" },
+            { date: "MAANDAG 28/07/25", time: "17:00-20:00", title: "'WANNEER KINDEREN SPREKEN MET KLEUREN'", description: "Tentoonstelling van kinderschilderijen van de winterworkshops van de Vereniging onder leiding van Lise-Lotte Iversen, in samenwerking met de CULTURELE VERENIGING VAN KARDAMENA 'ARGO'.", location: "MARITIEM & FOLKLORE MUSEUM VAN KARDAMENA", googleMaps: "https://maps.app.goo.gl/6tX8wP5vY9zR7fWb9", gCalStart: "20250728T170000", gCalEnd: "20250728T200000" },
+            { date: "MAANDAG 28/07/25", time: "22:00", title: "CONCERT MET ELENA PAPARIZOU", description: "Evenement met toegangsprijs.", location: "VOETBALVELD PYLI", googleMaps: "https://maps.app.goo.gl/hG5b8tF7yX5wR8vV9", gCalStart: "20250728T220000", gCalEnd: "20250728T235900" },
+            { date: "DONDERDAG 31/07/25", time: "20:00", title: "PRESENTATIE VAN HET BOEK VAN VOORMALIG VICE-RECTOR PANAGIOTIS NOUTSOS TITEL 'KOMT DE ZEE DOOR HET VISSEN? DE DIALECTISCHE METHODE VAN VRAAG EN ANTWOORD'", description: "In samenwerking met de P.O. KOON 'O FILITAS', het LYCEUM VAN GRIEKSE VROUWEN-afdeling Kos, DREPPO 'FAINARETI' en de 'ESTIA' BOEKWINKEL. Het boek wordt gepresenteerd door Minas G. Hatzantoniou en Theodosis Diakogiannis.", location: "BINNENPLAATS VAN HET HISTORISCH & FOLKLORE MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250731T200000", gCalEnd: "20250731T220000" },
+            // Augustus
+            { date: "ZATERDAG 02/08/25", time: "20:00", title: "ZOMERFESTIVAL", description: "We vieren de zomer met livemuziek, lokale dansen, wijn en lokale lekkernijen, in samenwerking met de SPORTCLUB 'ANTIMACHOS'.", location: "VOORMALIGE BASISSCHOOL MASTICHARI", googleMaps: "https://maps.app.goo.gl/kXv9zL5wR8yV7fWdA", gCalStart: "20250802T200000", gCalEnd: "20250802T230000" },
+            { date: "ZATERDAG 02/08/25 & ZONDAG 03/08/25", time: "19:00-21:00", title: "KUNSTZINNIG TWEE-DAGEN EVENEMENT", description: "Twee-daags evenement met een concert, artistieke activiteiten en een tentoonstelling van werken van de studenten van het Centrum voor Kunst- en Muziekstudies.", location: "HISTORISCH & FOLKLORE MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250802T190000", gCalEnd: "20250803T210000" },
+            { date: "ZONDAG 03/08/25", time: "20:00", title: "VISFESTIVAL", description: "Traditioneel festival over het thema vis, vissers, het trekken van de netten, enz., met lokale lekkernijen, lokale dansen en livemuziek met traditionele eilandliederen, in samenwerking met de CULTURELE VERENIGING VAN KEFALOS 'AGIOS NIKOLAOS'.", location: "HAVEN KEFALOS", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250803T200000", gCalEnd: "20250803T230000" },
+            { date: "MAANDAG 04/08/25", time: "21:30", title: "CONCERT MET NATASSA BOFILIOU", description: "Evenement met toegangsprijs.", location: "KOS MARINA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250804T213000", gCalEnd: "20250804T233000" },
+            { date: "WOENSDAG 06/08/25", time: "20:00", title: "PRESENTATIE VAN HET BOEK VAN KOSTAS SKANDALIDIS TITEL: 'SPREEKWOORDEN EN SPREEKWOORDELIJKE UITDRUKKINGEN VAN DE DODECANESOS (ANTHOLOGIE)'", description: "In samenwerking met de P.O. KOON 'O FILITAS' en het HUIS VAN LETTEREN EN KUNSTEN VAN DE DODECANESOS.", location: "BINNENPLAATS VAN HET HISTORISCH-FOLKLORE MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250806T200000", gCalEnd: "20250806T220000" },
+            { date: "WOENSDAG 06/08/25 t/m DONDERDAG 07/08/25", time: "18:30-21:00", title: "TENTOONSTELLING SCHILDERKUNST DOOR DE GROEP VAN KOS AMATEURSCHILDERS EN KUNSTENAARS 'AIGLI'", description: "Onder auspiciën van de P.O. KOON 'O FILITAS'.", location: "HISTORISCH & FOLKLORE MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250806T183000", gCalEnd: "20250807T210000" },
+            { date: "DONDERDAG 07/08/25", time: "21:00", title: "'DE LIEDEREN VAN SOTIRIA'", description: "Een muzikale voorstelling gewijd aan de 'Archontissa van rebetiko', Sotiria Bellou. Christina Maxouri en vier uitstekende volksmuzikanten zetten hun podium op en nodigen ons uit voor een andere reis in het leven en de liederen van Sotiria Bellou, in samenwerking met de UNIE VAN KOS ATHENE 'HIPPOCRATES'.", location: "ROMEINS ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250807T210000", gCalEnd: "20250807T230000" },
+            { date: "DONDERDAG 07/08/25", time: "21:15", title: "THEATERVOORSTELLING 'DE ZEE EN DE OUDE MAN'", description: "Gebaseerd op Ernest Hemingway's werk 'De Oude Man en de Zee' bewerkt en geregisseerd door: Marlen Kaminski. Hoofdrollen: Tasos Nousias, Vasilis Milionis, Faidra Soutou. Evenement met toegangsprijs.", location: "KOS MARINA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250807T211500", gCalEnd: "20250807T231500" },
+            { date: "VRIJDAG 08/08/25", time: "20:00", title: "PRESENTATIE VAN HET BOEK VAN KOSTAS I. PATOURIS TITEL 'DE ROOS DIE DE ZON VERLICHTE'", description: "Coördinatie-introductie Minas G. Hatzantoniou. Het boek wordt gepresenteerd door journaliste Kleopatra Misailidou. Ter nagedachtenis aan lerares Stamatia Oikonomidi-Koutsou, in samenwerking met DREPPO 'FAINARETI'.", location: "BINNENPLAATS VAN HET FOLKLORE & HISTORISCH MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250808T200000", gCalEnd: "20250808T220000" },
+            { date: "ZATERDAG 09/08/25", time: "21:00", title: "'VOLLE MAAN' MET KERASIA SAMARA", description: "Muzikale en poëtische voorstelling voor de Volle Maan van augustus. Giorgos Koubogiannis begeleidt op piano, in samenwerking met de UNIE VAN VROUWEN VAN GRIEKENLAND-afdeling Kos.", location: "ROMEINS ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250809T210000", gCalEnd: "20250809T230000" },
+            { date: "ZONDAG 10/08/25", time: "21:00", title: "CONCERT-TRIBUTE AAN DE COMPONIST GIANNIS SPANOS", description: "Een avond met de liederen - die we allemaal liefhadden - van Giannis Spanos, uit de New Wave en Griekse Cinema, in een 'boîte'-stijl, met een piano en twee stemmen. Met de jarenlange medewerker van onze grote componist, Chrysoula Stefanaki. Panagiotis Kypraios neemt deel. Op piano, muzikale leiding en curatie door Tsambikos Kamateros, in samenwerking met het KOS CENTRUM VOOR MUZIKALE STUDIES.", location: "ROMEINS ODEON VAN KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250810T210000", gCalEnd: "20250810T230000" },
+            { date: "WOENSDAG 13/08/25", time: "20:00", title: "PRESENTATIE VAN HET BOEK VAN VOORMALIG RECTOR STAMATIS ALACHIOTIS TITEL 'DE ANONIEME DOCHTER'", description: "In samenwerking met de P.O. KOON 'O FILITAS' en de UNIE VAN KOS ATHENE 'HIPPOCRATES'. Het boek wordt gepresenteerd door: Noutsos Panagiotis, Skandalidis Kostas en Trilianos Athanasios.", location: "BINNENPLAATS VAN HET HISTORISCH & FOLKLORE MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250813T200000", gCalEnd: "20250813T220000" },
+            { date: "WOENSDAG 13/08/25", time: "22:00", title: "CONCERT MET STELIOS ROKKOS", description: "Evenement met toegangsprijs.", location: "VOETBALVELD PYLI", googleMaps: "https://maps.app.goo.gl/hG5b8tF7yX5wR8vV9", gCalStart: "20250813T220000", gCalEnd: "20250813T235900" },
+            { date: "ZATERDAG 16/08/25", time: "19:00", title: "'MIKRASIATIKI VENGHERA' - REBETIKO AVOND MET KATERINA TSIRIDOU", description: "Muzikaal-verhalende voorstelling met liederen, tradities en verhalen uit Klein-Azië. Vertelling: Maria Siouta, in samenwerking met de CULTURELE VERENIGING VAN KARDAMENA 'ARGO'.", location: "OPENLUCHTTHEATER KARDAMENA", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250816T190000", gCalEnd: "20250816T210000" },
+            { date: "VRIJDAG 22/08/25", time: "20:30", title: "'ODE AAN DE POËZIE'", description: "Poëzieavond met een concert en recitaties samengesteld door Dimitris Vonapartis.", location: "ROMEINS ODEON VAN KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250822T203000", gCalEnd: "20250822T223000" },
+            { date: "ZATERDAG 23/08/25", time: "20:00", title: "HONINGFESTIVAL", description: "Traditioneel festival met lokale lekkernijen over het thema honing, omlijst door een concert van traditionele muziek met Maria Anamaterou, in samenwerking met de CULTURELE VERENIGING VAN ANTIMACHIA 'I PROODOS'.", location: "MOLEN, ANTIMACHIA", googleMaps: "https://maps.app.goo.gl/wJ5p5yQ8zX9wS6vR8", gCalStart: "20250823T200000", gCalEnd: "20250823T230000" },
+            { date: "ZONDAG 24/08/25", time: "20:30", title: "'THEODORA SPEELT VOOR DE MAAN'", description: "Solopiano concert door de 16-jarige Theodora Hostogian met Grieks en klassiek repertoire in het licht van de Augustus Maan, in samenwerking met de CULTURELE VERENIGING VAN KARDAMENA 'ARGO'.", location: "OPENLUCHTTHEATER KARDAMENA", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250824T203000", gCalEnd: "20250824T223000" },
+            { date: "WOENSDAG 27/08/25", time: "21:00", title: "THEATERVOORSTELLING 'WACHTEN OP DE 8'", description: "Door PANOS NIAGOS van de THEATERWERKPLAATS VAN DE GEMEENTE KOS. Regie: Chrysa Orfanou. Hoofdrollen: Chrysa Orfanou, Christina Politou en Giorgos Tyras.", location: "BINNENPLAATS VAN HET HISTORISCH & FOLKLORE MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250827T210000", gCalEnd: "20250827T230000" },
+            { date: "WOENSDAG 27/08/25 t/m ZATERDAG 30/08/25", title: "'ALIKARNASSEIA VAN KOS 2025'", description: "Het vierdaagse programma omvat lezingen, concerten, traditionele dansen, herleving van de 'kourbani'-traditie en een fototentoonstelling, in samenwerking met de VERENIGING VAN KLEIN-AZIË VAN KOS 'HERODOTUS'.", location: "Verschillende locaties (details niet gespecificeerd)", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250827T180000", gCalEnd: "20250830T230000" },
+            { date: "VRIJDAG 29/08/25", time: "21:00", title: "THEATERVOORSTELLING 'WACHTEN OP DE 8'", description: "Door PANOS NIAGOS van de THEATERWERKPLAATS VAN DE GEMEENTE KOS. Regie: Chrysa Orfanou. Hoofdrollen: Chrysa Orfanou, Christina Politou en Giorgos Tyras.", location: "TSIGKOURA THEATER, KEFALOS", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250829T210000", gCalEnd: "20250829T230000" },
+            { date: "ZATERDAG 30/08/25", time: "20:00", title: "WIJNFESTIVAL", description: "Traditioneel festival over het thema wijn, met lokale lekkernijen, lokale dansen en livemuziek, in samenwerking met de CULTURELE EN EDUCATIEVE VERENIGING VAN ASFENDIOU 'O THEOKRITOS'.", location: "EVANGELISTRIAS OPENLUCHTTHEATER, ASFENDIOU", googleMaps: "https://maps.app.goo.gl/rWfA8L3Q8jJqfRzY6", gCalStart: "20250830T200000", gCalEnd: "20250830T230000" },
+            { date: "ZONDAG 31/08/25", time: "21:00", title: "'KUNST IS EEN VROUW'", description: "Een groot eerbetoon aan de grootste vrouwelijke artiesten van de 20e eeuw, beginnend van het interbellum tot heden. Liederen worden gezongen door de stem van Chrysoula Stefanaki. Piano en muzikale leiding: Nikos Kouros. Accordeon: Tsambikos Kamateros, in samenwerking met het KOS CENTRUM VOOR MUZIKALE STUDIES.", location: "ROMEINS ODEON VAN KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250831T210000", gCalEnd: "20250831T230000" },
+            // September
+            { date: "MAANDAG 01/09/25", time: "20:00", title: "KINDERTHEATER 'POUPOULAR'", description: "Kindermuziektheater door de THEATERWERKPLAATS VAN KOS-ACTA. Regie: Foivos Symeonidis.", location: "CULTUREEL CENTRUM PYLI 'GALINOS FLASKOS'", googleMaps: "https://maps.app.goo.gl/jR8fG5vW9yY7xXzW8", gCalStart: "20250901T200000", gCalEnd: "20250901T220000" },
+            { date: "WOENSDAG 03/09/25", time: "20:00", title: "PRESENTATIE VAN HET BOEK VAN ANDREAS HATZIMICHAIL 'VOETBAL OP KOS VAN 1927 TOT HEDEN'", description: "Publicatie van D.O.P.A.V.S. KOS. Het boek wordt gepresenteerd door sportjournalist Giorgos Pitsis en hoogleraar Lichamelijke Opvoeding Giannis Trikoilis.", location: "BINNENPLAATS VAN HET HISTORISCH & FOLKLORE MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250903T200000", gCalEnd: "20250903T220000" },
+            { date: "ZATERDAG 06/09/25", time: "19:00", title: "INTERACTIEVE PRESENTATIE van het KINDERBOEK van MARIA LAKATA getiteld 'TZIVAGERA EN DE NACHTEGAAL'", description: "Er zal een luisterboekpresentatie zijn gecombineerd met een live dramatisering van de liederen. Sprekers: de auteur Maria Lakata, de illustrator van het boek, Danijela Palapani Curcic en de psycholoog-psychotherapeut Sissy Karathanou.", location: "CULTUREEL CENTRUM PYLI 'GALINOS FLASKOS'", googleMaps: "https://maps.app.goo.gl/jR8fG5vW9yY7xXzW8", gCalStart: "20250906T190000", gCalEnd: "20250906T210000" },
+            { date: "ZATERDAG 06/09/25", time: "21:15", title: "THEATERVOORSTELLING 'HIJ EN HIJ'", description: "Muzikale theatervoorstelling met humor, emotie en tijdloze liederen. Giorgos Konstantinou, Leonidas Kakouris en Dimitris Starovas creëren een verrassende voorstelling, vol menselijkheid en een satirische blik. Evenement met toegangsprijs.", location: "KOS MARINA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250906T211500", gCalEnd: "20250906T231500" },
+            { date: "ZONDAG 07/09/25", time: "20:00", title: "THEATERVOORSTELLING 'DE FILMNARRATOR'", description: "Katia Gerou schittert in de emblematische tekst van Hernán Rivera Letelier. Regie: Maya Politaki. De voorstelling neemt ons mee naar Chili in de jaren '60 en vertelt de avonturen van een meisje dat de zeldzame gave heeft om de verhalen van de films te vertellen of liever tot leven te brengen, in samenwerking met de THEATERWERKPLAATS VAN KOS-AACTA.", location: "ROMEINS ODEON VAN KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250907T200000", gCalEnd: "20250907T220000" },
+            { date: "MAANDAG 08/09/25", time: "21:00", title: "BACHATA AVOND in het kader van het BACHATA KING FESTIVAL", description: "Dansevenement met latin muziek.", location: "ELEFTHERIAS PLEIN", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250908T210000", gCalEnd: "20250908T230000" },
+            { date: "DINSDAG 09/09/25 t/m WOENSDAG 17/09/25", time: "11:00-13:00 & 18:00-19:00", title: "HERINNERINGSTENTOONSTELLING 'Voor mijn Adem' van IRIS MAVRAKI voor het voormalige SANATORIUM VAN DE DODECANESOS 1947-1970", description: "Ondersteuning: AFDELING CULTUUR VAN DE GEMEENTE KOS - MEDISCHE VERENIGING VAN KOS - 'DR.E.P.PO 'FAINARETI' - COMMUNICATIE-ONDERWIJS-CULTUUR ACTIVITEITEN.", location: "HISTORISCH & FOLKLORE MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250909T110000", gCalEnd: "20250917T190000" },
+            { date: "ZONDAG 14/09/25", time: "20:00", title: "CONCERT MET WERKEN VOOR SOLO VIOOL en VIOOL EN ELEKTRONICA MET SOLOISTE TANIA SIKELIANOU", description: "Ook deelnemend zijn Nikos Harizanos en Kostas Mantzoros op elektronica.", location: "ROMEINS ODEON VAN KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250914T200000", gCalEnd: "20250914T220000" },
+            { date: "VRIJDAG 19/09/25", time: "19:30", title: "EDUCATIEVE ACTIVITEIT VOOR KINDEREN", description: "Groepsactiviteiten en vaardigheidsworkshops met het 'ATHENE VOOR KINDEREN' Team, in samenwerking met de LIONS CLUB VAN KOS 'HIPPOCRATES'.", location: "MARITIEM & FOLKLORE MUSEUM VAN KARDAMENA", googleMaps: "https://maps.app.goo.gl/6tX8wP5vY9zR7fWb9", gCalStart: "20250919T193000", gCalEnd: "20250919T213000" },
+            { date: "ZATERDAG 20/09/25 & ZONDAG 21/09/25", time: "20:00", title: "VERTONING VAN KORTE FILMS", description: "Vertoning van de bekroonde films van het 47e Drama Grieks Kortfilmfestival van 2024, in samenwerking met de KOS CINEMACLUB.", location: "BINNENPLAATS VAN HET HISTORISCH & FOLKLORE MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250920T200000", gCalEnd: "20250921T220000" },
+            { date: "ZATERDAG 20/09/25 & ZONDAG 21/09/25", time: "20:30", title: "8E TRADITIONELE MUZIEK- EN DANSBIJEENKOMST VAN KOS-'ANNA SARRI-KARABESINI'", description: "Twee-daags muziek- en dansevenement, in samenwerking met de 'ARION' VRIENDEN VAN MUZIEK VERENIGING. Mede-organisator: REGIO VAN ZUID-EGEÏSCHE ZEE.", location: "EVANGELISTRIAS OPENLUCHTTHEATER, ASFENDIOU", googleMaps: "https://maps.app.goo.gl/rWfA8L3Q8jJqfRzY6", gCalStart: "20250920T203000", gCalEnd: "20250921T223000" },
+            { date: "ZATERDAG 20/09/25 t/m VRIJDAG 26/09/25", time: "18:30-21:00", title: "FOTOTENTOONSTELLING 'EEUWIGE MOMENTEN'", description: "Amateurfotografen Maria Kypraiou en Marina Orfanidou exposeren hun foto's. Hun gemeenschappelijke passie is de kunst van de fotografie en het benadrukken van de natuurlijke en culturele rijkdom van ons land.", location: "KOS MARINA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250920T183000", gCalEnd: "20250926T210000" },
+            { date: "DINSDAG 23/09/25 t/m ZONDAG 05/10/25", time: "18:00-21:00", title: "'GRAFISCHE ROUTES VOOR EEN ATYPISCHE GENESE' - BEELDENDE KUNST TENTOONSTELLING", description: "Dit is een tentoonstelling van monoprints/afdrukken van Giovanni D'Alessandro, in samenwerking met de CULTURELE VERENIGING AIAL LEROU.", location: "HISTORISCH & FOLKLORE MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250923T180000", gCalEnd: "20251005T210000" },
+            { date: "WOENSDAG 24/09/25", time: "19:30", title: "Boekpresentatie: 'Waar het leven druipt' van Dimitra I. Palapani", description: "Metronomos Publicaties. De dichtbundel wordt gepresenteerd door: Yota Kefala en Marina Betta. 'Vrienden en liefhebbers van poëzie' zullen gedichten voordragen.", location: "BINNENPLAATS VAN HET HISTORISCH & FOLKLORE MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250924T193000", gCalEnd: "20250924T213000" },
+            { date: "VRIJDAG 26/09/25 t/m ZONDAG 28/09/25", time: "VRIJ: 17:00-20:00, ZAT: 10:00-13:00 & 17:00-20:00, ZON: 10:00-13:00", title: "'RODANI: EEN ONVERWACHTE ONTMOETING VAN KINDEREN MET BOEKEN'", description: "Rodani is een houten bibliotheek op wielen die kinderen van (5 tot 12 jaar) uitnodigt om de magische wereld van boeken te leren kennen.", location: "KONITSIS PLEIN / ELEFTHERIAS PLEIN / ANTAGORA PLEIN", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250926T170000", gCalEnd: "20250928T130000" },
+            { date: "ZATERDAG 27/09/25", time: "20:00", title: "AVOND GEWIJD AAN WERELDTOERISMEDAG", description: "Muziek- en dansevenement gewijd aan Wereldtoerismedag met traditionele muziek en dansen, in samenwerking met de CULTURELE EN EDUCATIEVE VERENIGING VAN ASFENDIOU 'O THEOKRITOS'.", location: "TIGAKI PLEIN", googleMaps: "https://maps.app.goo.gl/fWzS9wU7Z6qR8pXz5", gCalStart: "20250927T200000", gCalEnd: "20250927T220000" },
+            { date: "ZATERDAG 27/09/25", time: "22:00", title: "CONCERT MET IOULIA KARAPATAKI", description: "Evenement met toegangsprijs.", location: "VOETBALVELD PYLI", googleMaps: "https://maps.app.goo.gl/hG5b8tF7yX5wR8vV9", gCalStart: "20250927T220000", gCalEnd: "20250927T235900" },
+            { date: "ZATERDAG 27/09/25 & ZONDAG 28/09/25", time: "ZAT: 10:00 (SEMINAR), 19:00 (LEZING), ZON: 20:00 (CONCERT)", title: "TWEE-DAGEN BLAASINSTRUMENTEN EVENEMENT-CONCERT MET HET 'IONIAN BRASS QUINTET'", description: "Het twee-daagse evenement omvat een blaasinstrumenten seminar, een toespraak-lezing over de voordelen van deelname van burgers van alle leeftijden aan bands en blaasensembles & een concert met het Blaas Kwintet met werken van diverse muziek, met de nadruk op Griekse componisten. De FILHARMONISCHE ORKEST VAN DE GEMEENTE KOS werkt samen.", location: "HISTORISCH & FOLKLORE MUSEUM VAN KOS / ROMEINS ODEON VAN KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250927T100000", gCalEnd: "20250928T220000" },
+            // Oktober
+            { date: "ZATERDAG 04/10/25", time: "19:30", title: "TRADITIONEEL VARKENSFEEST (CHOIROSFIGIA)", description: "Festival over het thema van de traditionele varkensslacht, met lokale lekkernijen, lokale dansen en livemuziek, in samenwerking met de CULTURELE EN EDUCATIEVE VERENIGING VAN PYLI 'O APELLIS'.", location: "AGIOS NIKOLAOS PLEIN, PYLI", googleMaps: "https://maps.app.goo.gl/vS6X7W9zY4f6s7wE9", gCalStart: "20251004T193000", gCalEnd: "20251004T223000" },
+            { date: "ZONDAG 05/10/25", time: "20:00", title: "MUZIEKEVENEMENT met REBETIKA LIEDEREN", description: "In samenwerking met het KOOR VAN DE VERENIGING VAN LERAARS PRIMAIR ONDERWIJS VAN KOS-NISYROS. Het Koor wordt begeleid door de muzikanten: Ilias Papailias, Periklis Ntonvas, Nikos Arbilias. Tekstbewerking-Koordirigent en accordeon, Christos Gamvrellis.", location: "BINNENPLAATS VAN DE KERK VAN AGIOS GEORGIOS VAN NEA ALIKARNASSOS", googleMaps: "https://maps.app.goo.gl/wJ5p5yQ8zX9wS6vR8", gCalStart: "20251005T200000", gCalEnd: "20251005T220000" },
+            { date: "ZATERDAG 11/10/25 & ZONDAG 12/10/25", time: "ZAT: 18:00-21:00, ZON: 11:00-20:00", title: "HAGIOGRAFIE TENTOONSTELLING", description: "Twee-daagse tentoonstelling van werken van de studenten van de kunstworkshop van de Vereniging, in samenwerking met de CULTURELE EN EDUCATIEVE VERENIGING VAN ASFENDIOU 'O THEOKRITOS'.", location: "KERKELIJK MUSEUM VAN DE HEILIGE METROPOLIS VAN KOS & NISYROS", googleMaps: "https://maps.app.goo.gl/qL8sU53zQ2pG8c187", gCalStart: "20251011T180000", gCalEnd: "20251012T200000" },
+            { date: "ZONDAG 12/10/25 t/m ZONDAG 19/10/25", time: "10:00-12:30 & 18:00-20:00", title: "BEELDENDE KUNST TENTOONSTELLING 'THE VOLT ART PROJECT'", description: "Dit is een tentoonstelling van beeldende kunst met sculpturen, collages, originele esthetiek en technieken, en een kunstinstallatie, bestaande uit een sculptuur en digitale beeldvorming, in samenwerking met de 2e BASISSCHOOL VAN KOS.", location: "HISTORISCH & FOLKLORE MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20251012T100000", gCalEnd: "20251019T200000" },
+            { date: "ZONDAG 12/10/25 t/m ZONDAG 19/10/25", title: "'HIPPOCRATISCHE WEEK'", description: "De 'Hippocratische Week' heeft als doel de internationalisering van de Authentieke Eed van Hippocrates, door de INTERNATIONALE HIPPOCRATISCHE STICHTING VAN KOS.", location: "INTERNATIONAL HIPPOCRATIC+FOUNDATION+OF+KOS", googleMaps: "https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7", gCalStart: "20251012T090000", gCalEnd: "20251019T170000" },
+            { date: "ZONDAG 26/10/25", time: "11:00", title: "LEZING OVER DE EPOS VAN 1940", description: "Spreker: Nikolaos S. Kanellopoulos, universitair docent Militaire Geschiedenis en Analyse van Militaire Operaties aan de Helleense Legeracademie. Er zal ter plaatse een tentoonstelling van periodiek materiaal worden gehouden, in samenwerking met de P.O. KOON 'O FILITAS'.", location: "INTERNATIONALE HIPPOCRATISCHE STICHTING VAN KOS", googleMaps: "https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7", gCalStart: "20251026T110000", gCalEnd: "20251026T130000" },
+            // November
+            { date: "ZONDAG 09/11/25", time: "17:00", title: "PRESENTATIE van het boek 'DE SCHULDIGEN' van auteur NIKOLAOS ARGYROPOULOS", description: "Dimitris Kaimakis, een gepensioneerde officier en lid van de Vereniging, zal over het boek spreken, in samenwerking met de VERENIGING VAN STEREA HELLAS INWONERS VAN KOS 'I ROUMELI'.", location: "CULTUREEL CENTRUM PYLI 'GALINOS FLASKOS'", googleMaps: "https://maps.app.goo.gl/jR8fG5vW9yY7xXzW8", gCalStart: "20251109T170000", gCalEnd: "20251109T190000" },
+            { date: "ZATERDAG 15/11/25", time: "18:00", title: "MUZIEK- EN DANSEVENEMENT EN PRESENTATIE VAN HET BOEK van auteur GIANNIS KALPOUZOS getiteld: 'DRONKAARD. OP DE BODEM VAN KRETA'", description: "Het boek wordt gepresenteerd door: Maria Amiridou en Marina Betta. Deelnemers: Vasilis Kokkalakis en Nikolas Papastamatiou, in samenwerking met de ANTIMACHIA JUNIOR HIGH SCHOOL, de ANTIMACHIA SENIOR HIGH SCHOOL & de HIPPOCRATEIO SENIOR HIGH SCHOOL VAN KOS.", location: "CULTUREEL CENTRUM PYLI 'GALINOS FLASKOS'", googleMaps: "https://maps.app.goo.gl/jR8fG5vW9yY7xXzW8", gCalStart: "20251115T180000", gCalEnd: "20251115T200000" },
+            { date: "ZONDAG 16/11/25", title: "BEZOEKEN AAN OPEN WIJNHUIZEN OP KOS", description: "In het kader van Wereldwijntoerismedag zullen veel wijnhuizen op Kos open zijn voor het publiek, wat de gelegenheid biedt om hun wijnen te leren kennen en een unieke wijntoerisme-ervaring op te doen.", location: "Verschillende wijnhuizen op Kos", googleMaps: "https://www.google.com/maps/search/wineries+in+Kos", gCalStart: "20251116T100000", gCalEnd: "20251116T170000" },
+            { date: "ZATERDAG 29/11/25 & ZONDAG 30/11/25", time: "ZAT: 18:00-21:00, ZON: 11:00-20:00", title: "BEELDENDE KUNST TENTOONSTELLING", description: "Twee-daagse tentoonstelling van werken van de studenten van de kunstworkshop van de Vereniging, in samenwerking met de CULTURELE EN EDUCATIEVE VERENIGING VAN ASFENDIOU 'O THEOKRITOS'.", location: "HISTORISCH & FOLKLORE MUSEUM VAN KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20251129T180000", gCalEnd: "20251130T200000" }
+        ];
+
+        // --- UI & NAVIGATIE ---
+        lucide.createIcons();
+        let currentSection = null;
+        const homeScreen = document.getElementById('home-screen');
+
+        function showSection(sectionId) {
+            homeScreen.style.display = 'none';
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+                currentSection = section;
+                section.scrollTop = 0;
+                
+                if (sectionId === 'events-section') {
+                    const dateFilterInput = document.getElementById('event-date-filter');
+                    if (dateFilterInput) {
+                        dateFilterInput.removeEventListener('change', renderEvents);
+                        dateFilterInput.addEventListener('change', renderEvents);
+                        const today = new Date();
+                        const yyyy = today.getFullYear();
+                        const mm = String(today.getMonth() + 1).padStart(2, '0');
+                        const dd = String(today.getDate()).padStart(2, '0');
+                        dateFilterInput.value = `${yyyy}-${mm}-${dd}`;
+                    }
+                    renderEvents(); 
+                }
+            }
+        }
+
+        function goBack() {
+            if (currentSection) {
+                currentSection.classList.remove('active');
+                currentSection = null;
+            }
+            setTimeout(() => {
+                 homeScreen.style.display = 'block';
+            }, 300);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2000);
+        }
+
+        function copyToClipboard(elementSelector, toastMessage) {
+            const textToCopy = document.querySelector(elementSelector).innerText;
+            const textArea = document.createElement('textarea');
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(toastMessage);
+            } catch (err) {
+                console.error('Kopiëren van tekst mislukt: ', err);
+                showToast('Kopiëren mislukt!');
+            }
+            document.body.removeChild(textArea);
+        }
+        
+        function copyGeneratedText(text, toastMessage) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(toastMessage);
+            } catch (err) {
+                console.error('Kopiëren van tekst mislukt: ', err);
+                showToast('Kopiëren mislukt!');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // --- EVENEMENTEN SECTIE LOGICA ---
+        function generateGoogleCalendarLink(event) {
+            const startDate = event.gCalStart;
+            const endDate = event.gCalEnd;
+            const title = encodeURIComponent(event.title);
+            const description = encodeURIComponent(`${event.description}\n\nLocatie: ${event.location}`);
+            const location = encodeURIComponent(event.location);
+            return `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${description}&location=${location}&sf=true&output=xml`;
+        }
+
+        function generateWhatsAppShareLink(event) {
+            const message = encodeURIComponent(`Bekijk dit evenement: ${event.title} op ${event.date} om ${event.location}. ${event.description} Meer info: ${event.googleMaps}`);
+            return `https://wa.me/?text=${message}`;
+        }
+
+        function renderEvents() {
+            const eventsList = document.getElementById('events-list');
+            const noEventsMessage = document.getElementById('no-events-message');
+            eventsList.innerHTML = '';
+            noEventsMessage.classList.add('hidden');
+
+            const selectedDate = document.getElementById('event-date-filter').value;
+            let filteredEvents = events;
+
+            if (selectedDate) {
+                filteredEvents = events.filter(event => {
+                    const eventStartDate = event.gCalStart ? event.gCalStart.substring(0, 8) : '';
+                    const eventEndDate = event.gCalEnd ? event.gCalEnd.substring(0, 8) : '';
+                    const formattedSelectedDate = selectedDate.replace(/-/g, '');
+                    return formattedSelectedDate >= eventStartDate && formattedSelectedDate <= eventEndDate;
+                });
+            }
+
+            if (filteredEvents.length === 0) {
+                noEventsMessage.classList.remove('hidden');
+            } else {
+                filteredEvents.forEach(event => {
+                    const eventCard = document.createElement('div');
+                    eventCard.className = 'event-card p-6 flex flex-col justify-between';
+                    eventCard.innerHTML = `
+                        <div>
+                            <h2 class="text-2xl font-bold mb-2">${event.title}</h2>
+                            <p class="text-lg mb-2"><i class="far fa-calendar-alt mr-2"></i>${event.date}</p>
+                            <p class="text-gray-700 mb-1"><i class="far fa-clock mr-2"></i>${event.time || ''}</p>
+                            <p class="text-md mb-3"><i class="fas fa-map-marker-alt mr-2"></i>${event.location}</p>
+                            <p class="text-gray-600 text-sm mb-4">${event.description}</p>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between gap-3 mt-4">
+                            <a href="${event.googleMaps}" target="_blank" class="btn-primary flex items-center text-sm">
+                                <i class="fas fa-external-link-alt mr-2"></i> Bekijk op Kaart
+                            </a>
+                            <div class="flex flex-wrap gap-2">
+                                <a href="${generateGoogleCalendarLink(event)}" target="_blank" class="btn-share text-sm">
+                                    <i class="far fa-calendar-plus"></i> Toevoegen aan Kalender
+                                </a>
+                                <a href="${generateWhatsAppShareLink(event)}" target="_blank" class="btn-share text-sm">
+                                    <i class="fab fa-whatsapp"></i> Delen
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    eventsList.appendChild(eventCard);
+                });
+            }
+        }
+
+        // --- GEMINI API HANDLER ---
+        async function callGeminiAPI(prompt) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }]
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorBody = await response.json();
+                    console.error("API Fout:", errorBody);
+                    return `Fout: ${errorBody.error.message}`;
+                }
+
+                const data = await response.json();
+                 if (data.candidates && data.candidates.length > 0 && data.candidates[0].content.parts.length > 0) {
+                    return data.candidates[0].content.parts[0].text;
+                } else {
+                    return "Sorry, ik kon geen antwoord genereren. De API gaf een onverwacht resultaat terug.";
+                }
+            } catch (error) {
+                console.error("Fout bij ophalen:", error);
+                return "Fout: Kon geen verbinding maken met de AI-service. Controleer uw netwerkverbinding.";
+            }
+        }
+
+        function showLoading(containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `<div class="flex justify-center items-center p-8"><div class="loader"></div></div>`;
+        }
+
+        // --- AI FUNCTIES ---
+
+        // 1. AI CONCIERGE
+        const chatContainer = document.getElementById('chat-container');
+        const chatInput = document.getElementById('chat-input');
+        
+        function getWelcomeBookContext() {
+            const sectionsToScan = ['welcome-section', 'essentials-section', 'guide-section', 'transport-section', 'important-section', 'departure-section', 'local-products-section', 'island-hopping-section', 'natural-beauty-section', 'local-recipes-section', 'events-section'];
+            let context = "Welkomstboek Informatie:\n";
+            sectionsToScan.forEach(id => {
+                const section = document.getElementById(id);
+                if (section) {
+                    context += `\n--- Sectie: ${id.replace('-section','')} ---\n`;
+                    context += section.innerText || section.textContent;
+                }
+            });
+            return context;
+        }
+
+        async function handleChatSubmit() {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+
+            chatContainer.innerHTML += `<div class="chat-bubble user">${userMessage}</div>`;
+            chatInput.value = '';
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            chatContainer.innerHTML += `<div id="ai-loading" class="chat-bubble ai"><div class="loader" style="width:24px; height:24px; border-bottom-color: #4a90e2;"></div></div>`;
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            const knowledgeSource = document.querySelector('input[name="knowledgeSource"]:checked').value;
+            let prompt;
+
+            if (knowledgeSource === 'welcomeBook') {
+                const context = getWelcomeBookContext();
+                prompt = `U bent Phaedra, een behulpzame AI-conciërge voor het appartement 'Diamante del Mar Phaedra' in Kos, Griekenland. Beantwoord de vraag van de gebruiker *alleen* op basis van de onderstaande "Welkomstboek Informatie". Als het antwoord niet in de tekst staat, zeg dan "Het spijt me, die informatie staat niet in het welkomstboek." Gebruik geen externe kennis.\n\n${context}\n\nGebruikersvraag: "${userMessage}"`;
+            } else {
+                prompt = `U bent Phaedra, een behulpzame AI-conciërge voor een toerist op Kos, Griekenland. Beantwoord de volgende vraag: "${userMessage}"`;
+            }
+
+            const aiResponse = await callGeminiAPI(prompt);
+            
+            const loadingBubble = document.getElementById('ai-loading');
+            loadingBubble.innerHTML = aiResponse.replace(/\n/g, '<br>');
+            loadingBubble.removeAttribute('id');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleChatSubmit();
+            }
+        });
+
+        // 2. AI RECEPTEN
+        async function generateRecipe() {
+            const outputContainer = document.getElementById('recipe-output');
+            outputContainer.querySelector('div').classList.add('hidden'); // Verberg placeholder
+            showLoading('recipe-output');
+            const prompt = "U bent een creatieve chef-kok gespecialiseerd in de Griekse eilandkeuken. Stel een eenvoudig en heerlijk recept voor met een of meer van deze lokale producten van Kos, Griekenland: Posa kaas (wijnkaas), Kos tijmhoning, lokale olijfolie, verse vis (zoals dorade of zeebaars) en cherrytomaten. Geef het recept een pakkende naam, een korte beschrijving, de lijst met ingrediënten en stapsgewijze instructies. Formatteer de reactie mooi met kopjes.";
+            const response = await callGeminiAPI(prompt);
+            outputContainer.innerHTML = response.replace(/\n/g, '<br>');
+        }
+
+        // 3. AI REISPLAN
+        async function generateItinerary() {
+            const outputContainer = document.getElementById('itinerary-output');
+            const days = document.getElementById('stay-days').value;
+            const interests = document.getElementById('interests').value;
+
+            if (!days || !interests) {
+                outputContainer.innerHTML = `<div class="text-center p-4 text-red-500">Voer het aantal dagen en uw interesses in.</div>`;
+                return;
+            }
+            
+            showLoading('itinerary-output');
+            const guideContext = getWelcomeBookContext();
+            const prompt = `U bent een ervaren reisleider voor Kos, Griekenland. Maak een gepersonaliseerd, dag-voor-dag reisplan voor een ${days}-daagse reis voor een toerist wiens interesses zijn: "${interests}". Gebruik de aanbevelingen van de gastheer uit de onderstaande gids als prioriteit. Stel voor elke dag een ochtendactiviteit, een middagactiviteit en een dinervoorstel voor. Wees creatief en praktisch. Formatteer het antwoord als schone HTML met kopjes (h3, h4), paragrafen (p) en lijsten (ul, li).\n\nGastheergids:\n${guideContext}`;
+            
+            const response = await callGeminiAPI(prompt);
+            outputContainer.innerHTML = response.replace(/\n/g, '<br>');
+        }
+
+        // 4. AI RECENSIE ASSISTENT
+        async function generateReview() {
+            const outputContainer = document.getElementById('review-output');
+            const keywords = document.getElementById('review-keywords').value;
+            
+            if (!keywords) {
+                outputContainer.innerHTML = `<p class="text-red-500 text-sm">Voer ten minste één trefwoord in.</p>`;
+                return;
+            }
+
+            outputContainer.innerHTML = `<div class="flex justify-center items-center p-4"><div class="loader"></div></div>`;
+            
+            const prompt = `U bent een behulpzame assistent voor een hotelgast. Schrijf op basis van deze trefwoorden: "${keywords}", een vriendelijke en positieve recensie voor een vakantiewoning. Laat het natuurlijk en persoonlijk klinken. De accommodatie heet 'Diamante del Mar Phaedra'. De recensie moet ongeveer 3-5 zinnen lang zijn.`;
+
+            const response = await callGeminiAPI(prompt);
+            
+            const reviewText = response;
+            
+            outputContainer.innerHTML = `
+                <textarea id="generated-review-text" rows="5" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">${reviewText}</textarea>
+                <button onclick="copyGeneratedText(document.getElementById('generated-review-text').value, 'Recensie gekopieerd!')" class="mt-2 w-full bg-gray-500 text-white px-3 py-1 rounded-lg text-sm font-semibold hover:bg-gray-600">Kopieer Recensie</button>
+            `;
+        }
+
+    </script>
+</body>
+</html>
