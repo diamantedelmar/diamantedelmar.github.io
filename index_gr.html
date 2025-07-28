@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Καλώς ήρθατε στο Diamante del Mar Phaedra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .section-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f7fafc; /* light gray */
+            z-index: 50;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .section-screen.active {
+            transform: translateX(0);
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .grid-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 1rem;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid rgba(226, 232, 240, 1);
+            transition: all 0.2s ease-in-out;
+        }
+        .grid-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .section-header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+        .prose-custom p, .prose-custom li {
+            color: #4A5568;
+        }
+        .prose-custom h3 {
+            color: #2D3748;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background-color: #4a90e2; /* Blue */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            background-color: #357ABD;
+        }
+        .event-card {
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        .btn-share {
+            background-color: #6a7fdb; /* Purple-blue */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-share:hover {
+            background-color: #536AC6;
+        }
+        /* Loading Spinner */
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #FFF;
+            border-bottom-color: #4a90e2;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Chat UI styles */
+        .chat-bubble {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            margin-bottom: 0.5rem;
+            word-wrap: break-word;
+        }
+        .chat-bubble.user {
+            background-color: #4a90e2;
+            color: white;
+            border-bottom-right-radius: 0.25rem;
+            align-self: flex-end;
+        }
+        .chat-bubble.ai {
+            background-color: #e2e8f0;
+            color: #2d3748;
+            border-bottom-left-radius: 0.25rem;
+            align-self: flex-start;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div id="app" class="max-w-md mx-auto min-h-screen bg-gray-100">
+        
+        <div id="home-screen">
+            <header class="relative">
+                <img src="https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop" 
+                     onerror="this.onerror=null;this.src='https://diamantedelmar.github.io/phaedra.png';" 
+                     alt="Φαίδρα" class="w-full h-60 object-cover">
+                <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-gray-100 to-transparent"></div>
+            </header>
+            <div class="p-4 -mt-10">
+                 <div class="text-center mb-6 bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg">
+                    <h1 class="text-3xl font-bold text-gray-800">Βιβλίο Υποδοχής</h1>
+                </div>
+                <main>
+                    <div class="grid grid-cols-3 gap-4">
+                        <button onclick="showSection('ai-concierge-section')" class="grid-button col-span-1">
+                            <i data-lucide="sparkles" class="w-10 h-10 text-purple-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Φαίδρα</span>
+                        </button>
+                        <button onclick="showSection('ai-itinerary-section')" class="grid-button col-span-1">
+                            <i data-lucide="calendar-check" class="w-10 h-10 text-green-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">AI Πρόγραμμα</span>
+                        </button>
+                        
+                        <button onclick="showSection('welcome-section')" class="grid-button">
+                            <i data-lucide="sun" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Καλωσόρισμα</span>
+                        </button>
+                        <button onclick="showSection('essentials-section')" class="grid-button">
+                            <i data-lucide="key-round" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Διαμέρισμα</span>
+                        </button>
+                        <button onclick="showSection('guide-section')" class="grid-button">
+                            <i data-lucide="map" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Οδηγός Νησιού</span>
+                        </button>
+                        <button onclick="showSection('natural-beauty-section')" class="grid-button">
+                            <i data-lucide="leaf" class="w-8 h-8 text-green-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Φυσική Ομορφιά</span>
+                        </button>
+                        <button onclick="showSection('events-section')" class="grid-button">
+                            <i data-lucide="calendar-days" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Εκδηλώσεις</span>
+                        </button>
+                        <button onclick="showSection('local-products-section')" class="grid-button">
+                            <i data-lucide="shopping-bag" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Τοπικά Προϊόντα</span>
+                        </button>
+                        <button onclick="showSection('local-recipes-section')" class="grid-button">
+                            <i data-lucide="utensils-crossed" class="w-8 h-8 text-orange-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Τοπικές Συνταγές</span>
+                        </button>
+                        <button onclick="showSection('island-hopping-section')" class="grid-button">
+                            <i data-lucide="sailboat" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Εκδρομές</span>
+                        </button>
+                        <button onclick="showSection('transport-section')" class="grid-button">
+                            <i data-lucide="bus" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Μετακινήσεις</span>
+                        </button>
+                        <button onclick="showSection('important-section')" class="grid-button">
+                            <i data-lucide="siren" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Σημαντικά</span>
+                        </button>
+                        <button onclick="showSection('departure-section')" class="grid-button">
+                            <i data-lucide="log-out" class="w-8 h-8 text-blue-500 mb-2"></i>
+                            <span class="font-semibold text-gray-700 text-sm">Αναχώρηση</span>
+                        </button>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <div id="ai-concierge-section" class="section-screen flex flex-col h-full">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Φαίδρα</h2>
+            </header>
+            <div class="p-4 flex-grow overflow-y-auto flex flex-col" id="chat-container">
+                <div class="chat-bubble ai">Γεια σας! Είμαι η Φαίδρα, ο AI Concierge σας. Πώς μπορώ να σας βοηθήσω σήμερα;</div>
+            </div>
+            <div class="p-4 bg-white border-t">
+                <div class="mb-2">
+                    <label class="text-sm font-medium text-gray-600">Πηγή Γνώσης:</label>
+                    <div class="flex items-center space-x-4 mt-1">
+                        <label class="flex items-center">
+                            <input type="radio" name="knowledgeSource" value="welcomeBook" class="form-radio text-blue-500" checked>
+                            <span class="ml-2 text-sm text-gray-700">Βιβλίο Υποδοχής</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="knowledgeSource" value="webSearch" class="form-radio text-blue-500">
+                            <span class="ml-2 text-sm text-gray-700">Αναζήτηση Ιστού</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <input type="text" id="chat-input" class="flex-grow border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ρωτήστε τη Φαίδρα μια ερώτηση...">
+                    <button onclick="handleChatSubmit()" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 focus:outline-none">
+                        <i data-lucide="send" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="ai-itinerary-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">AI Σχεδιασμός Προγράμματος</h2>
+            </header>
+            <div class="p-6 space-y-4">
+                <div class="card p-4">
+                    <h3 class="font-semibold text-lg mb-2">Δημιουργήστε το τέλειο ταξίδι σας</h3>
+                    <div>
+                        <label for="stay-days" class="block text-sm font-medium text-gray-700">Πόσες μέρες θα μείνετε;</label>
+                        <input type="number" id="stay-days" value="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
+                    </div>
+                    <div class="mt-4">
+                        <label for="interests" class="block text-sm font-medium text-gray-700">Ποια είναι τα ενδιαφέροντά σας;</label>
+                        <textarea id="interests" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="π.χ. παραλίες, ιστορία, φαγητό, πεζοπορία, νυχτερινή ζωή, χαλάρωση..."></textarea>
+                    </div>
+                    <button onclick="generateItinerary()" class="mt-4 w-full btn-primary">Δημιουργία Προγράμματος</button>
+                </div>
+                <div id="itinerary-output" class="prose-custom space-y-4">
+                    <div class="text-center p-4 text-gray-500">Το εξατομικευμένο πρόγραμμά σας θα εμφανιστεί εδώ.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="departure-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Μέχρι την επόμενη φορά...</h2>
+            </header>
+            <div class="p-6 prose-custom">
+                <h3 class="text-2xl font-bold mb-4">Ένας θερμός αποχαιρετισμός</h3>
+                <p class="mb-4">Καθώς ο χρόνος σας στο Diamante del Mar Phaedra και στο όμορφο νησί της Κω πλησιάζει στο τέλος του, θέλουμε να σας ευχαριστήσουμε ειλικρινά που επιλέξατε να μείνετε μαζί μας. Ελπίζουμε πραγματικά να περάσατε υπέροχες, ξεκούραστες και αξέχαστες διακοπές.</p>
+                
+                <div class="card my-6 bg-blue-50 p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="check-circle" class="w-5 h-5 mr-2 text-blue-500"></i>Υπενθύμιση Αναχώρησης</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li>Η ώρα αναχώρησης είναι το αργότερο στις <strong>11:00 π.μ.</strong>.</li>
+                        <li>Παρακαλούμε αφήστε τα <strong>κλειδιά στο κλειδοθήκη</strong>.</li>
+                        <li>Βεβαιωθείτε ότι όλα τα προσωπικά σας αντικείμενα είναι συσκευασμένα.</li>
+                        <li>Σβήστε όλα τα φώτα και τις μονάδες κλιματισμού.</li>
+                    </ul>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2">Μοιραστείτε την εμπειρία σας</h3>
+                <p>Εάν απολαύσατε τη διαμονή σας, θα ήμασταν απίστευτα ευγνώμονες αν μπορούσατε να αφήσετε μια κριτική. Τα σχόλιά σας βοηθούν τους μελλοντικούς ταξιδιώτες να ανακαλύψουν το μικρό μας κομμάτι παραδείσου.</p>
+                
+                <div class="card p-4 my-6 not-prose">
+                     <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="edit-3" class="w-5 h-5 mr-2 text-purple-500"></i>AI Βοηθός Κριτικών</h3>
+                     <p class="text-sm text-gray-600 mb-2">Χρειάζεστε βοήθεια για να γράψετε την κριτική σας; Σημειώστε μερικές λέξεις-κλειδιά και αφήστε τον AI βοηθό μας να σας βοηθήσει.</p>
+                     <div>
+                        <label for="review-keywords" class="block text-sm font-medium text-gray-700">Λέξεις-κλειδιά για τη διαμονή σας:</label>
+                        <textarea id="review-keywords" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="π.χ. υπέροχη θέα, καθαρό, εξαιρετική τοποθεσία, φιλικός οικοδεσπότης..."></textarea>
+                    </div>
+                    <button onclick="generateReview()" class="mt-4 w-full bg-purple-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-600">Δημιουργία Κριτικής</button>
+                    <div id="review-output" class="mt-4 space-y-2">
+                        </div>
+                </div>
+
+                <p>Μπορείτε να δημοσιεύσετε την κριτική σας στην πλατφόρμα που χρησιμοποιήσατε για την κράτηση (Booking.com ή Airbnb) ή στο <a href="https://g.page/r/CbUXM_AzUnc5EAE/review" target="_blank" class="text-blue-600 hover:underline">προφίλ μας στο Google Business</a>.</p>
+                
+                <h3 class="text-xl font-semibold mt-6 mb-2">Μείνετε Συνδεδεμένοι</h3>
+                <p>Ακολουθήστε μας στο Instagram <a href="https://www.instagram.com/diamantedelmar.phaedra" target="_blank" class="text-blue-600 hover:underline">@diamantedelmar.phaedra</a> ή επικοινωνήστε μαζί μας για μελλοντικές διαμονές στο diamantedelmarphaedra@gmail.com.</p>
+
+                <p class="mt-8">Σας ευχαριστούμε και πάλι. Σας ευχόμαστε ασφαλές και ευχάριστο ταξίδι!</p>
+            </div>
+        </div>
+
+        <div id="welcome-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Καλώς ήρθατε στον Παράδεισο!</h2>
+            </header>
+            <div class="p-6 prose-custom">
+                <h3 class="text-2xl font-bold mb-4">Καλώς ορίσατε!</h3>
+                <p class="mb-4">Καλώς ήρθατε στην Κω, και καλώς ήρθατε στο Diamante del Mar Phaedra. Είμαστε απόλυτα ενθουσιασμένοι που σας φιλοξενούμε σε αυτό το μαγευτικό νησί των Δωδεκανήσων. Πρόσφατα ανακαινισμένο και σχεδιασμένο με γνώμονα το στυλ και την άνεση, ελπίζουμε το σπίτι μας να αποτελέσει το τέλειο καταφύγιό σας από όπου θα εξερευνήσετε το συναρπαστικό μείγμα αρχαίας ιστορίας, ηλιόλουστων παραλιών και ζωντανής νησιωτικής ζωής που κάνει την Κω τόσο ξεχωριστή.</p>
+                <p class="mb-4">Η Κως σας προσκαλεί να επιβραδύνετε, να αναπνεύσετε τον αέρα της θάλασσας, να περιπλανηθείτε σε χιλιετίες ιστορίας και να απολαύσετε τις απλές χαρές. Ελπίζουμε να την ερωτευτείτε με τη μοναδική της γοητεία, όπως ακριβώς και εμείς.</p>
+                <h3 class="text-xl font-semibold mt-6 mb-2">Σχετικά με αυτόν τον Οδηγό</h3>
+                <p>Σκεφτείτε αυτό το βιβλίο ως την επιμελημένη εισαγωγή σας στο να ζήσετε σαν ένας κομψός ντόπιος. Συγκεντρώσαμε βασικές πληροφορίες για να σας βοηθήσουμε να εγκατασταθείτε αβίαστα, μαζί με τις προσωπικές μας προτάσεις για να ανακαλύψετε τα κυριότερα σημεία του νησιού. Τώρα, χαλαρώστε, ξεκουραστείτε και αφήστε την ιστορία σας στην Κω να ξεκινήσει!</p>
+            </div>
+        </div>
+
+        <div id="essentials-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Πληροφορίες Διαμερίσματος</h2>
+            </header>
+            <div class="p-6 space-y-6">
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="map-pin" class="w-5 h-5 mr-2 text-blue-500"></i>Διεύθυνση</h3>
+                    <p class="text-gray-600">Diamante Del Mar Phaedra</p>
+                    <p class="text-gray-600">Σοφοκλή Βενιζέλου 54</p>
+                    <p class="text-gray-600">Πόλη Κω, 853 00</p>
+                    <a href="https://maps.google.com/?q=Sophokli+Venizelou+54,+Kos+853+00" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Άνοιγμα στους Χάρτες <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="clock" class="w-5 h-5 mr-2 text-blue-500"></i>Check-in & Check-out</h3>
+                    <p class="text-gray-600"><strong>Check-in:</strong> Μετά τις 16:00 (4:00 μ.μ.)</p>
+                    <p class="text-gray-600"><strong>Κωδικός κλειδοθήκης:</strong> 1723</p>
+                    <p class="text-gray-600 mt-2"><strong>Check-out:</strong> Μέχρι τις 11:00 π.μ.</p>
+                    <p class="text-gray-500 text-sm mt-1">Παρακαλούμε επιστρέψτε τα κλειδιά στο κλειδοθήκη.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="wifi" class="w-5 h-5 mr-2 text-blue-500"></i>Πρόσβαση Wi-Fi</h3>
+                    <p class="text-gray-600"><strong>Δίκτυο:</strong> Phaedra</p>
+                    <div class="flex justify-between items-center mt-1">
+                        <p class="text-gray-600"><strong>Κωδικός:</strong> <span id="wifi-password">Phaedra!22420@</span></p>
+                        <button onclick="copyToClipboard('#wifi-password', 'Ο κωδικός αντιγράφηκε!')" class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm font-semibold hover:bg-blue-600">Αντιγραφή</button>
+                    </div>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="home" class="w-5 h-5 mr-2 text-blue-500"></i>Κανόνες Σπιτιού</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li><strong>Απαγορεύεται αυστηρά το κάπνισμα</strong> εντός του διαμερίσματος.</li>
+                        <li>Δεν επιτρέπονται τα <strong>κατοικίδια</strong>.</li>
+                        <li>Ώρες κοινής ησυχίας: <strong>22:00 - 07:00</strong>.</li>
+                        <li>Δεν επιτρέπονται <strong>πάρτι</strong>, εκδηλώσεις ή μεγάλες συγκεντρώσεις.</li>
+                        <li>Μόνο οι εγγεγραμμένοι επισκέπτες επιτρέπεται να διανυκτερεύσουν.</li>
+                    </ul>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="book-open" class="w-5 h-5 mr-2 text-blue-500"></i>Εγχειρίδια Συσκευών</h3>
+                    <p class="text-gray-600 mb-4">Σαρώστε τον κωδικό QR με την κάμερα του τηλεφώνου σας για να δείτε το εγχειρίδιο κάθε συσκευής.</p>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div>
+                            <p class="font-medium text-gray-700">Φούρνος Μικροκυμάτων</p>
+                            <a href="https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/8897453600-GMI-12311-B/en-US-8897453600-20221020135181-User-Manual---File-Longsv-SE.pdf"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/8897453600-GMI-12311-B/en-US-8897453600-20221020135181-User-Manual---File-Longsv-SE.pdf" alt="QR Κωδικός για Εγχειρίδιο Φούρνου Μικροκυμάτων" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-700">Φούρνος</p>
+                           <a href="https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/7768282928-Edition-75-Backofenset/en-US-7768282928-202311021237674-User-Manual---File-Longen-US.pdf"> <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.grundig.com/content/dam/rainbow-grundig-greece-gr-aem/rainbow-grundig-greece-gr-aemProductCatalog/product-documents/7768282928-Edition-75-Backofenset/en-US-7768282928-202311021237674-User-Manual---File-Longen-US.pdf" alt="QR Κωδικός για Εγχειρίδιο Φούρνου" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-700">Μηχανή καφέ Nespresso</p>
+                            <a href="https://www.nespresso.com/shared_res/manuals/essenza-mini/2017/UM_NESPRESSO_ESSENZA_MINI_KRUPS_PROD_WEB_2017_02_20.pdf"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.nespresso.com/shared_res/manuals/essenza-mini/2017/UM_NESPRESSO_ESSENZA_MINI_KRUPS_PROD_WEB_2017_02_20.pdf" alt="QR Κωδικός για Εγχειρίδιο Nespresso" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-700">Πλυντήριο Ρούχων</p>
+                            <a href="https://morris.gr/wp-content/uploads/2023/12/Instructions-manual-WIW-81411BI.pdf"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://morris.gr/wp-content/uploads/2023/12/Instructions-manual-WIW-81411BI.pdf" alt="QR Κωδικός για Εγχειρίδιο Πλυντηρίου Ρούχων" class="mx-auto mt-1 rounded-lg"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="guide-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Οδηγός Νησιού</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <div class="card overflow-hidden p-0 bg-blue-50 border border-blue-200">
+                    <img src="https://images.unsplash.com/photo-1551028150-64b9f398f67b?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://xasapaki.gr/wp-content/uploads/2023/05/DSC01818-scaled.jpg';" alt="Μια τέλεια ψημένη μπριζόλα" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2 text-blue-800 flex items-center"><i data-lucide="star" class="w-6 h-6 mr-2 text-yellow-500 fill-current"></i>Κορυφαία Επιλογή του Οικοδεσπότη: Χασαπάκι</h3>
+                        <p class="text-blue-700 mb-3">Για ένα αξέχαστο γεύμα, επισκεφθείτε το Χασαπάκι. Είναι ένα μοναδικό χασάπικο και steakhouse όπου επιλέγετε το κομμάτι του κρέατος και το ψήνουν στην εντέλεια. Τα μπιφτέκια τους επαινούνται ως τα καλύτερα στο νησί και τα ορεκτικά όπως το μοσχαρίσιο καρπάτσιο επίσης αποσπούν διθυραμβικές κριτικές!</p>
+                        <div class="flex space-x-2">
+                           <a href="https://xasapaki.gr/" target="_blank" class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700">Επισκεφθείτε την Ιστοσελίδα</a>
+                           <a href="https://maps.app.goo.gl/hR6NfGgGf8E8qZ6f7" target="_blank" class="inline-flex items-center bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300">Προβολή στον Χάρτη</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Φαγητό & Καφές</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1559305459-49de9734d355?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://imageproxy.wolt.com/assets/67335dc042b21b5c7ee59154';" alt="Ένα νόστιμο brunch" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Alchimion & The Cup</h4><p class="text-gray-600 mt-1">Ακριβώς δίπλα σας, το Alchimion προσφέρει χαλαρό brunch (Καγιανάς, Σακσούκα) ενώ το The Cup σερβίρει εξαιρετικό καφέ "τρίτου κύματος".</p><a href="https://maps.app.goo.gl/3A9iEa2uUvY4gJgw5" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Προβολή στον Χάρτη <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1541592106381-b5863c023904?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.athinorama.gr/Content/ImagesDatabase/p/750x422/crop/both/a5/a5468d17cae94a7dad807007ceefddf8.jpg?quality=81&404=default&v=4';" alt="Φρέσκα ζυμαρικά με θαλασσινά" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Μπαρμπούνι</h4><p class="text-gray-600 mt-1">Κορυφαία επιλογή για φρέσκα θαλασσινά δίπλα στο νερό, κοντά στο λιμάνι. Επαινείται για πιάτα όπως οι κροκέτες μπακαλιάρου και οι ταλιατέλες με μελάνι σουπιάς. Κάντε κράτηση εκ των προτέρων για τραπέζι δίπλα στο νερό.</p><a href="https://maps.app.goo.gl/kG1xQoD7bE2v5z8E7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Προβολή στον Χάρτη <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1622234994112-c94831e67991?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://media-01.imu.nl/storage/ourplanetinmylens.com/21978/restaurants-kos-greece-patriko-800x533.jpg';" alt="Μια ποικιλία ελληνικών μεζέδων" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Πατρικό</h4><p class="text-gray-600 mt-1">Ένα οικογενειακό διαμάντι για αυθεντικούς ελληνικούς μεζέδες. Δοκιμάστε τη ψητή φέτα με μέλι ή τη χαρακτηριστική Πατρική Σαλάτα τους.</p><a href="https://maps.app.goo.gl/C2zY6G4kS4wSg4Rk7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Προβολή στον Χάρτη <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1574929823616-1937a4d33595?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://platanoskos.gr/wp-content/uploads/2024/07/DSC03696-scaled.jpg';" alt="Δείπνο κάτω από ένα μεγάλο πλάτανο" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Εστιατόριο Πλάτανος</h4><p class="text-gray-600 mt-1">Για ένα γεύμα γεμάτο ιστορία και ρομαντισμό, δειπνήστε κάτω από τον θρυλικό Πλάτανο του Ιπποκράτη. Προσφέρει υψηλής ποιότητας φαγητό και υπέροχη ατμόσφαιρα.</p><a href="https://maps.app.goo.gl/rWfA8L3Q8jJqfRzY6" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Προβολή στον Χάρτη <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Παραλίες</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1625450438349-5975e50cf582?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://media.jet2.com/is/image/jet2/313976-kgs_lambi_0813_02_ps?$Original-Dynamic(max1280x1280)$&wid=1920&hei=500&fit=crop%2C1&dpr=off';" alt="Αμμώδης παραλία με ομπρέλες" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Παραλία Λάμπη</h4><p class="text-gray-600 mt-1">Ο πλησιέστερος γείτονάς σας (200μ μακριά)! Μια δημοφιλής, μεγάλη αμμώδης έκταση με ρηχά νερά, καλά οργανωμένη με μπαρ και θαλάσσια σπορ.</p><a href="https://maps.app.goo.gl/ggrD1a8D9b8vC73D9" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Προβολή στον Χάρτη <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531122-8353e813a8c5?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.jet2holidays.com/-/media/destination%20guide/greece/kos/cfu_agios_stefanos_beach_1497481107_getty_1023_01_rgb-136-dpi-for-web-min.jpg?h=500&w=1920&crop=1&hash=6B2D4846664312303EC275100A9440EB%201024w';" alt="Παραλία με εκκλησία σε ένα νησάκι" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Άγιος Στέφανος</h4><p class="text-gray-600 mt-1">Αναμφισβήτητα η πιο φωτογενής παραλία της Κω, με το νησάκι της Καστρίας και τα ερείπια βασιλικών του 5ου αιώνα ακριβώς δίπλα στην ακτή.</p><a href="https://maps.app.goo.gl/qL8sU53zQ2pG8c187" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Προβολή στον Χάρτη <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1617066808546-32d56a237190?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.reckonasbavi.cz/wp-content/uploads/2023/08/Therma-beach-Embros-prirodni-termalni-lazne-na-ostrove-Kos.jpg.jpg';" alt="Βραχώδης παραλία με θερμές πηγές" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Παραλία Θέρμα</h4><p class="text-gray-600 mt-1">Μια μοναδική φυσική εμπειρία σπα όπου θερμές πηγές με θεραπευτικές ιδιότητες ρέουν στη θάλασσα. Διαθέτει ηφαιστειακή μαύρη βοτσαλωτή άμμο.</p><a href="https://maps.app.goo.gl/8T1JvU5nUa1wP9W86" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Προβολή στον Χάρτη <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                         <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1507525428034-b723a996f329?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.vacanzekos.com/wp-content/uploads/2016/02/paradise-beach.jpg';" alt="Μια εκπληκτική αμμώδης παραλία με τιρκουάζ νερά" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Παραλία Paradise</h4><p class="text-gray-600 mt-1">Ανταποκρίνεται στο όνομά της με χρυσή άμμο και ρηχά, ήρεμα νερά, κάνοντας αυτή την παραλία ιδανική για οικογένειες. Μπορεί να έχει πολύ κόσμο.</p><a href="https://maps.app.goo.gl/VjP7zQjR9eG8m4RCA" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Προβολή στον Χάρτη <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Ιστορία & Χωριά</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531233-a3a2de7c858e?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.vacanzegreche.com/public/img/data/2019101794859527_asklepion-isola-di-kos.jpg'" alt="Το Ασκληπιείο" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Το Ασκληπιείο</h4><p class="text-gray-600 mt-1">Ο σημαντικότερος αρχαιολογικός χώρος του νησιού. Ένα ιερό θεραπείας που συνδέεται με τον Ιπποκράτη, τον "Πατέρα της Σύγχρονης Ιατρικής".</p><a href="https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Προβολή στον Χάρτη <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1540899979346-a4c4987053e4?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://as1.ftcdn.net/jpg/02/95/44/86/1000_F_295448668_PNfl3bFQOS2eT3vWez1r1MlrlhyB0TFF.webp';" alt="Ηλιοβασίλεμα σε ένα ελληνικό χωριό" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Χωριό Ζια</h4><p class="text-gray-600 mt-1">Ένα απόλυτα απαραίτητο ορεινό χωριό για επισκέψεις, για εκπληκτική πανοραμική θέα στο ηλιοβασίλεμα. Το εστιατόριο Ορομέδων συνιστάται ανεπιφύλακτα.</p><a href="https://maps.app.goo.gl/9z4Y2E3u8vX5F5vJ8" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Προβολή στον Χάρτη <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531065-a8a4f0b2f5d7?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://a.travel-assets.com/findyours-php/viewfinder/images/res70/73000/73702-Kos-Castle.jpg';" alt="Ένα πέτρινο κάστρο δίπλα στη θάλασσα" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Κάστρο Νεραντζιάς</h4><p class="text-gray-600 mt-1">Ένα εντυπωσιακό κάστρο των Ιπποτών του 15ου αιώνα που φρουρεί την είσοδο του λιμανιού. Ελέγξτε την κατάσταση αποκατάστασης πριν την επίσκεψη.</p><a href="https://maps.app.goo.gl/6pCgxXmUqB8qgU7E7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Προβολή στον Χάρτη <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="natural-beauty-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Φυσική Ομορφιά της Κω</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <p class="text-gray-700 mb-4">Για το σχετικά μικρό της μέγεθος, η Κως είναι ένα νησί απίστευτης φυσικής ποικιλομορφίας. Από αλυκές και υγροτόπους μέχρι ηφαιστειακές πηγές και καταπράσινα δάση, υπάρχουν τόσα πολλά να εξερευνήσετε πέρα ​​από τις παραλίες.</p>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/02/Alykes-Wetlands-Tigaki-Kos-003.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/a7d8de/ffffff?text=Αλυκή+Τιγκάκι';" alt="Αλυκή Τιγκάκι" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Αλυκή Τιγκάκι</h3>
+                        <p class="text-gray-600 mb-2">Ένας εκπληκτικός παραθαλάσσιος υγροβιότοπος που κάποτε χρησιμοποιούνταν για την παραγωγή αλατιού. Σήμερα, είναι ένα προστατευόμενο φυσικό καταφύγιο, γεμάτο ζωή, ειδικά το φθινόπωρο και τον χειμώνα, όταν γίνεται καταφύγιο για μεταναστευτικά πουλιά όπως τα φλαμίνγκο.</p>
+                        <a href="https://maps.app.goo.gl/3fTcvZ6gC4M1rCqq8" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Προβολή στον Χάρτη <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/01/Dikeos-mount-Kos-001.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/a7d8de/ffffff?text=Όρος+Δίκαιος';" alt="Όρος Δίκαιος" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Όρος Δίκαιος</h3>
+                        <p class="text-gray-600 mb-2">Με ύψος 846 μέτρα, το όρος Δίκαιος προσφέρει εκπληκτική πανοραμική θέα στην Κω και τα γύρω νησιά. Οι πλαγιές καλύπτονται από πευκοδάση και πλατάνια, καθιστώντας το έναν υπέροχο προορισμό για πεζοπορία, ειδικά την άνοιξη όταν ανθίζουν τα αγριολούλουδα.</p>
+                         <a href="https://maps.app.goo.gl/2k5y2E9L4eXjS9vP8" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Προβολή στον Χάρτη <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/02/Plaka-forest-kos-001.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/a7d8de/ffffff?text=Δάσος+Πλάκας';" alt="Δάσος Πλάκας" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Δάσος Πλάκας</h3>
+                        <p class="text-gray-600 mb-2">Ένα όμορφο πευκοδάσος κοντά στην Αντιμάχεια, φημισμένο για τους κατοίκους παγώνια και γάτες. Είναι μια δροσερή, σκιερή όαση ιδανική για πικνίκ, έναν ήπιο περίπατο και να απολαύσετε λίγη ηρεμία μακριά από τη ζέστη του καλοκαιριού.</p>
+                        <a href="https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Προβολή στον Χάρτη <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="local-recipes-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Τοπικές Συνταγές</h2>
+            </header>
+            <div class="p-6 space-y-8 prose-custom">
+                <p class="text-gray-700 mb-4">Βγείτε από τη ζώνη άνεσής σας και δοκιμάστε κάτι καινούργιο, εκμεταλλευόμενοι πλήρως τις διακοπές σας στο νησί της Κω με αυτά τα παραδοσιακά πιάτα!</p>
+
+                <div class="card p-6">
+                    <h3 class="font-semibold text-xl mb-2 text-gray-800">Πλιγούρι με Χοιρινό</h3>
+                    <p class="mb-4">Ένα χορταστικό και παραδοσιακό πιάτο όπου το πλιγούρι σιγομαγειρεύεται με τρυφερό χοιρινό, δημιουργώντας ένα πλούσιο και γευστικό γεύμα που αποτελεί βασικό στοιχείο στα τοπικά σπίτια.</p>
+                    <h4 class="font-semibold text-lg mb-2">Υλικά:</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>500γρ χοιρινό, κομμένο σε μικρούς κύβους</li>
+                        <li>1 φλιτζάνι χοντρό πλιγούρι</li>
+                        <li>1 μεγάλο κρεμμύδι, ψιλοκομμένο</li>
+                        <li>2 σκελίδες σκόρδο, ψιλοκομμένο</li>
+                        <li>400γρ ψιλοκομμένες ντομάτες (κονσέρβα ή φρέσκες)</li>
+                        <li>2 κουταλιές της σούπας ελαιόλαδο</li>
+                        <li>2,5 φλιτζάνια ζωμό λαχανικών ή κοτόπουλου</li>
+                        <li>Αλάτι και φρεσκοτριμμένο μαύρο πιπέρι κατά βούληση</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mb-2">Οδηγίες:</h4>
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li>Ζεστάνετε το ελαιόλαδο σε μια μεγάλη κατσαρόλα σε μέτρια προς δυνατή φωτιά. Προσθέστε το χοιρινό και μαγειρέψτε μέχρι να ροδίσει από όλες τις πλευρές.</li>
+                        <li>Προσθέστε το ψιλοκομμένο κρεμμύδι και μαγειρέψτε μέχρι να μαλακώσει, περίπου 5 λεπτά. Προσθέστε το σκόρδο και μαγειρέψτε για ένα ακόμη λεπτό μέχρι να μυρίσει.</li>
+                        <li>Ξεπλύνετε το πλιγούρι κάτω από κρύο νερό και προσθέστε το στην κατσαρόλα. Ανακατέψτε για ένα λεπτό για να το καβουρδίσετε ελαφρά.</li>
+                        <li>Ρίξτε τις ψιλοκομμένες ντομάτες και το ζωμό. Αλατοπιπερώστε και αφήστε να πάρει βράση.</li>
+                        <li>Μειώστε τη φωτιά στο χαμηλό, σκεπάστε την κατσαρόλα και αφήστε να σιγοβράσει για περίπου 20-25 λεπτά, ή μέχρι το πλιγούρι να μαλακώσει και να απορροφήσει το μεγαλύτερο μέρος του υγρού.</li>
+                        <li>Αφήστε το να σταθεί για 5-10 λεπτά εκτός φωτιάς πριν το ανακατέψετε με ένα πιρούνι και σερβίρετε.</li>
+                    </ol>
+                    <a href="https://www.youtube.com/watch?v=VzTF-o2irHg" target="_blank" class="inline-flex items-center mt-4 text-blue-600 font-semibold hover:underline">Παρακολουθήστε εκπαιδευτικό βίντεο <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="font-semibold text-xl mb-2 text-gray-800">Ντολμαδάκια (Γεμιστά Αμπελόφυλλα)</h3>
+                    <p class="mb-4">Τρυφερά αμπελόφυλλα τυλιγμένα γύρω από μια γέμιση ρυζιού και φρέσκων βοτάνων. Μπορούν να σερβιριστούν ζεστά ή κρύα, συχνά με μια φέτα λεμόνι και μια κουταλιά γιαούρτι.</p>
+                    <h4 class="font-semibold text-lg mb-2">Υλικά:</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>1 βάζο (περίπου 250γρ) αμπελόφυλλα σε άλμη</li>
+                        <li>1 φλιτζάνι ρύζι κοντόσπερμο, ξεπλυμένο</li>
+                        <li>1 μεγάλο κρεμμύδι, ψιλοκομμένο</li>
+                        <li>1/2 φλιτζάνι ψιλοκομμένο φρέσκο άνηθο</li>
+                        <li>1/2 φλιτζάνι ψιλοκομμένο φρέσκο δυόσμο</li>
+                        <li>1/2 φλιτζάνι ελαιόλαδο, μοιρασμένο</li>
+                        <li>2 φλιτζάνια ζεστό νερό</li>
+                        <li>Χυμός από 2 λεμόνια</li>
+                        <li>Αλάτι και πιπέρι κατά βούληση</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mb-2">Οδηγίες:</h4>
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li>Διαχωρίστε προσεκτικά τα αμπελόφυλλα και ξεπλύντε τα καλά. Ζεματίστε τα σε βραστό νερό για 3-5 λεπτά για να μαλακώσουν, στη συνέχεια στραγγίστε τα.</li>
+                        <li>Σε ένα μπολ, ανακατέψτε το ρύζι, το κρεμμύδι, τον άνηθο, τον δυόσμο, το μισό ελαιόλαδο, το χυμό από 1 λεμόνι, αλάτι και πιπέρι.</li>
+                        <li>Απλώστε ένα αμπελόφυλλο (με την λαμπερή πλευρά προς τα κάτω). Τοποθετήστε ένα κουταλάκι του γλυκού γέμιση κοντά στο κοτσάνι. Διπλώστε τα κάτω άκρα πάνω από τη γέμιση, στη συνέχεια διπλώστε τις πλευρές και τυλίξτε σφιχτά. Επαναλάβετε για όλα τα φύλλα.</li>
+                        <li>Στρώστε τον πάτο μιας πλατιάς κατσαρόλας με μερικά επιπλέον αμπελόφυλλα. Τοποθετήστε τα γεμιστά φύλλα σφιχτά σε στρώσεις.</li>
+                        <li>Ρίξτε το υπόλοιπο ελαιόλαδο, το χυμό λεμονιού και το ζεστό νερό από πάνω. Τοποθετήστε ένα ανεστραμμένο πυρίμαχο πιάτο από πάνω για να μην ξετυλιχθούν.</li>
+                        <li>Αφήστε να πάρει μια απαλή βράση, στη συνέχεια μειώστε τη φωτιά, σκεπάστε και σιγοβράστε για 45-60 λεπτά μέχρι να μαγειρευτεί το ρύζι. Αφήστε τα να κρυώσουν στην κατσαρόλα πριν σερβίρετε.</li>
+                    </ol>
+                    <a href="https://www.youtube.com/watch?v=2wLEzvXVKm4" target="_blank" class="inline-flex items-center mt-4 text-blue-600 font-semibold hover:underline">Παρακολουθήστε εκπαιδευτικό βίντεο <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                
+                <div class="card p-6">
+                    <h3 class="font-semibold text-xl mb-2 text-gray-800">Κρασοτύρι Σαγανάκι (Τηγανητό Τυρί με Κρασί)</h3>
+                    <p class="mb-4">Μια μοναδική τοπική λιχουδιά, τηγανισμένη στην εντέλεια. Το τυρί εμποτισμένο με κρασί γίνεται ζεστό και ελαφρώς λιωμένο εσωτερικά με μια νόστιμη τραγανή κρούστα.</p>
+                    <h4 class="font-semibold text-lg mb-2">Υλικά:</h4>
+                     <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>1 φέτα Κρασοτύρι, πάχους περίπου 1,5 εκ.</li>
+                        <li>2 κουταλιές της σούπας αλεύρι για όλες τις χρήσεις</li>
+                        <li>2 κουταλιές της σούπας ελαιόλαδο</li>
+                        <li>1 φέτα λεμόνι, για το σερβίρισμα</li>
+                    </ul>
+                    <h4 class="font-semibold text-lg mb-2">Οδηγίες:</h4>
+                     <ol class="list-decimal list-inside space-y-2">
+                        <li>Αλευρώστε τη φέτα κρασοτύρι, βεβαιωθείτε ότι είναι πλήρως καλυμμένη από όλες τις πλευρές. Απομακρύνετε τυχόν περίσσεια.</li>
+                        <li>Ζεστάνετε το ελαιόλαδο σε ένα μικρό, αντικολλητικό τηγάνι σε μέτρια προς δυνατή φωτιά.</li>
+                        <li>Τοποθετήστε προσεκτικά το αλευρωμένο τυρί στο καυτό τηγάνι. Τηγανίστε για 2-3 λεπτά ανά πλευρά, μέχρι να σχηματιστεί μια βαθιά χρυσοκαφέ κρούστα.</li>
+                        <li>Αφαιρέστε από το τηγάνι και τοποθετήστε σε ένα πιάτο. Σερβίρετε αμέσως με μια γενναιόδωρη ποσότητα φρέσκου χυμού λεμονιού από πάνω.</li>
+                    </ol>
+                    <a href="https://youtu.be/k1MZGsJT0Fw" target="_blank" class="inline-flex items-center mt-4 text-blue-600 font-semibold hover:underline">Παρακολουθήστε εκπαιδευτικό βίντεο <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="transport-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md"><button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200"><i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i></button><h2 class="text-xl font-bold text-gray-800 mx-auto">Μετακινήσεις στην Κω</h2></header>
+            <div class="p-6 space-y-6">
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="car" class="w-5 h-5 mr-2 text-blue-500"></i>Ενοικίαση Αυτοκινήτου / Scooter</h3>
+                    <p class="text-gray-600">Συνιστάται ανεπιφύλακτα για την μεγαλύτερη ελευθερία να εξερευνήσετε απομακρυσμένες παραλίες και χωριά. Αναμένετε να πληρώσετε ~35-60€/ημέρα για αυτοκίνητο και ~25€/ημέρα για σκούτερ. Κάντε κράτηση εκ των προτέρων το καλοκαίρι.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="bus" class="w-5 h-5 mr-2 text-blue-500"></i>Υπεραστικά Λεωφορεία ΚΤΕΛ</h3>
+                    <p class="text-gray-600">Ένας οικονομικός τρόπος για να ταξιδέψετε μεταξύ των μεγάλων πόλεων και των θέρετρων. Ο κεντρικός σταθμός βρίσκεται στην οδό Κλεοπάτρας 7. Ελέγξτε τα δρομολόγια online στο <a href="http://www.ktel-kos.gr" target="_blank" class="text-blue-600 hover:underline">ktel-kos.gr</a>.</p>
+                    <a href="https://maps.app.goo.gl/u7PdwWwY821HDPqX8" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">Προβολή Σταθμού στον Χάρτη <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                </div>
+                 <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="bus-front" class="w-5 h-5 mr-2 text-blue-500"></i>Αστικά Λεωφορεία ΔΕΑΣ</h3>
+                    <p class="text-gray-600">Για μετακινήσεις εντός της πόλης της Κω και των κοντινών περιοχών όπως η Λάμπη, η Ψαλίδι και το Ασκληπιείο. Ελέγξτε τα δρομολόγια στην <a href="http://mobility.kos.gr" target="_blank" class="text-blue-600 hover:underline">ιστοσελίδα/εφαρμογή Kos Mobility.</a></p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="bike" class="w-5 h-5 mr-2 text-blue-500"></i>Ποδηλασία</h3>
+                    <p class="text-gray-600">Το επίπεδο έδαφος της Κω καθιστά την ποδηλασία μια εξαιρετική επιλογή, με ειδικούς ποδηλατόδρομους από την πόλη της Κω προς το Τιγκάκι και την Ψαλίδι. Ενοικιάσεις είναι ευρέως διαθέσιμες για ~5-10€/ημέρα.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="taxi" class="w-5 h-5 mr-2 text-blue-500"></i>Ταξί</h3>
+                    <p class="text-gray-600">Είναι άμεσα διαθέσιμα. Βρείτε τα σε πιάτσες (όπως στην Ακτή Κουντουριώτου) ή κάντε κράτηση τηλεφωνικά. Συμφωνήστε για την τιμή για μεγάλες διαδρομές. Ράδιο Ταξί Κω: <a href="tel:+302242022777" class="text-blue-600 hover:underline">+30 22420 22777</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="important-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md"><button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200"><i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i></button><h2 class="text-xl font-bold text-gray-800 mx-auto">Σημαντικές Πληροφορίες</h2></header>
+            <div class="p-6 space-y-6">
+                <div class="card p-6 border-2 border-red-500">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center text-red-600"><i data-lucide="siren" class="w-5 h-5 mr-2"></i>Αριθμοί Έκτακτης Ανάγκης</h3>
+                    <p class="text-gray-700 text-lg">Για οποιαδήποτε έκτακτη ανάγκη, καλέστε τον Ευρωπαϊκό Αριθμό Έκτακτης Ανάγκης:</p>
+                    <a href="tel:112" class="block text-center my-3 text-3xl font-bold text-red-600 bg-red-100 p-4 rounded-lg tracking-widest">112</a>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li><strong>Ασθενοφόρο:</strong> 166</li>
+                        <li><strong>Αστυνομία:</strong> 100</li>
+                        <li><strong>Πυροσβεστική:</strong> 199</li>
+                        <li><strong>Λιμενικό:</strong> 108</li>
+                        <li><strong>Τουριστική Αστυνομία:</strong> 171</li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="user" class="w-5 h-5 mr-2 text-blue-500"></i>Επικοινωνία Οικοδεσπότη</h3>
+                    <p class="text-gray-600"><strong>Όνομα:</strong> Βαρθακούρης Ιωάννης</p>
+                    <p class="text-gray-600"><strong>Τηλέφωνο / WhatsApp:</strong></p>
+                     <a href="https://wa.me/306942575314" target="_blank" class="block text-center my-2 text-xl font-semibold text-green-600 bg-green-100 p-3 rounded-lg hover:bg-green-200">+30 6942 575314</a>
+                    <p class="text-sm text-gray-500">Το WhatsApp ή το Viber προτιμώνται για μη επείγουσες ερωτήσεις (9 π.μ. - 8 μ.μ.). Παρακαλούμε καλέστε για επείγοντα θέματα.</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="shopping-cart" class="w-5 h-5 mr-2 text-blue-500"></i>Κοντινά Απαραίτητα</h3>
+                    <p class="text-gray-600"><strong>Σούπερ Μάρκετ:</strong> Το ΑΒ Βασιλόπουλος βρίσκεται μόλις 1 λεπτό με τα πόδια για ψώνια.</p>
+                    <p class="text-gray-600 mt-2"><strong>ΑΤΜ:</strong> Διαθέσιμο στην είσοδο του σούπερ μάρκετ ΑΒ Βασιλόπουλος.</p>
+                    <p class="text-gray-600 mt-2"><strong>Φαρμακείο:</strong> Αρκετά κοντινά. Αναζητήστε πράσινο σταυρό. Μια λίστα με τα εφημερεύοντα φαρμακεία ("Εφημερεύον") αναρτάται στις πόρτες τους.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="events-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">ΙΠΠΟΚΡΑΤΕΙΑ 2025</h2>
+            </header>
+            <div class="p-6">
+                <div class="mb-6">
+                    <label for="event-date-filter" class="block text-gray-700 text-sm font-bold mb-2">Φιλτράρισμα ανά Ημερομηνία:</label>
+                    <input type="date" id="event-date-filter" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div id="events-list" class="grid grid-cols-1 gap-8">
+                    </div>
+                <div id="no-events-message" class="text-center text-gray-600 mt-8 hidden">
+                    Δεν βρέθηκαν εκδηλώσεις για την επιλεγμένη ημερομηνία.
+                </div>
+            </div>
+        </div>
+
+        <div id="local-products-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Τοπικά Προϊόντα & Συνταγές</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <div class="card p-4 text-center bg-orange-50 border-orange-200 border">
+                    <h3 class="font-semibold text-lg mb-2 flex items-center justify-center text-orange-800"><i data-lucide="chef-hat" class="w-6 h-6 mr-2"></i>Γευτείτε το Νησί με Συνταγές AI</h3>
+                    <p class="text-gray-600 mb-4">Λάβετε μια νόστιμη πρόταση συνταγής χρησιμοποιώντας τα φρέσκα, τοπικά προϊόντα της Κω.</p>
+                    <button onclick="generateRecipe()" class="w-full btn-primary bg-orange-500 hover:bg-orange-600">Προτείνετε μια Συνταγή</button>
+                </div>
+                <div id="recipe-output" class="prose-custom space-y-4">
+                     <div class="text-center p-4 text-gray-500 hidden">Η συνταγή σας θα εμφανιστεί εδώ.</div>
+                </div>
+
+                <p class="text-gray-700 mb-4">Η Κως είναι πλούσια σε τοπικά προϊόντα και παραδοσιακά αγαθά που αποτελούν υπέροχα αναμνηστικά. Ακολουθούν μερικά από τα αγαπημένα μας:</p>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://melitaygetos.gr/wp-content/uploads/2021/05/meli-1.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/melikoukouvas.jpg?itok=f4f4f4f4';" alt="Μέλι Κω" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Μέλι Κω</h3>
+                        <p class="text-gray-600 mb-2">Η Κως είναι γνωστή για το εξαιρετικό θυμαρίσιο μέλι της, πλούσιο σε άρωμα και γεύση. Είναι ένα φυσικό γλυκαντικό και μια υγιεινή λιχουδιά.</p>
+                        <p class="text-gray-700 font-medium"><strong>Πού να αγοράσετε:</strong> Τοπικές αγορές, μικρά καταστήματα σε χωριά όπως η Ζια, και καταστήματα ειδικών τροφίμων. Αναζητήστε βάζα με την ένδειξη "Μέλι Θυμαρίσιο".</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Μεταφορά στο σπίτι:</strong> Το μέλι είναι γενικά ασφαλές για μεταφορά στις παραδοτέες αποσκευές. Βεβαιωθείτε ότι είναι καλά σφραγισμένο για να αποφευχθούν διαρροές.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://gastronomytours.com/wp-content/uploads/2023/09/Possa-768x443.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/tyriposa.jpg?itok=f4f4f4f4';" alt="Τυρί Πόσας" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Τυρί Πόσας (Τυρί Κρασιού)</h3>
+                        <p class="text-gray-600 mb-2">Ένα μοναδικό τοπικό τυρί, η "Πόσα" (ή "Τυρί της Πόσας") παραδοσιακά ωριμάζει σε ίζημα κόκκινου κρασιού, δίνοντάς του μια ξεχωριστή κοκκινωπή απόχρωση και πλούσια, πικάντικη γεύση.</p>
+                        <p class="text-gray-700 font-medium"><strong>Πού να αγοράσετε:</strong> Τοπικά τυροκομεία, μεγαλύτερα σούπερ μάρκετ και μερικές παραδοσιακές ταβέρνες. Ζητήστε "Τυρί της Πόσας".</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Μεταφορά στο σπίτι:</strong> Καλύτερα να μεταφερθεί σε παραδοτέες αποσκευές, ιδανικά σε συσκευασία κενού αέρος εάν διατίθεται από τον πωλητή, για να διατηρηθεί η φρεσκάδα και να αποφευχθούν οσμές.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://lerosisland.gr/wp-content/uploads/2017/05/photo_2017-02-07_11-58-13-1.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/glykotomatas.jpg?itok=f4f4f4f4';" alt="Γλυκό του Κουταλιού Ντομάτα" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Γλυκό του Κουταλιού Ντοματάκι</h3>
+                        <p class="text-gray-600 mb-2">Ένα παραδοσιακό ελληνικό "γλυκό του κουταλιού" φτιαγμένο από μικρές, άγουρες ντομάτες. Είναι ζαχαρωμένο και έχει μια μοναδική, απολαυστική γεύση, συχνά σερβίρεται με καφέ ή ως επιδόρπιο.</p>
+                        <p class="text-gray-700 font-medium"><strong>Πού να αγοράσετε:</strong> Τοπικοί γυναικείοι συνεταιρισμοί, καταστήματα ειδικών τροφίμων και μερικά μεγαλύτερα σούπερ μάρκετ. Αναζητήστε βάζα με την ένδειξη "Γλυκό Ντοματάκι".</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Μεταφορά στο σπίτι:</strong> Τα βάζα είναι καλύτερα στις παραδοτέες αποσκευές. Βεβαιωθείτε ότι το καπάκι είναι σφιχτό για να αποφευχθούν διαρροές.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://www.argiro.gr/wp-content/uploads/2021/08/elaiolado-scaled-1-1320x720.jpeg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/ladi.jpg?itok=f4f4f4f4';" alt="Ελαιόλαδο Κω" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Εξαιρετικό Παρθένο Ελαιόλαδο</h3>
+                        <p class="text-gray-600 mb-2">Η Ελλάδα είναι φημισμένη για το ελαιόλαδό της, και η Κως παράγει εξαιρετικής ποιότητας εξαιρετικό παρθένο ελαιόλαδο. Είναι βασικό συστατικό στην ελληνική κουζίνα και μια υγιεινή επιλογή.</p>
+                        <p class="text-gray-700 font-medium"><strong>Πού να αγοράσετε:</strong> Απευθείας από παραγωγούς ελαιολάδου (ορισμένοι προσφέρουν ξεναγήσεις), τοπικές αγορές και σούπερ μάρκετ. Αναζητήστε "Εξαιρετικό Παρθένο Ελαιόλαδο".</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Μεταφορά στο σπίτι:</strong> Για μεγαλύτερες ποσότητες, είναι απαραίτητες οι παραδοτέες αποσκευές. Πολλά καταστήματα πωλούν ελαιόλαδο σε ειδικά σχεδιασμένα, στεγανά μεταλλικά δοχεία ή μπουκάλια για ταξίδια.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://www.thegreekfood.com/wp-content/uploads/2012/05/herbs-and-spices.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/votanakos.jpg?itok=f4f4f4f4';" alt="Τοπικά Βότανα και Μπαχαρικά" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Τοπικά Βότανα και Μπαχαρικά</h3>
+                        <p class="text-gray-600 mb-2">Το κλίμα του νησιού είναι ιδανικό για την καλλιέργεια αρωματικών βοτάνων όπως ρίγανη, θυμάρι και φασκόμηλο. Αυτά αποτελούν αρωματικά και πρακτικά αναμνηστικά.</p>
+                        <p class="text-gray-700 font-medium"><strong>Πού να αγοράσετε:</strong> Τοπικές αγορές, καταστήματα αναμνηστικών, ακόμη και μερικά σούπερ μάρκετ. Αναζητήστε αποξηραμένα βότανα σε μικρές σακούλες ή διακοσμητικά δεματάκια.</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Μεταφορά στο σπίτι:</strong> Μπορούν να μεταφερθούν τόσο σε χειραποσκευές όσο και σε παραδοτέες αποσκευές. Βεβαιωθείτε ότι είναι καλά συσκευασμένα για να διατηρήσουν το άρωμά τους και να αποφευχθεί η διαρροή.</p>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://static.kos4all.com/wp-content/uploads/2014/03/Zia_Village_Kos_Kos4all_003.jpg" onerror="this.onerror=null;this.src='https://www.kos.gr/sites/default/files/styles/flexslider_full/public/2020-03/keramika.jpg?itok=f4f4f4f4';" alt="Χειροποίητα Κεραμικά" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Χειροποίητα Κεραμικά</h3>
+                        <p class="text-gray-600 mb-2">Θα βρείτε όμορφα χειροποίητα κεραμικά σε όλη την Κω, συχνά με παραδοσιακά ελληνικά σχέδια ή ζωηρά χρώματα. Από διακοσμητικά πιάτα μέχρι λειτουργικές κούπες, αποτελούν υπέροχα αναμνηστικά.</p>
+                        <p class="text-gray-700 font-medium"><strong>Πού να αγοράσετε:</strong> Καταστήματα χειροτεχνίας στην πόλη της Κω και στα χωριά, ειδικά σε περιοχές με παράδοση στην τέχνη.</p>
+                        <p class="text-gray-700 font-medium mt-1"><strong>Μεταφορά στο σπίτι:</strong> Συσκευάστε προσεκτικά τα εύθραυστα αντικείμενα στις παραδοτέες αποσκευές σας, χρησιμοποιώντας ρούχα ή αεροπλάστ για προστασία. Σκεφτείτε να στείλετε με αποστολή μεγαλύτερα ή πολύ ευαίσθητα κομμάτια.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="island-hopping-section" class="section-screen">
+            <header class="section-header p-4 flex items-center shadow-md">
+                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800 mx-auto">Εκδρομές σε Νησιά από την Κω</h2>
+            </header>
+            <div class="p-6 space-y-8">
+                <p class="text-gray-700 mb-4">Η Κως είναι μια εξαιρετική βάση για να εξερευνήσετε τα κοντινά νησιά. Ακολουθούν μερικές δημοφιλείς επιλογές για ημερήσιες εκδρομές:</p>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://cdn.getyourguide.com/img/tour/b219904a91bc9dd83490526cf733932fe4c06143c9e347ccdacdec9e8e9ade6c.jpg/98.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1628189531122-8353e813a8c5?q=80&w=800&auto=format&fit=crop';" alt="Ηφαίστειο Νισύρου" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Νησί Νίσυρος: Το Ηφαιστειακό Διαμάντι</h3>
+                        <p class="text-gray-600 mb-2">Η Νίσυρος είναι ένα μικρό, γραφικό νησί που κυριαρχείται από το ενεργό ηφαίστειό της, έναν από τους λίγους προσβάσιμους υδροθερμικούς κρατήρες στον κόσμο.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>Τι να κάνετε:</strong> Επισκεφθείτε τον <a href="https://maps.app.goo.gl/3QxP6f1hN8fK9dYZA" target="_blank" class="text-blue-600 hover:underline">Κρατήρα Στέφανος</a> (περπατήστε μέσα!), εξερευνήστε την όμορφη πρωτεύουσα Μανδράκι με τα ασβεστωμένα σπίτια και το Μοναστήρι της Παναγίας Σπηλιανής.</li>
+                            <li><strong>Πρόγραμμα Ferry:</strong> Καθημερινές αναχωρήσεις από το λιμάνι της Κω, συνήθως το πρωί (π.χ. 9:00 π.μ. - 10:00 π.μ.) με επιστροφή αργά το απόγευμα (π.χ. 3:00 μ.μ. - 4:00 μ.μ.). Ο χρόνος ταξιδιού είναι περίπου 1-1,5 ώρες.</li>
+                            <li><strong>Κράτηση:</strong> Τα εισιτήρια μπορούν να αγοραστούν στο λιμάνι από διάφορους ταξιδιωτικούς πράκτορες ή online. Συνιστάται η κράτηση εκ των προτέρων κατά την περίοδο αιχμής.</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=ferry+kos+to+nisyros+schedule" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Αναζήτηση τελευταίων δρομολογίων <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://www.aegeanislands.gr/app/uploads/2020/07/shutterstock_197048153-1.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop';" alt="Παραλία Ψερίμου" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Νησί Ψέριμος: Ήρεμη Απόδραση</h3>
+                        <p class="text-gray-600 mb-2">Η Ψέριμος είναι ένα μικρό, ήσυχο νησί γνωστό για την όμορφη αμμώδη παραλία της και τα κρυστάλλινα νερά της, ιδανική για μια χαλαρωτική μέρα μακριά από τα πλήθη.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>Τι να κάνετε:</strong> Κολυμπήστε και κάντε ηλιοθεραπεία στην κεντρική παραλία, απολαύστε φρέσκα ψάρια σε μία από τις λίγες ταβέρνες και ζήστε την ήρεμη νησιωτική ζωή.</li>
+                            <li><strong>Πρόγραμμα Ferry:</strong> Συχνά αποτελεί μέρος μιας "Κρουαζιέρας 3 Νησιών" από την Κω.</li>
+                            <li><strong>Κράτηση:</strong> Τα εισιτήρια συνήθως αγοράζονται απευθείας από πωλητές στο λιμάνι της Κω.</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=boat+trips+kos+to+pserimos+schedule" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Αναζήτηση τελευταίων δρομολογίων <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="card overflow-hidden p-0">
+                    <img src="https://sailawaykos.com/wp-content/uploads/2018/11/3-Islads-Nisyros-Cruise-5-840x560.png" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop';" alt="Κρουαζιέρα 3 Νησιών" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800">Ημερήσια Εκδρομή 3 Νησιών: Ψέριμος, Κάλυμνος & Πλάτη</h3>
+                        <p class="text-gray-600 mb-2">Μια πολύ δημοφιλής ολοήμερη εκδρομή με πλοίο από το λιμάνι της Κω, προσφέροντας μια γεύση από τρία διαφορετικά νησιά των Δωδεκανήσων.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 mb-3">
+                            <li><strong>Ψέριμος:</strong> Απολαύστε την ήσυχη κεντρική παραλία και το μικρό χωριό.</li>
+                            <li><strong>Κάλυμνος:</strong> Εξερευνήστε την Πόθια, την πρωτεύουσα, γνωστή για την ιστορία της σπογγαλιείας και το ζωντανό λιμάνι της.</li>
+                            <li><strong>Πλάτη:</strong> Ένα μικροσκοπικό ακατοίκητο νησάκι με εκπληκτικά τιρκουάζ νερά, ιδανικό για κολύμπι και αναπνευστήρα.</li>
+                            <li><strong>Πρόγραμμα:</strong> Τα πλοία συνήθως αναχωρούν από το λιμάνι της Κω μεταξύ 9:30 π.μ. και 10:30 π.μ., επιστρέφοντας περίπου στις 4:30 μ.μ. έως 5:30 μ.μ. Περιλαμβάνει στάσεις σε κάθε νησί για κολύμπι και εξερεύνηση.</li>
+                            <li><strong>Κράτηση:</strong> Πολλά σκάφη προσφέρουν αυτή την εκδρομή απευθείας από το λιμάνι της Κω. Συνήθως μπορείτε να κάνετε κράτηση επί τόπου την προηγούμενη μέρα ή το πρωί της αναχώρησης. Οι τιμές διαφέρουν ανάλογα με το σκάφος και τις παροχές (π.χ. γεύμα).</li>
+                        </ul>
+                        <a href="https://www.google.com/search?q=3+island+cruise+kos+harbor" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:underline">Αναζήτηση Κρουαζιέρων 3 Νησιών <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300">
+        Το μήνυμα αντιγράφηκε!
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const API_KEY = "AIzaSyALAR-YIwFpAlVvv2bLZfF-iuYOAJAPHgM";
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+        
+        // --- DATA ---
+        const events = [
+            // June
+            { date: "SATURDAY 21/06/25 & SUNDAY 22/06/25", time: "SATURDAY 19:00 (OPENING), SUNDAY 18:00-20:00 (OPERATING HOURS)", title: "PAINTING AND HAGIOGRAPHY EXHIBITION", description: "Exhibition of works by the students of the Painting & Hagiography Workshop FRIDART of Maria Vamvakousi.", location: "HISTORICAL & FOLKLORE MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250621T190000", gCalEnd: "20250622T200000" },
+            { date: "TUESDAY 24/06/25", time: "19:00", title: "CONCERT WITH THE STUDENTS OF MARIA ORFANOUDAKI'S MUSIC SCHOOL", description: "Student concert of classical and contemporary music.", location: "COURTYARD OF THE FOLKLORE & HISTORICAL MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250624T190000", gCalEnd: "20250624T210000" },
+            { date: "WEDNESDAY 25/06/25", time: "19:30", title: "THE CUSTOM OF KLIDONAS", description: "Event with the re-enactment of the 'Fanos' and 'Klidonas', accompanied by dances from the children's and youth sections of the Cultural and Educational Association of Pyli 'O APELLIS'.", location: "MARMARI OPEN AIR THEATRE", googleMaps: "https://maps.app.goo.gl/bXb9C6t4wY2R8xZq7", gCalStart: "20250625T193000", gCalEnd: "20250625T213000" },
+            { date: "WEDNESDAY 25/06/25", time: "19:30", title: "RHYTHMIC GYMNASTICS AND MODERN DANCE PERFORMANCE", description: "In collaboration with the Cultural, Athletic Association 'ANAMORFOSI-ANAPLASI'. The children's and youth sections of the Association participate.", location: "KARDAMENA OPEN AIR THEATRE", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250625T193000", gCalEnd: "20250625T213000" },
+            { date: "THURSDAY 26/06/25", time: "20:00", title: "THE CUSTOM OF KLIDONAS", description: "Event with the re-enactment of the 'Fanos' and 'Klidonas', accompanied by dances from the children's and youth sections of the Lyceum of Greek Women, Kos branch.", location: "ELEFTHERIAS SQUARE, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250626T200000", gCalEnd: "20250626T220000" },
+            { date: "SATURDAY 28/06/25", time: "20:30", title: "DANCE EVENT 'ELIKONIA'", description: "An evening dedicated to Greek dances with special emphasis on zeibekiko, in collaboration with the 'ALEGRIA DANCE LAB' Dance School.", location: "ELEFTHERIAS SQUARE, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250628T203000", gCalEnd: "20250628T223000" },
+            { date: "SATURDAY 28/06/25 & SUNDAY 29/06/25", time: "SATURDAY 11:00 (KOS PARADE), 19:00 (KARDAMENA PARADE), SUNDAY 20:30 (CONCERT)", title: "COLLABORATION OF THE SINDOS YOUTH ORCHESTRA OF THE MUNICIPALITY OF DELTA AND THE PHILHARMONIC OF THE MUNICIPALITY OF KOS", description: "Parade in the central streets of Kos town and the Port and streets of Kardamena. Concert at Eleftherias Square.", location: "CENTRAL STREETS OF KOS TOWN / PORT AND STREETS OF KARDAMENA / ELEFTHERIAS SQUARE, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250628T110000", gCalEnd: "20250629T223000" },
+            { date: "SUNDAY 29/06/25", time: "19:30", title: "CHILDREN'S ACTIVITIES WITH A SEA THEME", description: "In collaboration with the CULTURAL ASSOCIATION OF KARDAMENA 'ARGO'. The event is held as part of Maritime Week.", location: "KARDAMENA OPEN AIR THEATRE", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250629T193000", gCalEnd: "20250629T213000" },
+            { date: "MONDAY 30/06/25", time: "20:00", title: "THE CUSTOM OF KLIDONAS", description: "Event with the re-enactment of the 'Fanos' and 'Klidonas', accompanied by dances from sections of the Cultural Association of Kefalos 'AGIOS NIKOLAOS'.", location: "KEFALOS PORT", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250630T200000", gCalEnd: "20250630T220000" },
+            // July
+            { date: "THURSDAY 03/07/25", time: "20:00", title: "PRESENTATION OF MARIA MAMALIGA'S NOVELLA TITLED 'MERCANTO'", description: "In collaboration with the P.O. KOON 'O FILITAS', the LYCEUM OF GREEK WOMEN-Kos branch, DREPPO 'FAINARETI' and the 'ESTIA' BOOKSTORE. The book will be presented by Minas G. Hatzantoniou and Theodosis Diakogiannis.", location: "COURTYARD OF THE FOLKLORE & HISTORICAL MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250703T200000", gCalEnd: "20250703T220000" },
+            { date: "THURSDAY 03/07/25", time: "19:00", title: "THEATRICAL PERFORMANCE 'THE BIRDS' by ARISTOPHANES", description: "In collaboration with the P.S. AVEROF MUNICIPALITY OF KOS. The children, parents, and pedagogical staff of the Station participate in the performance.", location: "ROMAN ODEON OF KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250703T190000", gCalEnd: "20250703T210000" },
+            { date: "SATURDAY 05/07/25", time: "20:00", title: "SHEPHERD'S FEAST", description: "Traditional festival on the theme of rural life, with local delicacies, local dances and live music, in collaboration with the CULTURAL ASSOCIATION OF ANTIMACHIA 'I PROODOS'.", location: "TRADITIONAL HOUSE, ANTIMACHIA MILL", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250705T200000", gCalEnd: "20250705T230000" },
+            { date: "SUNDAY 06/07/25", time: "20:30", title: "MUSIC AND DANCE PERFORMANCE 'DANCES AND SONGS OF THE LAND AND THE SEA'", description: "Closing of the Lyceum Year, in collaboration with the LYCEUM OF GREEK WOMEN OF KARDAMENA.", location: "KARDAMENA OPEN AIR THEATRE", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250706T203000", gCalEnd: "20250706T223000" },
+            { date: "MONDAY 07/07/25", time: "20:30", title: "THE MEETING OF LYRE PLAYERS OF THE SOUTHERN DODECANESE IN KEFALOS, KOS", description: "Music and dance meeting to highlight the richness of the Dodecanesian Lyre, with a focus on the Southern Dodecanese (Kos, Halki, Symi, Rhodes, Karpathos, Kasos). Lyre and lute players from Rhodes and Karpathos participate.", location: "KEFALOS PORT", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250707T203000", gCalEnd: "20250707T230000" },
+            { date: "SATURDAY 12/07/25", time: "20:00", title: "MUSIC NIGHT", description: "Traditional music and dances and local gastronomy, in collaboration with the CULTURAL AND EDUCATIONAL ASSOCIATION OF ASFENDIOU 'O THEOKRITOS'.", location: "TIGAKI SQUARE", googleMaps: "https://maps.app.goo.gl/fWzS9wU7Z6qR8pXz5", gCalStart: "20250712T200000", gCalEnd: "20250712T230000" },
+            { date: "SATURDAY 12/07/25", time: "20:00", title: "CONCERT WITH THE SINFONIETTA OF ATHENS", description: "Of the Artistic Director of ERT, GIORGOS ARAVIDIS, in collaboration with the ERATEIO CONSERVATORY OF ATHENS and the piano professor MARIA ORFANOUDAKI. A unique concert of classical and Greek repertoire, accompanied by piano & children's choir of students of Maria Orfanoudaki, in collaboration with Vangelis Vatsineas.", location: "INTERNATIONAL HIPPOCRATIC FOUNDATION OF KOS", googleMaps: "https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7", gCalStart: "20250712T200000", gCalEnd: "20250712T220000" },
+            { date: "SUNDAY 13/07/25", time: "20:00", title: "MUSIC AND DANCE PERFORMANCE 'Tonight my guitar...'", description: "In collaboration with the LYCEUM OF GREEK WOMEN-Kos branch. The sections of the Lyceum of Greek Women of Kos dance with the accompaniment of a traditional music group. A small group of Serenaders participates.", location: "COURTYARD OF THE 7th PRIMARY SCHOOL OF KOS", googleMaps: "https://maps.app.goo.gl/9t7B4e9v6tP6fXqK8", gCalStart: "20250713T200000", gCalEnd: "20250713T220000" },
+            { date: "TUESDAY 15/07/25", time: "20:30", title: "CHAMBER SONGS. FAIRY TALES & SONGS", description: "In collaboration with the LIONS CLUB OF KOS 'HIPPOCRATES'. 4 musicians on stage. They tell comic stories and fairy tales. They sing about love, generosity, free time, companionship, the circle of life, joy, play and of course dance.", location: "ROMAN ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250715T203000", gCalEnd: "20250715T223000" },
+            { date: "WEDNESDAY 16/07/25", time: "19:30", title: "CHILDREN'S THEATRICAL PERFORMANCE 'THE TICKLER'", description: "By DIMITRIS BASLAM, in collaboration with the LIONS CLUB OF KOS 'HIPPOCRATES'.", location: "K. KIAPOKA SQUARE, ZIPARI OPEN AIR THEATRE", googleMaps: "https://maps.app.goo.gl/eU5fC7wY8tJ8vXmP9", gCalStart: "20250716T193000", gCalEnd: "20250716T213000" },
+            { date: "FRIDAY 18/07/25", time: "22:00", title: "CONCERT WITH THE BAND PYX LAX", description: "Ticketed event.", location: "PYLI FOOTBALL FIELD", googleMaps: "https://maps.app.goo.gl/hG5b8tF7yX5wR8vV9", gCalStart: "20250718T220000", gCalEnd: "20250718T235900" },
+            { date: "SUNDAY 20/07/25", time: "20:30", title: "CONCERT WITH THE ORCHESTRA 'TA MANOUSAKIA' AND KAITI KOULIA", description: "Island festival with traditional dances and songs in the city center.", location: "ELEFTHERIAS SQUARE, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250720T203000", gCalEnd: "20250720T223000" },
+            { date: "FRIDAY 25/07/25", time: "21:00", title: "CONCERT WITH MARINA SATTI", description: "Ticketed event.", location: "KOS MARINA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250725T210000", gCalEnd: "20250725T230000" },
+            { date: "SATURDAY 26/07/25", time: "20:30", title: "'TRAVELING IN GREECE' - MUSIC AND DANCE PERFORMANCE", description: "Performance with traditional Greek dances, in collaboration with the ELENI DROUSOU DANCE SCHOOL.", location: "ELEFTHERIAS SQUARE, KOS", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250726T203000", gCalEnd: "20250726T223000" },
+            { date: "SUNDAY 27/07/25", time: "20:00", title: "MUSIC EVENT 'SELAS'", description: "Performance of ecclesiastical hymns by the cantor Nektaria Karantzi accompanied by 2 musical instruments, in collaboration with WOMEN WITHOUT BORDERS KOS.", location: "ROMAN ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250727T200000", gCalEnd: "20250727T220000" },
+            { date: "SUNDAY 27/07/25", time: "21:30", title: "'A LOVE FOR THE SUMMER...'", description: "Musical event-tribute to the New Wave. The Adult Choir of the 'Arion' Association also participates, in collaboration with the 'ARION' FRIENDS OF MUSIC ASSOCIATION.", location: "AGIOI ANARGYROI, KARDAMENA", googleMaps: "https://maps.app.goo.gl/z6eX8v9wQ5yR7fWc7", gCalStart: "20250727T213000", gCalEnd: "20250727T233000" },
+            { date: "MONDAY 28/07/25", time: "17:00-20:00", title: "'WHEN CHILDREN SPEAK WITH COLORS'", description: "Exhibition of children's paintings from the Association's winter workshops under the guidance of Lise-Lotte Iversen, in collaboration with the CULTURAL ASSOCIATION OF KARDAMENA 'ARGO'.", location: "MARITIME & FOLKLORE MUSEUM OF KARDAMENA", googleMaps: "https://maps.app.goo.gl/6tX8wP5vY9zR7fWb9", gCalStart: "20250728T170000", gCalEnd: "20250728T200000" },
+            { date: "MONDAY 28/07/25", time: "22:00", title: "CONCERT WITH ELENA PAPARIZOU", description: "Ticketed event.", location: "PYLI FOOTBALL FIELD", googleMaps: "https://maps.app.goo.gl/hG5b8tF7yX5wR8vV9", gCalStart: "20250728T220000", gCalEnd: "20250728T235900" },
+            { date: "THURSDAY 31/07/25", time: "20:00", title: "PRESENTATION OF THE BOOK by former Vice-Rector PANAGIOTIS NOUTSOS TITLED 'DOES THE SEA COME BY FISHING? THE DIALECTICAL METHOD OF QUESTION-AND-ANSWER'", description: "In collaboration with the P.O. KOON 'O FILITAS', the LYCEUM OF GREEK WOMEN-Kos branch, DREPPO 'FAINARETI' and the 'ESTIA' BOOKSTORE. The book will be presented by Minas G. Hatzantoniou and Theodosis Diakogiannis.", location: "COURTYARD OF THE HISTORICAL & FOLKLORE MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250731T200000", gCalEnd: "20250731T220000" },
+            // August
+            { date: "SATURDAY 02/08/25", time: "20:00", title: "SUMMER FESTIVAL", description: "We celebrate summer with live music, local dances, wine and local delicacies, in collaboration with the ATHLETIC CLUB 'ANTIMACHOS'.", location: "FORMER MASTICHARI PRIMARY SCHOOL", googleMaps: "https://maps.app.goo.gl/kXv9zL5wR8yV7fWdA", gCalStart: "20250802T200000", gCalEnd: "20250802T230000" },
+            { date: "SATURDAY 02/08/25 & SUNDAY 03/08/25", time: "19:00-21:00", title: "ARTISTIC TWO-DAY EVENT", description: "Two-day event with a concert, artistic activities and an exhibition of works by the students of the Art & Music Studies Center.", location: "HISTORICAL & FOLKLORE MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250802T190000", gCalEnd: "20250803T210000" },
+            { date: "SUNDAY 03/08/25", time: "20:00", title: "FISH FESTIVAL", description: "Traditional festival on the theme of fish, fishermen, pulling the nets, etc., with local delicacies, local dances and live music with traditional island songs, in collaboration with the CULTURAL ASSOCIATION OF KEFALOS 'AGIOS NIKOLAOS'.", location: "KEFALOS PORT", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250803T200000", gCalEnd: "20250803T230000" },
+            { date: "MONDAY 04/08/25", time: "21:30", title: "CONCERT WITH NATASSA BOFILIOU", description: "Ticketed event.", location: "KOS MARINA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250804T213000", gCalEnd: "20250804T233000" },
+            { date: "WEDNESDAY 06/08/25", time: "20:00", title: "PRESENTATION OF THE BOOK by KOSTAS SKANDALIDIS titled: 'PROVERBS AND PROVERBIAL EXPRESSIONS FROM THE DODECANESE (ANTHOLOGY)'", description: "In collaboration with the P.O. KOON 'O FILITAS' and the HOUSE OF LETTERS AND ARTS OF THE DODECANESE.", location: "COURTYARD OF THE HISTORICAL-FOLKLORE MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250806T200000", gCalEnd: "20250806T220000" },
+            { date: "WEDNESDAY 06/08/25 to THURSDAY 07/08/25", time: "18:30-21:00", title: "PAINTING EXHIBITION BY THE GROUP OF KOS AMATEUR PAINTERS AND ARTISTS 'AIGLI'", description: "Under the Auspices of the P.O. KOON 'O FILITAS'.", location: "HISTORICAL & FOLKLORE MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250806T183000", gCalEnd: "20250807T210000" },
+            { date: "THURSDAY 07/08/25", time: "21:00", title: "'THE SONGS OF SOTIRIA'", description: "A musical performance dedicated to the 'Archontissa of rebetiko', Sotiria Bellou. Christina Maxouri and four excellent folk musicians set up their stage and invite us on another journey into the life and songs of Sotiria Bellou, in collaboration with the UNION OF KOS ATHENS 'HIPPOCRATES'.", location: "ROMAN ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250807T210000", gCalEnd: "20250807T230000" },
+            { date: "THURSDAY 07/08/25", time: "21:15", title: "THEATRICAL PERFORMANCE 'THE SEA AND THE OLD MAN'", description: "Based on Ernest Hemingway's work 'The Old Man and the Sea' adapted and directed by: Marlen Kaminski. Starring: Tasos Nousias, Vasilis Milionis, Faidra Soutou. Ticketed event.", location: "KOS MARINA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250807T211500", gCalEnd: "20250807T231500" },
+            { date: "FRIDAY 08/08/25", time: "20:00", title: "PRESENTATION OF KOSTAS I. PATOURIS'S BOOK TITLED 'THE ROSE THAT LIT THE SUN'", description: "Coordination-introduction Minas G. Hatzantoniou. The book will be presented by journalist Kleopatra Misailidou. In memory of teacher Stamatia Oikonomidi-Koutsou, in collaboration with DREPPO 'FAINARETI'.", location: "COURTYARD OF THE FOLKLORE & HISTORICAL MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250808T200000", gCalEnd: "20250808T220000" },
+            { date: "SATURDAY 09/08/25", time: "21:00", title: "'FULL MOON' WITH KERASIA SAMARA", description: "Musical and poetic performance for the August Full Moon. Giorgos Koubogiannis accompanies on piano, in collaboration with the UNION OF WOMEN OF GREECE-Kos Branch.", location: "ROMAN ODEON", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250809T210000", gCalEnd: "20250809T230000" },
+            { date: "SUNDAY 10/08/25", time: "21:00", title: "CONCERT-TRIBUTE TO THE COMPOSER GIANNIS SPANOS", description: "An evening with the songs - which we all loved - by Giannis Spanos, from the New Wave and Greek Cinema, in a 'boîte' style, with a piano and two voices. With the long-time collaborator of our great composer, Chrysoula Stefanaki. Panagiotis Kypraios participates. On piano, musical direction and curation by Tsambikos Kamateros, in collaboration with the KOS CENTER FOR MUSICAL STUDIES.", location: "ROMAN ODEON OF KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250810T210000", gCalEnd: "20250810T230000" },
+            { date: "WEDNESDAY 13/08/25", time: "20:00", title: "PRESENTATION OF THE BOOK by former rector STAMATIS ALACHIOTIS TITLED 'THE ANONYMOUS DAUGHTER'", description: "In collaboration with the P.O. KOON 'O FILITAS' and the UNION OF KOS ATHENS 'HIPPOCRATES'. The book will be presented by: Noutsos Panagiotis, Skandalidis Kostas, and Trilianos Athanasios.", location: "COURTYARD OF THE HISTORICAL & FOLKLORE MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250813T200000", gCalEnd: "20250813T220000" },
+            { date: "WEDNESDAY 13/08/25", time: "22:00", title: "CONCERT WITH STELIOS ROKKOS", description: "Ticketed event.", location: "PYLI FOOTBALL FIELD", googleMaps: "https://maps.app.goo.gl/hG5b8tF7yX5wR8vV9", gCalStart: "20250813T220000", gCalEnd: "20250813T235900" },
+            { date: "SATURDAY 16/08/25", time: "19:00", title: "'MIKRASIATIKI VENGHERA' - REBETIKO NIGHT WITH KATERINA TSIRIDOU", description: "Musical-narrative performance with songs, traditions and stories from Asia Minor. Narration: Maria Siouta, in collaboration with the CULTURAL ASSOCIATION OF KARDAMENA 'ARGO'.", location: "KARDAMENA OPEN AIR THEATRE", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250816T190000", gCalEnd: "20250816T210000" },
+            { date: "FRIDAY 22/08/25", time: "20:30", title: "'ODE TO POETRY'", description: "Poetry evening with a concert and recitations curated by Dimitris Vonapartis.", location: "ROMAN ODEON OF KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250822T203000", gCalEnd: "20250822T223000" },
+            { date: "SATURDAY 23/08/25", time: "20:00", title: "HONEY FESTIVAL", description: "Traditional festival with local delicacies on the theme of honey, framed by a concert of traditional music with Maria Anamaterou, in collaboration with the CULTURAL ASSOCIATION OF ANTIMACHIA 'I PROODOS'.", location: "MILL, ANTIMACHIA", googleMaps: "https://maps.app.goo.gl/wJ5p5yQ8zX9wS6vR8", gCalStart: "20250823T200000", gCalEnd: "20250823T230000" },
+            { date: "SUNDAY 24/08/25", time: "20:30", title: "'THEODORA PLAYS FOR THE MOON'", description: "Solo piano concert by 16-year-old Theodora Hostogian with Greek and classical repertoire in the light of the August Moon, in collaboration with the CULTURAL ASSOCIATION OF KARDAMENA 'ARGO'.", location: "KARDAMENA OPEN AIR THEATRE", googleMaps: "https://maps.app.goo.gl/uJzVf9s7kX8X5fWbA", gCalStart: "20250824T203000", gCalEnd: "20250824T223000" },
+            { date: "WEDNESDAY 27/08/25", time: "21:00", title: "THEATRICAL PERFORMANCE 'WAITING FOR THE 8'", description: "By PANOS NIAGOS from the THEATRICAL WORKSHOP OF THE MUNICIPALITY OF KOS. Direction: Chrysa Orfanou. Starring: Chrysa Orfanou, Christina Politou and Giorgos Tyras.", location: "COURTYARD OF THE HISTORICAL & FOLKLORE MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250827T210000", gCalEnd: "20250827T230000" },
+            { date: "WEDNESDAY 27/08/25 to SATURDAY 30/08/25", title: "'ALIKARNASSEIA OF KOS 2025'", description: "The four-day program includes speeches, concerts, traditional dances, revival of the 'kourbani' custom and a photo exhibition, in collaboration with the ASSOCIATION OF ASIA MINOR OF KOS 'HERODOTUS'.", location: "Various locations (details not specified)", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250827T180000", gCalEnd: "20250830T230000" },
+            { date: "FRIDAY 29/08/25", time: "21:00", title: "THEATRICAL PERFORMANCE 'WAITING FOR THE 8'", description: "By PANOS NIAGOS from the THEATRICAL WORKSHOP OF THE MUNICIPALITY OF KOS. Direction: Chrysa Orfanou. Starring: Chrysa Orfanou, Christina Politou and Giorgos Tyras.", location: "TSIGKOURA THEATRE, KEFALOS", googleMaps: "https://maps.app.goo.gl/8e5E9g9yY4f7s7wE6", gCalStart: "20250829T210000", gCalEnd: "20250829T230000" },
+            { date: "SATURDAY 30/08/25", time: "20:00", title: "WINE FESTIVAL", description: "Traditional festival on the theme of wine, with local delicacies, local dances and live music, in collaboration with the CULTURAL AND EDUCATIONAL ASSOCIATION OF ASFENDIOU 'O THEOKRITOS'.", location: "EVANGELISTRIAS OPEN AIR THEATRE, ASFENDIOU", googleMaps: "https://maps.app.goo.gl/rWfA8L3Q8jJqfRzY6", gCalStart: "20250830T200000", gCalEnd: "20250830T230000" },
+            { date: "SUNDAY 31/08/25", time: "21:00", title: "'ART IS A WOMAN'", description: "A great tribute to the greatest female performers of the 20th century, starting from the interwar period and ending today. Songs are heard from the voice of Chrysoula Stefanaki. Piano and musical direction: Nikos Kouros. Accordion: Tsambikos Kamateros, in collaboration with the KOS CENTER FOR MUSICAL STUDIES.", location: "ROMAN ODEON OF KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250831T210000", gCalEnd: "20250831T230000" },
+            // September
+            { date: "MONDAY 01/09/25", time: "20:00", title: "CHILDREN'S THEATRE 'POUPOULAR'", description: "Children's musical theatre performance by the THEATRICAL WORKSHOP OF KOS-ACTA. Direction: Foivos Symeonidis.", location: "PYLI CULTURAL CENTER 'GALINOS FLASKOS'", googleMaps: "https://maps.app.goo.gl/jR8fG5vW9yY7xXzW8", gCalStart: "20250901T200000", gCalEnd: "20250901T220000" },
+            { date: "WEDNESDAY 03/09/25", time: "20:00", title: "PRESENTATION OF ANDREAS HATZIMICHAIL'S BOOK 'FOOTBALL IN KOS FROM 1927 TO TODAY'", description: "Publication of D.O.P.A.V.S. KOS. The book will be presented by sports journalist Giorgos Pitsis and Physical Education professor Giannis Trikoilis.", location: "COURTYARD OF THE HISTORICAL & FOLKLORE MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250903T200000", gCalEnd: "20250903T220000" },
+            { date: "SATURDAY 06/09/25", time: "19:00", title: "INTERACTIVE PRESENTATION of the CHILDREN'S BOOK by MARIA LAKATA titled 'TZIVAGERA AND THE NIGHTINGALE'", description: "There will be a listening of the book from the audiobook combined with a live dramatization of the songs. Speakers: the author Maria Lakata, the book's illustrator, Danijela Palapani Curcic and the psychologist-psychotherapist Sissy Karathanou.", location: "PYLI CULTURAL CENTER 'GALINOS FLASKOS'", googleMaps: "https://maps.app.goo.gl/jR8fG5vW9yY7xXzW8", gCalStart: "20250906T190000", gCalEnd: "20250906T210000" },
+            { date: "SATURDAY 06/09/25", time: "21:15", title: "THEATRICAL PERFORMANCE 'HIM AND HIM'", description: "Musical theatre performance with humor, emotion and timeless songs. Giorgos Konstantinou, Leonidas Kakouris and Dimitris Starovas create a surprise performance, full of humanity and a satirical look. Ticketed event.", location: "KOS MARINA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250906T211500", gCalEnd: "20250906T231500" },
+            { date: "SUNDAY 07/09/25", time: "20:00", title: "THEATRICAL PERFORMANCE 'THE MOVIE NARRATOR'", description: "Katia Gerou stars in the emblematic text by Hernán Rivera Letelier. Directed by Maya Politaki. The performance takes us to Chile in the 1960s and tells us the adventures of a girl who has the rare gift of telling or rather bringing to life the stories of the movies, in collaboration with the THEATRICAL WORKSHOP OF KOS-AACTA.", location: "ROMAN ODEON OF KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250907T200000", gCalEnd: "20250907T220000" },
+            { date: "MONDAY 08/09/25", time: "21:00", title: "BACHATA NIGHT in the framework of the BACHATA KING FESTIVAL", description: "Dance event with latin music.", location: "ELEFTHERIAS SQUARE", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250908T210000", gCalEnd: "20250908T230000" },
+            { date: "TUESDAY 09/09/25 to WEDNESDAY 17/09/25", time: "11:00-13:00 & 18:00-19:00", title: "MEMORY EXHIBITION 'For my Breath' by IRIS MAVRAKI for the former SANATORIUM OF THE DODECANESE 1947-1970", description: "Support: DEPARTMENT OF CULTURE OF THE MUNICIPALITY OF KOS - MEDICAL ASSOCIATION OF KOS - 'DR.E.P.PO 'FAINARETI' - COMMUNICATION-EDUCATION-CULTURE ACTIONS.", location: "HISTORICAL & FOLKLORE MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250909T110000", gCalEnd: "20250917T190000" },
+            { date: "SUNDAY 14/09/25", time: "20:00", title: "CONCERT WITH WORKS FOR SOLO VIOLIN and VIOLIN AND ELECTRONICS WITH SOLOIST TANIA SIKELIANOU", description: "Also participating are Nikos Harizanos and Kostas Mantzoros on electronics.", location: "ROMAN ODEON OF KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250914T200000", gCalEnd: "20250914T220000" },
+            { date: "FRIDAY 19/09/25", time: "19:30", title: "EDUCATIONAL ACTIVITY FOR CHILDREN", description: "Group activities and skills workshops with the 'ATHENS FOR KIDS' Team, in collaboration with the LIONS CLUB OF KOS 'HIPPOCRATES'.", location: "MARITIME & FOLKLORE MUSEUM OF KARDAMENA", googleMaps: "https://maps.app.goo.gl/6tX8wP5vY9zR7fWb9", gCalStart: "20250919T193000", gCalEnd: "20250919T213000" },
+            { date: "SATURDAY 20/09/25 & SUNDAY 21/09/25", time: "20:00", title: "SCREENING OF SHORT FILMS", description: "Screening of the award-winning films from the 47th Drama Greek Short Film Festival of 2024, in collaboration with the KOS CINEMA CLUB.", location: "COURTYARD OF THE HISTORICAL & FOLKLORE MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250920T200000", gCalEnd: "20250921T220000" },
+            { date: "SATURDAY 20/09/25 & SUNDAY 21/09/25", time: "20:30", title: "8th TRADITIONAL MUSIC AND DANCE GATHERING OF KOS-'ANNA SARRI-KARABESINI'", description: "Two-day music and dance event, in collaboration with the 'ARION' FRIENDS OF MUSIC ASSOCIATION. Co-organizer: REGION OF SOUTH AEGEAN.", location: "EVANGELISTRIAS OPEN AIR THEATRE, ASFENDIOU", googleMaps: "https://maps.app.goo.gl/rWfA8L3Q8jJqfRzY6", gCalStart: "20250920T203000", gCalEnd: "20250921T223000" },
+            { date: "SATURDAY 20/09/25 to FRIDAY 26/09/25", time: "18:30-21:00", title: "PHOTOGRAPHY EXHIBITION 'ETERNAL MOMENTS'", description: "Amateur photographers Maria Kypraiou and Marina Orfanidou exhibit their photographs. Their common passion is the art of photography and highlighting the natural and cultural wealth of our land.", location: "KOS MARINA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250920T183000", gCalEnd: "20250926T210000" },
+            { date: "TUESDAY 23/09/25 to SUNDAY 05/10/25", time: "18:00-21:00", title: "'GRAPHIC ROUTES FOR AN ATYPICAL GENESIS' - VISUAL ARTS EXHIBITION", description: "This is an exhibition of monotypes/prints by Giovanni D'Alessandro, in collaboration with the CULTURAL ASSOCIATION AIAL LEROU.", location: "HISTORICAL & FOLKLORE MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250923T180000", gCalEnd: "20251005T210000" },
+            { date: "WEDNESDAY 24/09/25", time: "19:30", title: "Book Presentation: 'Where life drips' by Dimitra I. Palapani", description: "Metronomos Publications. The poetry collection will be presented by: Yota Kefala and Marina Betta. 'Friends and lovers of poetry' will recite poems.", location: "COURTYARD OF THE HISTORICAL & FOLKLORE MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250924T193000", gCalEnd: "20250924T213000" },
+            { date: "FRIDAY 26/09/25 to SUNDAY 28/09/25", time: "FRI: 17:00-20:00, SAT: 10:00-13:00 & 17:00-20:00, SUN: 10:00-13:00", title: "'RODANI: AN UNEXPECTED ENCOUNTER OF CHILDREN WITH BOOKS'", description: "Rodani is a wooden library on wheels that invites children aged (5 to 12 years) to get to know the magical world of books.", location: "KONITSIS SQUARE / ELEFTHERIAS SQUARE / ANTAGORA SQUARE", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250926T170000", gCalEnd: "20250928T130000" },
+            { date: "SATURDAY 27/09/25", time: "20:00", title: "EVENING DEDICATED TO WORLD TOURISM DAY", description: "Music and dance event dedicated to World Tourism Day with traditional music and dances, in collaboration with the CULTURAL AND EDUCATIONAL ASSOCIATION OF ASFENDIOU 'O THEOKRITOS'.", location: "TIGAKI SQUARE", googleMaps: "https://maps.app.goo.gl/fWzS9wU7Z6qR8pXz5", gCalStart: "20250927T200000", gCalEnd: "20250927T220000" },
+            { date: "SATURDAY 27/09/25", time: "22:00", title: "CONCERT WITH IOULIA KARAPATAKI", description: "Ticketed event.", location: "PYLI FOOTBALL FIELD", googleMaps: "https://maps.app.goo.gl/hG5b8tF7yX5wR8vV9", gCalStart: "20250927T220000", gCalEnd: "20250927T235900" },
+            { date: "SATURDAY 27/09/25 & SUNDAY 28/09/25", time: "SAT: 10:00 (SEMINAR), 19:00 (LECTURE), SUN: 20:00 (CONCERT)", title: "TWO-DAY BRASS INSTRUMENT EVENT-CONCERT WITH THE 'IONIAN BRASS QUINTET'", description: "The two-day event includes a brass instrument seminar, a speech-lecture on the benefits of citizens of all ages participating in bands and wind ensembles & a concert with the Brass Quintet with works of various music, with an emphasis on Greek composers. The PHILHARMONIC ORCHESTRA OF THE MUNICIPALITY OF KOS collaborates.", location: "HISTORICAL & FOLKLORE MUSEUM OF KOS / ROMAN ODEON OF KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250927T100000", gCalEnd: "20250928T220000" },
+            // October
+            { date: "SATURDAY 04/10/25", time: "19:30", title: "TRADITIONAL PORK FEAST (CHOIROSFIGIA)", description: "Festival on the theme of traditional pork slaughter, with local delicacies, local dances and live music, in collaboration with the CULTURAL AND EDUCATIONAL ASSOCIATION OF PYLI 'O APELLIS'.", location: "AGIOS NIKOLAOS SQUARE, PYLI", googleMaps: "https://maps.app.goo.gl/vS6X7W9zY4f6s7wE9", gCalStart: "20251004T193000", gCalEnd: "20251004T223000" },
+            { date: "SUNDAY 05/10/25", time: "20:00", title: "MUSIC EVENT with REBETIKA SONGS", description: "In collaboration with the CHOIR OF THE ASSOCIATION OF PRIMARY EDUCATION TEACHERS OF KOS-NISYROS. The Choir is accompanied by the musicians: Ilias Papailias, Periklis Ntonvas, Nikos Arbilias. Text curation-Choir direction and accordion, Christos Gamvrellis.", location: "COURTYARD OF THE CHURCH OF AGIOS GEORGIOS OF NEA ALIKARNASSOS", googleMaps: "https://maps.app.goo.gl/wJ5p5yQ8zX9wS6vR8", gCalStart: "20251005T200000", gCalEnd: "20251005T220000" },
+            { date: "SATURDAY 11/10/25 & SUNDAY 12/10/25", time: "SAT: 18:00-21:00, SUN: 11:00-20:00", title: "HAGIOGRAPHY EXHIBITION", description: "Two-day exhibition of works by the students of the Association's art workshop, in collaboration with the CULTURAL AND EDUCATIONAL ASSOCIATION OF ASFENDIOU 'O THEOKRITOS'.", location: "ECCLESIASTICAL MUSEUM OF THE HOLY METROPOLIS OF KOS & NISYROS", googleMaps: "https://maps.app.goo.gl/qL8sU53zQ2pG8c187", gCalStart: "20251011T180000", gCalEnd: "20251012T200000" },
+            { date: "SUNDAY 12/10/25 to SUNDAY 19/10/25", time: "10:00-12:30 & 18:00-20:00", title: "VISUAL ARTS EXHIBITION 'THE VOLT ART PROJECT'", description: "This is a visual arts exhibition that includes sculptures, collages, original aesthetics and techniques, and an art installation, consisting of a sculpture and digital imaging, in collaboration with the 2nd PRIMARY SCHOOL OF KOS.", location: "HISTORICAL & FOLKLORE MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20251012T100000", gCalEnd: "20251019T200000" },
+            { date: "SUNDAY 12/10/25 to SUNDAY 19/10/25", title: "'HIPPOCRATIC WEEK'", description: "The 'Hippocratic Week' aims at the Internationalization of the Authentic Oath of Hippocrates, by the INTERNATIONAL HIPPOCRATIC FOUNDATION OF KOS.", location: "INTERNATIONAL HIPPOCRATIC+FOUNDATION+OF+KOS", googleMaps: "https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7", gCalStart: "20251012T090000", gCalEnd: "20251019T170000" },
+            { date: "SUNDAY 26/10/25", time: "11:00", title: "SPEECH ON THE EPIC OF 1940", description: "Speaker: Nikolaos S. Kanellopoulos, assistant professor of Military History and Analysis of Military Operations at the Hellenic Army Academy. An exhibition of period material will be held on site, in collaboration with the P.O. KOON 'O FILITAS'.", location: "INTERNATIONAL HIPPOCRATIC FOUNDATION OF KOS", googleMaps: "https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7", gCalStart: "20251026T110000", gCalEnd: "20251026T130000" },
+            // November
+            { date: "SUNDAY 09/11/25", time: "17:00", title: "PRESENTATION of the book 'THE GUILTY' by author NIKOLAOS ARGYROPOULOS", description: "Dimitris Kaimakis, a retired officer and member of the Association, will speak about the book, in collaboration with the ASSOCIATION OF STEREA HELLAS RESIDENTS OF KOS 'I ROUMELI'.", location: "PYLI CULTURAL CENTER 'GALINOS FLASKOS'", googleMaps: "https://maps.app.goo.gl/jR8fG5vW9yY7xXzW8", gCalStart: "20251109T170000", gCalEnd: "20251109T190000" },
+            { date: "SATURDAY 15/11/25", time: "18:00", title: "MUSIC AND DANCE EVENT AND PRESENTATION OF THE BOOK by author GIANNIS KALPOUZOS titled: 'DRUNKARD. ON THE SOIL OF CRETE'", description: "The book will be presented by: Maria Amiridou and Marina Betta. Participants: Vasilis Kokkalakis and Nikolas Papastamatiou, in collaboration with the ANTIMACHIA JUNIOR HIGH SCHOOL, the ANTIMACHIA SENIOR HIGH SCHOOL & the HIPPOCRATEIO SENIOR HIGH SCHOOL OF KOS.", location: "PYLI CULTURAL CENTER 'GALINOS FLASKOS'", googleMaps: "https://maps.app.goo.gl/jR8fG5vW9yY7xXzW8", gCalStart: "20251115T180000", gCalEnd: "20251115T200000" },
+            { date: "SUNDAY 16/11/25", title: "VISITS TO OPEN WINERIES IN KOS", description: "As part of World Wine Tourism Day, many wineries in Kos will be open to the public, offering the opportunity to get to know their wines and experience a unique wine tourism experience.", location: "Various wineries in Kos", googleMaps: "https://www.google.com/maps/search/wineries+in+Kos", gCalStart: "20251116T100000", gCalEnd: "20251116T170000" },
+            { date: "SATURDAY 29/11/25 & SUNDAY 30/11/25", time: "SAT: 18:00-21:00, SUN: 11:00-20:00", title: "VISUAL ARTS EXHIBITION", description: "Two-day exhibition of works by the students of the Association's art workshop, in collaboration with the CULTURAL AND EDUCATIONAL ASSOCIATION OF ASFENDIOU 'O THEOKRITOS'.", location: "HISTORICAL & FOLKLORE MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20251129T180000", gCalEnd: "20251130T200000" }
+        ];
+
+        // --- UI & NAVIGATION ---
+        lucide.createIcons();
+        let currentSection = null;
+        const homeScreen = document.getElementById('home-screen');
+
+        function showSection(sectionId) {
+            homeScreen.style.display = 'none';
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+                currentSection = section;
+                section.scrollTop = 0;
+                
+                if (sectionId === 'events-section') {
+                    const dateFilterInput = document.getElementById('event-date-filter');
+                    if (dateFilterInput) {
+                        dateFilterInput.removeEventListener('change', renderEvents);
+                        dateFilterInput.addEventListener('change', renderEvents);
+                        const today = new Date();
+                        const yyyy = today.getFullYear();
+                        const mm = String(today.getMonth() + 1).padStart(2, '0');
+                        const dd = String(today.getDate()).padStart(2, '0');
+                        dateFilterInput.value = `${yyyy}-${mm}-${dd}`;
+                    }
+                    renderEvents(); 
+                }
+            }
+        }
+
+        function goBack() {
+            if (currentSection) {
+                currentSection.classList.remove('active');
+                currentSection = null;
+            }
+            setTimeout(() => {
+                 homeScreen.style.display = 'block';
+            }, 300);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2000);
+        }
+
+        function copyToClipboard(elementSelector, toastMessage) {
+            const textToCopy = document.querySelector(elementSelector).innerText;
+            const textArea = document.createElement('textarea');
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(toastMessage);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                showToast('Failed to copy!');
+            }
+            document.body.removeChild(textArea);
+        }
+        
+        function copyGeneratedText(text, toastMessage) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(toastMessage);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                showToast('Failed to copy!');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // --- EVENTS SECTION LOGIC ---
+        function generateGoogleCalendarLink(event) {
+            const startDate = event.gCalStart;
+            const endDate = event.gCalEnd;
+            const title = encodeURIComponent(event.title);
+            const description = encodeURIComponent(`${event.description}\n\nLocation: ${event.location}`);
+            const location = encodeURIComponent(event.location);
+            return `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${description}&location=${location}&sf=true&output=xml`;
+        }
+
+        function generateWhatsAppShareLink(event) {
+            const message = encodeURIComponent(`Check out this event: ${event.title} on ${event.date} at ${event.location}. ${event.description} More info: ${event.googleMaps}`);
+            return `https://wa.me/?text=${message}`;
+        }
+
+        function renderEvents() {
+            const eventsList = document.getElementById('events-list');
+            const noEventsMessage = document.getElementById('no-events-message');
+            eventsList.innerHTML = '';
+            noEventsMessage.classList.add('hidden');
+
+            const selectedDate = document.getElementById('event-date-filter').value;
+            let filteredEvents = events;
+
+            if (selectedDate) {
+                filteredEvents = events.filter(event => {
+                    const eventStartDate = event.gCalStart ? event.gCalStart.substring(0, 8) : '';
+                    const eventEndDate = event.gCalEnd ? event.gCalEnd.substring(0, 8) : '';
+                    const formattedSelectedDate = selectedDate.replace(/-/g, '');
+                    return formattedSelectedDate >= eventStartDate && formattedSelectedDate <= eventEndDate;
+                });
+            }
+
+            if (filteredEvents.length === 0) {
+                noEventsMessage.classList.remove('hidden');
+            } else {
+                filteredEvents.forEach(event => {
+                    const eventCard = document.createElement('div');
+                    eventCard.className = 'event-card p-6 flex flex-col justify-between';
+                    eventCard.innerHTML = `
+                        <div>
+                            <h2 class="text-2xl font-bold mb-2">${event.title}</h2>
+                            <p class="text-lg mb-2"><i class="far fa-calendar-alt mr-2"></i>${event.date}</p>
+                            <p class="text-gray-700 mb-1"><i class="far fa-clock mr-2"></i>${event.time || ''}</p>
+                            <p class="text-md mb-3"><i class="fas fa-map-marker-alt mr-2"></i>${event.location}</p>
+                            <p class="text-gray-600 text-sm mb-4">${event.description}</p>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between gap-3 mt-4">
+                            <a href="${event.googleMaps}" target="_blank" class="btn-primary flex items-center text-sm">
+                                <i class="fas fa-external-link-alt mr-2"></i> Προβολή στον Χάρτη
+                            </a>
+                            <div class="flex flex-wrap gap-2">
+                                <a href="${generateGoogleCalendarLink(event)}" target="_blank" class="btn-share text-sm">
+                                    <i class="far fa-calendar-plus"></i> Προσθήκη στο Ημερολόγιο
+                                </a>
+                                <a href="${generateWhatsAppShareLink(event)}" target="_blank" class="btn-share text-sm">
+                                    <i class="fab fa-whatsapp"></i> Κοινοποίηση
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    eventsList.appendChild(eventCard);
+                });
+            }
+        }
+
+        // --- GEMINI API HANDLER ---
+        async function callGeminiAPI(prompt) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }]
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorBody = await response.json();
+                    console.error("API Error:", errorBody);
+                    return `Σφάλμα: ${errorBody.error.message}`;
+                }
+
+                const data = await response.json();
+                 if (data.candidates && data.candidates.length > 0 && data.candidates[0].content.parts.length > 0) {
+                    return data.candidates[0].content.parts[0].text;
+                } else {
+                    return "Συγγνώμη, δεν μπόρεσα να δημιουργήσω μια απάντηση. Το API επέστρεψε ένα απροσδόκητο αποτέλεσμα.";
+                }
+            } catch (error) {
+                console.error("Fetch Error:", error);
+                return "Σφάλμα: Δεν ήταν δυνατή η σύνδεση στην υπηρεσία AI. Ελέγξτε τη σύνδεσή σας στο δίκτυο.";
+            }
+        }
+
+        function showLoading(containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `<div class="flex justify-center items-center p-8"><div class="loader"></div></div>`;
+        }
+
+        // --- AI FEATURES ---
+
+        // 1. AI CONCIERGE
+        const chatContainer = document.getElementById('chat-container');
+        const chatInput = document.getElementById('chat-input');
+        
+        function getWelcomeBookContext() {
+            const sectionsToScan = ['welcome-section', 'essentials-section', 'guide-section', 'transport-section', 'important-section', 'departure-section', 'local-products-section', 'island-hopping-section', 'natural-beauty-section', 'local-recipes-section', 'events-section'];
+            let context = "Πληροφορίες Βιβλίου Υποδοχής:\n";
+            sectionsToScan.forEach(id => {
+                const section = document.getElementById(id);
+                if (section) {
+                    context += `\n--- Ενότητα: ${id.replace('-section','')} ---\n`;
+                    context += section.innerText || section.textContent;
+                }
+            });
+            return context;
+        }
+
+        async function handleChatSubmit() {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+
+            chatContainer.innerHTML += `<div class="chat-bubble user">${userMessage}</div>`;
+            chatInput.value = '';
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            chatContainer.innerHTML += `<div id="ai-loading" class="chat-bubble ai"><div class="loader" style="width:24px; height:24px; border-bottom-color: #4a90e2;"></div></div>`;
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            const knowledgeSource = document.querySelector('input[name="knowledgeSource"]:checked').value;
+            let prompt;
+
+            if (knowledgeSource === 'welcomeBook') {
+                const context = getWelcomeBookContext();
+                prompt = `Είστε η Φαίδρα, ένας χρήσιμος AI concierge για το διαμέρισμα 'Diamante del Mar Phaedra' στην Κω, Ελλάδα. Βάσει *μόνο* των παρακάτω "Πληροφοριών Βιβλίου Υποδοχής", απαντήστε στην ερώτηση του χρήστη. Εάν η απάντηση δεν υπάρχει στο κείμενο, πείτε "Λυπάμαι, αυτή η πληροφορία δεν υπάρχει στο βιβλίο υποδοχής." Μην χρησιμοποιήσετε καμία εξωτερική γνώση.\n\n${context}\n\nΕρώτηση χρήστη: "${userMessage}"`;
+            } else {
+                prompt = `Είστε η Φαίδρα, ένας χρήσιμος AI concierge για έναν τουρίστα στην Κω, Ελλάδα. Απαντήστε στην ακόλουθη ερώτηση: "${userMessage}"`;
+            }
+
+            const aiResponse = await callGeminiAPI(prompt);
+            
+            const loadingBubble = document.getElementById('ai-loading');
+            loadingBubble.innerHTML = aiResponse.replace(/\n/g, '<br>');
+            loadingBubble.removeAttribute('id');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleChatSubmit();
+            }
+        });
+
+        // 2. AI RECIPES
+        async function generateRecipe() {
+            const outputContainer = document.getElementById('recipe-output');
+            outputContainer.querySelector('div').classList.add('hidden'); // Hide placeholder
+            showLoading('recipe-output');
+            const prompt = "Είστε ένας δημιουργικός σεφ που ειδικεύεται στην ελληνική νησιώτικη κουζίνα. Προτείνετε μια απλή και νόστιμη συνταγή χρησιμοποιώντας ένα ή περισσότερα από αυτά τα τοπικά προϊόντα από την Κω, Ελλάδα: τυρί Πόσα (κρασοτύρι), θυμαρίσιο μέλι Κω, τοπικό ελαιόλαδο, φρέσκα ψάρια (όπως τσιπούρα ή λαβράκι) και ντοματίνια. Δώστε ένα πιασάρικο όνομα για τη συνταγή, μια σύντομη περιγραφή, τη λίστα των συστατικών και οδηγίες βήμα προς βήμα. Διαμορφώστε την απάντηση ωραία με επικεφαλίδες.";
+            const response = await callGeminiAPI(prompt);
+            outputContainer.innerHTML = response.replace(/\n/g, '<br>');
+        }
+
+        // 3. AI ITINERARY
+        async function generateItinerary() {
+            const outputContainer = document.getElementById('itinerary-output');
+            const days = document.getElementById('stay-days').value;
+            const interests = document.getElementById('interests').value;
+
+            if (!days || !interests) {
+                outputContainer.innerHTML = `<div class="text-center p-4 text-red-500">Παρακαλώ εισάγετε τον αριθμό των ημερών και τα ενδιαφέροντά σας.</div>`;
+                return;
+            }
+            
+            showLoading('itinerary-output');
+            const guideContext = getWelcomeBookContext();
+            const prompt = `Είστε ένας ειδικός τουριστικός οδηγός για την Κω, Ελλάδα. Δημιουργήστε ένα εξατομικευμένο, ημερήσιο πρόγραμμα για ένα ταξίδι ${days} ημερών για έναν τουρίστα του οποίου τα ενδιαφέροντα είναι: "${interests}". Χρησιμοποιήστε τις συστάσεις του οικοδεσπότη από τον παρακάτω οδηγό ως προτεραιότητα. Για κάθε μέρα, προτείνετε μια πρωινή δραστηριότητα, μια απογευματινή δραστηριότητα και μια πρόταση για δείπνο. Να είστε δημιουργικοί και πρακτικοί. Διαμορφώστε την απάντηση ως καθαρό HTML με επικεφαλίδες (h3, h4), παραγράφους (p) και λίστες (ul, li).\n\nΟδηγός οικοδεσπότη:\n${guideContext}`;
+            
+            const response = await callGeminiAPI(prompt);
+            outputContainer.innerHTML = response.replace(/\n/g, '<br>');
+        }
+
+        // 4. AI REVIEW ASSISTANT
+        async function generateReview() {
+            const outputContainer = document.getElementById('review-output');
+            const keywords = document.getElementById('review-keywords').value;
+            
+            if (!keywords) {
+                outputContainer.innerHTML = `<p class="text-red-500 text-sm">Παρακαλώ εισάγετε τουλάχιστον μία λέξη-κλειδί.</p>`;
+                return;
+            }
+
+            outputContainer.innerHTML = `<div class="flex justify-center items-center p-4"><div class="loader"></div></div>`;
+            
+            const prompt = `Είστε ένας χρήσιμος βοηθός για έναν επισκέπτη ξενοδοχείου. Με βάση αυτές τις λέξεις-κλειδιά: "${keywords}", γράψτε μια φιλική και θετική κριτική για ένα τουριστικό κατάλυμα. Να ακούγεται φυσικό και προσωπικό. Η ιδιοκτησία ονομάζεται 'Diamante del Mar Phaedra'. Η κριτική πρέπει να έχει περίπου 3-5 προτάσεις.`;
+
+            const response = await callGeminiAPI(prompt);
+            
+            const reviewText = response;
+            
+            outputContainer.innerHTML = `
+                <textarea id="generated-review-text" rows="5" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">${reviewText}</textarea>
+                <button onclick="copyGeneratedText(document.getElementById('generated-review-text').value, 'Η κριτική αντιγράφηκε!')" class="mt-2 w-full bg-gray-500 text-white px-3 py-1 rounded-lg text-sm font-semibold hover:bg-gray-600">Αντιγραφή Κριτικής</button>
+            `;
+        }
+
+    </script>
+</body>
+</html>
