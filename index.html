@@ -7,450 +7,71 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
-        .section-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f7fafc; /* light gray */
-            z-index: 50;
-            overflow-y: auto;
-            transform: translateX(100%);
-            transition: transform 0.3s ease-in-out;
-        }
-        .section-screen.active {
-            transform: translateX(0);
-        }
-        .card {
-            background-color: white;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .grid-button {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 1rem;
-            border-radius: 1rem;
-            background: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border: 1px solid rgba(226, 232, 240, 1);
+        .language-button {
             transition: all 0.2s ease-in-out;
         }
-        .grid-button:hover {
+        .language-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        .section-header {
-            position: sticky;
-            top: 0;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 10;
-        }
-        .prose-custom p, .prose-custom li {
-            color: #4A5568;
-        }
-        .prose-custom h3 {
-            color: #2D3748;
-            font-weight: 600;
-        }
-        .btn-primary {
-            background-color: #4a90e2; /* Blue */
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: background-color 0.2s ease-in-out;
-        }
-        .btn-primary:hover {
-            background-color: #357ABD;
-        }
-        .event-card {
-            background-color: #fff;
-            border-radius: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
-        .event-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        }
-        .btn-share {
-            background-color: #6a7fdb; /* Purple-blue */
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            font-weight: 500;
-            transition: background-color 0.2s ease-in-out;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .btn-share:hover {
-            background-color: #536AC6;
-        }
-        .loader {
-            width: 48px;
-            height: 48px;
-            border: 5px solid #FFF;
-            border-bottom-color: #4a90e2;
-            border-radius: 50%;
-            display: inline-block;
-            box-sizing: border-box;
-            animation: rotation 1s linear infinite;
-        }
-        @keyframes rotation {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .chat-bubble {
-            max-width: 80%;
-            padding: 0.75rem 1rem;
-            border-radius: 1rem;
-            margin-bottom: 0.5rem;
-            word-wrap: break-word;
-        }
-        .chat-bubble.user {
-            background-color: #4a90e2;
-            color: white;
-            border-bottom-right-radius: 0.25rem;
-            align-self: flex-end;
-        }
-        .chat-bubble.ai {
-            background-color: #e2e8f0;
-            color: #2d3748;
-            border-bottom-left-radius: 0.25rem;
-            align-self: flex-start;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
     </style>
 </head>
 <body class="bg-gray-100">
-
-    <div id="app" class="max-w-md mx-auto min-h-screen bg-gray-100">
+    <div class="max-w-md mx-auto min-h-screen flex flex-col justify-center items-center p-4">
+        <header class="relative w-full mb-8">
+            <img src="https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop" 
+                 onerror="this.onerror=null;this.src='https://diamantedelmar.github.io/phaedra.png';" 
+                 alt="View of Kos island" class="w-full h-60 object-cover rounded-2xl shadow-xl">
+            <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-gray-100 to-transparent"></div>
+        </header>
         
-        <div id="home-screen">
-            <header class="relative">
-                <img src="https://images.unsplash.com/photo-1590530325942-15f23e42b267?q=80&w=800&auto=format&fit=crop" 
-                     onerror="this.onerror=null;this.src='https://diamantedelmar.github.io/phaedra.png';" 
-                     alt="Phaedra" class="w-full h-60 object-cover">
-                <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-gray-100 to-transparent"></div>
-            </header>
-            <div class="p-4 -mt-10">
-                 <div class="text-center mb-6 bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg">
-                    <h1 class="text-3xl font-bold text-gray-800">Welcome Book</h1>
-                </div>
-                <main>
-                    <div class="grid grid-cols-3 gap-4">
-                        <button onclick="showSection('ai-concierge-section')" class="grid-button col-span-1">
-                            <i data-lucide="sparkles" class="w-10 h-10 text-purple-500 mb-2"></i>
-                            <span class="font-semibold text-gray-700 text-sm">Phaedra</span>
-                        </button>
-                        <button onclick="showSection('ai-itinerary-section')" class="grid-button col-span-1">
-                            <i data-lucide="calendar-check" class="w-10 h-10 text-green-500 mb-2"></i>
-                            <span class="font-semibold text-gray-700 text-sm">AI Itinerary</span>
-                        </button>
-                        <button onclick="showSection('welcome-section')" class="grid-button">
-                            <i data-lucide="sun" class="w-8 h-8 text-blue-500 mb-2"></i>
-                            <span class="font-semibold text-gray-700 text-sm">Welcome</span>
-                        </button>
-                        <button onclick="showSection('essentials-section')" class="grid-button">
-                            <i data-lucide="key-round" class="w-8 h-8 text-blue-500 mb-2"></i>
-                            <span class="font-semibold text-gray-700 text-sm">Apartment</span>
-                        </button>
-                        <button onclick="showSection('guide-section')" class="grid-button">
-                            <i data-lucide="map" class="w-8 h-8 text-blue-500 mb-2"></i>
-                            <span class="font-semibold text-gray-700 text-sm">Island Guide</span>
-                        </button>
-                        <button onclick="showSection('natural-beauty-section')" class="grid-button">
-                            <i data-lucide="leaf" class="w-8 h-8 text-green-500 mb-2"></i>
-                            <span class="font-semibold text-gray-700 text-sm">Natural Beauty</span>
-                        </button>
-                        <button onclick="showSection('events-section')" class="grid-button">
-                            <i data-lucide="calendar-days" class="w-8 h-8 text-blue-500 mb-2"></i>
-                            <span class="font-semibold text-gray-700 text-sm">Events</span>
-                        </button>
-                        <button onclick="showSection('local-products-section')" class="grid-button">
-                            <i data-lucide="shopping-bag" class="w-8 h-8 text-blue-500 mb-2"></i>
-                            <span class="font-semibold text-gray-700 text-sm">Local Goods</span>
-                        </button>
-                        <button onclick="showSection('local-recipes-section')" class="grid-button">
-                            <i data-lucide="utensils-crossed" class="w-8 h-8 text-orange-500 mb-2"></i>
-                            <span class="font-semibold text-gray-700 text-sm">Local Recipes</span>
-                        </button>
-                        <button onclick="showSection('island-hopping-section')" class="grid-button">
-                            <i data-lucide="sailboat" class="w-8 h-8 text-blue-500 mb-2"></i>
-                            <span class="font-semibold text-gray-700 text-sm">Island Hop</span>
-                        </button>
-                        <button onclick="showSection('transport-section')" class="grid-button">
-                            <i data-lucide="bus" class="w-8 h-8 text-blue-500 mb-2"></i>
-                            <span class="font-semibold text-gray-700 text-sm">Transport</span>
-                        </button>
-                        <button onclick="showSection('important-section')" class="grid-button">
-                            <i data-lucide="siren" class="w-8 h-8 text-blue-500 mb-2"></i>
-                            <span class="font-semibold text-gray-700 text-sm">Important</span>
-                        </button>
-                        <button onclick="showSection('departure-section')" class="grid-button">
-                            <i data-lucide="log-out" class="w-8 h-8 text-blue-500 mb-2"></i>
-                            <span class="font-semibold text-gray-700 text-sm">Departure</span>
-                        </button>
-                    </div>
-                </main>
+        <div class="text-center -mt-16 z-10 w-full">
+            <div class="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg">
+                <h1 class="text-3xl font-bold text-gray-800">Welcome</h1>
+                <p class="text-gray-600 mt-2">Please select your language</p>
             </div>
         </div>
 
-        <!-- AI CONCIERGE SECTION -->
-        <div id="ai-concierge-section" class="section-screen flex flex-col h-full">
-            <header class="section-header p-4 flex items-center shadow-md">
-                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
-                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
-                </button>
-                <h2 class="text-xl font-bold text-gray-800 mx-auto">Phaedra</h2>
-            </header>
-            <div class="p-4 flex-grow overflow-y-auto flex flex-col" id="chat-container">
-                <div class="chat-bubble ai">Hello! I'm Phaedra, your AI Concierge. How can I help you today?</div>
+        <main class="w-full mt-8">
+            <div class="grid grid-cols-2 gap-4">
+                <a href="index_en.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇬🇧</span>
+                    <span class="block font-semibold text-gray-700 mt-2">English</span>
+                </a>
+                <a href="index_es.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇪🇸</span>
+                    <span class="block font-semibold text-gray-700 mt-2">Español</span>
+                </a>
+                <a href="index_de.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇩🇪</span>
+                    <span class="block font-semibold text-gray-700 mt-2">Deutsch</span>
+                </a>
+                <a href="index_fr.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇫🇷</span>
+                    <span class="block font-semibold text-gray-700 mt-2">Français</span>
+                </a>
+                <a href="index_it.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇮🇹</span>
+                    <span class="block font-semibold text-gray-700 mt-2">Italiano</span>
+                </a>
+                <a href="index_nl.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇳🇱</span>
+                    <span class="block font-semibold text-gray-700 mt-2">Nederlands</span>
+                </a>
+                <a href="index_tr.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇹🇷</span>
+                    <span class="block font-semibold text-gray-700 mt-2">Türkçe</span>
+                </a>
+                <a href="index_el.html" class="language-button bg-white p-4 rounded-xl shadow-md text-center">
+                    <span class="text-2xl">🇬🇷</span>
+                    <span class="block font-semibold text-gray-700 mt-2">Ελληνικά</span>
+                </a>
             </div>
-            <div class="p-4 bg-white border-t">
-                <div class="mb-2">
-                    <label class="text-sm font-medium text-gray-600">Knowledge Source:</label>
-                    <div class="flex items-center space-x-4 mt-1">
-                        <label class="flex items-center">
-                            <input type="radio" name="knowledgeSource" value="welcomeBook" class="form-radio text-blue-500" checked>
-                            <span class="ml-2 text-sm text-gray-700">Welcome Book</span>
-                        </label>
-                        <label class="flex items-center">
-                            <input type="radio" name="knowledgeSource" value="webSearch" class="form-radio text-blue-500">
-                            <span class="ml-2 text-sm text-gray-700">Web Search</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <input type="text" id="chat-input" class="flex-grow border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ask Phaedra a question...">
-                    <button onclick="handleChatSubmit()" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 focus:outline-none">
-                        <i data-lucide="send" class="w-6 h-6"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- AI ITINERARY SECTION -->
-        <div id="ai-itinerary-section" class="section-screen">
-            <header class="section-header p-4 flex items-center shadow-md">
-                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
-                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
-                </button>
-                <h2 class="text-xl font-bold text-gray-800 mx-auto">AI Itinerary Planner</h2>
-            </header>
-            <div class="p-6 space-y-4">
-                <div class="card p-4">
-                    <h3 class="font-semibold text-lg mb-2">Create Your Perfect Trip</h3>
-                    <div>
-                        <label for="stay-days" class="block text-sm font-medium text-gray-700">How many days are you staying?</label>
-                        <input type="number" id="stay-days" value="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
-                    </div>
-                    <div class="mt-4">
-                        <label for="interests" class="block text-sm font-medium text-gray-700">What are your interests?</label>
-                        <textarea id="interests" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="e.g., beaches, history, food, hiking, nightlife, relaxation..."></textarea>
-                    </div>
-                    <button onclick="generateItinerary()" class="mt-4 w-full btn-primary">Generate Itinerary</button>
-                </div>
-                <div id="itinerary-output" class="prose-custom space-y-4">
-                    <div class="text-center p-4 text-gray-500">Your personalized itinerary will appear here.</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- DEPARTURE SECTION -->
-        <div id="departure-section" class="section-screen">
-            <header class="section-header p-4 flex items-center shadow-md">
-                <button onclick="goBack()" class="p-2 rounded-full hover:bg-gray-200">
-                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
-                </button>
-                <h2 class="text-xl font-bold text-gray-800 mx-auto">Until Next Time...</h2>
-            </header>
-            <div class="p-6 prose-custom">
-                <h3 class="text-2xl font-bold mb-4">A Fond Farewell</h3>
-                <p class="mb-4">As your time on the beautiful island of Kos draws to a close, we want to extend our sincerest thanks for choosing to stay with us. We truly hope you've had a wonderful and memorable holiday.</p>
-                <div class="card my-6 bg-blue-50 p-6">
-                    <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="check-circle" class="w-5 h-5 mr-2 text-blue-500"></i>Check-out Reminder</h3>
-                    <ul class="list-disc list-inside text-gray-600 space-y-1">
-                        <li>Check-out time is by <strong>11:00 AM</strong>.</li>
-                        <li>Please place your keys in the <strong>lockbox</strong>.</li>
-                        <li>Ensure all personal belongings are packed.</li>
-                        <li>Turn off all lights and A/C units.</li>
-                    </ul>
-                </div>
-                <h3 class="text-xl font-semibold mt-6 mb-2">Share Your Experience</h3>
-                <p>If you enjoyed your stay, we would be incredibly grateful if you could leave a review. Your feedback helps future travellers discover our little piece of paradise.</p>
-                <div class="card p-4 my-6 not-prose">
-                     <h3 class="font-semibold text-lg mb-2 flex items-center"><i data-lucide="edit-3" class="w-5 h-5 mr-2 text-purple-500"></i>AI Review Assistant</h3>
-                     <p class="text-sm text-gray-600 mb-2">Need help writing your review? Jot down a few keywords and let our AI assistant help you.</p>
-                     <div>
-                        <label for="review-keywords" class="block text-sm font-medium text-gray-700">Keywords about your stay:</label>
-                        <textarea id="review-keywords" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="e.g., beautiful view, clean, great location, friendly host..."></textarea>
-                    </div>
-                    <button onclick="generateReview()" class="mt-4 w-full bg-purple-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-600">Generate Review</button>
-                    <div id="review-output" class="mt-4 space-y-2">
-                    </div>
-                </div>
-                <p>You can post your review on the platform you used for booking or on our <a href="https://g.page/r/CbUXM_AzUnc5EAE/review" target="_blank" class="text-blue-600 hover:underline">Google Business Profile</a>.</p>
-                <h3 class="text-xl font-semibold mt-6 mb-2">Stay Connected</h3>
-                <p>Follow us on Instagram <a href="https://www.instagram.com/diamantedelmar.phaedra" target="_blank" class="text-blue-600 hover:underline">@diamantedelmar.phaedra</a>.</p>
-                <p class="mt-8">Thank you once again. We wish you a safe and pleasant journey onwards!</p>
-            </div>
-        </div>
-
-        <!-- All other sections follow... -->
-        <!-- Each section remains the same as the multilingual version, just without the `data-key` attributes -->
-        
+        </main>
     </div>
-
-    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300">
-        Message copied!
-    </div>
-
-    <script>
-        // --- CONFIGURATION ---
-        const API_KEY = "AIzaSyALAR-YIwFpAlVvv2bLZfF-iuYOAJAPHgM"; // IMPORTANT: Add your Google AI Studio API key here.
-        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
-        
-        // --- UI & NAVIGATION ---
-        lucide.createIcons();
-        let currentSection = null;
-        const homeScreen = document.getElementById('home-screen');
-
-        function showSection(sectionId) {
-            homeScreen.style.display = 'none';
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.classList.add('active');
-                currentSection = section;
-                section.scrollTop = 0;
-            }
-        }
-
-        function goBack() {
-            if (currentSection) {
-                currentSection.classList.remove('active');
-                currentSection = null;
-            }
-            setTimeout(() => {
-                 homeScreen.style.display = 'block';
-            }, 300);
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.innerText = message;
-            toast.style.opacity = '1';
-            setTimeout(() => {
-                toast.style.opacity = '0';
-            }, 2000);
-        }
-
-        function copyToClipboard(elementSelector, toastMessage) {
-            const textToCopy = document.querySelector(elementSelector).innerText;
-            const textArea = document.createElement('textarea');
-            textArea.value = textToCopy;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            showToast(toastMessage);
-        }
-
-        // --- GEMINI API HANDLER ---
-        async function callGeminiAPI(prompt) {
-            if (!API_KEY) {
-                return "Error: API key is missing. Please add your Google AI Studio API key to the script.";
-            }
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-                });
-                if (!response.ok) {
-                    const errorBody = await response.json();
-                    return `Error: ${errorBody.error.message}`;
-                }
-                const data = await response.json();
-                return data.candidates[0].content.parts[0].text;
-            } catch (error) {
-                return "Error: Could not connect to the AI service.";
-            }
-        }
-        
-        function showLoading(containerId) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = `<div class="flex justify-center items-center p-8"><div class="loader"></div></div>`;
-        }
-
-        // --- AI FEATURES ---
-        async function handleChatSubmit() {
-            const chatContainer = document.getElementById('chat-container');
-            const chatInput = document.getElementById('chat-input');
-            const userMessage = chatInput.value.trim();
-            if (!userMessage) return;
-
-            chatContainer.innerHTML += `<div class="chat-bubble user">${userMessage}</div>`;
-            chatInput.value = '';
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-            chatContainer.innerHTML += `<div id="ai-loading" class="chat-bubble ai"><div class="loader" style="width:24px; height:24px;"></div></div>`;
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-
-            const knowledgeSource = document.querySelector('input[name="knowledgeSource"]:checked').value;
-            let prompt;
-
-            if (knowledgeSource === 'welcomeBook') {
-                 const context = document.body.innerText; // Simplified context for static page
-                 prompt = `You are Phaedra, an AI concierge. Based ONLY on the provided welcome book text below, answer the user's question in English. If the answer isn't in the text, say so.\n\n${context}\n\nUser Question: "${userMessage}"`;
-            } else {
-                prompt = `You are Phaedra, an AI concierge in Kos, Greece. Answer in English: "${userMessage}"`;
-            }
-
-            const aiResponse = await callGeminiAPI(prompt);
-            const loadingBubble = document.getElementById('ai-loading');
-            loadingBubble.innerHTML = aiResponse.replace(/\n/g, '<br>');
-            loadingBubble.removeAttribute('id');
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-        
-        async function generateItinerary() {
-             const outputContainer = document.getElementById('itinerary-output');
-            const days = document.getElementById('stay-days').value;
-            const interests = document.getElementById('interests').value;
-            if (!days || !interests) return;
-            showLoading('itinerary-output');
-            const prompt = `Create a personalized, day-by-day itinerary for a ${days}-day trip to Kos, Greece for a tourist interested in: "${interests}". Respond in English.`;
-            const response = await callGeminiAPI(prompt);
-            outputContainer.innerHTML = response.replace(/\n/g, '<br>');
-        }
-
-        async function generateReview() {
-            const outputContainer = document.getElementById('review-output');
-            const keywords = document.getElementById('review-keywords').value;
-            if (!keywords) return;
-            showLoading('review-output');
-            const prompt = `Based on these keywords: "${keywords}", write a friendly, positive review for a vacation rental called 'Diamante del Mar Phaedra'. Make it sound natural and personal, about 3-5 sentences long. Write the review in English.`;
-            const response = await callGeminiAPI(prompt);
-            outputContainer.innerHTML = `<textarea rows="5" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2">${response}</textarea>`;
-        }
-    </script>
 </body>
 </html>
