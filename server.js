@@ -2,8 +2,12 @@
 const express = require('express');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const path = require('path');
+require('dotenv').config();
 
-// Use environment variables for the API key
+const app = express();
+const port = process.env.PORT || 8080;
+
+// Access the API key from the environment variable
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 if (!GEMINI_API_KEY) {
@@ -11,21 +15,20 @@ if (!GEMINI_API_KEY) {
     process.exit(1);
 }
 
-const app = express();
-const port = process.env.PORT || 8080; // DigitalOcean uses port 8080 by default
-
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 
-// Serve static files (your index.html, CSS, etc.)
-app.use(express.static(path.join(__dirname, 'public')));
+// Middleware to parse JSON bodies
 app.use(express.json());
+
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 // API endpoint to handle AI requests
 app.post('/api/chat', async (req, res) => {
     try {
-        const userPrompt = req.body.prompt;
+        const { prompt } = req.body;
         const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-        const result = await model.generateContent(userPrompt);
+        const result = await model.generateContent(prompt);
         const response = await result.response;
         const text = response.text();
         res.json({ text });

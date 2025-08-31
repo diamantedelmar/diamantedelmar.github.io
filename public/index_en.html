@@ -800,8 +800,8 @@
 
     <script>
         // --- CONFIGURATION ---
-        const API_KEY = "AIzaSyALAR-YIwFpAlVvv2bLZfF-iuYOAJAPHgM";
-        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+        
+        const API_URL = '/api/chat';
         
         // --- DATA ---
         const events = [
@@ -1037,33 +1037,27 @@
         }
 
         // --- GEMINI API HANDLER ---
-        async function callGeminiAPI(prompt) {
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: prompt }] }]
-                    })
-                });
+       async function callGeminiAPI(prompt) {
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: prompt })
+        });
 
-                if (!response.ok) {
-                    const errorBody = await response.json();
-                    console.error("API Error:", errorBody);
-                    return `Error: ${errorBody.error.message}`;
-                }
-
-                const data = await response.json();
-                 if (data.candidates && data.candidates.length > 0 && data.candidates[0].content.parts.length > 0) {
-                    return data.candidates[0].content.parts[0].text;
-                } else {
-                    return "Sorry, I couldn't generate a response. The API returned an unexpected result.";
-                }
-            } catch (error) {
-                console.error("Fetch Error:", error);
-                return "Error: Could not connect to the AI service. Please check your network connection.";
-            }
+        if (!response.ok) {
+            const errorBody = await response.json();
+            console.error("API Error:", errorBody);
+            return `Error: ${errorBody.error.message}`;
         }
+
+        const data = await response.json();
+        return data.text;
+    } catch (error) {
+        console.error("Fetch Error:", error);
+        return "Error: Could not connect to the AI service. Please check your network connection.";
+    }
+}
 
         function showLoading(containerId) {
             const container = document.getElementById(containerId);
