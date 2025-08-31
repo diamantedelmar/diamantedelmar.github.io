@@ -140,15 +140,6 @@
             border-bottom-left-radius: 0.25rem;
             align-self: flex-start;
         }
-        .loading-dots span {
-            animation: bounce 0.8s infinite ease-in-out;
-        }
-        .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-        .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes bounce {
-            0%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-5px); }
-        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -447,14 +438,14 @@
                         <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1625450438349-5975e50cf582?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://media.jet2.com/is/image/jet2/313976-kgs_lambi_0813_02_ps?$Original-Dynamic(max1280x1280)$&wid=1920&hei=500&fit=crop%2C1&dpr=off';" alt="Sandy beach with umbrellas" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Lambi Beach</h4><p class="text-gray-600 mt-1">Your closest neighbour (200m away)! A popular, long sandy stretch with shallow waters, well-organized with bars and watersports.</p><a href="https://maps.app.goo.gl/ggrD1a8D9b8vC73D9" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
                         <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531122-8353e813a8c5?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.jet2holidays.com/-/media/destination%20guide/greece/kos/cfu_agios_stefanos_beach_1497481107_getty_1023_01_rgb-136-dpi-for-web-min.jpg?h=500&w=1920&crop=1&hash=6B2D4846664312303EC275100A9440EB%201024w';" alt="Beach with a church on an islet" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Agios Stefanos</h4><p class="text-gray-600 mt-1">Arguably Kos's most photogenic beach, with the islet of Kastri and ruins of 5th-century basilicas right by the shore.</p><a href="https://maps.app.goo.gl/qL8sU53zQ2pG8c187" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
                         <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1617066808546-32d56a237190?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.reckonasbavi.cz/wp-content/uploads/2023/08/Therma-beach-Embros-prirodni-termalni-lazne-na-ostrove-Kos.jpg.jpg';" alt="Rocky beach with hot springs" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Therma Beach</h4><p class="text-gray-600 mt-1">A unique natural spa experience where hot springs with therapeutic benefits flow into the sea. Features volcanic black pebbly sand.</p><a href="https://maps.app.goo.gl/8T1JvU5nUa1wP9W86" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
-                         <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1507525428034-b723a996f329?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.vacanzekos.com/wp-content/uploads/2016/02/paradise-beach.jpg';" alt="A stunning sandy beach with turquoise water" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Paradise Beach</h4><p class="text-gray-600 mt-1">Lives up to its name with golden sand and shallow, calm waters, making this beach perfect for families. Can get very busy.</p><a href="https://maps.app.goo.gl/VjP7zQjR9eG8m4RCA" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></i></a></div></div>
+                         <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1507525428034-b723a996f329?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.vacanzekos.com/wp-content/uploads/2016/02/paradise-beach.jpg';" alt="A stunning sandy beach with turquoise water" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Paradise Beach</h4><p class="text-gray-600 mt-1">Lives up to its name with golden sand and shallow, calm waters, making this beach perfect for families. Can get very busy.</p><a href="https://maps.app.goo.gl/VjP7zQjR9eG8m4RCA" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
                     </div>
                 </div>
 
                 <div>
                     <h3 class="text-2xl font-bold mb-4 text-gray-800">History & Villages</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531065-a8a4f0b2f5d7?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.vacanzegreche.com/public/img/data/2019101794859527_asklepion-isola-di-kos.jpg'" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">The Asklepion</h4><p class="text-gray-600 mt-1">The island's most significant archaeological site. A healing sanctuary linked to Hippocrates, the "Father of Modern Medicine".</p><a href="https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
+                        <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531233-a3a2de7c858e?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://www.vacanzegreche.com/public/img/data/2019101794859527_asklepion-isola-di-kos.jpg'" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">The Asklepion</h4><p class="text-gray-600 mt-1">The island's most significant archaeological site. A healing sanctuary linked to Hippocrates, the "Father of Modern Medicine".</p><a href="https://maps.app.goo.gl/1fgr8aHjH1y6X2Hh7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
                         <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1540899979346-a4c4987053e4?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://as1.ftcdn.net/jpg/02/95/44/86/1000_F_295448668_PNfl3bFQOS2eT3vWez1r1MlrlhyB0TFF.webp';" alt="Sunset over a Greek village" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Zia Village</h4><p class="text-gray-600 mt-1">An absolute must-visit mountain village for breathtaking panoramic sunset views. Oromedon restaurant is highly recommended.</p><a href="https://maps.app.goo.gl/9z4Y2E3u8vX5F5vJ8" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
                         <div class="card overflow-hidden p-0"><img src="https://images.unsplash.com/photo-1628189531065-a8a4f0b2f5d7?q=80&w=800&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://a.travel-assets.com/findyours-php/viewfinder/images/res70/73000/73702-Kos-Castle.jpg';" alt="A stone castle by the sea" class="w-full h-32 object-cover"><div class="p-4"><h4 class="font-semibold text-lg">Neratzia Castle</h4><p class="text-gray-600 mt-1">An impressive 15th-century Knights' castle guarding the harbour entrance. Check for restoration status before visiting.</p><a href="https://maps.app.goo.gl/6pCgxXmUqB8qgU7E7" target="_blank" class="inline-flex items-center mt-2 text-blue-600 font-semibold hover:underline">View on Map <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></a></div></div>
                     </div>
@@ -808,10 +799,8 @@
     </div>
 
     <script>
-        // --- CLIENT-SIDE SCRIPT ---
+        // --- CONFIGURATION ---
         
-        // This is the endpoint on your DigitalOcean backend server.
-        // It will be a local relative path, as the backend serves the frontend.
         const API_URL = '/api/chat';
         
         // --- DATA ---
@@ -872,7 +861,7 @@
             // September
             { date: "MONDAY 01/09/25", time: "20:00", title: "CHILDREN'S THEATRE 'POUPOULAR'", description: "Children's musical theatre performance by the THEATRICAL WORKSHOP OF KOS-ACTA. Direction: Foivos Symeonidis.", location: "PYLI CULTURAL CENTER 'GALINOS FLASKOS'", googleMaps: "https://maps.app.goo.gl/jR8fG5vW9yY7xXzW8", gCalStart: "20250901T200000", gCalEnd: "20250901T220000" },
             { date: "WEDNESDAY 03/09/25", time: "20:00", title: "PRESENTATION OF ANDREAS HATZIMICHAIL'S BOOK 'FOOTBALL IN KOS FROM 1927 TO TODAY'", description: "Publication of D.O.P.A.V.S. KOS. The book will be presented by sports journalist Giorgos Pitsis and Physical Education professor Giannis Trikoilis.", location: "COURTYARD OF THE HISTORICAL & FOLKLORE MUSEUM OF KOS", googleMaps: "https://maps.app.goo.gl/tUv8zJ3r5gP6XyQY9", gCalStart: "20250903T200000", gCalEnd: "20250903T220000" },
-            { date: "SATURDAY 06/09/25", time: "19:00", title: "INTERACTIVE PRESENTATION of the CHILDREN'S BOOK by MARIA LAKATA titled 'TZIVAGERA AND THE NIGHTINGALE'", description: "Group activities and skills workshops with the 'ATHENS FOR KIDS' Team, in collaboration with the LIONS CLUB OF KOS 'HIPPOCRATES'.", location: "PYLI CULTURAL CENTER 'GALINOS FLASKOS'", googleMaps: "https://maps.app.goo.gl/jR8fG5vW9yY7xXzW8", gCalStart: "20250906T190000", gCalEnd: "20250906T210000" },
+            { date: "SATURDAY 06/09/25", time: "19:00", title: "INTERACTIVE PRESENTATION of the CHILDREN'S BOOK by MARIA LAKATA titled 'TZIVAGERA AND THE NIGHTINGALE'", description: "There will be a listening of the book from the audiobook combined with a live dramatization of the songs. Speakers: the author Maria Lakata, the book's illustrator, Danijela Palapani Curcic and the psychologist-psychotherapist Sissy Karathanou.", location: "PYLI CULTURAL CENTER 'GALINOS FLASKOS'", googleMaps: "https://maps.app.goo.gl/jR8fG5vW9yY7xXzW8", gCalStart: "20250906T190000", gCalEnd: "20250906T210000" },
             { date: "SATURDAY 06/09/25", time: "21:15", title: "THEATRICAL PERFORMANCE 'HIM AND HIM'", description: "Musical theatre performance with humor, emotion and timeless songs. Giorgos Konstantinou, Leonidas Kakouris and Dimitris Starovas create a surprise performance, full of humanity and a satirical look. Ticketed event.", location: "KOS MARINA", googleMaps: "https://maps.app.goo.gl/pL2f7nU5N6M3R5bJ9", gCalStart: "20250906T211500", gCalEnd: "20250906T231500" },
             { date: "SUNDAY 07/09/25", time: "20:00", title: "THEATRICAL PERFORMANCE 'THE MOVIE NARRATOR'", description: "Katia Gerou stars in the emblematic text by Hernán Rivera Letelier. Directed by Maya Politaki. The performance takes us to Chile in the 1960s and tells us the adventures of a girl who has the rare gift of telling or rather bringing to life the stories of the movies, in collaboration with the THEATRICAL WORKSHOP OF KOS-AACTA.", location: "ROMAN ODEON OF KOS", googleMaps: "https://maps.app.goo.gl/dY4C7v8pQ5zS7xZt5", gCalStart: "20250907T200000", gCalEnd: "20250907T220000" },
             { date: "MONDAY 08/09/25", time: "21:00", title: "BACHATA NIGHT in the framework of the BACHATA KING FESTIVAL", description: "Dance event with latin music.", location: "ELEFTHERIAS SQUARE", googleMaps: "https://maps.app.goo.gl/nBv8ZKJw7L8XfJgN7", gCalStart: "20250908T210000", gCalEnd: "20250908T230000" },
@@ -1048,42 +1037,31 @@
         }
 
         // --- GEMINI API HANDLER ---
-        async function callGeminiAPI(prompt, useWebSearch = false) {
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt, useWebSearch })
-                });
+       async function callGeminiAPI(prompt) {
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: prompt })
+        });
 
-                if (!response.ok) {
-                    const errorBody = await response.json();
-                    console.error("API Error:", errorBody);
-                    // Use a simple alert-like message box instead of alert()
-                    alert(`Error: ${errorBody.error || response.statusText}`);
-                    return "Error: Failed to get response from the AI service.";
-                }
-
-                const data = await response.json();
-                return data.text;
-            } catch (error) {
-                console.error("Fetch Error:", error);
-                return "Error: Could not connect to the AI service. Please check your network connection.";
-            }
+        if (!response.ok) {
+            const errorBody = await response.json();
+            console.error("API Error:", errorBody);
+            return `Error: ${errorBody.error.message}`;
         }
+
+        const data = await response.json();
+        return data.text;
+    } catch (error) {
+        console.error("Fetch Error:", error);
+        return "Error: Could not connect to the AI service. Please check your network connection.";
+    }
+}
 
         function showLoading(containerId) {
             const container = document.getElementById(containerId);
             container.innerHTML = `<div class="flex justify-center items-center p-8"><div class="loader"></div></div>`;
-        }
-        
-        function showChatLoading() {
-            const loadingBubble = document.createElement('div');
-            loadingBubble.className = 'chat-bubble ai';
-            loadingBubble.innerHTML = `<div class="loading-dots flex space-x-1"><span class="w-2 h-2 bg-gray-500 rounded-full"></span><span class="w-2 h-2 bg-gray-500 rounded-full"></span><span class="w-2 h-2 bg-gray-500 rounded-full"></span></div>`;
-            chatContainer.appendChild(loadingBubble);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-            return loadingBubble;
         }
 
         // --- AI FEATURES ---
@@ -1113,22 +1091,24 @@
             chatInput.value = '';
             chatContainer.scrollTop = chatContainer.scrollHeight;
 
-            const loadingBubble = showChatLoading();
+            chatContainer.innerHTML += `<div id="ai-loading" class="chat-bubble ai"><div class="loader" style="width:24px; height:24px; border-bottom-color: #4a90e2;"></div></div>`;
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
             const knowledgeSource = document.querySelector('input[name="knowledgeSource"]:checked').value;
             let prompt;
-            let useWebSearch = false;
 
             if (knowledgeSource === 'welcomeBook') {
                 const context = getWelcomeBookContext();
                 prompt = `You are Phaedra, a helpful AI concierge for the 'Diamante del Mar Phaedra' apartment in Kos, Greece. Based *only* on the provided "Welcome Book Information" below, answer the user's question. If the answer is not in the text, say "I'm sorry, that information is not in the welcome book." Do not use any external knowledge.\n\n${context}\n\nUser Question: "${userMessage}"`;
             } else {
-                useWebSearch = true;
                 prompt = `You are Phaedra, a helpful AI concierge for a tourist in Kos, Greece. Answer the following question: "${userMessage}"`;
             }
 
-            const aiResponse = await callGeminiAPI(prompt, useWebSearch);
+            const aiResponse = await callGeminiAPI(prompt);
             
+            const loadingBubble = document.getElementById('ai-loading');
             loadingBubble.innerHTML = aiResponse.replace(/\n/g, '<br>');
+            loadingBubble.removeAttribute('id');
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
         
@@ -1141,10 +1121,10 @@
         // 2. AI RECIPES
         async function generateRecipe() {
             const outputContainer = document.getElementById('recipe-output');
-            outputContainer.innerHTML = '';
+            outputContainer.querySelector('div').classList.add('hidden'); // Hide placeholder
             showLoading('recipe-output');
             const prompt = "You are a creative chef specializing in Greek island cuisine. Suggest a simple and delicious recipe using one or more of these local products from Kos, Greece: Posa cheese (wine cheese), Kos thyme honey, local olive oil, fresh fish (like sea bream or sea bass), and cherry tomatoes. Provide a catchy name for the recipe, a short description, the list of ingredients, and step-by-step instructions. Format the response nicely with headings.";
-            const response = await callGeminiAPI(prompt, false);
+            const response = await callGeminiAPI(prompt);
             outputContainer.innerHTML = response.replace(/\n/g, '<br>');
         }
 
@@ -1163,7 +1143,7 @@
             const guideContext = getWelcomeBookContext();
             const prompt = `You are an expert tour guide for Kos, Greece. Create a personalized, day-by-day itinerary for a ${days}-day trip for a tourist whose interests are: "${interests}". Use the host's recommendations from the guide below as a priority. For each day, suggest a morning activity, an afternoon activity, and a dinner suggestion. Be creative and practical. Format the response as clean HTML with headings (h3, h4), paragraphs (p), and lists (ul, li).\n\nHost's Guide:\n${guideContext}`;
             
-            const response = await callGeminiAPI(prompt, false);
+            const response = await callGeminiAPI(prompt);
             outputContainer.innerHTML = response.replace(/\n/g, '<br>');
         }
 
@@ -1181,7 +1161,7 @@
             
             const prompt = `You are a helpful assistant for a hotel guest. Based on these keywords: "${keywords}", write a friendly and positive review for a vacation rental. Make it sound natural and personal. The property is called 'Diamante del Mar Phaedra'. The review should be about 3-5 sentences long.`;
 
-            const response = await callGeminiAPI(prompt, false);
+            const response = await callGeminiAPI(prompt);
             
             const reviewText = response;
             
