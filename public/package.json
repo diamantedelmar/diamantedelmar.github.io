@@ -1,0 +1,27 @@
+{
+  "name": "diamantedelmar.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "concierge.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diamantedelmar/diamantedelmar.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/diamantedelmar/diamantedelmar.github.io/issues"
+  },
+  "homepage": "https://github.com/diamantedelmar/diamantedelmar.github.io#readme",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0"
+  }
+}
