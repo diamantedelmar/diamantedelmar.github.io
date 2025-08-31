@@ -32,11 +32,26 @@ app.get('/', (req, res) => {
 // Serve the static files from the 'public' directory for all other assets
 app.use(express.static(path.join(__dirname, 'public')));
 
+// List of keywords to filter. You can expand this list.
+const forbiddenKeywords = ['misuse', 'malicious', 'exploit', 'hack', 'illegal', 'harmful', 'unethical'];
+
+// Function to filter user prompts for misuse
+function filterPrompt(prompt) {
+    const lowerCasePrompt = prompt.toLowerCase();
+    return forbiddenKeywords.some(keyword => lowerCasePrompt.includes(keyword));
+}
 
 // API endpoint to handle all AI requests
 app.post('/api/chat', async (req, res) => {
     try {
         const { prompt, useWebSearch } = req.body;
+
+        // Check the user prompt against the filter list
+        if (filterPrompt(prompt)) {
+            console.warn('Blocked a potentially malicious prompt:', prompt);
+            res.status(400).json({ error: 'Your request contains forbidden words. Please rephrase.' });
+            return;
+        }
         
         // Correct model for generateContent with tools
         let modelName = "gemini-2.5-flash-preview-05-20";
